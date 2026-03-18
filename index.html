@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="sw">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mnyilinga News | Nyumbani</title>
+    <link rel="stylesheet" href="style.css">
+
+
+
+<style>
+
+/* -- GLOBAL RESET & VARIABLES -- */
+:root {
+    --primary-blue: #001e5a;
+    --primary-yellow: #fff200;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-color: #f4f4f4;
+}
+
+/* -- HEADER STYLING -- */
+.main-header {
+    background-color: var(--primary-blue);
+    position: fixed; /* Ili iwe sticky */
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    border-bottom: 2px solid var(--primary-yellow);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    height: 70px; /* Vipimo vyeo kulingana na picha */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.header-content {
+    width: 90%;
+    max-width: 1200px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    z-index: 200; /* Ili iwe juu ya yellow corner */
+}
+
+/* -- LOGO AREA -- */
+.logo-link {
+    display: flex;
+    align-items: center;
+}
+
+.logo-svg {
+    height: 40px; /* Rekebisha ukubwa kulingana na picha */
+    width: auto;
+}
+
+/* -- HAMBURGER ICON (PRO STYLE) -- */
+.hamburger-btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.bar {
+    width: 30px;
+    height: 3px;
+    background-color: #000000; /* Nyeusi juu ya njano */
+    border-radius: 2px;
+    transition: all 0.3s ease;
+}
+
+/* -- YELLOW CORNER DESIGN -- */
+.yellow-corner {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100px;
+    height: 100%;
+    background-color: var(--primary-yellow);
+    clip-path: polygon(25% 0%, 100% 0%, 100% 100%, 0% 100%);
+    z-index: 100;
+}
+
+/* -- ANIMATION KWA HAMBURGER (Kugeuza kuwa 'X') -- */
+.hamburger-btn.active .bar1 {
+    transform: rotate(45deg) translate(8px, 8px);
+    background-color: #000000;
+}
+
+.hamburger-btn.active .bar2 {
+    opacity: 0;
+}
+
+.hamburger-btn.active .bar3 {
+    transform: rotate(-45deg) translate(8px, -8px);
+    background-color: #000000;
+}
+
+/* -- MOBILE NAV MENU (MENU INAYOSHUKA) -- */
+.mobile-nav {
+    position: fixed;
+    top: 70px; /* Kuanzia chini ya header */
+    right: 0;
+    width: 80%; /* Menu nzito kidogo kwa simu */
+    height: calc(100vh - 70px);
+    background-color: #1a1a1a; /* Giza kwa news vibes */
+    transform: translateX(100%); /* Ficha kwa sasa */
+    transition: transform 0.4s ease-in-out;
+    z-index: 900;
+}
+
+.mobile-nav.active {
+    transform: translateX(0); /* Onyesha */
+}
+
+.mobile-nav ul {
+    list-style: none;
+    padding-top: 20px;
+}
+
+.mobile-nav ul li a {
+    display: block;
+    padding: 15px 30px;
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 1.1rem;
+    font-weight: bold;
+    border-bottom: 1px solid #333;
+    transition: background 0.2s ease;
+}
+
+.mobile-nav ul li a:hover {
+    background-color: #333;
+}
+
+</style>
+
+
+
+
+</head>
+<body>
+
+    <header class="main-header">
+        <div class="header-content">
+            <a href="#" class="logo-link">
+                <img src="https://raw.githubusercontent.com/blockersnet/mdl-ogo/d8c9cdf4425a4b14b02e2479e85578e036f95b71/Mnyilinga%2CNews%2CLOGO-01.svg" alt="Mnyilinga News Logo" class="logo-svg">
+            </a>
+
+            <button class="hamburger-btn" id="hamburgerBtn">
+                <span class="bar bar1"></span>
+                <span class="bar bar2"></span>
+                <span class="bar bar3"></span>
+            </button>
+        </div>
+
+        <div class="yellow-corner"></div>
+
+        <nav class="mobile-nav" id="mobileNav">
+            <ul>
+                <li><a href="#">Kitaifa</a></li>
+                <li><a href="#">Kimataifa</a></li>
+                <li><a href="#">Biashara</a></li>
+                <li><a href="#">Michezo</a></li>
+                <li><a href="#">Mengineyo</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main style="padding-top: 100px; height: 1500px;">
+        <h2 style="text-align: center;">Maudhui ya Chini Yataendelea Hapa</h2>
+    </main>
+
+    <script src="script.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+    <script>
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    const hamburgerBtn = document.getElementById('hamburgerBtn');
+    const mobileNav = document.getElementById('mobileNav');
+
+    hamburgerBtn.addEventListener('click', function() {
+        // Geuza class zote mbili
+        this.classList.toggle('active'); // Inabadilisha icon kuwa 'X'
+        mobileNav.classList.toggle('active'); // Inaonyesha menu
+    });
+});
+
+
+
+    </script>
+
+
+
+
+</body>
+</html>
