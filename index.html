@@ -257,36 +257,341 @@
 
 
 
-      .header-search {
+      /* ============================================================ HAMBURGER BUTTON */
+      .hamburger-btn {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 26px;
+        height: 18px;
+        cursor: pointer;
+        padding: 0;
+        background: none;
+        border: none;
+        flex-shrink: 0;
+      }
+      .hamburger-btn span {
+        display: block;
+        height: 2px;
+        background: var(--white);
+        transition: transform 0.32s cubic-bezier(0.77,0,0.175,1),
+                    opacity 0.22s ease,
+                    background 0.2s ease;
+        transform-origin: left center;
+      }
+      .hamburger-btn:hover span {
+        background: var(--yellow);
+      }
+      .hamburger-btn.open span:nth-child(1) {
+        transform: rotate(41deg) translateY(-1px);
+        background: var(--yellow);
+      }
+      .hamburger-btn.open span:nth-child(2) {
+        opacity: 0;
+        transform: scaleX(0.2);
+      }
+      .hamburger-btn.open span:nth-child(3) {
+        transform: rotate(-41deg) translateY(1px);
+        background: var(--yellow);
+      }
+
+      /* ============================================================ NAV DRAWER OVERLAY */
+      .nav-drawer-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.72);
+        backdrop-filter: blur(2px);
+        -webkit-backdrop-filter: blur(2px);
+        z-index: 998;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.35s ease, visibility 0.35s ease;
+      }
+      .nav-drawer-overlay.visible {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      /* ============================================================ NAV DRAWER */
+      .nav-drawer {
+        position: fixed;
+        top: 0;
+        left: -320px;
+        width: 296px;
+        height: 100vh;
+        background: #060606;
+        border-right: 1px solid #1c1c1c;
+        z-index: 999;
+        transition: left 0.38s cubic-bezier(0.77, 0, 0.175, 1);
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+        scrollbar-width: none;
+      }
+      .nav-drawer::-webkit-scrollbar { display: none; }
+      .nav-drawer.open {
+        left: 0;
+        box-shadow: 8px 0 40px rgba(0,0,0,0.6);
+      }
+      .nav-drawer-head {
         display: flex;
         align-items: center;
-        background: #111;
-        border: 1px solid #333;
-        height: 34px;
-        padding: 0 12px;
-        gap: 8px;
+        justify-content: space-between;
+        padding: 0 20px;
+        height: 58px;
+        border-bottom: 1px solid #1c1c1c;
+        flex-shrink: 0;
+      }
+      .nav-drawer-close {
+        color: var(--gray-600);
+        font-size: 1.2rem;
+        cursor: pointer;
+        background: none;
+        border: none;
+        line-height: 1;
+        padding: 6px;
+        transition: color var(--tr);
+      }
+      .nav-drawer-close:hover { color: var(--white); }
+      .nav-drawer-body {
+        padding: 10px 0 24px;
         flex: 1;
-        max-width: 30px;
-        transition: border-color var(--tr);
       }
-      .header-search:focus-within {
+      .nav-drawer-section-label {
+        font-family: var(--font-mono);
+        font-size: 0.58rem;
+        font-weight: 500;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: #444;
+        padding: 18px 22px 6px;
+      }
+      .nav-drawer-item {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 12px 22px;
+        font-family: var(--font-display);
+        font-size: 0.82rem;
+        font-weight: 600;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        color: #888;
+        border-left: 3px solid transparent;
+        transition: color var(--tr), border-color var(--tr), background var(--tr);
+        text-decoration: none;
+      }
+      .nav-drawer-item:hover {
+        color: var(--yellow);
+        border-left-color: var(--yellow);
+        background: rgba(255, 242, 0, 0.035);
+      }
+      .nav-drawer-item i {
+        width: 18px;
+        text-align: center;
+        font-size: 0.9rem;
+        flex-shrink: 0;
+      }
+      .nav-drawer-divider {
+        height: 1px;
+        background: #161616;
+        margin: 10px 0;
+      }
+      .nav-drawer-footer {
+        padding: 16px 22px;
+        border-top: 1px solid #1c1c1c;
+        display: flex;
+        gap: 18px;
+      }
+      .nav-drawer-social {
+        color: #555;
+        font-size: 1rem;
+        transition: color var(--tr);
+      }
+      .nav-drawer-social:hover { color: var(--yellow); }
+
+      /* ============================================================ HEADER SEARCH ICON BUTTON */
+      .header-search-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 36px;
+        height: 36px;
+        color: var(--gray-400);
+        cursor: pointer;
+        border: 1px solid #2a2a2a;
+        background: #111;
+        transition: border-color var(--tr), color var(--tr), background var(--tr);
+        flex-shrink: 0;
+      }
+      .header-search-btn:hover {
         border-color: var(--yellow);
+        color: var(--yellow);
+        background: rgba(255,242,0,0.06);
       }
-      .header-search input {
+
+      /* ============================================================ SEARCH OVERLAY */
+      .search-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.94);
+        backdrop-filter: blur(6px);
+        -webkit-backdrop-filter: blur(6px);
+        z-index: 1100;
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+        padding-top: 100px;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.28s ease, visibility 0.28s ease;
+      }
+      .search-overlay.visible {
+        opacity: 1;
+        visibility: visible;
+      }
+      .search-overlay-inner {
+        width: 100%;
+        max-width: 660px;
+        padding: 0 24px;
+      }
+      .search-overlay-bar {
+        display: flex;
+        align-items: center;
+        border-bottom: 2px solid var(--yellow);
+        padding-bottom: 10px;
+        gap: 14px;
+      }
+      .search-overlay-icon {
+        color: #555;
+        flex-shrink: 0;
+      }
+      .search-overlay-input {
         background: none;
         border: none;
         outline: none;
         color: var(--white);
         font-family: var(--font-body);
-        font-size: 0.82rem;
+        font-size: 1.5rem;
         width: 100%;
+        font-weight: 300;
+        letter-spacing: 0.01em;
       }
-      .header-search input::placeholder {
-        color: var(--gray-400);
-      }
-      .header-search svg {
-        color: var(--gray-400);
+      .search-overlay-input::placeholder { color: #3a3a3a; }
+      .search-overlay-close {
+        color: #555;
+        font-size: 1.2rem;
+        cursor: pointer;
+        background: none;
+        border: none;
         flex-shrink: 0;
+        padding: 4px 6px;
+        transition: color var(--tr);
+        line-height: 1;
+      }
+      .search-overlay-close:hover { color: var(--white); }
+      .search-overlay-hint {
+        font-family: var(--font-mono);
+        font-size: 0.6rem;
+        color: #333;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        margin-top: 16px;
+      }
+
+      /* ============================================================ CONTENT GRID (dynamic) */
+      .main-card {
+        background-color: #ffffff;
+        max-width: 800px;
+        width: 100%;
+        padding: 25px;
+        border: 1px solid #e0e0e0;
+      }
+      .cg-header {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 10px;
+        font-weight: bold;
+        color: #0056b3;
+        margin-bottom: 12px;
+        text-transform: uppercase;
+      }
+      .cg-header .dot {
+        color: #0056b3;
+        font-size: 24px;
+        line-height: 0;
+      }
+      .top-line {
+        border: 0;
+        border-top: 1px solid #ddd;
+        margin-bottom: 25px;
+      }
+      .content-grid {
+        display: grid;
+        grid-template-columns: 1fr 1px 1fr;
+        gap: 20px;
+        align-items: start;
+      }
+      .cg-article {
+        display: flex;
+        flex-direction: column;
+        cursor: pointer;
+      }
+      .cg-article:hover .cg-title { color: #555; }
+      .img-box {
+        position: relative;
+        width: 100%;
+        aspect-ratio: 1.6 / 1;
+        background-color: #eee;
+        overflow: hidden;
+      }
+      .img-box img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.4s ease;
+      }
+      .cg-article:hover .img-box img { transform: scale(1.03); }
+      .cg-title {
+        font-size: 18px;
+        font-weight: 700;
+        line-height: 1.22;
+        margin-top: 12px;
+        color: #111;
+        transition: color var(--tr);
+      }
+      .cg-cat {
+        display: inline-block;
+        font-family: var(--font-mono);
+        font-size: 0.58rem;
+        font-weight: 600;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--yellow);
+        background: var(--black);
+        padding: 2px 6px;
+        margin-top: 8px;
+      }
+      .vertical-divider {
+        background-color: #ddd;
+        height: 100%;
+        min-height: 200px;
+      }
+      .cg-row-separator {
+        grid-column: 1 / -1;
+        height: 1px;
+        background: #e8e8e8;
+        margin: 4px 0;
+      }
+      @media (max-width: 600px) {
+        .main-card { padding: 15px; }
+        .cg-title { font-size: 14px; }
+        .content-grid {
+          grid-template-columns: 1fr;
+          gap: 16px;
+        }
+        .vertical-divider { display: none; }
       }
       .category-nav {
         background: #0a0a0a;
@@ -375,12 +680,20 @@
       .hero-overlay {
         position: absolute;
         inset: 0;
-        background: linear-gradient(
-          to top,
-          rgba(0, 0, 0, 0.92) 0%,
-          rgba(0, 0, 0, 0.45) 55%,
-          rgba(0, 0, 0, 0.08) 100%
-        );
+        background:
+          linear-gradient(
+            to bottom,
+            rgba(0, 0, 0, 0.72) 0%,
+            rgba(0, 0, 0, 0.28) 30%,
+            rgba(0, 0, 0, 0.0) 55%
+          ),
+          linear-gradient(
+            to top,
+            rgba(0, 0, 0, 0.97) 0%,
+            rgba(0, 0, 0, 0.78) 35%,
+            rgba(0, 0, 0, 0.38) 65%,
+            rgba(0, 0, 0, 0.0) 100%
+          );
       }
       .hero-content {
         position: absolute;
@@ -440,46 +753,7 @@
 
 
 
-      /* Admin row kwenye hero */
-
-
-
-
-
-
-
-
-
-
-      .hero-admin {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        margin-top: 6px;
-      }
-      .hero-admin-avatar {
-        width: 30px;
-        height: 30px;
-        border-radius: 50%;
-        object-fit: cover;
-        border: 1px solid rgba(255, 255, 255, 0.3);
-        flex-shrink: 0;
-      }
-      .hero-admin-name {
-       font-family: var(--font-body);
-        font-size: 0.7rem;
-        color: rgba(255, 255, 255, 0.85);
-        font-weight: 500;
-      }
-      .hero-admin-sep {
-        color: rgba(255, 255, 255, 0.3);
-        font-size: 0.7rem;
-      }
-      .hero-admin-time {
-        font-family: var(--font-body)
-        font-size: 0.68rem;
-        color: var(--gray-400);
-      }
+      /* hero-admin imeondolewa kwa makusudi */
 
 
 
@@ -889,9 +1163,6 @@
         .header-top {
           padding: 0 14px;
         }
-        .header-search {
-          max-width: 180px;
-        }
         .hero-image-wrap {
           height: 300px;
         }
@@ -1105,129 +1376,7 @@
 
 
 
-        /* SEHEMU MPYA YA KUONGEZA MUONEKANO MZURI WA NEWS */
-        .main-card {
-            background-color: #ffffff;
-            max-width: 800px;
-            width: 100%;
-            padding: 25px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0); /* Hapa ndipo shadow ilipo */
-            border: 1px solid #e0e0e0;
-        }
-
-        /* Sehemu ya juu (Header) */
-        .header {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 10px;
-            font-weight: bold;
-            color: #0056b3;;
-            margin-bottom: 12px;
-            text-transform: uppercase;
-        }
-
-        .header .dot {
-            color: #0056b3;
-            font-size: 24px;
-            line-height: 0;
-        }
-
-        .header .author {
-            color: #333;
-            text-transform: none;
-            font-size: 10px;
-            font-family: var(--font-display);
-        }
-
-        .top-line {
-            border: 0;
-            border-top: 1px solid #ddd;
-            margin-bottom: 25px;
-        }
-
-        /* GRID: Safu mbili ambazo hazibadiliki hata kwenye simu */
-        .content-grid {
-            display: grid;
-            grid-template-columns: 1fr 1px 1fr; /* Inagawa 50/50 na mstari mmoja katikati */
-            gap: 20px;
-            align-items: start;
-        }
-
-        .article {
-            display: flex;
-            flex-direction: column;
-        }
-
-        /* Picha na Mpangilio wake */
-        .img-box {
-            position: relative;
-            width: 100%;
-            aspect-ratio: 1.6 / 1; /* Inatunza urefu na upana sawa */
-            background-color: #eee;
-        }
-
-        .img-box img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        /* Vichwa vya habari */
-        .title {
-            font-size: 20px;
-            font-weight: 700;
-            line-height: 1.2;
-            margin-top: 15px;
-            color: #111;
-        }
-
-        /* Mstari wa katikati (Vertical Divider) */
-        .vertical-divider {
-            background-color: #ddd;
-            height: 100%;
-            min-height: 250px;
-        }
-
-        /* Alama za Video (Overlay) */
-        .video-label {
-            position: absolute;
-            bottom: 8px;
-            left: 8px;
-            background: rgba(0,0,0,0.8);
-            color: #ffcc00;
-            padding: 3px 7px;
-            font-size: 10px;
-            font-weight: 900;
-            letter-spacing: 1px;
-        }
-
-        .video-time {
-            position: absolute;
-            bottom: 8px;
-            left: 70px;
-            color: white;
-            font-size: 13px;
-            font-weight: bold;
-        }
-
-        .play-icon {
-            position: absolute;
-            top: 8px;
-            right: 8px;
-            background: #ffcc00;
-            width: 32px;
-            height: 32px;
-            clip-path: polygon(25% 20%, 25% 80%, 85% 50%); /* Inachora triangle ya play */
-        }
-
-        /* Marekebisho madogo kwa ajili ya simu ili maandishi yasizidiane */
-        @media (max-width: 600px) {
-            .main-card { padding: 15px; }
-            .title { font-size: 15px; }
-            .header .author { font-size: 15px; }
-            .content-grid { gap: 10px; }
-        }
+/* CSS za content-grid zinapatikana juu */
 
 
 
@@ -1274,6 +1423,12 @@
         </div>
       </div>
       <div class="header-top">
+        <!-- Hamburger Menu Button -->
+        <button class="hamburger-btn" id="hamburger-btn" aria-label="Fungua menyu" onclick="toggleDrawer()">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
         <a href="index.html" class="site-logo" aria-label="Mnyilinga News">
           <img
             src="https://raw.githubusercontent.com/blockersnet/mdl-ogo/d8c9cdf4425a4b14b02e2479e85578e036f95b71/Mnyilinga%2CNews%2CLOGO-01.svg"
@@ -1281,26 +1436,13 @@
             style="height: 30px; width: auto"
           />
         </a>
-        <div class="header-search" role="search">
-          <svg
-            width="14"
-            height="14"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2.5"
-          >
+        <!-- Search Icon -->
+        <button class="header-search-btn" aria-label="Tafuta" onclick="openSearch()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
             <circle cx="11" cy="11" r="8" />
             <line x1="21" y1="21" x2="16.65" y2="16.65" />
           </svg>
-          <input
-            type="text"
-            id="search-input"
-            placeholder="Tafuta habari..."
-            autocomplete="off"
-            aria-label="Tafuta habari"
-          />
-        </div>
+        </button>
       </div>
       <nav class="category-nav" aria-label="Aina za habari">
         <div class="category-nav-inner" id="category-nav">
@@ -1342,13 +1484,7 @@
 
 
 
-          <div class="hero-admin">
-            <img class="hero-admin-avatar" src="" alt="admin" />
-            <span class="hero-admin-name"></span>
-            <span class="hero-admin-sep">·</span>
-            <span class="hero-admin-time"></span>
-
-          </div>
+          <!-- hero-admin imeondolewa -->
         </div>
 
 
@@ -1390,44 +1526,13 @@
 
 
 
-  <!-- SECTION MPYA INAYOJITEGEMEA KABISA  -->
-
-
-    <div class="main-card">
-        <div class="header">
-            <span>43 MIN AGO</span>
-            <span class="dot">•</span>
-            <span class="author">Chloe Taylor</span>
-        </div>
-        <hr class="top-line">
-
-        <div class="content-grid">
-            
-            <div class="article">
-                <div class="img-box">
-                    <img src="https://images.unsplash.com/photo-1610312278520-bcc893a3ff1d?q=80&w=800" alt="Gold">
-                </div>
-                <div class="title">
-                    Gold loans are thriving in India — and attracting global investors
-                </div>
-            </div>
-
-            <div class="vertical-divider"></div>
-
-            <div class="article">
-                <div class="img-box">
-                    <img src="https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?q=80&w=800" alt="Market">
-                    <div class="play-icon"></div>
-                    <div class="video-label">VIDEO</div>
-                    <div class="video-time">10:06</div>
-                </div>
-                <div class="title">
-                    Why Western playbooks fail in China — and what it takes for brands to compete
-                </div>
-            </div>
-
-        </div>
+  <!-- CONTENT GRID — inajazwa na JS kutoka kwa data ya API -->
+  <div class="main-card" id="content-grid-card" style="display:none;">
+    <hr class="top-line" style="margin-bottom:0; margin-top:0;">
+    <div class="content-grid" id="content-grid-inner">
+      <!-- JS inajaza hapa -->
     </div>
+  </div>
 
 
 
@@ -1494,6 +1599,74 @@
     </main>
 
     <button id="scroll-top" aria-label="Rudi juu">&#x2191;</button>
+
+    <!-- ============================================================ NAV DRAWER OVERLAY -->
+    <div class="nav-drawer-overlay" id="nav-drawer-overlay" onclick="closeDrawer()"></div>
+
+    <!-- ============================================================ NAV DRAWER -->
+    <nav class="nav-drawer" id="nav-drawer" aria-label="Menyu Kuu">
+      <div class="nav-drawer-head">
+        <img
+          src="https://raw.githubusercontent.com/blockersnet/mdl-ogo/d8c9cdf4425a4b14b02e2479e85578e036f95b71/Mnyilinga%2CNews%2CLOGO-01.svg"
+          alt="Mnyilinga News"
+          style="height: 24px; width: auto;"
+        />
+        <button class="nav-drawer-close" onclick="closeDrawer()" aria-label="Funga menyu">
+          <i class="fa fa-times"></i>
+        </button>
+      </div>
+      <div class="nav-drawer-body">
+        <div class="nav-drawer-section-label">Kurasa Kuu</div>
+        <a href="#" class="nav-drawer-item"><i class="fa fa-house"></i> Nyumbani</a>
+        <a href="#" class="nav-drawer-item"><i class="fa fa-newspaper"></i> Habari Zote</a>
+        <a href="#" class="nav-drawer-item"><i class="fa fa-fire"></i> Zinazosumbua</a>
+        <a href="#" class="nav-drawer-item"><i class="fa fa-video"></i> Video</a>
+        <div class="nav-drawer-divider"></div>
+        <div class="nav-drawer-section-label">Aina za Habari</div>
+        <a href="#" class="nav-drawer-item"><i class="fa fa-globe"></i> Siasa</a>
+        <a href="#" class="nav-drawer-item"><i class="fa fa-chart-line"></i> Uchumi</a>
+        <a href="#" class="nav-drawer-item"><i class="fa fa-futbol"></i> Michezo</a>
+        <a href="#" class="nav-drawer-item"><i class="fa fa-microchip"></i> Teknolojia</a>
+        <a href="#" class="nav-drawer-item"><i class="fa fa-heart-pulse"></i> Afya</a>
+        <a href="#" class="nav-drawer-item"><i class="fa fa-masks-theater"></i> Burudani</a>
+        <div class="nav-drawer-divider"></div>
+        <div class="nav-drawer-section-label">Zaidi</div>
+        <a href="#" class="nav-drawer-item"><i class="fa fa-circle-info"></i> Kuhusu Sisi</a>
+        <a href="#" class="nav-drawer-item"><i class="fa fa-envelope"></i> Wasiliana Nasi</a>
+        <a href="#" class="nav-drawer-item"><i class="fa fa-mobile-screen"></i> Pakua App</a>
+      </div>
+      <div class="nav-drawer-footer">
+        <a href="#" class="nav-drawer-social"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" class="nav-drawer-social"><i class="fab fa-x-twitter"></i></a>
+        <a href="#" class="nav-drawer-social"><i class="fab fa-instagram"></i></a>
+        <a href="#" class="nav-drawer-social"><i class="fab fa-tiktok"></i></a>
+        <a href="#" class="nav-drawer-social"><i class="fab fa-threads"></i></a>
+      </div>
+    </nav>
+
+    <!-- ============================================================ SEARCH OVERLAY -->
+    <div class="search-overlay" id="search-overlay" role="dialog" aria-modal="true" aria-label="Tafuta">
+      <div class="search-overlay-inner">
+        <div class="search-overlay-bar">
+          <svg class="search-overlay-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"/>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+          </svg>
+          <input
+            type="text"
+            class="search-overlay-input"
+            id="search-input"
+            placeholder="Tafuta habari..."
+            autocomplete="off"
+            aria-label="Tafuta habari"
+          />
+          <button class="search-overlay-close" onclick="closeSearch()" aria-label="Funga tafuta">
+            <i class="fa fa-times"></i>
+          </button>
+        </div>
+        <div class="search-overlay-hint">Andika kisha bonyeza Enter au subiri sekunde moja</div>
+      </div>
+    </div>
 
 
 
@@ -1814,9 +1987,6 @@
         const imgEl = sec.querySelector(".hero-img-el");
         const catEl = sec.querySelector(".hero-category");
         const headEl = sec.querySelector(".hero-headline");
-        const avEl = sec.querySelector(".hero-admin-avatar");
-        const nameEl = sec.querySelector(".hero-admin-name");
-        const timeEl = sec.querySelector(".hero-admin-time");
         const dotsWrap = sec.querySelector(".hero-dots");
         const timerEl = sec.querySelector(".hero-timer");
         const count = Math.min(posts.length, 6);
@@ -1833,23 +2003,14 @@
         function goHero(i) {
           heroIndex = i;
           const p = posts[i];
-          const admin = getAdmin(i);
           imgEl.classList.add("fade-out");
           sec.querySelector(".hero-content").classList.add("fade-out");
           setTimeout(() => {
             imgEl.src = p.picha_url || placeholder();
-            imgEl.onerror = () => {
-              imgEl.src = placeholder();
-            };
+            imgEl.onerror = () => { imgEl.src = placeholder(); };
             catEl.textContent = p.category || "Habari";
             headEl.textContent = p.headline;
-            avEl.src = admin.avatar;
-            avEl.onerror = () => {
-              avEl.style.display = "none";
-            };
-            nameEl.textContent = admin.name;
-            timeEl.textContent = timeAgo(p.timestamp);
-            sec.onclick = () => navigateTo(postUrl(i));
+            sec.onclick = () => navigateTo(postUrl(allPosts.indexOf(p)));
             imgEl.classList.remove("fade-out");
             sec.querySelector(".hero-content").classList.remove("fade-out");
             dotsWrap
@@ -1861,7 +2022,10 @@
           }, 350);
         }
 
-        goHero(0);
+        /* Anza kutoka index 3 (post ya 4) ili kuepuka mfanano na grids za chini */
+        const startIdx = Math.min(3, count - 1);
+        heroIndex = startIdx;
+        goHero(startIdx);
         if (heroInterval) clearInterval(heroInterval);
         heroInterval = setInterval(() => {
           heroIndex = (heroIndex + 1) % count;
@@ -1993,6 +2157,7 @@
           initHero(allPosts.slice(0, 6));
           renderContent(allPosts, "all", "");
           buildTicker();
+          buildContentGrid(allPosts);
         } catch (err) {
           console.error("Fetch error:", err);
           if (topEl)
@@ -2003,7 +2168,128 @@
         if (ls) ls.classList.add("hidden");
       }
 
-      /* ============================================================ OLD NEWS TOGGLE */
+      /* ============================================================ CONTENT GRID — Dynamic */
+      function buildContentGrid(posts) {
+        const card = document.getElementById("content-grid-card");
+        const inner = document.getElementById("content-grid-inner");
+        if (!card || !inner) return;
+
+        /* Chagua post za wiki 1+ (zamani kidogo — si mpya kabisa, si za miezi)
+           zile ambazo si recent (zaidi ya wiki 1) lakini si old (chini ya mwezi 1) */
+        const ONE_WEEK_MS   = 7 * 24 * 60 * 60 * 1000;
+        const ONE_MONTH_MS  = 30 * 24 * 60 * 60 * 1000;
+        const now = Date.now();
+
+        let pool = posts.filter(p => {
+          const age = now - new Date(p.timestamp).getTime();
+          return age >= ONE_WEEK_MS && age < ONE_MONTH_MS;
+        });
+
+        /* Kama hakuna kati ya wiki 1 na mwezi, tumia post 5-12 (slice baada ya top 4) */
+        if (pool.length < 2) {
+          pool = posts.slice(4, 12);
+        }
+
+        if (!pool.length) {
+          card.style.display = "none";
+          return;
+        }
+
+        /* Changanya (shuffle) pool ili zionekane kwa mpangilio wa nasibu kila refresh */
+        for (let i = pool.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [pool[i], pool[j]] = [pool[j], pool[i]];
+        }
+
+        /* Chagua jozi za post 2 kwa 2, kuonyesha mstari kwa mstari */
+        const pairs = [];
+        for (let i = 0; i + 1 < pool.length && pairs.length < 4; i += 2) {
+          pairs.push([pool[i], pool[i + 1]]);
+        }
+
+        let html = "";
+        pairs.forEach((pair, pairIdx) => {
+          if (pairIdx > 0) {
+            html += `<div class="cg-row-separator"></div><div class="cg-row-separator" style="background:none;"></div><div class="cg-row-separator" style="background:none;"></div>`;
+          }
+          pair.forEach((p, side) => {
+            const idx = posts.indexOf(p);
+            const img = p.picha_url || placeholder();
+            html += `
+            <div class="cg-article" onclick="navigateTo('${postUrl(idx)}')" tabindex="0" role="article" onkeydown="if(event.key==='Enter')navigateTo('${postUrl(idx)}')">
+              <div class="img-box">
+                <img src="${esc(img)}" alt="${esc(p.headline)}" onerror="this.src='${placeholder()}'">
+              </div>
+              <span class="cg-cat">${esc(p.category || "Habari")}</span>
+              <div class="cg-title">${esc(p.headline)}</div>
+            </div>`;
+            /* Weka divider kati ya kila jozi (baada ya post ya kwanza, kabla ya ya pili) */
+            if (side === 0) {
+              html += `<div class="vertical-divider"></div>`;
+            }
+          });
+        });
+
+        inner.innerHTML = html;
+        card.style.display = "";
+      }
+
+      /* ============================================================ HAMBURGER / DRAWER */
+      function toggleDrawer() {
+        const drawer  = document.getElementById("nav-drawer");
+        const overlay = document.getElementById("nav-drawer-overlay");
+        const btn     = document.getElementById("hamburger-btn");
+        const isOpen  = drawer.classList.contains("open");
+        if (isOpen) {
+          closeDrawer();
+        } else {
+          drawer.classList.add("open");
+          overlay.classList.add("visible");
+          btn.classList.add("open");
+          document.body.style.overflow = "hidden";
+        }
+      }
+      function closeDrawer() {
+        const drawer  = document.getElementById("nav-drawer");
+        const overlay = document.getElementById("nav-drawer-overlay");
+        const btn     = document.getElementById("hamburger-btn");
+        drawer.classList.remove("open");
+        overlay.classList.remove("visible");
+        btn.classList.remove("open");
+        document.body.style.overflow = "";
+      }
+
+      /* ============================================================ SEARCH OVERLAY */
+      function openSearch() {
+        const overlay = document.getElementById("search-overlay");
+        const input   = document.getElementById("search-input");
+        overlay.classList.add("visible");
+        document.body.style.overflow = "hidden";
+        setTimeout(() => input && input.focus(), 80);
+      }
+      function closeSearch() {
+        const overlay = document.getElementById("search-overlay");
+        overlay.classList.remove("visible");
+        document.body.style.overflow = "";
+      }
+
+      /* Funga search overlay kwa kubonyeza Escape */
+      document.addEventListener("keydown", function(e) {
+        if (e.key === "Escape") {
+          closeSearch();
+          closeDrawer();
+        }
+      });
+
+      /* Funga search overlay ukibonyeza nje ya sanduku */
+      document.getElementById && document.addEventListener("DOMContentLoaded", function() {
+        const overlay = document.getElementById("search-overlay");
+        if (overlay) {
+          overlay.addEventListener("click", function(e) {
+            if (e.target === overlay) closeSearch();
+          });
+        }
+      });
       function toggleOldNews() {
         const g = document.getElementById("old-news-grid");
         const c = document.getElementById("old-news-chevron");
@@ -2027,6 +2313,8 @@
       /* ============================================================ INIT */
       document.addEventListener("DOMContentLoaded", () => {
         setTimeout(fetchPosts, 800);
+
+        /* Wire search input (iko ndani ya search overlay) */
         const si = document.getElementById("search-input");
         if (si) {
           let db;
@@ -2034,7 +2322,20 @@
             clearTimeout(db);
             db = setTimeout(() => handleSearch(e.target.value), 280);
           });
+          /* Funga overlay kwa Enter */
+          si.addEventListener("keydown", (e) => {
+            if (e.key === "Enter") closeSearch();
+          });
         }
+
+        /* Funga search overlay ukibonyeza nje ya inner box */
+        const searchOverlay = document.getElementById("search-overlay");
+        if (searchOverlay) {
+          searchOverlay.addEventListener("click", function(e) {
+            if (e.target === searchOverlay) closeSearch();
+          });
+        }
+
         initScrollTop();
       });
     </script>
