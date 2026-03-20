@@ -1,224 +1,610 @@
 <!DOCTYPE html>
 <html lang="sw">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mnyilinga News | Nyumbani</title>
-    <link rel="stylesheet" href="style.css">
-
-
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mnyilinga News — Habari Za Kweli</title>
+  <meta name="description" content="Mnyilinga News — Habari za haraka, za kweli, na za kina.">
+  <meta property="og:title" content="Mnyilinga News">
+  <meta name="theme-color" content="#000000">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <!-- Badilisha fonts hapa ukitaka nyingine — nenda fonts.google.com -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-
-/* -- GLOBAL RESET & VARIABLES -- */
+/* ============================================================
+   MNYILINGA NEWS — CSS YOTE
+   Rangi: Nyeusi (#000), Njano (#fff200), Nyeupe (#fff)
+   Badilisha CSS variables hapa chini kwa mabadiliko ya haraka
+   ============================================================ */
 :root {
-    --primary-blue: #001e5a;
-    --primary-yellow: #fff200;
+  /* --- RANGI: Badilisha hapa --- */
+  --yellow: #fff200;
+  --black: #000000;
+  --white: #ffffff;
+  --gray-100: #f5f5f5;
+  --gray-200: #e8e8e8;
+  --gray-400: #999999;
+  --gray-600: #555555;
+  --gray-800: #222222;
+  /* --- FONTS: Badilisha hapa --- */
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body: 'IBM Plex Sans', sans-serif;
+  --font-mono: 'IBM Plex Mono', monospace;
+  /* --- MISC --- */
+  --header-h: 56px;
+  --max-w: 1280px;
+  --tr: 0.18s ease;
 }
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:15px}
+body{font-family:var(--font-body);background:var(--white);color:var(--black);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{display:block;max-width:100%;object-fit:cover}
+a{text-decoration:none;color:inherit}
+button{cursor:pointer;border:none;background:none;font-family:var(--font-body)}
+ul{list-style:none}
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: Arial, sans-serif;
+/* ============================================================ LOADING SCREEN */
+#loading-screen{position:fixed;inset:0;background:var(--black);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:9999;transition:opacity .5s ease,visibility .5s ease}
+#loading-screen.hidden{opacity:0;visibility:hidden;pointer-events:none}
+.loading-logo{width:140px;height:auto;animation:logoPulse 1.4s ease-in-out infinite}
+@keyframes logoPulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.06);opacity:.7}}
+.loading-bar-wrap{margin-top:32px;width:160px;height:2px;background:#222}
+.loading-bar{height:2px;background:var(--yellow);width:0%;animation:loadBar 1.8s ease-in-out forwards}
+@keyframes loadBar{from{width:0%}to{width:100%}}
+
+/* ============================================================ HEADER */
+#site-header{position:sticky;top:0;left:0;right:0;z-index:900;background:var(--black);border-bottom:3px solid var(--yellow)}
+.ticker-bar{background:var(--yellow);color:var(--black);overflow:hidden;height:28px;display:flex;align-items:center}
+.ticker-label{background:var(--black);color:var(--yellow);font-family:var(--font-mono);font-size:.63rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;padding:0 14px;height:100%;display:flex;align-items:center;flex-shrink:0;white-space:nowrap}
+.ticker-scroll{overflow:hidden;flex:1}
+.ticker-content{display:flex;align-items:center;animation:tickerScroll 50s linear infinite;white-space:nowrap;padding-left:40px;font-family:var(--font-mono);font-size:.68rem;font-weight:500;letter-spacing:.03em;gap:60px}
+@keyframes tickerScroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.header-top{display:flex;align-items:center;justify-content:space-between;max-width:var(--max-w);margin:0 auto;padding:0 20px;height:var(--header-h);gap:16px}
+.site-logo{display:flex;align-items:center;flex-shrink:0}
+.header-search{display:flex;align-items:center;background:#111;border:1px solid #333;height:34px;padding:0 12px;gap:8px;flex:1;max-width:320px;transition:border-color var(--tr)}
+.header-search:focus-within{border-color:var(--yellow)}
+.header-search input{background:none;border:none;outline:none;color:var(--white);font-family:var(--font-body);font-size:.82rem;width:100%}
+.header-search input::placeholder{color:var(--gray-400)}
+.header-search svg{color:var(--gray-400);flex-shrink:0}
+.category-nav{background:#0a0a0a;border-bottom:1px solid #1a1a1a;overflow-x:auto;scrollbar-width:none}
+.category-nav::-webkit-scrollbar{display:none}
+.category-nav-inner{display:flex;align-items:center;max-width:var(--max-w);margin:0 auto;padding:0 20px}
+.cat-btn{font-family:var(--font-mono);font-size:.7rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--gray-400);padding:9px 14px;white-space:nowrap;border-bottom:2px solid transparent;transition:color var(--tr),border-color var(--tr);flex-shrink:0}
+.cat-btn:hover,.cat-btn.active{color:var(--yellow);border-bottom-color:var(--yellow)}
+
+/* ============================================================ LAYOUT */
+#main-content{max-width:var(--max-w);margin:0 auto;padding:0 20px}
+.section-label{font-family:var(--font-mono);font-size:.68rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--gray-400);border-left:3px solid var(--yellow);padding-left:10px;margin-bottom:20px}
+.section-wrap{margin-top:48px}
+
+/* ============================================================ HERO */
+#hero-section{position:relative;background:var(--black);overflow:hidden;margin:24px 0 0;cursor:pointer}
+.hero-image-wrap{position:relative;width:100%;height:520px;overflow:hidden}
+.hero-image-wrap img{width:100%;height:100%;object-fit:cover;transition:transform .6s ease,opacity .4s ease}
+.hero-image-wrap img.fade-out{opacity:0;transform:scale(1.03)}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.92) 0%,rgba(0,0,0,.45) 55%,rgba(0,0,0,.08) 100%)}
+.hero-content{position:absolute;bottom:0;left:0;right:0;padding:32px 36px;transition:opacity .4s ease}
+.hero-content.fade-out{opacity:0}
+.hero-category{display:inline-block;background:var(--yellow);color:var(--black);font-family:var(--font-mono);font-size:.68rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;padding:3px 8px;margin-bottom:12px}
+.hero-headline{font-family:var(--font-display);font-size:clamp(1.5rem,3.5vw,2.6rem);font-weight:900;color:var(--white);line-height:1.16;max-width:780px;margin-bottom:14px}
+/* Admin row kwenye hero */
+.hero-admin{display:flex;align-items:center;gap:10px;margin-top:6px}
+.hero-admin-avatar{width:30px;height:30px;border-radius:50%;object-fit:cover;border:1px solid rgba(255,255,255,.3);flex-shrink:0}
+.hero-admin-name{font-family:var(--font-mono);font-size:.7rem;color:rgba(255,255,255,.85);font-weight:500}
+.hero-admin-sep{color:rgba(255,255,255,.3);font-size:.7rem}
+.hero-admin-time{font-family:var(--font-mono);font-size:.68rem;color:var(--gray-400)}
+.hero-dots{position:absolute;bottom:22px;right:36px;display:flex;gap:6px}
+.hero-dot{width:6px;height:6px;background:rgba(255,255,255,.3);transition:background .3s,width .3s;cursor:pointer}
+.hero-dot.active{background:var(--yellow);width:18px}
+.hero-timer{position:absolute;bottom:0;left:0;height:2px;background:var(--yellow);width:0%}
+.hero-timer.running{animation:heroTimer 180s linear forwards}
+@keyframes heroTimer{from{width:0%}to{width:100%}}
+
+/* ============================================================ NEWS CARD */
+.news-card{position:relative;overflow:hidden;cursor:pointer;background:var(--gray-100);transition:box-shadow var(--tr)}
+.news-card:hover{box-shadow:0 4px 20px rgba(0,0,0,.1)}
+.news-card:hover .card-img{transform:scale(1.03)}
+.card-img-wrap{overflow:hidden;position:relative}
+.card-img{width:100%;height:100%;object-fit:cover;transition:transform .4s ease}
+.card-body{padding:14px 16px 16px;background:var(--white)}
+.card-category{font-family:var(--font-mono);font-size:.65rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--yellow);background:var(--black);display:inline-block;padding:2px 7px;margin-bottom:8px}
+.card-headline{font-family:var(--font-display);font-weight:700;line-height:1.22;color:var(--black);transition:color var(--tr)}
+.news-card:hover .card-headline{color:#333}
+.card-snippet{font-size:.8rem;color:var(--gray-600);line-height:1.5;margin-top:7px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+/* Admin row */
+.card-admin{display:flex;align-items:center;gap:8px;margin-top:10px;padding-top:10px;border-top:1px solid var(--gray-200)}
+.card-admin-avatar{width:24px;height:24px;border-radius:50%;object-fit:cover;border:1px solid var(--gray-200);flex-shrink:0}
+.card-admin-name{font-family:var(--font-mono);font-size:.64rem;font-weight:500;color:var(--black)}
+.card-admin-sep{font-size:.6rem;color:var(--gray-400)}
+.card-admin-time{font-family:var(--font-mono);font-size:.6rem;color:var(--gray-400)}
+
+/* TOP NEWS GRID */
+.top-news-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px}
+.top-news-grid .news-card:first-child{grid-column:1/-1}
+.top-news-grid .news-card:first-child .card-img-wrap{height:380px}
+.top-news-grid .news-card:not(:first-child) .card-img-wrap{height:220px}
+.top-news-grid .news-card:first-child .card-headline{font-size:1.45rem}
+.top-news-grid .news-card:not(:first-child) .card-headline{font-size:1.05rem}
+
+/* MAIN NEWS GRID */
+.main-news-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px}
+.main-news-grid .news-card .card-img-wrap{height:200px}
+.main-news-grid .news-card .card-headline{font-size:1rem}
+
+/* ============================================================ SNIPER BLOCKS */
+.sniper-block{background:var(--black);color:var(--white);padding:22px 24px;cursor:pointer;border-left:4px solid var(--yellow);transition:background var(--tr);grid-column:1/-1}
+.sniper-block:hover{background:#0d0d0d}
+.sniper-label{font-family:var(--font-mono);font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:var(--yellow);margin-bottom:8px}
+.sniper-headline{font-family:var(--font-display);font-size:1.08rem;font-weight:700;line-height:1.28;color:var(--white);margin-bottom:10px}
+.sniper-snippet{font-size:.82rem;color:#aaa;line-height:1.55;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;margin-bottom:12px}
+/* Admin row kwenye sniper */
+.sniper-admin{display:flex;align-items:center;gap:8px;padding-top:12px;border-top:1px solid #1e1e1e}
+.sniper-admin-avatar{width:24px;height:24px;border-radius:50%;object-fit:cover;border:1px solid #333;flex-shrink:0}
+.sniper-admin-name{font-family:var(--font-mono);font-size:.64rem;color:#888;font-weight:500}
+.sniper-admin-sep{font-size:.6rem;color:#444}
+.sniper-admin-time{font-family:var(--font-mono);font-size:.6rem;color:var(--gray-600);margin-left:auto}
+
+/* ============================================================ OLD NEWS */
+#old-news-section{margin-top:60px;padding-top:24px;border-top:1px solid var(--gray-200)}
+.old-news-toggle{display:flex;align-items:center;justify-content:space-between;cursor:pointer;padding:12px 0;user-select:none}
+.old-news-toggle .section-label{margin-bottom:0}
+.old-news-chevron{font-size:.8rem;color:var(--gray-400);font-family:var(--font-mono);transition:transform var(--tr)}
+.old-news-chevron.open{transform:rotate(180deg)}
+.old-news-grid{display:none;grid-template-columns:1fr 1fr;gap:2px;margin-top:16px}
+.old-news-grid.visible{display:grid}
+.old-news-grid .news-card .card-img-wrap{height:160px}
+.old-news-grid .news-card .card-headline{font-size:.9rem}
+
+/* ============================================================ SKELETON */
+.skeleton{background:linear-gradient(90deg,#e8e8e8 25%,#f5f5f5 50%,#e8e8e8 75%);background-size:200% 100%;animation:shimmer 1.4s infinite}
+@keyframes shimmer{from{background-position:200% 0}to{background-position:-200% 0}}
+.skel-card{background:var(--gray-100);overflow:hidden}
+.skel-img{height:200px}
+.skel-body{padding:14px 16px 16px}
+.skel-cat{height:14px;width:60px;margin-bottom:10px}
+.skel-title{height:18px;width:90%;margin-bottom:6px}
+.skel-title-2{height:18px;width:70%;margin-bottom:10px}
+.skel-meta{height:12px;width:40%}
+
+/* ============================================================ MISC */
+.empty-state{text-align:center;padding:60px 20px;font-family:var(--font-mono);font-size:.8rem;color:var(--gray-400);letter-spacing:.06em;grid-column:1/-1}
+.empty-state strong{display:block;font-family:var(--font-display);font-size:1.5rem;color:var(--black);margin-bottom:8px}
+#scroll-top{position:fixed;bottom:28px;right:24px;width:40px;height:40px;background:var(--black);color:var(--yellow);border:1px solid #333;display:flex;align-items:center;justify-content:center;font-size:1.1rem;cursor:pointer;opacity:0;visibility:hidden;transition:opacity var(--tr),visibility var(--tr),background var(--tr);z-index:800}
+#scroll-top.visible{opacity:1;visibility:visible}
+#scroll-top:hover{background:var(--yellow);color:var(--black);border-color:var(--yellow)}
+img.lazy{opacity:0;transition:opacity .4s ease}
+img.lazy.loaded{opacity:1}
+
+/* ============================================================ RESPONSIVE */
+@media(max-width:768px){
+  :root{--header-h:50px}
+  .header-top{padding:0 14px}
+  .header-search{max-width:180px}
+  .hero-image-wrap{height:300px}
+  .hero-content{padding:20px 18px}
+  .hero-dots{right:18px}
+  .top-news-grid{grid-template-columns:1fr}
+  .top-news-grid .news-card:first-child{grid-column:1}
+  .top-news-grid .news-card:first-child .card-img-wrap{height:220px}
+  .top-news-grid .news-card:not(:first-child) .card-img-wrap{height:180px}
+  .top-news-grid .news-card:first-child .card-headline{font-size:1.2rem}
+  .main-news-grid{grid-template-columns:1fr}
+  .old-news-grid{grid-template-columns:1fr}
+  .sniper-block{grid-column:1}
 }
-
-body {
-    background-color: #f4f4f4;
+@media(max-width:480px){
+  #main-content{padding:0 10px}
+  .hero-image-wrap{height:240px}
+  .category-nav-inner{padding:0 10px}
+  .section-wrap{margin-top:32px}
 }
-
-/* -- HEADER STYLING -- */
-.main-header {
-    background-color: var(--primary-blue);
-    position: fixed; /* Ili iwe sticky */
-    top: 0;
-    width: 100%;
-    z-index: 1000;
-    border-bottom: 2px solid var(--primary-yellow);
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    height: 70px; /* Vipimo vyeo kulingana na picha */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.header-content {
-    width: 90%;
-    max-width: 1200px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: relative;
-    z-index: 200; /* Ili iwe juu ya yellow corner */
-}
-
-/* -- LOGO AREA -- */
-.logo-link {
-    display: flex;
-    align-items: center;
-}
-
-.logo-svg {
-    height: 40px; /* Rekebisha ukubwa kulingana na picha */
-    width: auto;
-}
-
-/* -- HAMBURGER ICON (PRO STYLE) -- */
-.hamburger-btn {
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    width: 35px;
-    height: 35px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
-}
-
-.bar {
-    width: 30px;
-    height: 3px;
-    background-color: #000000; /* Nyeusi juu ya njano */
-    border-radius: 2px;
-    transition: all 0.3s ease;
-}
-
-/* -- YELLOW CORNER DESIGN -- */
-.yellow-corner {
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 100px;
-    height: 100%;
-    background-color: var(--primary-yellow);
-    clip-path: polygon(25% 0%, 100% 0%, 100% 100%, 0% 100%);
-    z-index: 100;
-}
-
-/* -- ANIMATION KWA HAMBURGER (Kugeuza kuwa 'X') -- */
-.hamburger-btn.active .bar1 {
-    transform: rotate(45deg) translate(8px, 8px);
-    background-color: #000000;
-}
-
-.hamburger-btn.active .bar2 {
-    opacity: 0;
-}
-
-.hamburger-btn.active .bar3 {
-    transform: rotate(-45deg) translate(8px, -8px);
-    background-color: #000000;
-}
-
-/* -- MOBILE NAV MENU (MENU INAYOSHUKA) -- */
-.mobile-nav {
-    position: fixed;
-    top: 70px; /* Kuanzia chini ya header */
-    right: 0;
-    width: 80%; /* Menu nzito kidogo kwa simu */
-    height: calc(100vh - 70px);
-    background-color: #1a1a1a; /* Giza kwa news vibes */
-    transform: translateX(100%); /* Ficha kwa sasa */
-    transition: transform 0.4s ease-in-out;
-    z-index: 900;
-}
-
-.mobile-nav.active {
-    transform: translateX(0); /* Onyesha */
-}
-
-.mobile-nav ul {
-    list-style: none;
-    padding-top: 20px;
-}
-
-.mobile-nav ul li a {
-    display: block;
-    padding: 15px 30px;
-    color: #ffffff;
-    text-decoration: none;
-    font-size: 1.1rem;
-    font-weight: bold;
-    border-bottom: 1px solid #333;
-    transition: background 0.2s ease;
-}
-
-.mobile-nav ul li a:hover {
-    background-color: #333;
-}
-
 </style>
-
-
-
-
 </head>
 <body>
 
-    <header class="main-header">
-        <div class="header-content">
-            <a href="#" class="logo-link">
-                <img src="https://raw.githubusercontent.com/blockersnet/mdl-ogo/d8c9cdf4425a4b14b02e2479e85578e036f95b71/Mnyilinga%2CNews%2CLOGO-01.svg" alt="Mnyilinga News Logo" class="logo-svg">
-            </a>
+<!-- LOADING SCREEN -->
+<div id="loading-screen">
+  <svg class="loading-logo" viewBox="0 0 220 90" xmlns="http://www.w3.org/2000/svg">
+    <polygon points="8,10 22,10 38,36 54,10 68,10 68,74 54,74 54,30 38,54 22,30 22,74 8,74" fill="#fff200"/>
+    <rect x="76" y="10" width="9" height="64" fill="#fff200"/>
+    <polygon points="76,10 85,10 110,46 110,10 119,10 119,74 110,74 85,28 85,74 76,74" fill="#fff200"/>
+    <text x="128" y="50" font-family="Georgia,serif" font-size="30" font-weight="900" fill="#fff200" letter-spacing="-1">YILINGA</text>
+    <rect x="128" y="58" width="68" height="14" fill="#fff200"/>
+    <text x="162" y="69" font-family="monospace" font-size="9" font-weight="700" fill="#000" text-anchor="middle" letter-spacing="2">NEWS</text>
+  </svg>
+  <div class="loading-bar-wrap"><div class="loading-bar"></div></div>
+</div>
 
-            <button class="hamburger-btn" id="hamburgerBtn">
-                <span class="bar bar1"></span>
-                <span class="bar bar2"></span>
-                <span class="bar bar3"></span>
-            </button>
-        </div>
+<!-- HEADER -->
+<header id="site-header">
+  <div class="ticker-bar">
+    <span class="ticker-label">Breaking</span>
+    <div class="ticker-scroll">
+      <div class="ticker-content" id="ticker-content">
+        <span>Habari zinaendelea kupakia...</span>
+      </div>
+    </div>
+  </div>
+  <div class="header-top">
+    <a href="index.html" class="site-logo" aria-label="Mnyilinga News">
+      <svg viewBox="0 0 220 60" xmlns="http://www.w3.org/2000/svg" style="height:36px;width:auto;">
+        <polygon points="6,6 18,6 32,30 46,6 58,6 58,54 46,54 46,24 32,48 18,24 18,54 6,54" fill="#fff200"/>
+        <rect x="66" y="6" width="8" height="48" fill="#fff200"/>
+        <polygon points="66,6 74,6 98,40 98,6 106,6 106,54 98,54 74,20 74,54 66,54" fill="#fff200"/>
+        <text x="114" y="40" font-family="Georgia,serif" font-size="24" font-weight="900" fill="#fff200" letter-spacing="-.5">YILINGA</text>
+        <rect x="114" y="44" width="66" height="11" fill="#fff200"/>
+        <text x="147" y="53" font-family="monospace" font-size="7.5" font-weight="700" fill="#000" text-anchor="middle" letter-spacing="2">NEWS</text>
+      </svg>
+    </a>
+    <div class="header-search" role="search">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+        <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+      </svg>
+      <input type="text" id="search-input" placeholder="Tafuta habari..." autocomplete="off" aria-label="Tafuta habari">
+    </div>
+  </div>
+  <nav class="category-nav" aria-label="Aina za habari">
+    <div class="category-nav-inner" id="category-nav">
+      <button class="cat-btn active" onclick="filterCategory('all')">Zote</button>
+    </div>
+  </nav>
+</header>
 
-        <div class="yellow-corner"></div>
+<!-- MAIN CONTENT -->
+<main id="main-content">
+  <!-- HERO -->
+  <section id="hero-section" aria-label="Habari Kubwa">
+    <div class="hero-image-wrap">
+      <img class="hero-img-el" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1200' height='520'%3E%3Crect width='1200' height='520' fill='%23111'/%3E%3C/svg%3E" alt="Featured">
+    </div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="hero-category">Inapakia...</div>
+      <h1 class="hero-headline">Habari zinaendelea kupakia...</h1>
+      <div class="hero-admin">
+        <img class="hero-admin-avatar" src="" alt="admin">
+        <span class="hero-admin-name"></span>
+        <span class="hero-admin-sep">·</span>
+        <span class="hero-admin-time"></span>
+      </div>
+    </div>
+    <div class="hero-dots" aria-hidden="true"></div>
+    <div class="hero-timer"></div>
+  </section>
 
-        <nav class="mobile-nav" id="mobileNav">
-            <ul>
-                <li><a href="#">Kitaifa</a></li>
-                <li><a href="#">Kimataifa</a></li>
-                <li><a href="#">Biashara</a></li>
-                <li><a href="#">Michezo</a></li>
-                <li><a href="#">Mengineyo</a></li>
-            </ul>
-        </nav>
-    </header>
+  <!-- TOP STORIES -->
+  <section class="section-wrap">
+    <div class="section-label">Habari Kuu</div>
+    <div class="top-news-grid" id="top-news-grid"></div>
+  </section>
 
-    <main style="padding-top: 100px; height: 1500px;">
-        <h2 style="text-align: center;">Maudhui ya Chini Yataendelea Hapa</h2>
-    </main>
+  <!-- LATEST NEWS -->
+  <section class="section-wrap">
+    <div class="section-label">Habari Za Hivi Karibuni</div>
+    <div class="main-news-grid" id="main-news-grid"></div>
+  </section>
 
-    <script src="script.js"></script>
+  <!-- OLD NEWS — inaonekana tu kama kuna habari za zamani -->
+  <section id="old-news-section" style="display:none;">
+    <div class="old-news-toggle" onclick="toggleOldNews()" role="button" tabindex="0"
+      onkeydown="if(event.key==='Enter')toggleOldNews()">
+      <div class="section-label" style="margin-bottom:0;">
+        Habari za Zamani <span id="old-news-count" style="opacity:.6;"></span>
+      </div>
+      <span class="old-news-chevron" id="old-news-chevron">&#x25BC;</span>
+    </div>
+    <div class="old-news-grid" id="old-news-grid"></div>
+  </section>
+</main>
 
+<button id="scroll-top" aria-label="Rudi juu">&#x2191;</button>
 
+<script>
+/* ============================================================
+   MNYILINGA NEWS — JAVASCRIPT YOTE
+   ============================================================ */
 
+/* --- API URL: Badilisha hapa ukibadilisha API yako --- */
+const API_URL = 'https://script.google.com/macros/s/AKfycbxRU38CN-Xnu7FOokZ7bzKXrxljegpDtpUPmRWCm06zBDEFfUl0ftbOlNUUNX_nAs5u/exec';
 
+/* ============================================================
+   ADMINS 10 — BADILISHA HAPA!
+   name  = Jina la admin litakaloonekana kwenye kila habari
+   avatar = Link ya picha ya admin (weka link yako)
+   ============================================================ */
+const ADMINS = [
+  { id:1,  name:"Amina Khamis",   avatar:"https://i.pravatar.cc/150?img=1"  },
+  { id:2,  name:"Hassan Mwangi",  avatar:"https://i.pravatar.cc/150?img=8"  },
+  { id:3,  name:"Fatuma Said",    avatar:"https://i.pravatar.cc/150?img=5"  },
+  { id:4,  name:"Juma Rashid",    avatar:"https://i.pravatar.cc/150?img=12" },
+  { id:5,  name:"Salma Abdalla",  avatar:"https://i.pravatar.cc/150?img=16" },
+  { id:6,  name:"Omar Sharif",    avatar:"https://i.pravatar.cc/150?img=20" },
+  { id:7,  name:"Zuwena Pandu",   avatar:"https://i.pravatar.cc/150?img=25" },
+  { id:8,  name:"Bakari Hamisi",  avatar:"https://i.pravatar.cc/150?img=30" },
+  { id:9,  name:"Mariam Ally",    avatar:"https://i.pravatar.cc/150?img=35" },
+  { id:10, name:"Said Kombo",     avatar:"https://i.pravatar.cc/150?img=40" }
+];
 
+/* Chagua admin kwa kila post — inaendelea mzunguko 1-10 */
+function getAdmin(idx){ return ADMINS[idx % ADMINS.length]; }
 
+/* --- State --- */
+let allPosts = [];
+let currentCategory = 'all';
+let heroIndex = 0;
+let heroInterval = null;
 
+/* ============================================================ UTILITIES */
+function timeAgo(d){
+  const now=new Date(), date=new Date(d);
+  if(isNaN(date)) return d||'';
+  const s=Math.floor((now-date)/1000);
+  if(s<60) return 'Sasa hivi';
+  if(s<3600) return `Dakika ${Math.floor(s/60)} zilizopita`;
+  if(s<86400) return `Masaa ${Math.floor(s/3600)} yaliyopita`;
+  if(s<2592000) return `Siku ${Math.floor(s/86400)} zilizopita`;
+  const m=Math.floor(s/2592000);
+  return m<12 ? `Miezi ${m} iliyopita` : `Miaka ${Math.floor(m/12)} iliyopita`;
+}
+function isOld(d){ const date=new Date(d); return !isNaN(date)&&(new Date()-date)/1000>2592000; }
+function snippet(t,w=18){ if(!t)return''; const ws=t.trim().split(/\s+/); return ws.slice(0,w).join(' ')+(ws.length>w?'...':''); }
+function esc(s){ return s?String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'):''; }
+function postUrl(i){ return `post.html?id=${i}`; }
+function savePosts(){ try{sessionStorage.setItem('mn_posts',JSON.stringify(allPosts));}catch(e){} }
+function navigateTo(url){ savePosts(); window.location.href=url; }
+function placeholder(){ return "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='450'%3E%3Crect width='800' height='450' fill='%23e8e8e8'/%3E%3C/svg%3E"; }
 
-
-
-
-
-    <script>
-
-
-document.addEventListener('DOMContentLoaded', function() {
-    const hamburgerBtn = document.getElementById('hamburgerBtn');
-    const mobileNav = document.getElementById('mobileNav');
-
-    hamburgerBtn.addEventListener('click', function() {
-        // Geuza class zote mbili
-        this.classList.toggle('active'); // Inabadilisha icon kuwa 'X'
-        mobileNav.classList.toggle('active'); // Inaonyesha menu
+/* Lazy image loading */
+function observeLazy(){
+  const imgs=document.querySelectorAll('img.lazy:not(.loaded)');
+  if(!('IntersectionObserver' in window)){
+    imgs.forEach(img=>{img.src=img.dataset.src;img.classList.add('loaded');});
+    return;
+  }
+  const obs=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      if(!e.isIntersecting) return;
+      const img=e.target;
+      img.src=img.dataset.src;
+      img.onload=()=>img.classList.add('loaded');
+      img.onerror=()=>{img.src=placeholder();img.classList.add('loaded');};
+      obs.unobserve(img);
     });
+  },{rootMargin:'200px'});
+  imgs.forEach(img=>obs.observe(img));
+}
+
+/* Skeleton loader */
+function showSkeletons(el,n){
+  let h='';
+  for(let i=0;i<n;i++) h+=`<div class="skel-card"><div class="skel-img skeleton"></div><div class="skel-body"><div class="skel-cat skeleton"></div><div class="skel-title skeleton"></div><div class="skel-title-2 skeleton"></div><div class="skel-meta skeleton"></div></div></div>`;
+  el.innerHTML=h;
+}
+
+/* ============================================================ ADMIN ROW HTML */
+function adminRow(admin, ts, dark=false){
+  const p = placeholder();
+  if(dark){
+    return `<div class="sniper-admin">
+      <img class="sniper-admin-avatar" src="${esc(admin.avatar)}" alt="${esc(admin.name)}" onerror="this.src='${p}'">
+      <span class="sniper-admin-name">${esc(admin.name)}</span>
+      <span class="sniper-admin-sep">·</span>
+      <span class="sniper-admin-time">${timeAgo(ts)}</span>
+    </div>`;
+  }
+  return `<div class="card-admin">
+    <img class="card-admin-avatar" src="${esc(admin.avatar)}" alt="${esc(admin.name)}" onerror="this.src='${p}'">
+    <span class="card-admin-name">${esc(admin.name)}</span>
+    <span class="card-admin-sep">·</span>
+    <span class="card-admin-time">${timeAgo(ts)}</span>
+  </div>`;
+}
+
+/* ============================================================ CARD HTML */
+function cardHTML(post, idx){
+  const admin = getAdmin(idx);
+  const img   = post.picha_url || placeholder();
+  const lazy  = post.picha_url
+    ? `<img class="card-img lazy" data-src="${esc(img)}" src="${placeholder()}" alt="${esc(post.headline)}">`
+    : `<img class="card-img" src="${placeholder()}" alt="${esc(post.headline)}">`;
+  return `<div class="news-card" onclick="navigateTo('${postUrl(idx)}')" tabindex="0" role="article" onkeydown="if(event.key==='Enter')navigateTo('${postUrl(idx)}')">
+    <div class="card-img-wrap">${lazy}</div>
+    <div class="card-body">
+      <div class="card-category">${esc(post.category||'Habari')}</div>
+      <div class="card-headline">${esc(post.headline)}</div>
+      <div class="card-snippet">${esc(snippet(post.article))}</div>
+      ${adminRow(admin, post.timestamp, false)}
+    </div>
+  </div>`;
+}
+
+/* ============================================================ SNIPER HTML */
+function sniperHTML(post, idx){
+  const admin = getAdmin(idx);
+  return `<div class="sniper-block" onclick="navigateTo('${postUrl(idx)}')" tabindex="0" role="article" onkeydown="if(event.key==='Enter')navigateTo('${postUrl(idx)}')">
+    <div class="sniper-label">${esc(post.category||'Habari za Haraka')}</div>
+    <div class="sniper-headline">${esc(post.headline)}</div>
+    <div class="sniper-snippet">${esc(snippet(post.article,30))}</div>
+    ${adminRow(admin, post.timestamp, true)}
+  </div>`;
+}
+
+/* ============================================================ HERO */
+function initHero(posts){
+  const sec=document.getElementById('hero-section');
+  if(!sec||!posts.length) return;
+  const imgEl=sec.querySelector('.hero-img-el');
+  const catEl=sec.querySelector('.hero-category');
+  const headEl=sec.querySelector('.hero-headline');
+  const avEl=sec.querySelector('.hero-admin-avatar');
+  const nameEl=sec.querySelector('.hero-admin-name');
+  const timeEl=sec.querySelector('.hero-admin-time');
+  const dotsWrap=sec.querySelector('.hero-dots');
+  const timerEl=sec.querySelector('.hero-timer');
+  const count=Math.min(posts.length,6);
+
+  /* Dots */
+  dotsWrap.innerHTML='';
+  for(let i=0;i<count;i++){
+    const d=document.createElement('div');
+    d.className='hero-dot'+(i===0?' active':'');
+    d.onclick=()=>goHero(i);
+    dotsWrap.appendChild(d);
+  }
+
+  function goHero(i){
+    heroIndex=i;
+    const p=posts[i];
+    const admin=getAdmin(i);
+    imgEl.classList.add('fade-out');
+    sec.querySelector('.hero-content').classList.add('fade-out');
+    setTimeout(()=>{
+      imgEl.src=p.picha_url||placeholder();
+      imgEl.onerror=()=>{imgEl.src=placeholder();};
+      catEl.textContent=p.category||'Habari';
+      headEl.textContent=p.headline;
+      avEl.src=admin.avatar;
+      avEl.onerror=()=>{avEl.style.display='none';};
+      nameEl.textContent=admin.name;
+      timeEl.textContent=timeAgo(p.timestamp);
+      sec.onclick=()=>navigateTo(postUrl(i));
+      imgEl.classList.remove('fade-out');
+      sec.querySelector('.hero-content').classList.remove('fade-out');
+      dotsWrap.querySelectorAll('.hero-dot').forEach((d,j)=>d.classList.toggle('active',j===i));
+      timerEl.classList.remove('running');
+      void timerEl.offsetWidth;
+      timerEl.classList.add('running');
+    },350);
+  }
+
+  goHero(0);
+  if(heroInterval) clearInterval(heroInterval);
+  heroInterval=setInterval(()=>{heroIndex=(heroIndex+1)%count;goHero(heroIndex);},180000);
+}
+
+/* ============================================================ CATEGORY NAV */
+function buildCategoryNav(posts){
+  const nav=document.getElementById('category-nav');
+  if(!nav) return;
+  const cats=['Zote',...new Set(posts.map(p=>p.category).filter(Boolean))];
+  nav.innerHTML=cats.map(cat=>{
+    const val=cat==='Zote'?'all':cat;
+    return `<button class="cat-btn${val==='all'?' active':''}" onclick="filterCategory('${esc(val)}')">${esc(cat)}</button>`;
+  }).join('');
+}
+
+/* ============================================================ FILTER & SEARCH */
+function filterCategory(cat){
+  currentCategory=cat;
+  document.querySelectorAll('.cat-btn').forEach(btn=>{
+    btn.classList.toggle('active',(cat==='all'&&btn.textContent==='Zote')||(btn.textContent.toLowerCase()===cat.toLowerCase()));
+  });
+  renderContent(allPosts,cat,document.getElementById('search-input')?.value?.trim().toLowerCase()||'');
+}
+function handleSearch(q){ renderContent(allPosts,currentCategory,q.trim().toLowerCase()); }
+
+/* ============================================================ RENDER */
+function renderContent(posts,catF,searchQ){
+  const filtered=posts.filter(p=>{
+    const mc=catF==='all'||(p.category||'').toLowerCase()===catF.toLowerCase();
+    const ms=!searchQ||(p.headline||'').toLowerCase().includes(searchQ)||(p.category||'').toLowerCase().includes(searchQ);
+    return mc&&ms;
+  });
+  const recent=filtered.filter(p=>!isOld(p.timestamp));
+  const old=filtered.filter(p=>isOld(p.timestamp));
+
+  /* Top 4 */
+  const topEl=document.getElementById('top-news-grid');
+  if(topEl){
+    const top=recent.slice(0,4);
+    topEl.innerHTML=top.length
+      ?top.map(p=>cardHTML(p,allPosts.indexOf(p))).join('')
+      :`<div class="empty-state"><strong>Hakuna habari</strong>Jaribu tafuta kwa neno tofauti.</div>`;
+  }
+
+  /* Main grid + sniper kila 5 */
+  const mainEl=document.getElementById('main-news-grid');
+  if(mainEl){
+    const rest=recent.slice(4);
+    mainEl.innerHTML=rest.length
+      ?rest.map((p,i)=>{ const idx=allPosts.indexOf(p); return (i+1)%5===0?sniperHTML(p,idx):cardHTML(p,idx); }).join('')
+      :'';
+  }
+
+  /* Old news */
+  const oldEl=document.getElementById('old-news-grid');
+  const oldSec=document.getElementById('old-news-section');
+  if(oldEl&&oldSec){
+    if(!old.length){ oldSec.style.display='none'; }
+    else{
+      oldSec.style.display='';
+      const ce=document.getElementById('old-news-count');
+      if(ce) ce.textContent=`(${old.length})`;
+      oldEl.innerHTML=old.map(p=>cardHTML(p,allPosts.indexOf(p))).join('');
+    }
+  }
+  observeLazy();
+}
+
+/* ============================================================ TICKER */
+function buildTicker(){
+  const el=document.getElementById('ticker-content');
+  if(!el||!allPosts.length) return;
+  const h=allPosts.slice(0,12).map(p=>esc(p.headline));
+  el.innerHTML=[...h,...h].map(x=>`<span>${x}</span>`).join('');
+}
+
+/* ============================================================ FETCH */
+async function fetchPosts(){
+  const topEl=document.getElementById('top-news-grid');
+  const mainEl=document.getElementById('main-news-grid');
+  if(topEl) showSkeletons(topEl,4);
+  if(mainEl) showSkeletons(mainEl,6);
+  try{
+    const res=await fetch(API_URL+'?t='+Date.now());
+    if(!res.ok) throw new Error('API error');
+    const data=await res.json();
+    allPosts=Array.isArray(data)?data:[];
+    allPosts.sort((a,b)=>new Date(b.timestamp)-new Date(a.timestamp));
+    savePosts();
+    buildCategoryNav(allPosts);
+    initHero(allPosts.slice(0,6));
+    renderContent(allPosts,'all','');
+    buildTicker();
+  }catch(err){
+    console.error('Fetch error:',err);
+    if(topEl) topEl.innerHTML=`<div class="empty-state" style="grid-column:1/-1"><strong>Hitilafu ya Muunganiko</strong>Tafadhali refresh ukurasa.</div>`;
+    if(mainEl) mainEl.innerHTML='';
+  }
+  const ls=document.getElementById('loading-screen');
+  if(ls) ls.classList.add('hidden');
+}
+
+/* ============================================================ OLD NEWS TOGGLE */
+function toggleOldNews(){
+  const g=document.getElementById('old-news-grid');
+  const c=document.getElementById('old-news-chevron');
+  if(!g) return;
+  const open=g.classList.toggle('visible');
+  if(c) c.classList.toggle('open',open);
+}
+
+/* ============================================================ SCROLL TOP */
+function initScrollTop(){
+  const btn=document.getElementById('scroll-top');
+  if(!btn) return;
+  window.addEventListener('scroll',()=>btn.classList.toggle('visible',window.scrollY>600),{passive:true});
+  btn.onclick=()=>window.scrollTo({top:0,behavior:'smooth'});
+}
+
+/* ============================================================ INIT */
+document.addEventListener('DOMContentLoaded',()=>{
+  setTimeout(fetchPosts,800);
+  const si=document.getElementById('search-input');
+  if(si){ let db; si.addEventListener('input',e=>{ clearTimeout(db); db=setTimeout(()=>handleSearch(e.target.value),280); }); }
+  initScrollTop();
 });
-
-
-
-    </script>
-
-
-
-
+</script>
 </body>
 </html>
