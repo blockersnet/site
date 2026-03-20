@@ -539,6 +539,60 @@
 
       
 
+      /* ============================================================ VERIFIED BADGE + ADMIN BIO */
+      .post-admin-name-row {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+      }
+      .verified-badge {
+        display: inline-flex;
+        align-items: center;
+        flex-shrink: 0;
+      }
+      .verified-badge svg {
+        width: 14px;
+        height: 14px;
+      }
+      .admin-chevron-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background: none;
+        border: none;
+        padding: 0 2px;
+        cursor: pointer;
+        color: var(--gray-400);
+        transition: color var(--tr), transform var(--tr);
+        flex-shrink: 0;
+      }
+      .admin-chevron-btn:hover {
+        color: var(--black);
+      }
+      .admin-chevron-btn svg {
+        width: 13px;
+        height: 13px;
+        transition: transform 0.22s ease;
+      }
+      .admin-chevron-btn.open svg {
+        transform: rotate(180deg);
+      }
+      .admin-bio-panel {
+        display: none;
+        margin-top: 7px;
+        background: var(--gray-100);
+        border-left: 3px solid var(--yellow);
+        padding: 8px 11px;
+        font-family: var(--font-body);
+        font-size: 0.68rem;
+        color: var(--gray-600);
+        line-height: 1.55;
+        max-width: 320px;
+      }
+      .admin-bio-panel.open {
+        display: block;
+      }
+
       /* ============================================================ RESPONSIVE */
       @media (max-width: 768px) {
         :root {
@@ -746,10 +800,27 @@
             alt="admin"
           />
           <div class="post-admin-info">
-            <span class="post-admin-name" id="post-admin-name"
-              >Mnyilinga News</span
-            >
+            <div class="post-admin-name-row">
+              <span class="post-admin-name" id="post-admin-name">Mnyilinga News</span>
+              <!-- Verified badge — inaonekana ndani ya post tu -->
+              <span class="verified-badge" id="post-verified-badge">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="12" cy="12" r="12" fill="#1D9BF0"/>
+                  <path d="M6.5 12.5L10 16L17.5 8.5" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+              <!-- Chevron — gusa uone bio ya admin -->
+              <button class="admin-chevron-btn" id="admin-chevron-btn" onclick="toggleAdminBio()" aria-label="Maelezo ya mhariri">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="6 9 12 15 18 9"/>
+                </svg>
+              </button>
+            </div>
             <span class="post-admin-role">Mhariri wa Habari</span>
+            <!-- Bio panel — inafunguka ukigusa chevron -->
+            <div class="admin-bio-panel" id="admin-bio-panel">
+              <span id="admin-bio-text"></span>
+            </div>
           </div>
         </div>
         <span class="post-meta-time" id="post-meta-time">---</span>
@@ -894,51 +965,61 @@
           id: 1,
           name: "Amina Khamis",
           avatar: "https://i.pravatar.cc/150?img=1",
+          bio: "Amina ni mhariri mkuu wa habari za kijamii na masuala ya wanawake. Ana uzoefu wa zaidi ya miaka 8 katika uandishi wa habari. [Badilisha maelezo haya kulingana na Amina Khamis]",
         },
         {
           id: 2,
           name: "Hassan Mwangi",
           avatar: "https://i.pravatar.cc/150?img=8",
+          bio: "Hassan anashughulikia habari za uchumi, biashara na teknolojia. Amefanya kazi na vyombo vingi vya habari Afrika Mashariki. [Badilisha maelezo haya kulingana na Hassan Mwangi]",
         },
         {
           id: 3,
           name: "Fatuma Said",
           avatar: "https://i.pravatar.cc/150?img=5",
+          bio: "Fatuma ni mtaalamu wa habari za siasa na utawala. Anafuatilia masuala ya haki za binadamu na demokrasia kwa makini. [Badilisha maelezo haya kulingana na Fatuma Said]",
         },
         {
           id: 4,
           name: "Juma Rashid",
           avatar: "https://i.pravatar.cc/150?img=12",
+          bio: "Juma anaandika habari za michezo na burudani. Ni mpigapicha hodari pia na ana ubunifu mkubwa wa kuwasilisha habari. [Badilisha maelezo haya kulingana na Juma Rashid]",
         },
         {
           id: 5,
           name: "Salma Abdalla",
           avatar: "https://i.pravatar.cc/150?img=16",
+          bio: "Salma anajishughulisha na habari za afya, elimu na maendeleo ya jamii. Ana shahada ya uandishi wa habari kutoka chuo kikuu. [Badilisha maelezo haya kulingana na Salma Abdalla]",
         },
         {
           id: 6,
           name: "Omar Sharif",
           avatar: "https://i.pravatar.cc/150?img=20",
+          bio: "Omar ni mchambuzi wa habari za kimataifa. Amewahi kufanya kazi nje ya nchi na ana mtazamo mpana wa mambo yanayotokea duniani. [Badilisha maelezo haya kulingana na Omar Sharif]",
         },
         {
           id: 7,
           name: "Zuwena Pandu",
           avatar: "https://i.pravatar.cc/150?img=25",
+          bio: "Zuwena anafuatilia habari za mazingira, utamaduni na utalii. Anapenda kuelimisha wasomaji kuhusu urithi wa Afrika. [Badilisha maelezo haya kulingana na Zuwena Pandu]",
         },
         {
           id: 8,
           name: "Bakari Hamisi",
           avatar: "https://i.pravatar.cc/150?img=30",
+          bio: "Bakari ni mhariri wa habari za usalama na sheria. Ana uzoefu wa kufanya kazi na vyombo vya usalama na mahakama. [Badilisha maelezo haya kulingana na Bakari Hamisi]",
         },
         {
           id: 9,
           name: "Mariam Ally",
           avatar: "https://i.pravatar.cc/150?img=35",
+          bio: "Mariam anaandika habari za sanaa, muziki na utamaduni. Yeye ni mpenda sanaa na anaamini habari za ubunifu zina nguvu. [Badilisha maelezo haya kulingana na Mariam Ally]",
         },
         {
           id: 10,
           name: "Said Kombo",
           avatar: "https://i.pravatar.cc/150?img=40",
+          bio: "Said ni mhariri mwandamizi na mwanzilishi wa Mnyilinga News. Ana uzoefu wa miaka mingi katika tasnia ya habari za kidijitali. [Badilisha maelezo haya kulingana na Said Kombo]",
         },
       ];
 
@@ -1007,6 +1088,16 @@
         const nameEl = document.getElementById("post-admin-name");
         if (nameEl) nameEl.textContent = admin.name;
 
+        /* Bio ya admin — weka maandishi ya placeholder */
+        const bioEl = document.getElementById("admin-bio-text");
+        if (bioEl) bioEl.textContent = admin.bio || "";
+
+        /* Reset chevron na bio panel kila post inapopakia */
+        const chevronBtn = document.getElementById("admin-chevron-btn");
+        const bioPanel = document.getElementById("admin-bio-panel");
+        if (chevronBtn) chevronBtn.classList.remove("open");
+        if (bioPanel) bioPanel.classList.remove("open");
+
         /* Category */
         const catEl = document.getElementById("post-category");
         if (catEl) catEl.textContent = post.category || "Habari";
@@ -1054,6 +1145,15 @@
 
         /* More posts */
         renderMorePosts(idx);
+      }
+
+      /* ============================================================ TOGGLE ADMIN BIO */
+      function toggleAdminBio() {
+        const btn = document.getElementById("admin-chevron-btn");
+        const panel = document.getElementById("admin-bio-panel");
+        if (!btn || !panel) return;
+        btn.classList.toggle("open");
+        panel.classList.toggle("open");
       }
 
       /* ============================================================ SHARE */
