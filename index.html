@@ -502,96 +502,68 @@
       /* ============================================================ CONTENT GRID (dynamic) */
       .main-card {
         background-color: #ffffff;
-        max-width: 800px;
         width: 100%;
-        padding: 25px;
+        padding: 20px 20px 24px;
         border: 1px solid #e0e0e0;
-      }
-      .cg-header {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        font-size: 10px;
-        font-weight: bold;
-        color: #0056b3;
-        margin-bottom: 12px;
-        text-transform: uppercase;
-      }
-      .cg-header .dot {
-        color: #0056b3;
-        font-size: 24px;
-        line-height: 0;
       }
       .top-line {
         border: 0;
-        border-top: 1px solid #ddd;
-        margin-bottom: 25px;
+        border-top: 1px solid #e0e0e0;
+        margin: 0 0 20px;
       }
+      /*
+        FIXED 2-COLUMN GRID — haibadiliki kamwe.
+        Inatumia minmax(0, 1fr) badala ya 1fr ili kila kolamu
+        ipunguke sawasawa hata kwenye screen ndogo.
+        Hakuna media query inayobadilisha columns.
+      */
       .content-grid {
         display: grid;
-        grid-template-columns: 1fr 1px 1fr;
-        gap: 20px;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 16px;
         align-items: start;
       }
       .cg-article {
         display: flex;
         flex-direction: column;
         cursor: pointer;
+        text-decoration: none;
+        color: inherit;
+        overflow: hidden;
       }
-      .cg-article:hover .cg-title { color: #555; }
       .img-box {
         position: relative;
         width: 100%;
-        aspect-ratio: 1.6 / 1;
-        background-color: #eee;
+        aspect-ratio: 16 / 9;
+        background-color: #e8e8e8;
         overflow: hidden;
       }
       .img-box img {
         width: 100%;
         height: 100%;
         object-fit: cover;
+        display: block;
         transition: transform 0.4s ease;
       }
-      .cg-article:hover .img-box img { transform: scale(1.03); }
+      .cg-article:hover .img-box img {
+        transform: scale(1.04);
+      }
       .cg-title {
-        font-size: 18px;
+        font-family: var(--font-display);
+        font-size: clamp(0.78rem, 1.6vw, 1rem);
         font-weight: 700;
-        line-height: 1.22;
-        margin-top: 12px;
+        line-height: 1.28;
+        margin-top: 10px;
         color: #111;
         transition: color var(--tr);
+        /* Clamp to 3 lines max ili heights ziwe karibu sawa */
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
       }
-      .cg-cat {
-        display: inline-block;
-        font-family: var(--font-mono);
-        font-size: 0.58rem;
-        font-weight: 600;
-        letter-spacing: 0.12em;
-        text-transform: uppercase;
-        color: var(--yellow);
-        background: var(--black);
-        padding: 2px 6px;
-        margin-top: 8px;
-      }
-      .vertical-divider {
-        background-color: #ddd;
-        height: 100%;
-        min-height: 200px;
-      }
-      .cg-row-separator {
-        grid-column: 1 / -1;
-        height: 1px;
-        background: #e8e8e8;
-        margin: 4px 0;
-      }
-      @media (max-width: 600px) {
-        .main-card { padding: 15px; }
-        .cg-title { font-size: 14px; }
-        .content-grid {
-          grid-template-columns: 1fr;
-          gap: 16px;
-        }
-        .vertical-divider { display: none; }
+      .cg-article:hover .cg-title {
+        color: #444;
       }
       .category-nav {
         background: #0a0a0a;
@@ -1528,9 +1500,8 @@
 
   <!-- CONTENT GRID — inajazwa na JS kutoka kwa data ya API -->
   <div class="main-card" id="content-grid-card" style="display:none;">
-    <hr class="top-line" style="margin-bottom:0; margin-top:0;">
     <div class="content-grid" id="content-grid-inner">
-      <!-- JS inajaza hapa -->
+      <!-- JS inajaza hapa: post 4 tu, 2×2 fixed grid -->
     </div>
   </div>
 
@@ -2170,14 +2141,17 @@
 
       /* ============================================================ CONTENT GRID — Dynamic */
       function buildContentGrid(posts) {
-        const card = document.getElementById("content-grid-card");
+        const card  = document.getElementById("content-grid-card");
         const inner = document.getElementById("content-grid-inner");
         if (!card || !inner) return;
 
-        /* Chagua post za wiki 1+ (zamani kidogo — si mpya kabisa, si za miezi)
-           zile ambazo si recent (zaidi ya wiki 1) lakini si old (chini ya mwezi 1) */
-        const ONE_WEEK_MS   = 7 * 24 * 60 * 60 * 1000;
-        const ONE_MONTH_MS  = 30 * 24 * 60 * 60 * 1000;
+        /*
+          Chagua pool: post zilizo kati ya wiki 1 na mwezi 1.
+          Kama hazitoshi 4, chukua slice ya allPosts (index 4 hadi 12)
+          ili daima tuwe na angalau post 4.
+        */
+        const ONE_WEEK_MS  = 7  * 24 * 60 * 60 * 1000;
+        const ONE_MONTH_MS = 30 * 24 * 60 * 60 * 1000;
         const now = Date.now();
 
         let pool = posts.filter(p => {
@@ -2185,9 +2159,8 @@
           return age >= ONE_WEEK_MS && age < ONE_MONTH_MS;
         });
 
-        /* Kama hakuna kati ya wiki 1 na mwezi, tumia post 5-12 (slice baada ya top 4) */
-        if (pool.length < 2) {
-          pool = posts.slice(4, 12);
+        if (pool.length < 4) {
+          pool = posts.slice(4, 14);
         }
 
         if (!pool.length) {
@@ -2195,42 +2168,38 @@
           return;
         }
 
-        /* Changanya (shuffle) pool ili zionekane kwa mpangilio wa nasibu kila refresh */
+        /* Changanya (shuffle) ili post ziwe tofauti kila refresh */
         for (let i = pool.length - 1; i > 0; i--) {
           const j = Math.floor(Math.random() * (i + 1));
           [pool[i], pool[j]] = [pool[j], pool[i]];
         }
 
-        /* Chagua jozi za post 2 kwa 2, kuonyesha mstari kwa mstari */
-        const pairs = [];
-        for (let i = 0; i + 1 < pool.length && pairs.length < 4; i += 2) {
-          pairs.push([pool[i], pool[i + 1]]);
-        }
+        /* Chukua EXACTLY 4 tu — haziongezeki, hazipungui */
+        const four = pool.slice(0, 4);
 
-        let html = "";
-        pairs.forEach((pair, pairIdx) => {
-          if (pairIdx > 0) {
-            html += `<div class="cg-row-separator"></div><div class="cg-row-separator" style="background:none;"></div><div class="cg-row-separator" style="background:none;"></div>`;
-          }
-          pair.forEach((p, side) => {
-            const idx = posts.indexOf(p);
-            const img = p.picha_url || placeholder();
-            html += `
-            <div class="cg-article" onclick="navigateTo('${postUrl(idx)}')" tabindex="0" role="article" onkeydown="if(event.key==='Enter')navigateTo('${postUrl(idx)}')">
+        /* Jenga HTML: picha + title tu, bila category label, bila divider */
+        inner.innerHTML = four.map(p => {
+          const idx = posts.indexOf(p);
+          const img = p.picha_url || placeholder();
+          return `<div
+              class="cg-article"
+              onclick="navigateTo('${postUrl(idx)}')"
+              tabindex="0"
+              role="article"
+              onkeydown="if(event.key==='Enter')navigateTo('${postUrl(idx)}')"
+            >
               <div class="img-box">
-                <img src="${esc(img)}" alt="${esc(p.headline)}" onerror="this.src='${placeholder()}'">
+                <img
+                  src="${esc(img)}"
+                  alt="${esc(p.headline)}"
+                  onerror="this.src='${placeholder()}'"
+                  loading="lazy"
+                >
               </div>
-              <span class="cg-cat">${esc(p.category || "Habari")}</span>
               <div class="cg-title">${esc(p.headline)}</div>
             </div>`;
-            /* Weka divider kati ya kila jozi (baada ya post ya kwanza, kabla ya ya pili) */
-            if (side === 0) {
-              html += `<div class="vertical-divider"></div>`;
-            }
-          });
-        });
+        }).join("");
 
-        inner.innerHTML = html;
         card.style.display = "";
       }
 
