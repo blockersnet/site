@@ -3,14 +3,23 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mnyilinga News — Habari Za Kweli</title>
+  <title>Mnyilinga News</title>
   <meta name="description" content="Mnyilinga News — Habari za haraka, za kweli, na za kina.">
   <meta property="og:title" content="Mnyilinga News">
   <meta name="theme-color" content="#000000">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ 
+  
+  
   <!-- Badilisha fonts hapa ukitaka nyingine — nenda fonts.google.com -->
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@300;400;600;700&family=Merriweather:wght@700;900&display=swap" rel="stylesheet">
+
+
+
+  
 <style>
 /* ============================================================
    MNYILINGA NEWS — CSS YOTE
@@ -27,15 +36,35 @@
   --gray-400: #999999;
   --gray-600: #555555;
   --gray-800: #222222;
+
+
+
+
+
+  
+  
   /* --- FONTS: Badilisha hapa --- */
-  --font-display: 'Playfair Display', Georgia, serif;
-  --font-body: 'IBM Plex Sans', sans-serif;
-  --font-mono: 'IBM Plex Mono', monospace;
-  /* --- MISC --- */
-  --header-h: 56px;
-  --max-w: 1280px;
-  --tr: 0.18s ease;
+
+
+  
+ /* --- FONTS: CNN / CNBC STYLE --- */
+
+--font-display: 'Merriweather', serif;
+--font-body: 'Source Sans 3', sans-serif;
+--font-mono: monospace;
+
+/* --- MISC --- */
+--header-h: 56px;
+--max-w: 1280px;
+--tr: 0.18s ease;
 }
+
+
+
+
+
+
+  
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;font-size:15px}
 body{font-family:var(--font-body);background:var(--white);color:var(--black);-webkit-font-smoothing:antialiased;overflow-x:hidden}
@@ -44,6 +73,12 @@ a{text-decoration:none;color:inherit}
 button{cursor:pointer;border:none;background:none;font-family:var(--font-body)}
 ul{list-style:none}
 
+
+
+
+
+
+  
 /* ============================================================ LOADING SCREEN */
 #loading-screen{position:fixed;inset:0;background:var(--black);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:9999;transition:opacity .5s ease,visibility .5s ease}
 #loading-screen.hidden{opacity:0;visibility:hidden;pointer-events:none}
