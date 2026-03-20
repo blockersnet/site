@@ -1062,6 +1062,180 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        /* SEHEMU MPYA YA KUONGEZA MUONEKANO MZURI WA NEWS */
+        .main-card {
+            background-color: #ffffff;
+            max-width: 800px;
+            width: 100%;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0); /* Hapa ndipo shadow ilipo */
+            border: 1px solid #e0e0e0;
+        }
+
+        /* Sehemu ya juu (Header) */
+        .header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 14px;
+            font-weight: bold;
+            color: #666;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+        }
+
+        .header .dot {
+            color: #0056b3;
+            font-size: 24px;
+            line-height: 0;
+        }
+
+        .header .author {
+            color: #0056b3;
+            text-transform: none;
+            font-size: 18px;
+            font-family: serif;
+        }
+
+        .top-line {
+            border: 0;
+            border-top: 1px solid #ddd;
+            margin-bottom: 25px;
+        }
+
+        /* GRID: Safu mbili ambazo hazibadiliki hata kwenye simu */
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1px 1fr; /* Inagawa 50/50 na mstari mmoja katikati */
+            gap: 20px;
+            align-items: start;
+        }
+
+        .article {
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Picha na Mpangilio wake */
+        .img-box {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 1.6 / 1; /* Inatunza urefu na upana sawa */
+            background-color: #eee;
+        }
+
+        .img-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Vichwa vya habari */
+        .title {
+            font-size: 20px;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-top: 15px;
+            color: #111;
+        }
+
+        /* Mstari wa katikati (Vertical Divider) */
+        .vertical-divider {
+            background-color: #ddd;
+            height: 100%;
+            min-height: 250px;
+        }
+
+        /* Alama za Video (Overlay) */
+        .video-label {
+            position: absolute;
+            bottom: 8px;
+            left: 8px;
+            background: rgba(0,0,0,0.8);
+            color: #ffcc00;
+            padding: 3px 7px;
+            font-size: 10px;
+            font-weight: 900;
+            letter-spacing: 1px;
+        }
+
+        .video-time {
+            position: absolute;
+            bottom: 8px;
+            left: 70px;
+            color: white;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        .play-icon {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background: #ffcc00;
+            width: 32px;
+            height: 32px;
+            clip-path: polygon(25% 20%, 25% 80%, 85% 50%); /* Inachora triangle ya play */
+        }
+
+        /* Marekebisho madogo kwa ajili ya simu ili maandishi yasizidiane */
+        @media (max-width: 600px) {
+            .main-card { padding: 15px; }
+            .title { font-size: 15px; }
+            .header .author { font-size: 15px; }
+            .content-grid { gap: 10px; }
+        }
+
+
+
+
+
+
+
+
+
       
     </style>
   </head>
@@ -1195,9 +1369,63 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   <!-- SECTION MPYA INAYOJITEGEMEA KABISA  -->
 
 
+    <div class="main-card">
+        <div class="header">
+            <span>43 MIN AGO</span>
+            <span class="dot">•</span>
+            <span class="author">Chloe Taylor</span>
+        </div>
+        <hr class="top-line">
+
+        <div class="content-grid">
+            
+            <div class="article">
+                <div class="img-box">
+                    <img src="https://images.unsplash.com/photo-1610312278520-bcc893a3ff1d?q=80&w=800" alt="Gold">
+                </div>
+                <div class="title">
+                    Gold loans are thriving in India — and attracting global investors
+                </div>
+            </div>
+
+            <div class="vertical-divider"></div>
+
+            <div class="article">
+                <div class="img-box">
+                    <img src="https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?q=80&w=800" alt="Market">
+                    <div class="play-icon"></div>
+                    <div class="video-label">VIDEO</div>
+                    <div class="video-time">10:06</div>
+                </div>
+                <div class="title">
+                    Why Western playbooks fail in China — and what it takes for brands to compete
+                </div>
+            </div>
+
+        </div>
+    </div>
 
 
 
@@ -1220,18 +1448,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-  
 
 
 
