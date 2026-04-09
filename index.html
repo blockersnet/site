@@ -56,11 +56,12 @@
 
 
         
-        /* --- FONTS: CLEAN MODERN STYLE NAWEZA KUBADILI FONTS HAPA  --- */
+        /* --- FONTS: Inter pekee --- */
 
         --font-display: "Inter", sans-serif;
         --font-body: "Inter", sans-serif;
-        --font-mono: monospace;
+        --font-mono: "Inter", sans-serif;
+        --font-inter: "Inter", sans-serif;
 
         /* --- MISC --- */
         --header-h: 56px;
@@ -336,53 +337,7 @@
         background: var(--black);
         border-bottom: 3px solid var(--yellow);
       }
-      .ticker-bar {
-        background: var(--yellow);
-        color: var(--black);
-        overflow: hidden;
-        height: 28px;
-        display: flex;
-        align-items: center;
-      }
-      .ticker-label {
-        background: var(--black);
-        color: var(--yellow);
-        font-family: var(--font-mono);
-        font-size: 0.63rem;
-        font-weight: 500;
-        letter-spacing: 0.1em;
-        text-transform: uppercase;
-        padding: 0 14px;
-        height: 100%;
-        display: flex;
-        align-items: center;
-        flex-shrink: 0;
-        white-space: nowrap;
-      }
-      .ticker-scroll {
-        overflow: hidden;
-        flex: 1;
-      }
-      .ticker-content {
-        display: flex;
-        align-items: center;
-        animation: tickerScroll 50s linear infinite;
-        white-space: nowrap;
-        padding-left: 40px;
-        font-family: var(--font-mono);
-        font-size: 0.68rem;
-        font-weight: 500;
-        letter-spacing: 0.03em;
-        gap: 60px;
-      }
-      @keyframes tickerScroll {
-        from {
-          transform: translateX(0);
-        }
-        to {
-          transform: translateX(-50%);
-        }
-      }
+
       .header-top {
         display: flex;
         align-items: center;
@@ -573,6 +528,7 @@
         cursor: pointer;
         border: 1px solid #2a2a2a;
         background: #111;
+        border-radius: 8px;
         transition: border-color var(--tr), color var(--tr), background var(--tr);
         flex-shrink: 0;
       }
@@ -848,16 +804,7 @@
         opacity: 0;
       }
       .hero-category {
-        display: inline-block;
-        background: var(--yellow);
-        color: var(--black);
-        font-family: var(--font-mono);
-        font-size: 0.68rem;
-        font-weight: 500;
-        letter-spacing: 0.12em;
-        text-transform: uppercase;
-        padding: 3px 8px;
-        margin-bottom: 12px;
+        display: none;
       }
       .hero-headline {
         font-family: var(--font-inter);
@@ -977,18 +924,7 @@
         padding: 14px 16px 16px;
         background: var(--white);
       }
-      .card-category {
-        font-family: var(--font-display);
-        font-size: 0.65rem;
-        font-weight: 500;
-        letter-spacing: 0.12em;
-        text-transform: uppercase;
-        color: var(--yellow);
-        background: var(--black);
-        display: inline-block;
-        padding: 2px 7px;
-        margin-bottom: 8px;
-      }
+      /* card-category imeondolewa */
       .card-headline {
         font-family: var(--font-display);
         font-weight: 700;
@@ -1009,38 +945,7 @@
         -webkit-box-orient: vertical;
         overflow: hidden;
       }
-      /* Admin row */
-      .card-admin {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        margin-top: 10px;
-        padding-top: 10px;
-        border-top: 1px solid var(--gray-200);
-      }
-      .card-admin-avatar {
-        width: 24px;
-        height: 24px;
-        border-radius: 50%;
-        object-fit: cover;
-        border: 1px solid var(--gray-200);
-        flex-shrink: 0;
-      }
-      .card-admin-name {
-        font-family: var(--font-display);
-        font-size: 0.64rem;
-        font-weight: 500;
-        color: var(--black);
-      }
-      .card-admin-sep {
-        font-size: 0.6rem;
-        color: var(--gray-400);
-      }
-      .card-admin-time {
-        font-family: var(--font-inter);
-        font-size: 0.6rem;
-        color: var(--gray-400);
-      }
+      /* card-admin imeondolewa */
 
       /* TOP NEWS GRID */
       .top-news-grid {
@@ -1090,14 +995,7 @@
       .sniper-block:hover {
         background: #0d0d0d;
       }
-      .sniper-label {
-        font-family: var(--font-mono);
-        font-size: 0.62rem;
-        letter-spacing: 0.16em;
-        text-transform: uppercase;
-        color: var(--yellow);
-        margin-bottom: 8px;
-      }
+      /* sniper-admin na sniper-label vimeondolewa */
       .sniper-headline {
         font-family: var(--font-display);
         font-size: 1.08rem;
@@ -1114,39 +1012,6 @@
         -webkit-line-clamp: 3;
         -webkit-box-orient: vertical;
         overflow: hidden;
-        margin-bottom: 12px;
-      }
-      /* Admin row kwenye sniper */
-      .sniper-admin {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        padding-top: 12px;
-        border-top: 1px solid #1e1e1e;
-      }
-      .sniper-admin-avatar {
-        width: 24px;
-        height: 24px;
-        border-radius: 50%;
-        object-fit: cover;
-        border: 1px solid #333;
-        flex-shrink: 0;
-      }
-      .sniper-admin-name {
-        font-family: var(--font-mono);
-        font-size: 0.64rem;
-        color: #888;
-        font-weight: 500;
-      }
-      .sniper-admin-sep {
-        font-size: 0.6rem;
-        color: #444;
-      }
-      .sniper-admin-time {
-        font-family: var(--font-mono);
-        font-size: 0.6rem;
-        color: var(--gray-600);
-        margin-left: auto;
       }
 
       /* ============================================================ OLD NEWS */
@@ -1569,14 +1434,7 @@
 
     <!-- HEADER -->
     <header id="site-header">
-      <div class="ticker-bar">
-        <span class="ticker-label">Breaking</span>
-        <div class="ticker-scroll">
-          <div class="ticker-content" id="ticker-content">
-            <span>Habari zinaendelea kupakia...</span>
-          </div>
-        </div>
-      </div>
+
       <div class="header-top">
         <!-- Hamburger Menu Button -->
         <button class="hamburger-btn" id="hamburger-btn" aria-label="Fungua menyu" onclick="toggleDrawer()">
@@ -2211,28 +2069,8 @@
         el.innerHTML = h;
       }
 
-      /* ============================================================ ADMIN ROW HTML */
-      function adminRow(admin, ts, dark = false) {
-        const p = placeholder();
-        if (dark) {
-          return `<div class="sniper-admin">
-      <img class="sniper-admin-avatar" src="${esc(admin.avatar)}" alt="${esc(admin.name)}" onerror="this.src='${p}'">
-      <span class="sniper-admin-name">${esc(admin.name)}</span>
-      <span class="sniper-admin-sep">·</span>
-      <span class="sniper-admin-time">${timeAgo(ts)}</span>
-    </div>`;
-        }
-        return `<div class="card-admin">
-    <img class="card-admin-avatar" src="${esc(admin.avatar)}" alt="${esc(admin.name)}" onerror="this.src='${p}'">
-    <span class="card-admin-name">${esc(admin.name)}</span>
-    <span class="card-admin-sep">·</span>
-    <span class="card-admin-time">${timeAgo(ts)}</span>
-  </div>`;
-      }
-
       /* ============================================================ CARD HTML */
       function cardHTML(post, idx) {
-        const admin = getAdmin(idx);
         const img = post.picha_url || placeholder();
         const lazy = post.picha_url
           ? `<img class="card-img lazy" data-src="${esc(img)}" src="${placeholder()}" alt="${esc(post.headline)}">`
@@ -2240,22 +2078,17 @@
         return `<div class="news-card" onclick="navigateTo('${postUrl(idx)}')" tabindex="0" role="article" onkeydown="if(event.key==='Enter')navigateTo('${postUrl(idx)}')">
     <div class="card-img-wrap">${lazy}</div>
     <div class="card-body">
-      <div class="card-category">${esc(post.category || "Habari")}</div>
       <div class="card-headline">${esc(post.headline)}</div>
       <div class="card-snippet">${esc(snippet(post.article))}</div>
-      ${adminRow(admin, post.timestamp, false)}
     </div>
   </div>`;
       }
 
       /* ============================================================ SNIPER HTML */
       function sniperHTML(post, idx) {
-        const admin = getAdmin(idx);
         return `<div class="sniper-block" onclick="navigateTo('${postUrl(idx)}')" tabindex="0" role="article" onkeydown="if(event.key==='Enter')navigateTo('${postUrl(idx)}')">
-    <div class="sniper-label">${esc(post.category || "Habari za Haraka")}</div>
     <div class="sniper-headline">${esc(post.headline)}</div>
     <div class="sniper-snippet">${esc(snippet(post.article, 30))}</div>
-    ${adminRow(admin, post.timestamp, true)}
   </div>`;
       }
 
