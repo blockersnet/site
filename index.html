@@ -4,6 +4,14 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Mnyilinga News</title>
+
+
+
+<link rel="icon" type="image/svg+xml" href="https://news.mnyilinga.co.tz/new-fav-01.svg">
+
+    
+
+    
     <meta
       name="description"
       content="Mnyilinga News — Habari za haraka, za kweli, na za kina."
@@ -102,6 +110,80 @@
       }
       ul {
         list-style: none;
+      }
+
+      /* ============================================================ BOTTOM NAV */
+      .bottom-nav {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 950;
+        background: var(--black);
+        border-top: 2px solid var(--yellow);
+        display: flex;
+        align-items: stretch;
+        height: 62px;
+      }
+      .bottom-nav-item {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+        cursor: pointer;
+        background: none;
+        border: none;
+        color: #666;
+        font-family: var(--font-mono);
+        font-size: 0.52rem;
+        font-weight: 600;
+        letter-spacing: 0.09em;
+        text-transform: uppercase;
+        transition: color var(--tr), background var(--tr);
+        position: relative;
+        padding: 0;
+        text-decoration: none;
+      }
+      .bottom-nav-item svg {
+        width: 22px;
+        height: 22px;
+        transition: stroke var(--tr), fill var(--tr);
+      }
+      .bottom-nav-item:hover,
+      .bottom-nav-item.active {
+        color: var(--yellow);
+        background: rgba(255, 242, 0, 0.04);
+      }
+      .bottom-nav-item:hover svg,
+      .bottom-nav-item.active svg {
+        stroke: var(--yellow);
+      }
+      .bottom-nav-item::before {
+        content: '';
+        position: absolute;
+        top: -2px;
+        left: 50%;
+        transform: translateX(-50%) scaleX(0);
+        width: 36px;
+        height: 2px;
+        background: var(--yellow);
+        transition: transform 0.22s ease;
+      }
+      .bottom-nav-item:hover::before,
+      .bottom-nav-item.active::before {
+        transform: translateX(-50%) scaleX(1);
+      }
+      .bottom-nav-divider {
+        width: 1px;
+        background: #1a1a1a;
+        align-self: stretch;
+        flex-shrink: 0;
+      }
+      /* Weka nafasi chini ya ukurasa ili content isifunikwe na bottom nav */
+      body {
+        padding-bottom: 62px;
       }
 
       /* ============================================================ LOADING SCREEN */
@@ -1403,7 +1485,7 @@
       
       
    <img
-        src="https://raw.githubusercontent.com/blockersnet/mdl-ogo/d8c9cdf4425a4b14b02e2479e85578e036f95b71/Mnyilinga%2CNews%2CLOGO-01.svg"
+        src="https://news.mnyilinga.co.tz/assets/images/logo.svg"
         alt="Mnyilinga News"
         style="height: 20px; width: auto"
       />
@@ -1434,7 +1516,7 @@
         </button>
         <a href="index.html" class="site-logo" aria-label="Mnyilinga News">
           <img
-            src="https://raw.githubusercontent.com/blockersnet/mdl-ogo/d8c9cdf4425a4b14b02e2479e85578e036f95b71/Mnyilinga%2CNews%2CLOGO-01.svg"
+            src="https://news.mnyilinga.co.tz/assets/images/logo.svg"
             alt="Mnyilinga News"
             style="height: 30px; width: auto"
           />
@@ -1749,6 +1831,57 @@
 
  <!-- =================MWISHO WA FOOTER YETU==================== -->
 
+    <!-- ============================================================ BOTTOM NAV -->
+    <nav class="bottom-nav" id="bottom-nav" aria-label="Urambazaji wa chini">
+
+      <!-- HOT STORIES -->
+      <button class="bottom-nav-item" aria-label="Hot Stories" onclick="void(0)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 2C12 2 7 7.5 7 12.5C7 15.537 9.239 18 12 18C14.761 18 17 15.537 17 12.5C17 10.5 15.5 8.5 15.5 8.5C15.5 8.5 15 11 13 11C13 11 14 8 12 2Z"/>
+          <path d="M10.5 14C10.5 14 9 12.8 9 11.8C9 11.02 9.672 10.5 10.35 10.5C10.728 10.5 11.078 10.68 11.3 10.97C11.522 10.68 11.872 10.5 12.25 10.5C12.928 10.5 13.6 11.02 13.6 11.8C13.6 12.8 12.1 14 12.1 14H10.5Z" fill="currentColor" stroke="none"/>
+        </svg>
+        Hot Stories
+      </button>
+
+      <div class="bottom-nav-divider"></div>
+
+      <!-- BOOKS -->
+      <button class="bottom-nav-item" aria-label="Books" onclick="void(0)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 19.5C4 18.119 5.119 17 6.5 17H20"/>
+          <path d="M6.5 2H20V22H6.5C5.119 22 4 20.881 4 19.5V4.5C4 3.119 5.119 2 6.5 2Z"/>
+          <line x1="8" y1="7" x2="16" y2="7"/>
+          <line x1="8" y1="11" x2="16" y2="11"/>
+          <line x1="8" y1="15" x2="13" y2="15"/>
+        </svg>
+        Books
+      </button>
+
+      <div class="bottom-nav-divider"></div>
+
+      <!-- READ LIST -->
+      <button class="bottom-nav-item" aria-label="Read List" onclick="void(0)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M19 21L12 16L5 21V5C5 3.895 5.895 3 7 3H17C18.105 3 19 3.895 19 5V21Z"/>
+          <line x1="9" y1="9" x2="15" y2="9"/>
+          <line x1="9" y1="13" x2="13" y2="13"/>
+        </svg>
+        Read List
+      </button>
+
+      <div class="bottom-nav-divider"></div>
+
+      <!-- HOME -->
+      <button class="bottom-nav-item active" aria-label="Nyumbani" onclick="void(0)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 9.5L12 3L21 9.5V20C21 20.552 20.552 21 20 21H15V15H9V21H4C3.448 21 3 20.552 3 20V9.5Z"/>
+        </svg>
+        Home
+      </button>
+
+    </nav>
+    <!-- ============================================================ MWISHO WA BOTTOM NAV -->
+
 
 
 
@@ -1775,9 +1908,37 @@
    MNYILINGA NEWS — JAVASCRIPT YOTE
    ============================================================ */
 
-      /* --- API URL: Badilisha hapa ukibadilisha API yako --- */
-      const API_URL =
-        "https://script.google.com/macros/s/AKfycbxRU38CN-Xnu7FOokZ7bzKXrxljegpDtpUPmRWCm06zBDEFfUl0ftbOlNUUNX_nAs5u/exec";
+      /* --- API URL: Cloudflare Worker proxy — GAS iko salama nyuma --- */
+      const API_URL = "https://api.mnyilinga.co.tz/api/data";
+
+      /* --- CACHE SETTINGS --- */
+      const CACHE_KEY = "mn_posts_cache";
+      const CACHE_TTL = 5 * 60 * 1000; // dakika 5
+
+      /* Badilisha ImgBB link → proxy link ya Cloudflare */
+      function proxyImg(url) {
+        if (!url) return url;
+        // i.ibb.co/abc/picha.webp → api.mnyilinga.co.tz/v62/abc/picha.webp
+        return url.replace(/^https?:\/\/i\.ibb\.co\//, "https://api.mnyilinga.co.tz/v62/");
+      }
+
+      /* Hifadhi cache kwenye localStorage na timestamp */
+      function saveCache(data) {
+        try {
+          localStorage.setItem(CACHE_KEY, JSON.stringify({ data, ts: Date.now() }));
+        } catch (e) {}
+      }
+
+      /* Soma cache — rudisha null kama imekwisha au haipo */
+      function loadCache() {
+        try {
+          const raw = localStorage.getItem(CACHE_KEY);
+          if (!raw) return null;
+          const { data, ts } = JSON.parse(raw);
+          if (Date.now() - ts > CACHE_TTL) return null; // imekwisha
+          return data;
+        } catch (e) { return null; }
+      }
 
       /* ============================================================
    ADMINS 10 — BADILISHA HAPA!
@@ -1887,6 +2048,7 @@
       function savePosts() {
         try {
           sessionStorage.setItem("mn_posts", JSON.stringify(allPosts));
+          saveCache(allPosts); // hifadhi pia kwenye localStorage cache
         } catch (e) {}
       }
       function navigateTo(url) {
@@ -2144,16 +2306,43 @@
       async function fetchPosts() {
         const topEl = document.getElementById("top-news-grid");
         const mainEl = document.getElementById("main-news-grid");
+
+        /* ⚡ Jaribu cache kwanza — haraka bila network */
+        const cached = loadCache();
+        if (cached && cached.length) {
+          allPosts = cached;
+          buildCategoryNav(allPosts);
+          initHero(allPosts.slice(0, 6));
+          renderContent(allPosts, "all", "");
+          buildTicker();
+          buildContentGrid(allPosts);
+          const ls = document.getElementById("loading-screen");
+          if (ls) ls.classList.add("hidden");
+          /* Refresh data nyuma bila kuonyesha skeleton */
+          fetchFresh();
+          return;
+        }
+
+        /* Hakuna cache — onyesha skeleton na fanya fetch */
         if (topEl) showSkeletons(topEl, 4);
         if (mainEl) showSkeletons(mainEl, 6);
+        await fetchFresh();
+      }
+
+      async function fetchFresh() {
         try {
           const res = await fetch(API_URL + "?t=" + Date.now());
           if (!res.ok) throw new Error("API error");
           const data = await res.json();
           allPosts = Array.isArray(data) ? data : [];
-          allPosts.sort(
-            (a, b) => new Date(b.timestamp) - new Date(a.timestamp),
-          );
+
+          /* Badilisha ImgBB links → proxy links moja kwa moja */
+          allPosts = allPosts.map(p => ({
+            ...p,
+            picha_url: proxyImg(p.picha_url)
+          }));
+
+          allPosts.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
           savePosts();
           buildCategoryNav(allPosts);
           initHero(allPosts.slice(0, 6));
@@ -2162,9 +2351,11 @@
           buildContentGrid(allPosts);
         } catch (err) {
           console.error("Fetch error:", err);
-          if (topEl)
+          const topEl = document.getElementById("top-news-grid");
+          const mainEl = document.getElementById("main-news-grid");
+          if (topEl && !allPosts.length)
             topEl.innerHTML = `<div class="empty-state" style="grid-column:1/-1"><strong>Hitilafu ya Muunganiko</strong>Tafadhali refresh ukurasa.</div>`;
-          if (mainEl) mainEl.innerHTML = "";
+          if (mainEl && !allPosts.length) mainEl.innerHTML = "";
         }
         const ls = document.getElementById("loading-screen");
         if (ls) ls.classList.add("hidden");
