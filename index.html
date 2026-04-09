@@ -148,8 +148,8 @@
         -webkit-tap-highlight-color: transparent;
       }
       .bottom-nav-item svg {
-        width: 24px;
-        height: 24px;
+        width: 20px;
+        height: 20px;
         stroke: var(--white);
         fill: none;
         transition: stroke 0.2s ease, fill 0.2s ease;
@@ -191,6 +191,69 @@
       /* Weka nafasi chini ya ukurasa ili content isifunikwe na bottom nav */
       body {
         padding-bottom: 64px;
+      }
+
+      /* ============================================================ BN PAGES (SPA routing) */
+      .bn-page { display: block; }
+      .bn-page--hidden { display: none !important; }
+
+      /* Placeholder pages */
+      .bn-placeholder {
+        min-height: calc(100vh - 64px - 56px);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 18px;
+        padding: 40px 24px;
+        background: var(--white);
+        text-align: center;
+      }
+      .bn-placeholder-icon {
+        width: 72px;
+        height: 72px;
+        background: var(--black);
+        border-radius: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 2px solid var(--black);
+      }
+      .bn-placeholder-icon svg {
+        width: 34px;
+        height: 34px;
+        stroke: var(--yellow);
+        fill: none;
+        stroke-width: 1.5;
+      }
+      .bn-placeholder-title {
+        font-family: var(--font-display);
+        font-size: 1.6rem;
+        font-weight: 800;
+        letter-spacing: -0.02em;
+        color: var(--black);
+        text-transform: uppercase;
+        margin: 0;
+      }
+      .bn-placeholder-desc {
+        font-family: var(--font-body);
+        font-size: 0.88rem;
+        color: var(--gray-600);
+        max-width: 300px;
+        line-height: 1.6;
+        margin: 0;
+      }
+      .bn-placeholder-badge {
+        display: inline-block;
+        background: var(--black);
+        color: var(--yellow);
+        font-family: var(--font-mono);
+        font-size: 0.6rem;
+        font-weight: 700;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        padding: 6px 14px;
+        border: 1px solid var(--black);
       }
 
       /* ============================================================ LOADING SCREEN */
@@ -1553,7 +1616,8 @@
 
 
 
-    <!-- MAIN CONTENT -->
+    <!-- ============================================================ PAGE: HOME -->
+    <div id="page-home" class="bn-page">
     <main id="main-content">
       <!-- HERO -->
       <section id="hero-section" aria-label="Habari Kubwa">
@@ -1834,20 +1898,62 @@
         </div>
       </div>
     </footer>
+    </div><!-- /#page-home -->
 
+    <!-- ============================================================ PAGE: HOT STORIES (placeholder) -->
+    <div id="page-hot-stories" class="bn-page bn-page--hidden">
+      <div class="bn-placeholder">
+        <div class="bn-placeholder-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+          </svg>
+        </div>
+        <h2 class="bn-placeholder-title">Hot Stories</h2>
+        <p class="bn-placeholder-desc">Kurasa hii itakuwa na hadithi za mapenzi na mahusiano. Itaunganishwa hivi karibuni.</p>
+        <span class="bn-placeholder-badge">Inakuja Hivi Karibuni</span>
+      </div>
+    </div>
 
- <!-- =================MWISHO WA FOOTER YETU==================== -->
+    <!-- ============================================================ PAGE: BOOKS (placeholder) -->
+    <div id="page-books" class="bn-page bn-page--hidden">
+      <div class="bn-placeholder">
+        <div class="bn-placeholder-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+            <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+            <line x1="8.5" y1="7" x2="15.5" y2="7"/>
+            <line x1="8.5" y1="10.5" x2="15.5" y2="10.5"/>
+            <line x1="8.5" y1="14" x2="12.5" y2="14"/>
+          </svg>
+        </div>
+        <h2 class="bn-placeholder-title">Books</h2>
+        <p class="bn-placeholder-desc">Maktaba yako ya vitabu vya kidijitali. Soma, gundua, na hifadhi vitabu unavyopenda. Itaunganishwa hivi karibuni.</p>
+        <span class="bn-placeholder-badge">Inakuja Hivi Karibuni</span>
+      </div>
+    </div>
+
+    <!-- ============================================================ PAGE: READ LIST (placeholder) -->
+    <div id="page-readlist" class="bn-page bn-page--hidden">
+      <div class="bn-placeholder">
+        <div class="bn-placeholder-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M17 3H7a2 2 0 0 0-2 2v16l7-3 7 3V5a2 2 0 0 0-2-2z"/>
+            <polyline points="9,11 11,13 15,9"/>
+          </svg>
+        </div>
+        <h2 class="bn-placeholder-title">Read List</h2>
+        <p class="bn-placeholder-desc">Hifadhi makala unayotaka kusoma baadaye. Orodha yako ya kibinafsi ya habari na maudhui. Itaunganishwa hivi karibuni.</p>
+        <span class="bn-placeholder-badge">Inakuja Hivi Karibuni</span>
+      </div>
+    </div>
 
     <!-- ============================================================ BOTTOM NAV -->
     <nav class="bottom-nav" id="bottom-nav" aria-label="Urambazaji wa chini">
 
       <!-- HOT STORIES -->
-      <button class="bottom-nav-item" aria-label="Hot Stories" onclick="void(0)">
-        <svg viewBox="0 0 24 24" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
-          <!-- Flame kali — sharp curves -->
-          <path d="M12 2C9.5 6 8 8.5 8 11.5C8 14.5 9.8 17 12 17C14.2 17 16 14.5 16 11.5C16 10 15 8.5 14.5 7.5C14.5 7.5 14 10 12.5 10.5C12.5 10.5 13.5 7 12 2Z" stroke="currentColor"/>
-          <!-- Inner heart flame -->
-          <path class="bn-hot-fill" d="M10.8 13.8C10.8 13.8 9.5 12.7 9.5 11.8C9.5 11.1 10.05 10.6 10.65 10.6C10.98 10.6 11.28 10.76 11.48 11.01C11.68 10.76 11.98 10.6 12.31 10.6C12.91 10.6 13.46 11.1 13.46 11.8C13.46 12.7 12.16 13.8 12.16 13.8H10.8Z" stroke="currentColor" stroke-width="1.2" fill="none"/>
+      <button class="bottom-nav-item" id="bn-hot" aria-label="Hot Stories" onclick="bnNavigate('hot-stories')">
+        <svg viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
         </svg>
         Hot Stories
       </button>
@@ -1855,15 +1961,13 @@
       <div class="bottom-nav-divider"></div>
 
       <!-- BOOKS -->
-      <button class="bottom-nav-item" aria-label="Books" onclick="void(0)">
-        <svg viewBox="0 0 24 24" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
-          <!-- Cover + spine -->
-          <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" stroke="currentColor"/>
-          <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" stroke="currentColor"/>
-          <!-- Text lines inside -->
-          <line x1="8.5" y1="7" x2="15.5" y2="7" stroke="currentColor"/>
-          <line x1="8.5" y1="10.5" x2="15.5" y2="10.5" stroke="currentColor"/>
-          <line x1="8.5" y1="14" x2="12.5" y2="14" stroke="currentColor"/>
+      <button class="bottom-nav-item" id="bn-books" aria-label="Books" onclick="bnNavigate('books')">
+        <svg viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+          <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+          <line x1="8.5" y1="7" x2="15.5" y2="7"/>
+          <line x1="8.5" y1="10.5" x2="15.5" y2="10.5"/>
+          <line x1="8.5" y1="14" x2="12.5" y2="14"/>
         </svg>
         Books
       </button>
@@ -1871,12 +1975,10 @@
       <div class="bottom-nav-divider"></div>
 
       <!-- READ LIST -->
-      <button class="bottom-nav-item" aria-label="Read List" onclick="void(0)">
-        <svg viewBox="0 0 24 24" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
-          <!-- Bookmark ribbon -->
-          <path d="M17 3H7a2 2 0 0 0-2 2v16l7-3 7 3V5a2 2 0 0 0-2-2z" stroke="currentColor"/>
-          <!-- Check mark inside -->
-          <polyline points="9,11 11,13 15,9" stroke="currentColor"/>
+      <button class="bottom-nav-item" id="bn-readlist" aria-label="Read List" onclick="bnNavigate('readlist')">
+        <svg viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M17 3H7a2 2 0 0 0-2 2v16l7-3 7 3V5a2 2 0 0 0-2-2z"/>
+          <polyline points="9,11 11,13 15,9"/>
         </svg>
         Read List
       </button>
@@ -1884,12 +1986,10 @@
       <div class="bottom-nav-divider"></div>
 
       <!-- HOME -->
-      <button class="bottom-nav-item active" aria-label="Nyumbani" onclick="void(0)">
-        <svg viewBox="0 0 24 24" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
-          <!-- Sharp roof -->
-          <path d="M3 10.5L12 3l9 7.5" stroke="currentColor"/>
-          <!-- Walls -->
-          <path d="M5 8.5V20a1 1 0 0 0 1 1h4v-5h4v5h4a1 1 0 0 0 1-1V8.5" stroke="currentColor"/>
+      <button class="bottom-nav-item" id="bn-home" aria-label="Nyumbani" onclick="bnNavigate('home')">
+        <svg viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 10.5L12 3l9 7.5"/>
+          <path d="M5 8.5V20a1 1 0 0 0 1 1h4v-5h4v5h4a1 1 0 0 0 1-1V8.5"/>
         </svg>
         Home
       </button>
@@ -2543,7 +2643,39 @@
         }
 
         initScrollTop();
+
+        /* Weka Home active mwanzoni */
+        bnNavigate('home');
       });
+
+      /* ============================================================ BOTTOM NAV NAVIGATION */
+      const BN_PAGES = {
+        'home':        { pageId: 'page-home',        btnId: 'bn-home'     },
+        'hot-stories': { pageId: 'page-hot-stories', btnId: 'bn-hot'      },
+        'books':       { pageId: 'page-books',        btnId: 'bn-books'    },
+        'readlist':    { pageId: 'page-readlist',     btnId: 'bn-readlist' },
+      };
+
+      function bnNavigate(key) {
+        /* Ficha pages zote, ondoa active kutoka buttons zote */
+        Object.values(BN_PAGES).forEach(({ pageId, btnId }) => {
+          const page = document.getElementById(pageId);
+          const btn  = document.getElementById(btnId);
+          if (page) page.classList.add('bn-page--hidden');
+          if (btn)  btn.classList.remove('active');
+        });
+
+        /* Onyesha page iliyochaguliwa, weka active kwenye button */
+        const target = BN_PAGES[key];
+        if (!target) return;
+        const page = document.getElementById(target.pageId);
+        const btn  = document.getElementById(target.btnId);
+        if (page) page.classList.remove('bn-page--hidden');
+        if (btn)  btn.classList.add('active');
+
+        /* Rudi juu ya ukurasa */
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
     </script>
   </body>
 </html>
