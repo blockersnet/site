@@ -663,28 +663,16 @@
         font-weight: 700;
         line-height: 1.35;
         margin-top: 10px;
-        padding: 0 4px 12px;
+        padding: 0 4px;
         color: #111;
         transition: color var(--tr);
         display: -webkit-box;
         -webkit-line-clamp: 3;
         -webkit-box-orient: vertical;
         overflow: hidden;
-        position: relative;
-      }
-      .cg-title::after {
-        content: '';
-        position: absolute;
-        bottom: 0;
-        left: 4px;
-        width: 28px;
-        height: 2px;
-        background: var(--yellow);
-        border-radius: 2px;
-        transition: width 0.3s ease;
-      }
-      .cg-article:hover .cg-title::after {
-        width: 50px;
+        text-decoration: underline;
+        text-decoration-thickness: 1px;
+        text-underline-offset: 3px;
       }
       .cg-article:hover .cg-title {
         color: #444;
