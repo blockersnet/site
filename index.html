@@ -120,10 +120,10 @@
         right: 0;
         z-index: 950;
         background: var(--black);
-        border-top: 2px solid var(--yellow);
+        border-top: 2px solid var(--white);
         display: flex;
         align-items: stretch;
-        height: 62px;
+        height: 64px;
       }
       .bottom-nav-item {
         flex: 1;
@@ -135,55 +135,62 @@
         cursor: pointer;
         background: none;
         border: none;
-        color: #666;
+        color: var(--white);
         font-family: var(--font-mono);
-        font-size: 0.52rem;
+        font-size: 0.5rem;
         font-weight: 600;
-        letter-spacing: 0.09em;
+        letter-spacing: 0.1em;
         text-transform: uppercase;
-        transition: color var(--tr), background var(--tr);
+        transition: color 0.2s ease, background 0.2s ease;
         position: relative;
         padding: 0;
         text-decoration: none;
+        -webkit-tap-highlight-color: transparent;
       }
       .bottom-nav-item svg {
-        width: 22px;
-        height: 22px;
-        transition: stroke var(--tr), fill var(--tr);
+        width: 24px;
+        height: 24px;
+        stroke: var(--white);
+        fill: none;
+        transition: stroke 0.2s ease, fill 0.2s ease;
+        flex-shrink: 0;
       }
       .bottom-nav-item:hover,
       .bottom-nav-item.active {
         color: var(--yellow);
-        background: rgba(255, 242, 0, 0.04);
       }
       .bottom-nav-item:hover svg,
       .bottom-nav-item.active svg {
         stroke: var(--yellow);
       }
-      .bottom-nav-item::before {
+      .bottom-nav-item.active .bn-hot-fill {
+        fill: var(--yellow);
+        stroke: none;
+      }
+      .bottom-nav-item::after {
         content: '';
         position: absolute;
         top: -2px;
         left: 50%;
         transform: translateX(-50%) scaleX(0);
-        width: 36px;
+        width: 32px;
         height: 2px;
         background: var(--yellow);
-        transition: transform 0.22s ease;
+        transition: transform 0.22s cubic-bezier(0.34,1.56,0.64,1);
       }
-      .bottom-nav-item:hover::before,
-      .bottom-nav-item.active::before {
+      .bottom-nav-item:hover::after,
+      .bottom-nav-item.active::after {
         transform: translateX(-50%) scaleX(1);
       }
       .bottom-nav-divider {
         width: 1px;
-        background: #1a1a1a;
+        background: #1e1e1e;
         align-self: stretch;
         flex-shrink: 0;
       }
       /* Weka nafasi chini ya ukurasa ili content isifunikwe na bottom nav */
       body {
-        padding-bottom: 62px;
+        padding-bottom: 64px;
       }
 
       /* ============================================================ LOADING SCREEN */
@@ -1836,9 +1843,11 @@
 
       <!-- HOT STORIES -->
       <button class="bottom-nav-item" aria-label="Hot Stories" onclick="void(0)">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M12 2C12 2 7 7.5 7 12.5C7 15.537 9.239 18 12 18C14.761 18 17 15.537 17 12.5C17 10.5 15.5 8.5 15.5 8.5C15.5 8.5 15 11 13 11C13 11 14 8 12 2Z"/>
-          <path d="M10.5 14C10.5 14 9 12.8 9 11.8C9 11.02 9.672 10.5 10.35 10.5C10.728 10.5 11.078 10.68 11.3 10.97C11.522 10.68 11.872 10.5 12.25 10.5C12.928 10.5 13.6 11.02 13.6 11.8C13.6 12.8 12.1 14 12.1 14H10.5Z" fill="currentColor" stroke="none"/>
+        <svg viewBox="0 0 24 24" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+          <!-- Flame kali — sharp curves -->
+          <path d="M12 2C9.5 6 8 8.5 8 11.5C8 14.5 9.8 17 12 17C14.2 17 16 14.5 16 11.5C16 10 15 8.5 14.5 7.5C14.5 7.5 14 10 12.5 10.5C12.5 10.5 13.5 7 12 2Z" stroke="currentColor"/>
+          <!-- Inner heart flame -->
+          <path class="bn-hot-fill" d="M10.8 13.8C10.8 13.8 9.5 12.7 9.5 11.8C9.5 11.1 10.05 10.6 10.65 10.6C10.98 10.6 11.28 10.76 11.48 11.01C11.68 10.76 11.98 10.6 12.31 10.6C12.91 10.6 13.46 11.1 13.46 11.8C13.46 12.7 12.16 13.8 12.16 13.8H10.8Z" stroke="currentColor" stroke-width="1.2" fill="none"/>
         </svg>
         Hot Stories
       </button>
@@ -1847,12 +1856,14 @@
 
       <!-- BOOKS -->
       <button class="bottom-nav-item" aria-label="Books" onclick="void(0)">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M4 19.5C4 18.119 5.119 17 6.5 17H20"/>
-          <path d="M6.5 2H20V22H6.5C5.119 22 4 20.881 4 19.5V4.5C4 3.119 5.119 2 6.5 2Z"/>
-          <line x1="8" y1="7" x2="16" y2="7"/>
-          <line x1="8" y1="11" x2="16" y2="11"/>
-          <line x1="8" y1="15" x2="13" y2="15"/>
+        <svg viewBox="0 0 24 24" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+          <!-- Cover + spine -->
+          <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" stroke="currentColor"/>
+          <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" stroke="currentColor"/>
+          <!-- Text lines inside -->
+          <line x1="8.5" y1="7" x2="15.5" y2="7" stroke="currentColor"/>
+          <line x1="8.5" y1="10.5" x2="15.5" y2="10.5" stroke="currentColor"/>
+          <line x1="8.5" y1="14" x2="12.5" y2="14" stroke="currentColor"/>
         </svg>
         Books
       </button>
@@ -1861,10 +1872,11 @@
 
       <!-- READ LIST -->
       <button class="bottom-nav-item" aria-label="Read List" onclick="void(0)">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M19 21L12 16L5 21V5C5 3.895 5.895 3 7 3H17C18.105 3 19 3.895 19 5V21Z"/>
-          <line x1="9" y1="9" x2="15" y2="9"/>
-          <line x1="9" y1="13" x2="13" y2="13"/>
+        <svg viewBox="0 0 24 24" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+          <!-- Bookmark ribbon -->
+          <path d="M17 3H7a2 2 0 0 0-2 2v16l7-3 7 3V5a2 2 0 0 0-2-2z" stroke="currentColor"/>
+          <!-- Check mark inside -->
+          <polyline points="9,11 11,13 15,9" stroke="currentColor"/>
         </svg>
         Read List
       </button>
@@ -1873,8 +1885,11 @@
 
       <!-- HOME -->
       <button class="bottom-nav-item active" aria-label="Nyumbani" onclick="void(0)">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M3 9.5L12 3L21 9.5V20C21 20.552 20.552 21 20 21H15V15H9V21H4C3.448 21 3 20.552 3 20V9.5Z"/>
+        <svg viewBox="0 0 24 24" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+          <!-- Sharp roof -->
+          <path d="M3 10.5L12 3l9 7.5" stroke="currentColor"/>
+          <!-- Walls -->
+          <path d="M5 8.5V20a1 1 0 0 0 1 1h4v-5h4v5h4a1 1 0 0 0 1-1V8.5" stroke="currentColor"/>
         </svg>
         Home
       </button>
