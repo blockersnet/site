@@ -8,17 +8,21 @@
       name="description"
       content="Soma makala kamili kwenye Mnyilinga News."
     />
+    <meta property="og:title" content="Mnyilinga News — Makala" />
+    <meta property="og:description" content="Soma makala kamili kwenye Mnyilinga News." />
+    <meta property="og:image" content="https://news.mnyilinga.co.tz/new-fav-01.svg" />
+    <meta property="og:url" content="https://news.mnyilinga.co.tz" />
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="Mnyilinga News" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Mnyilinga News — Makala" />
+    <meta name="twitter:description" content="Soma makala kamili kwenye Mnyilinga News." />
+    <meta name="twitter:image" content="https://news.mnyilinga.co.tz/new-fav-01.svg" />
     <meta name="theme-color" content="#000000" />
-
-
-
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
 
-
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-
-
 
     <!-- Badilisha fonts hapa ukitaka nyingine — lazima iwe sawa na index.html -->
 
@@ -27,15 +31,12 @@
       rel="stylesheet"
     />
 
+    <!-- Badilisha HII KWAAJILI YA PLAYSTORE NA APPSTORE YA FOOTER -->
 
-
- <!-- Badilisha HII KWAAJILI YA PLAYSTORE NA APPSTORE YA FOOTER -->
-
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
-    
-    
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
 
     <style>
       /* ============================================================
@@ -44,25 +45,26 @@
    ============================================================ */
       :root {
         --yellow: #fff200;
-        --black: #000000;
+        --black: #102039;
+        --black-deep: #0a1628;
+        --black-mid: #162d4a;
+        --black-light: #1e3a5f;
         --white: #ffffff;
         --gray-100: #f5f5f5;
         --gray-200: #e8e8e8;
         --gray-400: #999999;
         --gray-600: #555555;
-        --gray-800: #222222;
+        --gray-800: #1a2a3a;
+        --red-new: #cb1111;
 
-        /* --- FONTS: CLEAN MODERN STYLE NAWEZA KUBADILI FONTS HAPA  --- */
-    /* --- FONTS: CLEAN MODERN STYLE NAWEZA KUBADILI FONTS HAPA  --- */
+        --font-display: "Inter", sans-serif;
+        --font-body: "Inter", sans-serif;
+        --font-mono: "Inter", sans-serif;
 
-              --font-display: 'Inter', sans-serif;
-      --font-body: 'Inter', sans-serif;
-      --font-mono: 'Inter', sans-serif;
-
-      /* --- MISC --- */
-      --header-h: 56px;
-      --max-w: 1280px;
-      --tr: 0.18s ease;
+        /* --- MISC --- */
+        --header-h: 56px;
+        --max-w: 1280px;
+        --tr: 0.18s ease;
       }
 
       *,
@@ -103,7 +105,7 @@
       #post-loading {
         position: fixed;
         inset: 0;
-        background: var(--black);
+        background: linear-gradient(135deg, #0a1628 0%, #102039 100%);
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -138,7 +140,7 @@
         margin-top: 32px;
         width: 160px;
         height: 2px;
-        background: #222;
+        background: #1e3a5f;
       }
       .loading-bar {
         height: 2px;
@@ -155,14 +157,6 @@
         }
       }
 
-
-
-
-
-
-
-
-
       /* ============================================================ HEADER */
       #site-header {
         position: sticky;
@@ -170,8 +164,9 @@
         left: 0;
         right: 0;
         z-index: 900;
-        background: var(--black);
+        background: linear-gradient(135deg, #0a1628 0%, #102039 60%, #162d4a 100%);
         border-bottom: 3px solid var(--yellow);
+        box-shadow: 0 2px 20px rgba(0,0,0,0.4);
       }
       .header-top {
         display: flex;
@@ -267,7 +262,6 @@
         display: flex;
         flex-direction: column;
         gap: 2px;
-      
       }
       .post-admin-name {
         font-family: var(--font-mono);
@@ -299,16 +293,11 @@
         margin-bottom: 32px;
       }
 
-
-
-
-
-
       /* Article body */
       .post-body {
         font-size: 14px;
         line-height: 1.58;
-        color: #000000);
+        color: #000000;
         font-family: var(--font-body);
         font-weight: 400;
         word-break: break-word;
@@ -316,60 +305,172 @@
       .post-body p {
         margin-bottom: 1.5em;
       }
+      .post-body h1 {
+        font-size: 1.8rem;
+        font-weight: 900;
+        margin: 1.2em 0 0.5em;
+        line-height: 1.2;
+      }
+      .post-body h2 {
+        font-size: 1.4rem;
+        font-weight: 800;
+        margin: 1em 0 0.4em;
+        line-height: 1.25;
+      }
+      .post-body h3 {
+        font-size: 1.15rem;
+        font-weight: 700;
+        margin: 0.9em 0 0.4em;
+      }
+      .post-body strong,
+      .post-body b {
+        font-weight: 800;
+      }
+      .post-body em,
+      .post-body i {
+        font-style: italic;
+      }
+      .post-body u {
+        text-decoration: underline;
+      }
+      .post-body s {
+        text-decoration: line-through;
+      }
+      .post-body a {
+        color: #dc2626;
+        text-decoration: underline;
+        font-weight: 600;
+      }
+      .post-body a:hover {
+        opacity: 0.8;
+      }
+      .post-body ul,
+      .post-body ol {
+        padding-left: 22px;
+        margin: 0.8em 0 1.4em;
+      }
+      .post-body li {
+        margin-bottom: 0.4em;
+      }
+      .post-body blockquote {
+        border-left: 3px solid #dc2626;
+        padding-left: 16px;
+        color: #555;
+        margin: 1.2em 0;
+        font-style: italic;
+      }
+      .post-body hr {
+        border: none;
+        border-top: 1px solid #e8e8e8;
+        margin: 1.5em 0;
+      }
+      /* Picha ndani ya makala */
+      .post-body img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 10px;
+        margin: 16px 0;
+        display: block;
+        object-fit: cover;
+      }
+
+
+
+
+
+
+
+
 
       /* ============================================================ SHARE BAR */
       .share-bar {
-        margin-top: 40px;
-        padding-top: 24px;
-        border-top: 2px solid var(--black);
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        flex-wrap: wrap;
+        width: 100%;
       }
-      .share-label {
-        font-family: var(--font-mono);
-        font-size: 0.68rem;
-        letter-spacing: 0.1em;
-        text-transform: uppercase;
-        color: var(--gray-600);
-        margin-right: 4px;
+      .top-divider {
+        border-top: 2.5px solid #000000;
+        margin: 40px 0 20px 0;
+      }
+      .share-buttons {
+        display: flex;
+        gap: 12px;
+        margin-bottom: 20px;
       }
       .share-btn {
-        display: inline-flex;
+        width: 48px;
+        height: 48px;
+        border: 1px solid #00000037;
+        border-radius: 5px;
+        background-color: #ffffff;
+        display: flex;
+        justify-content: center;
         align-items: center;
-        gap: 6px;
-        font-family: var(--font-mono);
-        font-size: 0.7rem;
-        font-weight: 500;
-        letter-spacing: 0.06em;
-        text-transform: uppercase;
-        padding: 7px 14px;
-        border: 1px solid var(--gray-200);
-        color: var(--gray-800);
-        transition:
-          background var(--tr),
-          color var(--tr),
-          border-color var(--tr);
         cursor: pointer;
+        font-size: 26px;
+        color: #000000;
+        transition: all 0.2s ease-in-out;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+        text-decoration: none;
+        flex-shrink: 0;
+        line-height: 1;
       }
       .share-btn:hover {
-        background: var(--black);
-        color: var(--white);
-        border-color: var(--black);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      }
+      .share-btn.whatsapp {
+        color: #000000;
+      }
+      .share-btn.whatsapp:hover {
+        background: #25d366;
+        color: #fff;
+      }
+      .share-btn.native {
+        color: #000000;
+      }
+      .share-btn.native:hover {
+        background: #f5f5f5;
+      }
+      .share-btn.facebook {
+        color: #000000;
+      }
+      .share-btn.facebook:hover {
+        background: #1877f2;
+        color: #fff;
+      }
+      .share-btn.copylink {
+        color: #000000;
+      }
+      .share-btn.copylink:hover {
+        background: #000000;
+        color: #fff;
       }
       .share-btn.copied {
-        background: var(--yellow);
-        color: var(--black);
-        border-color: var(--yellow);
+        background: #22c55e;
+        color: #fff;
+        border-color: #22c55e;
       }
-
-
-
-
-
-
-
+      .bottom-divider {
+        width: 100vw;
+        position: relative;
+        left: 50%;
+        right: 50%;
+        margin-left: -50vw;
+        margin-right: -50vw;
+        height: 16px;
+        background-color: #f9f9f9;
+        border-top: 1px solid #eeeeee;
+        border-bottom: 1px solid #eeeeee;
+      }
+      @media (max-width: 600px) {
+        .share-btn {
+          width: 44px;
+          height: 44px;
+          font-size: 22px;
+        }
+        .share-buttons {
+          gap: 10px;
+        }
+      }
 
       /* ============================================================ MORE POSTS */
       .more-posts-section {
@@ -418,7 +519,7 @@
         background: var(--white);
       }
       .card-category {
-         font-family: var(--font-display);
+        font-family: var(--font-display);
         font-size: 0.65rem;
         font-weight: 1000;
         letter-spacing: 0.12em;
@@ -466,7 +567,7 @@
         flex-shrink: 0;
       }
       .card-admin-name {
-         font-family: var(--font-display);
+        font-family: var(--font-display);
         font-size: 0.64rem;
         font-weight: 500;
         color: var(--black);
@@ -476,16 +577,12 @@
         color: var(--gray-400);
       }
       .card-admin-time {
-         font-family: var(--font-display);
+        font-family: var(--font-display);
         font-size: 0.6rem;
         color: var(--gray-400);
       }
 
       /* ============================================================ MISC */
-
-
-
-
 
       #scroll-top {
         position: fixed;
@@ -511,14 +608,6 @@
         z-index: 800;
       }
 
-
-
-
-
-
-
-
-
       #scroll-top.visible {
         opacity: 1;
         visibility: visible;
@@ -528,12 +617,6 @@
         color: var(--black);
         border-color: var(--yellow);
       }
-
-
-
-
-
-
 
       .section-label {
         font-family: var(--font-body);
@@ -545,14 +628,6 @@
         padding-left: 18px;
         margin-bottom: 27px;
       }
-
-
-
-
-
-
-
-      
 
       /* ============================================================ VERIFIED BADGE + ADMIN BIO */
       .post-admin-name-row {
@@ -578,7 +653,9 @@
         padding: 0 2px;
         cursor: pointer;
         color: var(--gray-400);
-        transition: color var(--tr), transform var(--tr);
+        transition:
+          color var(--tr),
+          transform var(--tr);
         flex-shrink: 0;
       }
       .admin-chevron-btn:hover {
@@ -642,23 +719,10 @@
         }
       }
 
-
-
-
-
-
-
-
-
-
-
-
-
-      
       /*  +++++CODE ZOTE ZA FOOTER ZINAPANGWA HAPA+++++++   */
 
       .footer {
-        background: #000;
+        background: linear-gradient(180deg, #0a1628 0%, #060e1a 100%);
         color: #fff;
         padding: 60px 20px;
         text-align: center;
@@ -666,11 +730,10 @@
 
       .footer hr {
         border: 0;
-        border-top: 1px solid #333;
+        border-top: 1px solid #1e3a5f;
         margin: 30px auto;
         max-width: 1000px;
       }
-
 
       .follow-title {
         margin-bottom: 20px;
@@ -683,20 +746,15 @@
         gap: 30px;
         font-size: 22px;
         margin-bottom: 40px;
-      
       }
 
       .social-icons a {
         color: #fff;
         transition: 0.3s;
-
-
-
       }
 
       .social-icons a:hover {
         color: #00e0ff;
-      
       }
 
       .download-title {
@@ -713,8 +771,8 @@
       }
 
       .app-btn {
-        background: #111;
-        border: 1px solid #444;
+        background: #111827;
+        border: 1px solid #1e3a5f;
         color: #fff;
         padding: 12px 14px;
         border-radius: 6px;
@@ -737,8 +795,6 @@
         color: #ffffff;
         text-decoration: none;
         font-size: 14px;
-      
-
       }
 
       .footer-links a:hover {
@@ -752,22 +808,203 @@
         margin: auto;
         line-height: 1.6;
       }
+      /* ============================================================ HAMBURGER BUTTON */
+      .hamburger-btn {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 26px;
+        height: 18px;
+        cursor: pointer;
+        padding: 0;
+        background: none;
+        border: none;
+        flex-shrink: 0;
+      }
+      .hamburger-btn span {
+        display: block;
+        height: 2px;
+        background: var(--white);
+        transition: transform 0.32s cubic-bezier(0.77,0,0.175,1),
+                    opacity 0.22s ease,
+                    background 0.2s ease;
+        transform-origin: left center;
+      }
+      .hamburger-btn:hover span { background: var(--yellow); }
+      .hamburger-btn.open span:nth-child(1) {
+        transform: rotate(41deg) translateY(-1px);
+        background: var(--yellow);
+      }
+      .hamburger-btn.open span:nth-child(2) {
+        opacity: 0; transform: scaleX(0.2);
+      }
+      .hamburger-btn.open span:nth-child(3) {
+        transform: rotate(-41deg) translateY(1px);
+        background: var(--yellow);
+      }
 
+      /* ============================================================ NAV DRAWER OVERLAY */
+      .nav-drawer-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0,0,0,0.72);
+        backdrop-filter: blur(2px);
+        -webkit-backdrop-filter: blur(2px);
+        z-index: 998;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.35s ease, visibility 0.35s ease;
+      }
+      .nav-drawer-overlay.visible { opacity: 1; visibility: visible; }
 
+      /* ============================================================ NAV DRAWER */
+      .nav-drawer {
+        position: fixed;
+        top: 0;
+        left: -320px;
+        width: 296px;
+        height: 100vh;
+        background: #0a1628;
+        border-right: 1px solid #1e3a5f;
+        z-index: 999;
+        transition: left 0.38s cubic-bezier(0.77, 0, 0.175, 1);
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+        scrollbar-width: none;
+      }
+      .nav-drawer::-webkit-scrollbar { display: none; }
+      .nav-drawer.open {
+        left: 0;
+        box-shadow: 8px 0 40px rgba(0,0,0,0.6);
+      }
+      .nav-drawer-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 20px;
+        height: 58px;
+        border-bottom: 1px solid #1e3a5f;
+        flex-shrink: 0;
+        background: linear-gradient(135deg, #0a1628 0%, #162d4a 100%);
+      }
+      .nav-drawer-close {
+        color: #4a7ab5;
+        font-size: 1.2rem;
+        cursor: pointer;
+        background: none;
+        border: none;
+        line-height: 1;
+        padding: 6px;
+        transition: color var(--tr);
+      }
+      .nav-drawer-close:hover { color: var(--white); }
+      .nav-drawer-body { padding: 10px 0 24px; flex: 1; }
+      .nav-drawer-section-label {
+        font-family: var(--font-mono);
+        font-size: 0.58rem;
+        font-weight: 500;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: #4a7ab5;
+        padding: 18px 22px 6px;
+      }
+      .nav-drawer-item {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 12px 22px;
+        font-family: var(--font-display);
+        font-size: 0.82rem;
+        font-weight: 600;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        color: #aabdd0;
+        border-left: 3px solid transparent;
+        transition: color var(--tr), border-color var(--tr), background var(--tr);
+        text-decoration: none;
+      }
+      .nav-drawer-item:hover {
+        color: var(--yellow);
+        border-left-color: var(--yellow);
+        background: rgba(255,242,0,0.06);
+      }
+      .nav-drawer-item i { width: 18px; text-align: center; font-size: 0.9rem; flex-shrink: 0; }
+      .nav-drawer-divider { height: 1px; background: #1e3a5f; margin: 10px 0; }
+      .nav-drawer-footer {
+        padding: 16px 22px;
+        border-top: 1px solid #1e3a5f;
+        display: flex;
+        gap: 18px;
+      }
+      .nav-drawer-social { color: #4a7ab5; font-size: 1rem; transition: color var(--tr); }
+      .nav-drawer-social:hover { color: var(--yellow); }
 
+      /* ============================================================ DRAWER SEARCH */
+      .nav-drawer-search-wrap {
+        padding: 14px 16px 10px;
+        border-bottom: 1px solid #1e3a5f;
+        flex-shrink: 0;
+      }
+      .nav-drawer-search-box {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        background: #162d4a;
+        border: 1px solid #1e3a5f;
+        border-radius: 8px;
+        padding: 9px 14px;
+        transition: border-color 0.2s ease;
+      }
+      .nav-drawer-search-box:focus-within { border-color: var(--yellow); }
+      .nav-drawer-search-box svg {
+        width: 15px; height: 15px;
+        stroke: #4a7ab5; fill: none;
+        flex-shrink: 0; transition: stroke 0.2s;
+      }
+      .nav-drawer-search-box:focus-within svg { stroke: var(--yellow); }
+      .nav-drawer-search-input {
+        background: none; border: none; outline: none;
+        color: var(--white);
+        font-family: var(--font-body);
+        font-size: 0.82rem; width: 100%;
+      }
+      .nav-drawer-search-input::placeholder { color: #4a7ab5; }
+      .nav-drawer-search-results {
+        margin-top: 10px;
+        display: none; flex-direction: column;
+        gap: 3px; max-height: 280px;
+        overflow-y: auto; scrollbar-width: none;
+      }
+      .nav-drawer-search-results.visible { display: flex; }
+      .dss-item {
+        display: flex; align-items: center; gap: 10px;
+        padding: 8px 10px;
+        background: #162d4a; border: 1px solid #1e3a5f;
+        border-radius: 6px; cursor: pointer;
+        transition: background 0.15s, border-color 0.15s; text-decoration: none;
+      }
+      .dss-item:hover { background: #1e3a5f; border-color: #4a7ab5; }
+      .dss-thumb {
+        width: 44px; height: 32px; border-radius: 4px;
+        object-fit: cover; flex-shrink: 0; background: #1e3a5f;
+      }
+      .dss-title {
+        font-family: var(--font-body); font-size: 0.74rem;
+        font-weight: 600; color: #ccd9e8; line-height: 1.3;
+        overflow: hidden; display: -webkit-box;
+        -webkit-line-clamp: 2; -webkit-box-orient: vertical;
+      }
+      .dss-hint {
+        font-family: var(--font-mono); font-size: 0.6rem;
+        color: #4a7ab5; letter-spacing: 0.1em;
+        text-transform: uppercase; padding: 6px 2px 2px;
+      }
+      .dss-no-result {
+        font-size: 0.75rem; color: #4a7ab5;
+        padding: 10px 4px; text-align: center;
+      }
 
-
-
-
-
-
-
-      
-
-
-
-
-      
     </style>
   </head>
   <body>
@@ -775,29 +1012,99 @@
 
     <div id="post-loading">
       <img
-        src="https://raw.githubusercontent.com/blockersnet/mdl-ogo/d8c9cdf4425a4b14b02e2479e85578e036f95b71/Mnyilinga%2CNews%2CLOGO-01.svg"
+        src="https://news.mnyilinga.co.tz/assets/logo-2026-01.svg"
         alt="Mnyilinga News"
         style="height: 20px; width: auto"
       />
-
-      
       <div class="loading-bar-wrap"><div class="loading-bar"></div></div>
     </div>
 
-    <!-- HEADER -->
+    <!-- HEADER — inafanana kabisa na index.html -->
     <header id="site-header">
       <div class="header-top">
+        <!-- Hamburger Menu Button -->
+        <button class="hamburger-btn" id="hamburger-btn" aria-label="Fungua menyu" onclick="toggleDrawer()">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
         <a href="index.html" class="site-logo" aria-label="Mnyilinga News">
           <img
-            src="https://raw.githubusercontent.com/blockersnet/mdl-ogo/d8c9cdf4425a4b14b02e2479e85578e036f95b71/Mnyilinga%2CNews%2CLOGO-01.svg"
+            src="https://news.mnyilinga.co.tz/assets/logo-2026-01.svg"
             alt="Mnyilinga News"
             style="height: 30px; width: auto"
           />
-
-          Rudi Nyuma
         </a>
+        <!-- Spacer ili logo ibaki katikati -->
+        <div style="width:26px;flex-shrink:0;"></div>
       </div>
     </header>
+
+    <!-- NAV DRAWER OVERLAY -->
+    <div class="nav-drawer-overlay" id="nav-drawer-overlay" onclick="closeDrawer()"></div>
+
+    <!-- NAV DRAWER — inafanana kabisa na index.html -->
+    <nav class="nav-drawer" id="nav-drawer" aria-label="Menyu Kuu">
+      <div class="nav-drawer-head">
+        <img
+          src="https://news.mnyilinga.co.tz/assets/logo-2026-01.svg"
+          alt="Mnyilinga News"
+          style="height: 24px; width: auto;"
+        />
+        <button class="nav-drawer-close" onclick="closeDrawer()" aria-label="Funga menyu">
+          <i class="fa fa-times"></i>
+        </button>
+      </div>
+
+      <!-- SEARCH INSIDE DRAWER -->
+      <div class="nav-drawer-search-wrap">
+        <div class="nav-drawer-search-box">
+          <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"/>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+          </svg>
+          <input
+            type="text"
+            class="nav-drawer-search-input"
+            id="drawer-search-input"
+            placeholder="Tafuta habari..."
+            autocomplete="off"
+            aria-label="Tafuta habari"
+          />
+        </div>
+        <div class="nav-drawer-search-results" id="drawer-search-results">
+          <div class="dss-hint">Andika kuchunguza habari...</div>
+        </div>
+      </div>
+
+      <div class="nav-drawer-body">
+        <div class="nav-drawer-section-label">Kurasa Kuu</div>
+        <a href="index.html" class="nav-drawer-item"><i class="fa fa-house"></i> Nyumbani</a>
+        <a href="#" class="nav-drawer-item"><i class="fa fa-newspaper"></i> Habari Zote</a>
+        <a href="#" class="nav-drawer-item"><i class="fa fa-fire"></i> Zinazosumbua</a>
+        <a href="#" class="nav-drawer-item"><i class="fa fa-video"></i> Video</a>
+        <div class="nav-drawer-divider"></div>
+        <div class="nav-drawer-section-label">Aina za Habari</div>
+        <a href="#" class="nav-drawer-item"><i class="fa fa-globe"></i> Siasa</a>
+        <a href="#" class="nav-drawer-item"><i class="fa fa-chart-line"></i> Uchumi</a>
+        <a href="#" class="nav-drawer-item"><i class="fa fa-futbol"></i> Michezo</a>
+        <a href="#" class="nav-drawer-item"><i class="fa fa-microchip"></i> Teknolojia</a>
+        <a href="#" class="nav-drawer-item"><i class="fa fa-heart-pulse"></i> Afya</a>
+        <a href="#" class="nav-drawer-item"><i class="fa fa-masks-theater"></i> Burudani</a>
+        <div class="nav-drawer-divider"></div>
+        <div class="nav-drawer-section-label">Zaidi</div>
+        <a href="#" class="nav-drawer-item"><i class="fa fa-circle-info"></i> Kuhusu Sisi</a>
+        <a href="#" class="nav-drawer-item"><i class="fa fa-envelope"></i> Wasiliana Nasi</a>
+        <a href="#" class="nav-drawer-item"><i class="fa fa-mobile-screen"></i> Pakua App</a>
+      </div>
+      <div class="nav-drawer-footer">
+        <a href="#" class="nav-drawer-social"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" class="nav-drawer-social"><i class="fab fa-x-twitter"></i></a>
+        <a href="#" class="nav-drawer-social"><i class="fab fa-instagram"></i></a>
+        <a href="#" class="nav-drawer-social"><i class="fab fa-tiktok"></i></a>
+        <a href="#" class="nav-drawer-social"><i class="fab fa-threads"></i></a>
+      </div>
+    </nav>
 
     <!-- POST CONTENT -->
     <article id="post-page">
@@ -816,18 +1123,42 @@
           />
           <div class="post-admin-info">
             <div class="post-admin-name-row">
-              <span class="post-admin-name" id="post-admin-name">Mnyilinga News</span>
+              <span class="post-admin-name" id="post-admin-name"
+                >Mnyilinga News</span
+              >
               <!-- Verified badge — inaonekana ndani ya post tu -->
               <span class="verified-badge" id="post-verified-badge">
-                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <circle cx="12" cy="12" r="12" fill="#1D9BF0"/>
-                  <path d="M6.5 12.5L10 16L17.5 8.5" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <circle cx="12" cy="12" r="12" fill="#1D9BF0" />
+                  <path
+                    d="M6.5 12.5L10 16L17.5 8.5"
+                    stroke="white"
+                    stroke-width="2.2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
                 </svg>
               </span>
               <!-- Chevron — gusa uone bio ya admin -->
-              <button class="admin-chevron-btn" id="admin-chevron-btn" onclick="toggleAdminBio()" aria-label="Maelezo ya mhariri">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                  <polyline points="6 9 12 15 18 9"/>
+              <button
+                class="admin-chevron-btn"
+                id="admin-chevron-btn"
+                onclick="toggleAdminBio()"
+                aria-label="Maelezo ya mhariri"
+              >
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <polyline points="6 9 12 15 18 9" />
                 </svg>
               </button>
             </div>
@@ -854,13 +1185,7 @@
       <div class="share-bar" id="share-bar"></div>
       <!-- More posts -->
       <section class="more-posts-section">
-
-
-
         <div class="section-label">IN CASE YOU MISSED IT</div>
-
-
-
 
         <div class="more-posts-grid" id="more-posts-grid"></div>
       </section>
@@ -868,29 +1193,11 @@
 
     <button id="scroll-top" aria-label="Rudi juu">&#x2191;</button>
 
-
-
-
-
-
-
-
-
-
-
-
-
- <!-- HAPA NDIPO INAKAA FOOTER YOTE YA MNYILINGA NEWS -->
+    <!-- HAPA NDIPO INAKAA FOOTER YOTE YA MNYILINGA NEWS -->
 
     <footer class="footer">
       <div class="footer-container">
         <hr />
-
-       
-
-
-
-
 
         <h3 class="follow-title">FOLLOW MNYILINGA</h3>
 
@@ -941,35 +1248,46 @@
       </div>
     </footer>
 
+    <!-- =================MWISHO WA FOOTER YETU==================== -->
 
- <!-- =================MWISHO WA FOOTER YETU==================== -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-
-
-    
     <script>
       /* ============================================================
    MNYILINGA NEWS — POST.JS YOTE
    ============================================================ */
 
-      /* --- API URL: Lazima iwe SAWA na index.html --- */
-      const API_URL =
-        "https://script.google.com/macros/s/AKfycbxRU38CN-Xnu7FOokZ7bzKXrxljegpDtpUPmRWCm06zBDEFfUl0ftbOlNUUNX_nAs5u/exec";
+      /* --- API URL: Cloudflare Worker proxy — lazima iwe SAWA na index.html --- */
+      const API_URL = "https://api.mnyilinga.co.tz/api/data";
+
+      const CACHE_KEY = "mn_posts_cache";
+      const CACHE_TTL = 5 * 60 * 1000;
+
+      function proxyImg(url) {
+        if (!url) return url;
+        return url.replace(
+          /^https?:\/\/i\.ibb\.co\//,
+          "https://api.mnyilinga.co.tz/v62/",
+        );
+      }
+
+      function saveCache(data) {
+        try {
+          localStorage.setItem(
+            CACHE_KEY,
+            JSON.stringify({ data, ts: Date.now() }),
+          );
+        } catch (e) {}
+      }
+
+      function loadCache() {
+        try {
+          const raw = localStorage.getItem(CACHE_KEY);
+          if (!raw) return null;
+          const { data, ts } = JSON.parse(raw);
+          return Date.now() - ts > CACHE_TTL ? null : data;
+        } catch (e) {
+          return null;
+        }
+      }
 
       /* ============================================================
    ADMINS 10 — LAZIMA ZIWE SAWA kabisa na index.html!
@@ -1072,11 +1390,41 @@
       }
       function snippet(t, w = 18) {
         if (!t) return "";
-        const ws = t.trim().split(/\s+/);
+        // Ondoa HTML tags kwanza kabla ya kutengeneza snippet
+        const plain = t
+          .replace(/<[^>]*>/g, " ")
+          .replace(/\s+/g, " ")
+          .trim();
+        const ws = plain.split(/\s+/);
         return ws.slice(0, w).join(" ") + (ws.length > w ? "..." : "");
       }
       function placeholder() {
         return "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='450'%3E%3Crect width='800' height='450' fill='%23e8e8e8'/%3E%3C/svg%3E";
+      }
+
+      /* ============================================================ SLUG — Permanent unique ID
+         Lazima iwe IDENTICAL kabisa na generateSlug kwenye index.html
+      ============================================================ */
+      function generateSlug(post) {
+        const base = (post.headline || '')
+          .toLowerCase()
+          .normalize('NFD')
+          .replace(/[\u0300-\u036f]/g, '')
+          .replace(/[^a-z0-9\s-]/g, '')
+          .trim()
+          .replace(/\s+/g, '-')
+          .replace(/-+/g, '-')
+          .slice(0, 55);
+        const suffix = new Date(post.timestamp).getTime().toString(36).slice(-8);
+        return (base || 'habari') + '-' + suffix;
+      }
+
+      /* Pata post kwa slug — angalia allPosts zote */
+      function findPostBySlug(slug) {
+        for (let i = 0; i < allPosts.length; i++) {
+          if (generateSlug(allPosts[i]) === slug) return i;
+        }
+        return -1;
       }
 
       /* ============================================================ RENDER POST */
@@ -1085,6 +1433,24 @@
 
         /* Title ya browser tab */
         document.title = (post.headline || "Makala") + " — Mnyilinga News";
+
+        /* OG / Twitter meta tags — muhimu kwa WhatsApp & Facebook preview */
+        const slug = generateSlug(post);
+        const postFullUrl = `https://news.mnyilinga.co.tz/post.html?slug=${slug}`;
+        const postImg = post.picha_url || 'https://news.mnyilinga.co.tz/new-fav-01.svg';
+        const postDesc = snippet(post.article, 25) || "Soma makala kamili kwenye Mnyilinga News.";
+        const setMeta = (sel, val) => { const el = document.querySelector(sel); if (el) el.setAttribute('content', val); };
+        setMeta('meta[property="og:title"]',       (post.headline || 'Makala') + ' — Mnyilinga News');
+        setMeta('meta[property="og:description"]', postDesc);
+        setMeta('meta[property="og:image"]',       postImg);
+        setMeta('meta[property="og:url"]',         postFullUrl);
+        setMeta('meta[name="twitter:title"]',      (post.headline || 'Makala') + ' — Mnyilinga News');
+        setMeta('meta[name="twitter:description"]',postDesc);
+        setMeta('meta[name="twitter:image"]',      postImg);
+        /* Canonical URL */
+        let canonical = document.querySelector('link[rel="canonical"]');
+        if (!canonical) { canonical = document.createElement('link'); canonical.rel = 'canonical'; document.head.appendChild(canonical); }
+        canonical.href = postFullUrl;
 
         /* Admin wa post hii */
         const admin = getAdmin(idx);
@@ -1140,19 +1506,16 @@
           else imgEl.style.display = "";
         }
 
-        /* Article body — gawanya mistari kuwa paragraphs */
+        /* Article body — onyesha HTML moja kwa moja (bold, italic, picha, links zinabaki) */
+        /* ⚡ Rekebisha picha zote za inline: badilisha i.ibb.co → api.mnyilinga.co.tz/v62 */
         const bodyEl = document.getElementById("post-body");
         if (bodyEl) {
-          const paragraphs = (post.article || "")
-            .split(/\n+/)
-            .filter((p) => p.trim());
-          if (paragraphs.length) {
-            bodyEl.innerHTML = paragraphs
-              .map((p) => `<p>${esc(p.trim())}</p>`)
-              .join("");
-          } else {
-            bodyEl.innerHTML = `<p>${esc(post.article || "")}</p>`;
-          }
+          const rawHtml = post.article || "";
+          const fixedHtml = rawHtml.replace(
+            /https?:\/\/i\.ibb\.co\//g,
+            "https://api.mnyilinga.co.tz/v62/"
+          );
+          bodyEl.innerHTML = fixedHtml;
         }
 
         /* Share buttons */
@@ -1178,35 +1541,47 @@
         const url = encodeURIComponent(window.location.href);
         const title = encodeURIComponent(post.headline || "");
         bar.innerHTML = `
-    <span class="share-label">Sambaza</span>
-    <button class="share-btn" id="copy-btn" onclick="copyLink(this)">
-      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <rect x="9" y="9" width="13" height="13"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
-      </svg>
-      Nakili Link
-    </button>
-    <a class="share-btn" href="https://wa.me/?text=${title}%20${url}" target="_blank" rel="noopener">
-      <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M11.999 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.948-1.419A9.95 9.95 0 0 0 12 22c5.523 0 10-4.477 10-10S17.523 2 12 2z"/></svg>
-      WhatsApp
-    </a>
-    <a class="share-btn" href="https://www.facebook.com/sharer/sharer.php?u=${url}" target="_blank" rel="noopener">
-      <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
-      Facebook
-    </a>
-    <a class="share-btn" href="https://twitter.com/intent/tweet?text=${title}&url=${url}" target="_blank" rel="noopener">
-      <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.74l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-      X / Twitter
-    </a>`;
+          <div class="top-divider"></div>
+          <div class="share-buttons">
+            <a class="share-btn whatsapp" href="https://wa.me/?text=${title}%20${url}" target="_blank" rel="noopener" aria-label="Share on WhatsApp">
+              <i class="fa-brands fa-whatsapp"></i>
+            </a>
+            <button class="share-btn native" onclick="nativeShare('${title}','${url}')" aria-label="Share">
+              <i class="fa-solid fa-share"></i>
+            </button>
+            <a class="share-btn facebook" href="https://www.facebook.com/sharer/sharer.php?u=${url}" target="_blank" rel="noopener" aria-label="Share on Facebook">
+              <i class="fa-brands fa-facebook"></i>
+            </a>
+            <button class="share-btn copylink" id="copy-btn" onclick="copyLink(this)" aria-label="Copy Link">
+              <i class="fa-solid fa-link"></i>
+            </button>
+          </div>
+          <div class="bottom-divider"></div>`;
+      }
+
+      function nativeShare(title, url) {
+        if (navigator.share) {
+          navigator
+            .share({
+              title: decodeURIComponent(title),
+              url: decodeURIComponent(url),
+            })
+            .catch(() => {});
+        } else {
+          window.open(
+            `https://twitter.com/intent/tweet?text=${title}&url=${url}`,
+            "_blank",
+          );
+        }
       }
 
       /* Nakili link */
       function copyLink(btn) {
         const copy = () => {
-          btn.textContent = "Imenakiliwa!";
+          btn.innerHTML = '<i class="fa-solid fa-check"></i>';
           btn.classList.add("copied");
           setTimeout(() => {
-            btn.innerHTML =
-              '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Nakili Link';
+            btn.innerHTML = '<i class="fa-solid fa-link"></i>';
             btn.classList.remove("copied");
           }, 2500);
         };
@@ -1269,52 +1644,140 @@
       function loadPost(idx) {
         if (!allPosts[idx]) return;
         window.scrollTo({ top: 0, behavior: "smooth" });
-        history.pushState(null, "", `post.html?id=${idx}`);
+        const slug = generateSlug(allPosts[idx]);
+        history.pushState(null, "", `post.html?slug=${slug}`);
         renderPost(allPosts[idx], idx);
       }
 
       /* ============================================================ INIT */
       async function initPostPage() {
         const params = new URLSearchParams(window.location.search);
-        const idParam = parseInt(params.get("id"));
+        const slugParam = params.get("slug");
+        const idParam   = parseInt(params.get("id")); // backward compat na links za zamani
 
-        /* Jaribu kupata data kutoka sessionStorage kwanza (haraka) */
-        let postsData = null;
-        try {
-          const stored = sessionStorage.getItem("mn_posts");
-          if (stored) postsData = JSON.parse(stored);
-        } catch (e) {}
+        /* Helper: pata index kutoka param yoyote */
+        function resolveIdx(posts) {
+          if (slugParam) {
+            const i = findPostBySlug(slugParam);
+            return i >= 0 ? i : 0;
+          }
+          if (!isNaN(idParam)) return idParam; // fallback kwa links za zamani
+          return 0;
+        }
 
-        if (postsData && postsData.length) {
-          allPosts = postsData;
-          const idx = isNaN(idParam) ? 0 : idParam;
+        /* ⚡ Jaribu localStorage cache kwanza — haraka bila network */
+        const cached = loadCache();
+        if (cached && cached.length) {
+          allPosts = cached;
+          const idx = resolveIdx(allPosts);
           if (allPosts[idx]) renderPost(allPosts[idx], idx);
           document.getElementById("post-loading")?.classList.add("hidden");
-        } else {
-          /* Kama hakuna sessionStorage — pakia kutoka API */
-          try {
-            const res = await fetch(API_URL + "?t=" + Date.now());
-            const data = await res.json();
-            allPosts = Array.isArray(data) ? data : [];
-            allPosts.sort(
-              (a, b) => new Date(b.timestamp) - new Date(a.timestamp),
-            );
-            try {
-              sessionStorage.setItem("mn_posts", JSON.stringify(allPosts));
-            } catch (e) {}
-            const idx = isNaN(idParam) ? 0 : idParam;
-            if (allPosts[idx]) renderPost(allPosts[idx], idx);
-            else {
-              const t = document.getElementById("post-title");
-              if (t) t.textContent = "Makala haikupatikana";
-            }
-          } catch (err) {
-            console.error("Post load error:", err);
-            const t = document.getElementById("post-title");
-            if (t) t.textContent = "Hitilafu — Tafadhali rudi nyuma";
-          }
-          document.getElementById("post-loading")?.classList.add("hidden");
+          return;
         }
+
+        /* Jaribu sessionStorage (ukitoka index.html moja kwa moja) */
+        try {
+          const stored = sessionStorage.getItem("mn_posts");
+          if (stored) {
+            const postsData = JSON.parse(stored);
+            if (postsData && postsData.length) {
+              allPosts = postsData;
+              const idx = resolveIdx(allPosts);
+              if (allPosts[idx]) renderPost(allPosts[idx], idx);
+              document.getElementById("post-loading")?.classList.add("hidden");
+              return;
+            }
+          }
+        } catch (e) {}
+
+        /* Hakuna cache yoyote — fanya fetch ya mwisho */
+        try {
+          const res = await fetch(API_URL + "?t=" + Date.now());
+          const data = await res.json();
+          allPosts = Array.isArray(data) ? data : [];
+          allPosts = allPosts.map((p) => ({
+            ...p,
+            picha_url: proxyImg(p.picha_url),
+          }));
+          allPosts.sort(
+            (a, b) => new Date(b.timestamp) - new Date(a.timestamp),
+          );
+          saveCache(allPosts);
+          try {
+            sessionStorage.setItem("mn_posts", JSON.stringify(allPosts));
+          } catch (e) {}
+          const idx = resolveIdx(allPosts);
+          if (allPosts[idx]) renderPost(allPosts[idx], idx);
+          else {
+            const t = document.getElementById("post-title");
+            if (t) t.textContent = "Makala haikupatikana";
+          }
+        } catch (err) {
+          console.error("Post load error:", err);
+          const t = document.getElementById("post-title");
+          if (t) t.textContent = "Hitilafu — Tafadhali rudi nyuma";
+        }
+        document.getElementById("post-loading")?.classList.add("hidden");
+      }
+
+      /* ============================================================ HAMBURGER / DRAWER */
+      function toggleDrawer() {
+        const drawer  = document.getElementById("nav-drawer");
+        const overlay = document.getElementById("nav-drawer-overlay");
+        const btn     = document.getElementById("hamburger-btn");
+        const isOpen  = drawer.classList.contains("open");
+        if (isOpen) {
+          closeDrawer();
+        } else {
+          drawer.classList.add("open");
+          overlay.classList.add("visible");
+          btn.classList.add("open");
+          document.body.style.overflow = "hidden";
+          /* Focus search input baada ya drawer kufunguka */
+          setTimeout(() => {
+            const si = document.getElementById("drawer-search-input");
+            if (si) si.focus();
+          }, 350);
+        }
+      }
+      function closeDrawer() {
+        const drawer  = document.getElementById("nav-drawer");
+        const overlay = document.getElementById("nav-drawer-overlay");
+        const btn     = document.getElementById("hamburger-btn");
+        drawer.classList.remove("open");
+        overlay.classList.remove("visible");
+        btn.classList.remove("open");
+        document.body.style.overflow = "";
+      }
+
+      /* ============================================================ DRAWER SEARCH */
+      function drawerSearch(q) {
+        const box = document.getElementById("drawer-search-results");
+        if (!box) return;
+        if (!q || q.length < 2) {
+          box.classList.remove("visible");
+          box.innerHTML = '<div class="dss-hint">Andika kuchunguza habari...</div>';
+          return;
+        }
+        const ql = q.toLowerCase();
+        const matches = allPosts.filter(p =>
+          (p.headline || "").toLowerCase().includes(ql) ||
+          (p.category || "").toLowerCase().includes(ql)
+        ).slice(0, 6);
+        if (!matches.length) {
+          box.innerHTML = `<div class="dss-no-result">🔍 Hakuna habari — jaribu neno tofauti</div>`;
+          box.classList.add("visible");
+          return;
+        }
+        box.innerHTML = matches.map(p => {
+          const idx = allPosts.indexOf(p);
+          const img = p.picha_url || placeholder();
+          return `<div class="dss-item" onclick="closeDrawer();loadPost(${idx})">
+            <img class="dss-thumb" src="${esc(img)}" alt="" onerror="this.src='${placeholder()}'" loading="lazy">
+            <div class="dss-title">${esc(p.headline)}</div>
+          </div>`;
+        }).join("");
+        box.classList.add("visible");
       }
 
       /* ============================================================ SCROLL TOP */
@@ -1333,6 +1796,24 @@
       document.addEventListener("DOMContentLoaded", () => {
         initPostPage();
         initScrollTop();
+
+        /* Wire drawer search input */
+        const dsi = document.getElementById("drawer-search-input");
+        if (dsi) {
+          let db;
+          dsi.addEventListener("input", (e) => {
+            clearTimeout(db);
+            db = setTimeout(() => drawerSearch(e.target.value), 260);
+          });
+          dsi.addEventListener("keydown", (e) => {
+            if (e.key === "Escape") closeDrawer();
+          });
+        }
+
+        /* Funga drawer kwa Escape key */
+        document.addEventListener("keydown", (e) => {
+          if (e.key === "Escape") closeDrawer();
+        });
       });
     </script>
   </body>
