@@ -1019,13 +1019,17 @@
         width: 100%;
         height: 100%;
         object-fit: cover;
-        transition:
-          transform 0.6s ease,
-          opacity 0.4s ease;
+        transition: opacity 0.55s ease;
       }
       .hero-image-wrap img.fade-out {
         opacity: 0;
-        transform: scale(1.03);
+      }
+      .hero-content {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding: 28px 36px 32px;
       }
       .hero-overlay {
         position: absolute;
@@ -1033,40 +1037,127 @@
         background:
           linear-gradient(
             to bottom,
-            rgba(0, 0, 0, 0.72) 0%,
-            rgba(0, 0, 0, 0.28) 30%,
-            rgba(0, 0, 0, 0.0) 55%
+            rgba(10, 22, 40, 0.55) 0%,
+            rgba(10, 22, 40, 0.10) 28%,
+            rgba(0, 0, 0, 0.0) 50%
           ),
           linear-gradient(
             to top,
-            rgba(0, 0, 0, 0.97) 0%,
-            rgba(0, 0, 0, 0.78) 35%,
-            rgba(0, 0, 0, 0.38) 65%,
-            rgba(0, 0, 0, 0.0) 100%
+            rgba(5, 12, 24, 1.0)  0%,
+            rgba(10, 22, 40, 0.92) 28%,
+            rgba(10, 22, 40, 0.55) 55%,
+            rgba(0, 0, 0, 0.0)    100%
+          ),
+          linear-gradient(
+            135deg,
+            rgba(253, 185, 19, 0.07) 0%,
+            transparent 60%
           );
       }
-      .hero-content {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        padding: 32px 36px;
-        transition: opacity 0.4s ease;
-      }
-      .hero-content.fade-out {
-        opacity: 0;
-      }
-      .hero-category {
-        display: none;
-      }
+
+      /* === CATEGORY — imeondolewa === */
+      .hero-category { display: none !important; }
+
+      /* === HEADLINE === */
       .hero-headline {
         font-family: var(--font-inter);
-        font-size: clamp(1.5rem, 3.5vw, 2.6rem);
+        font-size: clamp(1.4rem, 3.2vw, 2.5rem);
         font-weight: 900;
         color: var(--white);
-        line-height: 1.16;
-        max-width: 780px;
-        margin-bottom: 14px;
+        line-height: 1.18;
+        max-width: 820px;
+        margin-bottom: 10px;
+        text-shadow: 0 2px 12px rgba(0,0,0,0.5);
+      }
+
+      /* === BOTTOM ROW: timestamp + counter usawa mmoja === */
+      .hero-meta-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: 4px;
+      }
+      .hero-time {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-family: var(--font-mono);
+        font-size: 0.62rem;
+        font-weight: 500;
+        letter-spacing: 0.08em;
+        color: rgba(255,255,255,0.55);
+      }
+      .hero-time svg {
+        width: 11px;
+        height: 11px;
+        stroke: rgba(255,255,255,0.45);
+        fill: none;
+        flex-shrink: 0;
+      }
+      /* Counter — sasa iko ndani ya meta-row, si absolute tena */
+      .hero-counter {
+        font-family: var(--font-mono);
+        font-size: 0.62rem;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        color: rgba(255,255,255,0.45);
+        pointer-events: none;
+      }
+      .hero-counter .hero-counter-current {
+        color: var(--yellow);
+        font-size: 0.72rem;
+      }
+
+      /* === ARROWS === */
+      .hero-arrow {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 10;
+        width: 38px;
+        height: 38px;
+        background: rgba(10, 22, 40, 0.55);
+        border: 1px solid rgba(255,255,255,0.12);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+        backdrop-filter: blur(4px);
+        -webkit-backdrop-filter: blur(4px);
+        -webkit-tap-highlight-color: transparent;
+        opacity: 0;
+      }
+      #hero-section:hover .hero-arrow,
+      #hero-section:focus-within .hero-arrow { opacity: 1; }
+      /* Kwenye mobile, onyesha arrows daima bila hover */
+      @media (max-width: 768px) {
+        .hero-arrow { opacity: 0.7; width: 32px; height: 32px; }
+      }
+      .hero-arrow:hover {
+        background: rgba(253, 185, 19, 0.85);
+        border-color: var(--yellow);
+        transform: translateY(-50%) scale(1.08);
+      }
+      .hero-arrow:hover svg { stroke: var(--black); }
+      .hero-arrow svg {
+        width: 16px;
+        height: 16px;
+        stroke: rgba(255,255,255,0.85);
+        fill: none;
+        stroke-width: 2.2;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        flex-shrink: 0;
+        transition: stroke 0.2s ease;
+      }
+      .hero-arrow-prev { left: 14px; }
+      .hero-arrow-next { right: 14px; }
+      @media (max-width: 480px) {
+        .hero-arrow-prev { left: 8px; }
+        .hero-arrow-next { right: 8px; }
+        .hero-counter { bottom: 20px; right: 18px; }
       }
 
 
@@ -1960,32 +2051,34 @@
           />
         </div>
         <div class="hero-overlay"></div>
+
+        <!-- Arrow Prev -->
+        <button class="hero-arrow hero-arrow-prev" id="hero-arrow-prev" aria-label="Habari iliyotangulia" onclick="event.stopPropagation(); heroPrev()">
+          <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        <!-- Arrow Next -->
+        <button class="hero-arrow hero-arrow-next" id="hero-arrow-next" aria-label="Habari inayofuata" onclick="event.stopPropagation(); heroNext()">
+          <svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg>
+        </button>
+
         <div class="hero-content">
-          <div class="hero-category">Inapakia...</div>
+          <div class="hero-category" id="hero-cat-badge">Habari</div>
           <h1 class="hero-headline">Habari zinaendelea kupakia...</h1>
-
-
-
-
-
-
-
-
-          <!-- hero-admin imeondolewa -->
+          <div class="hero-meta-row">
+            <div class="hero-time" id="hero-time-label">
+              <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"/>
+                <polyline points="12 6 12 12 16 14"/>
+              </svg>
+              <span>--</span>
+            </div>
+            <div class="hero-counter" id="hero-counter">
+              <span class="hero-counter-current" id="hero-cnt-cur">1</span>
+              <span> / </span>
+              <span id="hero-cnt-tot">6</span>
+            </div>
+          </div>
         </div>
-
-
-
-
-
-
-
-
-
-
-
-        <div class="hero-dots" aria-hidden="true"></div>
-        <div class="hero-timer"></div>
       </section>
 
 
@@ -2602,55 +2695,95 @@
 
       /* ============================================================ HERO */
       function initHero(posts) {
-        const sec = document.getElementById("hero-section");
+        const sec     = document.getElementById("hero-section");
         if (!sec || !posts.length) return;
-        const imgEl = sec.querySelector(".hero-img-el");
-        const catEl = sec.querySelector(".hero-category");
-        const headEl = sec.querySelector(".hero-headline");
-        const dotsWrap = sec.querySelector(".hero-dots");
-        const timerEl = sec.querySelector(".hero-timer");
-        const count = Math.min(posts.length, 6);
+        const imgEl   = sec.querySelector(".hero-img-el");
+        const headEl  = sec.querySelector(".hero-headline");
+        const timeEl  = document.getElementById("hero-time-label");
+        const cntCur  = document.getElementById("hero-cnt-cur");
+        const cntTot  = document.getElementById("hero-cnt-tot");
+        const count   = Math.min(posts.length, 6);
 
-        /* Dots */
-        dotsWrap.innerHTML = "";
-        for (let i = 0; i < count; i++) {
-          const d = document.createElement("div");
-          d.className = "hero-dot" + (i === 0 ? " active" : "");
-          d.onclick = () => goHero(i);
-          dotsWrap.appendChild(d);
-        }
+        /* Counter total */
+        if (cntTot) cntTot.textContent = count;
 
-        function goHero(i) {
+        /* ---- goHero: badilisha picha, headline, time, counter ---- */
+        function goHero(i, clicked) {
           heroIndex = i;
           const p = posts[i];
+
+          /* Picha peke yake inafade — content inabadilika moja kwa moja bila blink */
           imgEl.classList.add("fade-out");
-          sec.querySelector(".hero-content").classList.add("fade-out");
+
           setTimeout(() => {
             imgEl.src = p.picha_url || placeholder();
             imgEl.onerror = () => { imgEl.src = placeholder(); };
-            catEl.textContent = p.category || "Habari";
-            headEl.textContent = p.headline;
-            sec.onclick = () => navigateTo(postUrl(allPosts.indexOf(p)));
             imgEl.classList.remove("fade-out");
-            sec.querySelector(".hero-content").classList.remove("fade-out");
-            dotsWrap
-              .querySelectorAll(".hero-dot")
-              .forEach((d, j) => d.classList.toggle("active", j === i));
-            timerEl.classList.remove("running");
-            void timerEl.offsetWidth;
-            timerEl.classList.add("running");
-          }, 350);
+          }, 300);
+
+          /* Text inabadilika mara moja — laini, bila kutoweka */
+          headEl.textContent = p.headline;
+
+          if (timeEl) {
+            const span = timeEl.querySelector("span");
+            if (span) span.textContent = timeAgo(p.timestamp);
+          }
+
+          if (cntCur) cntCur.textContent = i + 1;
+
+          /* Click ya hero */
+          sec.onclick = (e) => {
+            if (e.target.closest(".hero-arrow")) return;
+            navigateTo(postUrl(allPosts.indexOf(p)));
+          };
+
+          /* Restart auto-rotation ikiwa mtumiaji alibonyeza manually */
+          if (clicked) {
+            clearInterval(heroInterval);
+            heroInterval = setInterval(() => {
+              heroIndex = (heroIndex + 1) % count;
+              goHero(heroIndex, false);
+            }, 6000);
+          }
         }
 
-        /* Anza kutoka index 3 (post ya 4) ili kuepuka mfanano na grids za chini */
+        /* ---- Arrow functions: zinaitwa kutoka HTML onclick ---- */
+        window.heroPrev = function() {
+          goHero((heroIndex - 1 + count) % count, true);
+        };
+        window.heroNext = function() {
+          goHero((heroIndex + 1) % count, true);
+        };
+
+        /* ---- Swipe gesture kwa mobile ---- */
+        let touchStartX = 0;
+        let touchStartY = 0;
+        sec.addEventListener("touchstart", (e) => {
+          touchStartX = e.changedTouches[0].clientX;
+          touchStartY = e.changedTouches[0].clientY;
+        }, { passive: true });
+        sec.addEventListener("touchend", (e) => {
+          const dx = e.changedTouches[0].clientX - touchStartX;
+          const dy = e.changedTouches[0].clientY - touchStartY;
+          /* Ignore kama swipe ni vertical zaidi */
+          if (Math.abs(dy) > Math.abs(dx) || Math.abs(dx) < 40) return;
+          if (dx < 0) {
+            goHero((heroIndex + 1) % count, true);       /* swipe kushoto → next */
+          } else {
+            goHero((heroIndex - 1 + count) % count, true); /* swipe kulia → prev */
+          }
+        }, { passive: true });
+
+        /* ---- Anza ---- */
         const startIdx = Math.min(3, count - 1);
         heroIndex = startIdx;
-        goHero(startIdx);
+        goHero(startIdx, false);
+
         if (heroInterval) clearInterval(heroInterval);
         heroInterval = setInterval(() => {
           heroIndex = (heroIndex + 1) % count;
-          goHero(heroIndex);
-        }, 180000);
+          goHero(heroIndex, false);
+        }, 6000);
       }
 
       /* ============================================================ CATEGORY NAV */
