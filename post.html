@@ -1157,12 +1157,6 @@
     <!-- HEADER — inafanana kabisa na index.html -->
     <header id="site-header">
       <div class="header-top">
-        <!-- Hamburger Menu Button -->
-        <button class="hamburger-btn" id="hamburger-btn" aria-label="Fungua menyu" onclick="toggleDrawer()">
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
         <a href="index.html" class="site-logo" aria-label="Mnyilinga News">
           <img
             src="https://news.mnyilinga.co.tz/assets/logo-2026-01.svg"
@@ -1170,8 +1164,14 @@
             style="height: 30px; width: auto"
           />
         </a>
-        <!-- Spacer ili logo ibaki katikati -->
-        <div style="width:26px;flex-shrink:0;"></div>
+        <!-- Spacer ili logo ibaki kushoto, hamburger iende kulia -->
+        <div style="flex:1;"></div>
+        <!-- Hamburger Menu Button — kulia -->
+        <button class="hamburger-btn" id="hamburger-btn" aria-label="Fungua menyu" onclick="toggleDrawer()">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
       </div>
     </header>
 
