@@ -287,10 +287,14 @@
 
       /* Hero image */
       .post-hero-img {
-        width: 100%;
+        width: calc(100% + 40px);
+        max-width: calc(100% + 40px);
         height: 440px;
         object-fit: cover;
+        margin-left: -20px;
+        margin-right: -20px;
         margin-bottom: 32px;
+        display: block;
       }
 
       /* Article body */
@@ -368,7 +372,7 @@
       .post-body img {
         max-width: 100%;
         height: auto;
-        border-radius: 10px;
+        border-radius: 0;
         margin: 16px 0;
         display: block;
         object-fit: cover;
@@ -716,6 +720,12 @@
       @media (max-width: 480px) {
         #post-page {
           padding: 0 12px 80px;
+        }
+        .post-hero-img {
+          width: calc(100% + 24px);
+          max-width: calc(100% + 24px);
+          margin-left: -12px;
+          margin-right: -12px;
         }
       }
 
