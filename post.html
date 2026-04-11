@@ -808,6 +808,126 @@
         margin: auto;
         line-height: 1.6;
       }
+      /* ============================================================ CATEGORY NAV */
+      .category-nav {
+        background: #0a1628;
+        border-bottom: 1px solid #1e3a5f;
+        overflow-x: auto;
+        scrollbar-width: none;
+      }
+      .category-nav::-webkit-scrollbar { display: none; }
+      .category-nav-inner {
+        display: flex;
+        align-items: center;
+        max-width: var(--max-w);
+        margin: 0 auto;
+        padding: 10px 16px;
+        gap: 8px;
+      }
+      .cat-btn {
+        font-family: var(--font-mono);
+        font-size: 0.65rem;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: #aabdd0;
+        padding: 6px 14px;
+        white-space: nowrap;
+        border: 1px solid #1e3a5f;
+        border-radius: 4px;
+        background: transparent;
+        flex-shrink: 0;
+        cursor: pointer;
+        transition: color 0.18s ease, background 0.18s ease, border-color 0.18s ease, transform 0.15s ease;
+      }
+      .cat-btn:hover {
+        color: var(--white);
+        border-color: #4a7ab5;
+        background: rgba(255,255,255,0.08);
+        transform: translateY(-1px);
+      }
+      .cat-btn.active {
+        color: var(--black);
+        background: var(--yellow);
+        border-color: var(--yellow);
+        font-weight: 800;
+      }
+
+      /* ============================================================ BOTTOM NAV */
+      .bottom-nav {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 950;
+        background: #102039;
+        border-top: 2px solid var(--yellow);
+        display: flex;
+        align-items: stretch;
+        height: 64px;
+        box-shadow: 0 -4px 20px rgba(0,0,0,0.35);
+      }
+      .bottom-nav-item {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+        cursor: pointer;
+        background: none;
+        border: none;
+        color: var(--white);
+        font-family: var(--font-mono);
+        font-size: 0.5rem;
+        font-weight: 600;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        transition: color 0.2s ease, background 0.2s ease;
+        position: relative;
+        padding: 0;
+        text-decoration: none;
+        -webkit-tap-highlight-color: transparent;
+      }
+      .bottom-nav-item svg {
+        width: 20px;
+        height: 20px;
+        stroke: var(--white);
+        fill: none;
+        transition: stroke 0.2s ease, fill 0.2s ease;
+        flex-shrink: 0;
+      }
+      .bottom-nav-item:hover,
+      .bottom-nav-item.active {
+        color: var(--yellow);
+      }
+      .bottom-nav-item:hover svg,
+      .bottom-nav-item.active svg {
+        stroke: var(--yellow);
+      }
+      .bottom-nav-item::after {
+        content: '';
+        position: absolute;
+        top: -2px;
+        left: 50%;
+        transform: translateX(-50%) scaleX(0);
+        width: 32px;
+        height: 2px;
+        background: var(--yellow);
+        transition: transform 0.22s cubic-bezier(0.34,1.56,0.64,1);
+      }
+      .bottom-nav-item:hover::after,
+      .bottom-nav-item.active::after {
+        transform: translateX(-50%) scaleX(1);
+      }
+      .bottom-nav-divider {
+        width: 1px;
+        background: #1e3a5f;
+        align-self: stretch;
+        flex-shrink: 0;
+      }
+      body { padding-bottom: 64px; }
+
       /* ============================================================ HAMBURGER BUTTON */
       .hamburger-btn {
         display: flex;
@@ -1040,6 +1160,13 @@
       </div>
     </header>
 
+    <!-- CATEGORY NAV — inafanana na index.html -->
+    <nav class="category-nav" aria-label="Aina za habari">
+      <div class="category-nav-inner" id="post-category-nav">
+        <button class="cat-btn active" onclick="filterPostCategory('all')">Zote</button>
+      </div>
+    </nav>
+
     <!-- NAV DRAWER OVERLAY -->
     <div class="nav-drawer-overlay" id="nav-drawer-overlay" onclick="closeDrawer()"></div>
 
@@ -1249,6 +1376,55 @@
     </footer>
 
     <!-- =================MWISHO WA FOOTER YETU==================== -->
+
+    <!-- BOTTOM NAV — inafanana kabisa na index.html -->
+    <nav class="bottom-nav" id="bottom-nav" aria-label="Urambazaji wa chini">
+
+      <!-- HOT STORIES -->
+      <button class="bottom-nav-item" id="bn-hot" aria-label="Hot Stories" onclick="window.location.href='index.html'">
+        <svg viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+        </svg>
+        Hot Stories
+      </button>
+
+      <div class="bottom-nav-divider"></div>
+
+      <!-- BOOKS -->
+      <button class="bottom-nav-item" id="bn-books" aria-label="Books" onclick="window.location.href='index.html'">
+        <svg viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+          <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+          <line x1="8.5" y1="7" x2="15.5" y2="7"/>
+          <line x1="8.5" y1="10.5" x2="15.5" y2="10.5"/>
+          <line x1="8.5" y1="14" x2="12.5" y2="14"/>
+        </svg>
+        Books
+      </button>
+
+      <div class="bottom-nav-divider"></div>
+
+      <!-- READ LIST -->
+      <button class="bottom-nav-item" id="bn-readlist" aria-label="Read List" onclick="window.location.href='index.html'">
+        <svg viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M17 3H7a2 2 0 0 0-2 2v16l7-3 7 3V5a2 2 0 0 0-2-2z"/>
+          <polyline points="9,11 11,13 15,9"/>
+        </svg>
+        Read List
+      </button>
+
+      <div class="bottom-nav-divider"></div>
+
+      <!-- HOME -->
+      <button class="bottom-nav-item active" id="bn-home" aria-label="Nyumbani" onclick="window.location.href='index.html'">
+        <svg viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 10.5L12 3l9 7.5"/>
+          <path d="M5 8.5V20a1 1 0 0 0 1 1h4v-5h4v5h4a1 1 0 0 0 1-1V8.5"/>
+        </svg>
+        Home
+      </button>
+
+    </nav>
 
     <script>
       /* ============================================================
@@ -1671,6 +1847,7 @@
           allPosts = cached;
           const idx = resolveIdx(allPosts);
           if (allPosts[idx]) renderPost(allPosts[idx], idx);
+          buildPostCategoryNav(allPosts);
           document.getElementById("post-loading")?.classList.add("hidden");
           return;
         }
@@ -1684,6 +1861,7 @@
               allPosts = postsData;
               const idx = resolveIdx(allPosts);
               if (allPosts[idx]) renderPost(allPosts[idx], idx);
+              buildPostCategoryNav(allPosts);
               document.getElementById("post-loading")?.classList.add("hidden");
               return;
             }
@@ -1706,6 +1884,7 @@
           try {
             sessionStorage.setItem("mn_posts", JSON.stringify(allPosts));
           } catch (e) {}
+          buildPostCategoryNav(allPosts);
           const idx = resolveIdx(allPosts);
           if (allPosts[idx]) renderPost(allPosts[idx], idx);
           else {
@@ -1718,6 +1897,28 @@
           if (t) t.textContent = "Hitilafu — Tafadhali rudi nyuma";
         }
         document.getElementById("post-loading")?.classList.add("hidden");
+      }
+
+      /* ============================================================ CATEGORY NAV — post page */
+      function buildPostCategoryNav(posts) {
+        const nav = document.getElementById("post-category-nav");
+        if (!nav) return;
+        const cats = ["Zote", ...new Set(posts.map(p => p.category).filter(Boolean))];
+        nav.innerHTML = cats.map(cat => {
+          const val = cat === "Zote" ? "all" : cat;
+          return `<button class="cat-btn${val === "all" ? " active" : ""}" onclick="filterPostCategory('${val.replace(/'/g,"&#39;")}')">${cat}</button>`;
+        }).join("");
+      }
+
+      /* Ukibonyeza category kwenye post page — rudi index.html na filter ile category */
+      function filterPostCategory(cat) {
+        if (cat === "all") {
+          window.location.href = "index.html";
+        } else {
+          /* Hifadhi category iliyochaguliwa kwenye sessionStorage */
+          try { sessionStorage.setItem("mn_filter_cat", cat); } catch(e) {}
+          window.location.href = "index.html";
+        }
       }
 
       /* ============================================================ HAMBURGER / DRAWER */
