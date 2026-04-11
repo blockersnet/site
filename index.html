@@ -2849,6 +2849,21 @@
 
         initScrollTop();
 
+        /* Angalia kama mtumiaji anarudi kutoka post.html na category iliyochaguliwa */
+        try {
+          const savedCat = sessionStorage.getItem("mn_filter_cat");
+          if (savedCat) {
+            sessionStorage.removeItem("mn_filter_cat");
+            /* Ngoja posts zipakiwe kwanza kisha filter */
+            const tryFilter = setInterval(() => {
+              if (allPosts.length) {
+                clearInterval(tryFilter);
+                filterCategory(savedCat);
+              }
+            }, 200);
+          }
+        } catch(e) {}
+
         /* Weka Home active mwanzoni */
         bnNavigate('home');
       });
