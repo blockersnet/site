@@ -901,6 +901,138 @@
         font-weight: 800;
       }
 
+      /* ============================================================ CATEGORY PANEL — post.html */
+      #cat-panel {
+        position: fixed;
+        top: calc(var(--header-h) + 48px); /* chini ya header + category nav */
+        left: 0;
+        right: 0;
+        z-index: 898;
+        display: none;
+        background: #0a1628;
+        border-bottom: 2px solid #1e3a5f;
+        max-height: 70vh;
+        overflow-y: auto;
+        scrollbar-width: none;
+      }
+      #cat-panel::-webkit-scrollbar { display: none; }
+      #cat-panel.visible {
+        display: block;
+        animation: panelSlide 0.28s cubic-bezier(0.4,0,0.2,1) both;
+      }
+      @keyframes panelSlide {
+        from { opacity: 0; transform: translateY(-10px); }
+        to   { opacity: 1; transform: translateY(0); }
+      }
+      .cat-panel-inner {
+        max-width: var(--max-w);
+        margin: 0 auto;
+        padding: 0 16px 4px;
+      }
+      .cat-post-row {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        padding: 14px 0;
+        cursor: pointer;
+        border-bottom: 1px solid rgba(255,255,255,0.07);
+        transition: background 0.15s ease;
+        -webkit-tap-highlight-color: transparent;
+      }
+      .cat-post-row:last-of-type { border-bottom: none; }
+      .cat-post-row:active { background: rgba(255,255,255,0.04); }
+      .cat-post-thumb {
+        width: 110px;
+        height: 76px;
+        object-fit: cover;
+        flex-shrink: 0;
+        display: block;
+        background: #1e3a5f;
+      }
+      .cat-post-content {
+        flex: 1;
+        min-width: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+      .cat-post-title {
+        font-family: var(--font-display);
+        font-size: 0.88rem;
+        font-weight: 700;
+        color: var(--white);
+        line-height: 1.3;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+      .cat-post-time {
+        font-family: var(--font-mono);
+        font-size: 0.65rem;
+        color: #6b8aaa;
+        letter-spacing: 0.04em;
+      }
+      .cat-panel-footer {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 8px;
+        padding: 14px 0 10px;
+        cursor: pointer;
+        border-top: 1px solid rgba(255,255,255,0.07);
+        -webkit-tap-highlight-color: transparent;
+      }
+      .cat-panel-footer-text {
+        font-family: var(--font-body);
+        font-size: 0.82rem;
+        color: #4a9fd4;
+        white-space: nowrap;
+      }
+      .cat-panel-footer-text strong {
+        color: var(--white);
+        font-weight: 800;
+        text-decoration: underline;
+        text-decoration-color: var(--white);
+        text-underline-offset: 3px;
+      }
+      .cat-panel-chevron {
+        color: #4a9fd4;
+        font-size: 0.75rem;
+        transition: transform 0.25s ease;
+        flex-shrink: 0;
+      }
+      .cat-panel-chevron.open { transform: rotate(180deg); }
+      .cat-panel-expanded {
+        display: none;
+        border-top: 1px solid rgba(255,255,255,0.07);
+        padding-bottom: 4px;
+      }
+      .cat-panel-expanded.visible {
+        display: block;
+        animation: panelSlide 0.22s ease both;
+      }
+      .cat-panel-close {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        padding: 10px 0 6px;
+        cursor: pointer;
+        gap: 6px;
+        color: #6b8aaa;
+        font-family: var(--font-mono);
+        font-size: 0.6rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+      }
+      .cat-panel-close:hover { color: var(--white); }
+
+      /* Piga juu article kidogo wakati panel iko wazi */
+      body.cat-panel-open #post-page {
+        margin-top: calc(88px + 260px);
+        transition: margin-top 0.28s ease;
+      }
+
       /* ============================================================ BOTTOM NAV */
       .bottom-nav {
         position: fixed;
@@ -1220,6 +1352,23 @@
         <button class="cat-btn active" onclick="filterPostCategory('all')">Zote</button>
       </div>
     </nav>
+
+    <!-- CATEGORY PANEL — inafunguka hukuhuku kwenye post page -->
+    <div id="cat-panel" role="region" aria-label="Makala za category">
+      <div class="cat-panel-inner">
+        <div id="cat-panel-posts"></div>
+        <div class="cat-panel-footer" id="cat-panel-footer" onclick="toggleCatExpanded()">
+          <span class="cat-panel-footer-text" id="cat-panel-footer-text">See more posts based in, <strong id="cat-panel-name"></strong></span>
+          <span class="cat-panel-chevron" id="cat-panel-chevron">&#8964;</span>
+        </div>
+        <div class="cat-panel-expanded" id="cat-panel-expanded">
+          <div class="cat-panel-close" onclick="toggleCatExpanded()">
+            <i class="fa fa-chevron-up" style="font-size:0.6rem;"></i> Funga
+          </div>
+          <div id="cat-panel-all-posts"></div>
+        </div>
+      </div>
+    </div>
 
     <!-- NAV DRAWER OVERLAY -->
     <div class="nav-drawer-overlay" id="nav-drawer-overlay" onclick="closeDrawer()"></div>
@@ -1964,14 +2113,108 @@
         }).join("");
       }
 
-      /* Ukibonyeza category kwenye post page — rudi index.html na filter ile category */
+      /* ============================================================ CATEGORY PANEL — logic */
+      let catPanelOpen = false;
+      let catPanelExpandedOpen = false;
+      let currentCatPanelKey = '';
+
+      function formatDate(d) {
+        const date = new Date(d);
+        if (isNaN(date)) return '';
+        const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+        return `${date.getDate()}, ${months[date.getMonth()]} ${date.getFullYear()}`;
+      }
+
+      function catPostRowHTML(post, idx) {
+        const img = post.picha_url || placeholder();
+        return `<div class="cat-post-row" onclick="closeCatPanel();loadPost(${idx})">
+          <img class="cat-post-thumb" src="${esc(img)}" alt="${esc(post.headline)}" onerror="this.src='${placeholder()}'" loading="lazy">
+          <div class="cat-post-content">
+            <div class="cat-post-title">${esc(post.headline)}</div>
+            <div class="cat-post-time">${formatDate(post.timestamp)}</div>
+          </div>
+        </div>`;
+      }
+
+      function showCatPanel(cat, catLabel) {
+        if (catPanelOpen && currentCatPanelKey === cat) {
+          closeCatPanel();
+          return;
+        }
+
+        const filtered = allPosts.filter(p =>
+          (p.category || '').toLowerCase() === cat.toLowerCase()
+        ).sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+
+        const panel = document.getElementById('cat-panel');
+        const postsEl = document.getElementById('cat-panel-posts');
+        const nameEl = document.getElementById('cat-panel-name');
+        const footer = document.getElementById('cat-panel-footer');
+        const expanded = document.getElementById('cat-panel-expanded');
+        const allPostsEl = document.getElementById('cat-panel-all-posts');
+        const chevron = document.getElementById('cat-panel-chevron');
+
+        if (!panel || !postsEl) return;
+
+        catPanelExpandedOpen = false;
+        if (expanded) expanded.classList.remove('visible');
+        if (chevron)  chevron.classList.remove('open');
+
+        const top3 = filtered.slice(0, 3);
+        postsEl.innerHTML = top3.length
+          ? top3.map(p => catPostRowHTML(p, allPosts.indexOf(p))).join('')
+          : `<div style="padding:20px 0;color:#6b8aaa;font-size:0.82rem;text-align:center;">Hakuna makala za "${catLabel}"</div>`;
+
+        if (nameEl) nameEl.textContent = catLabel;
+        if (footer) footer.style.display = filtered.length > 3 ? 'flex' : 'none';
+
+        if (allPostsEl) {
+          allPostsEl.innerHTML = filtered.slice(3).map(p =>
+            catPostRowHTML(p, allPosts.indexOf(p))
+          ).join('');
+        }
+
+        currentCatPanelKey = cat;
+        catPanelOpen = true;
+        panel.classList.add('visible');
+        document.body.classList.add('cat-panel-open');
+      }
+
+      function closeCatPanel() {
+        const panel = document.getElementById('cat-panel');
+        if (panel) panel.classList.remove('visible');
+        catPanelOpen = false;
+        catPanelExpandedOpen = false;
+        currentCatPanelKey = '';
+        const expanded = document.getElementById('cat-panel-expanded');
+        const chevron = document.getElementById('cat-panel-chevron');
+        if (expanded) expanded.classList.remove('visible');
+        if (chevron)  chevron.classList.remove('open');
+        document.body.classList.remove('cat-panel-open');
+      }
+
+      function toggleCatExpanded() {
+        catPanelExpandedOpen = !catPanelExpandedOpen;
+        const expanded = document.getElementById('cat-panel-expanded');
+        const chevron  = document.getElementById('cat-panel-chevron');
+        if (expanded) expanded.classList.toggle('visible', catPanelExpandedOpen);
+        if (chevron)  chevron.classList.toggle('open', catPanelExpandedOpen);
+      }
+
       function filterPostCategory(cat) {
-        if (cat === "all") {
-          window.location.href = "index.html";
+        /* Highlight active button */
+        document.querySelectorAll('#post-category-nav .cat-btn').forEach(btn => {
+          btn.classList.toggle('active',
+            (cat === 'all' && btn.textContent.trim() === 'Zote') ||
+            btn.textContent.trim().toLowerCase() === cat.toLowerCase()
+          );
+        });
+
+        if (cat === 'all') {
+          closeCatPanel();
         } else {
-          /* Hifadhi category iliyochaguliwa kwenye sessionStorage */
-          try { sessionStorage.setItem("mn_filter_cat", cat); } catch(e) {}
-          window.location.href = "index.html";
+          const label = cat.charAt(0).toUpperCase() + cat.slice(1);
+          showCatPanel(cat, label);
         }
       }
 
