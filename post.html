@@ -111,50 +111,83 @@
         align-items: center;
         justify-content: center;
         z-index: 9999;
-        transition:
-          opacity 0.5s ease,
-          visibility 0.5s ease;
+        transition: opacity 0.6s ease, visibility 0.6s ease;
       }
       #post-loading.hidden {
         opacity: 0;
         visibility: hidden;
         pointer-events: none;
       }
-      .loading-logo {
-        width: 140px;
-        height: auto;
-        animation: logoPulse 1.4s ease-in-out infinite;
+
+      /* SVG logo container */
+      .loading-svg-wrap {
+        width: 120px;
+        height: 120px;
+        position: relative;
+      }
+      .loading-svg-wrap svg {
+        width: 100%;
+        height: 100%;
+        overflow: visible;
+      }
+
+      .load-part-top {
+        animation: partDrop 0.7s cubic-bezier(0.34,1.56,0.64,1) 0.1s both;
+      }
+      .load-part-top-2 {
+        animation: partDrop 0.7s cubic-bezier(0.34,1.56,0.64,1) 0.2s both;
+      }
+      .load-part-left {
+        animation: partLeft 0.7s cubic-bezier(0.34,1.56,0.64,1) 0.35s both;
+      }
+      .load-part-left-2 {
+        animation: partLeft 0.7s cubic-bezier(0.34,1.56,0.64,1) 0.45s both;
+      }
+      .load-part-right {
+        animation: partRight 0.7s cubic-bezier(0.34,1.56,0.64,1) 0.35s both;
+      }
+      .load-part-right-2 {
+        animation: partRight 0.7s cubic-bezier(0.34,1.56,0.64,1) 0.45s both;
+      }
+
+      @keyframes partDrop {
+        from { opacity: 0; transform: translateY(-40px) scale(0.85); }
+        to   { opacity: 1; transform: translateY(0) scale(1); }
+      }
+      @keyframes partLeft {
+        from { opacity: 0; transform: translateX(-40px) scale(0.85); }
+        to   { opacity: 1; transform: translateX(0) scale(1); }
+      }
+      @keyframes partRight {
+        from { opacity: 0; transform: translateX(40px) scale(0.85); }
+        to   { opacity: 1; transform: translateX(0) scale(1); }
+      }
+
+      .loading-svg-wrap svg {
+        animation: logoPulse 2s ease-in-out 1.1s infinite;
       }
       @keyframes logoPulse {
-        0%,
-        100% {
-          transform: scale(1);
-          opacity: 1;
-        }
-        50% {
-          transform: scale(1.06);
-          opacity: 0.7;
-        }
+        0%, 100% { transform: scale(1); }
+        50%       { transform: scale(1.06); }
       }
-      .loading-bar-wrap {
-        margin-top: 32px;
-        width: 160px;
-        height: 2px;
-        background: #1e3a5f;
+
+      .loading-dots {
+        display: flex;
+        gap: 7px;
+        margin-top: 36px;
       }
-      .loading-bar {
-        height: 2px;
-        background: var(--yellow);
-        width: 0%;
-        animation: loadBar 1.8s ease-in-out forwards;
+      .loading-dots span {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        animation: dotBounce 1.2s ease-in-out infinite;
       }
-      @keyframes loadBar {
-        from {
-          width: 0%;
-        }
-        to {
-          width: 100%;
-        }
+      .loading-dots span:nth-child(1) { animation-delay: 0s;   background: #6e55dc; }
+      .loading-dots span:nth-child(2) { animation-delay: 0.2s; background: #fba007; }
+      .loading-dots span:nth-child(3) { animation-delay: 0.4s; background: #0eb24c; }
+      @keyframes dotBounce {
+        0%, 80%, 100% { transform: scale(0.6); opacity: 0.4; }
+        40%            { transform: scale(1.2); opacity: 1; }
       }
 
       /* ============================================================ HEADER */
@@ -1146,12 +1179,33 @@
     <!-- POST LOADING SCREEN -->
 
     <div id="post-loading">
-      <img
-        src="https://news.mnyilinga.co.tz/assets/logo-2026-01.svg"
-        alt="Mnyilinga News"
-        style="height: 20px; width: auto"
-      />
-      <div class="loading-bar-wrap"><div class="loading-bar"></div></div>
+      <div class="loading-svg-wrap">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1080">
+          <g class="load-part-top">
+            <polygon points="518.61 108.53 364.75 216.75 364.75 224.82 364.75 347.85 364.75 349.21 364.75 472.24 364.75 480.31 518.61 588.53 518.61 108.53" fill="#6e55dc"/>
+          </g>
+          <g class="load-part-top-2">
+            <polygon points="560.17 588.53 714.03 480.31 714.03 349.21 714.03 347.85 714.03 216.75 560.17 108.53 560.17 588.53" fill="#fba007"/>
+          </g>
+          <g class="load-part-left">
+            <polygon points="495.78 619.87 326.38 538.09 319.34 542.01 211.84 601.86 210.66 602.52 103.16 662.38 96.11 666.3 76.41 853.37 495.78 619.87" fill="#0eb24c"/>
+          </g>
+          <g class="load-part-left-2">
+            <polygon points="96.63 889.69 266.03 971.47 380.57 907.69 381.75 907.04 496.3 843.26 516 656.19 96.63 889.69" fill="#fba007"/>
+          </g>
+          <g class="load-part-right">
+            <polygon points="1003.59 844.26 979.99 657.64 972.87 653.86 864.15 596.26 862.95 595.63 754.23 538.03 747.1 534.25 579.44 619.54 1003.59 844.26" fill="#0eb24c"/>
+          </g>
+          <g class="load-part-right-2">
+            <polygon points="559.98 656.28 583.58 842.9 699.43 904.27 700.63 904.91 816.47 966.28 984.13 880.99 559.98 656.28" fill="#6e55dc"/>
+          </g>
+        </svg>
+      </div>
+      <div class="loading-dots">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
     </div>
 
     <!-- HEADER — inafanana kabisa na index.html -->
