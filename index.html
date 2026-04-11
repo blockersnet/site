@@ -7,7 +7,10 @@
 
 
 
-<link rel="icon" type="image/svg+xml" href="https://news.mnyilinga.co.tz/new-fav-01.svg">
+<!-- Favicon: SVG (primary) + ICO (fallback kwa vivinjari vya zamani) -->
+<link rel="icon" type="image/svg+xml" href="https://news.mnyilinga.co.tz/premium-icon-01.svg">
+<link rel="alternate icon" type="image/x-icon" href="https://news.mnyilinga.co.tz/backup-favicon-01.ico">
+<link rel="shortcut icon" href="https://news.mnyilinga.co.tz/backup-favicon-01.ico">
 
     
 
@@ -95,6 +98,8 @@
         box-sizing: border-box;
         margin: 0;
         padding: 0;
+        user-select: none;
+        -webkit-user-select: none;
       }
       html {
         scroll-behavior: smooth;
@@ -715,11 +720,10 @@
         background-color: #ffffff;
         width: 100%;
         padding: 20px 0 24px;
-        border: 1px solid #e0e0e0;
+        border: none;
       }
       .top-line {
-        border: 0;
-        border-top: 1px solid #e0e0e0;
+        border: none;
         margin: 0 0 20px;
       }
       /*
@@ -951,6 +955,13 @@
         text-transform: uppercase;
       }
       .cat-panel-close:hover { color: var(--white); }
+      /* Close button ya chini — iwe na border juu ili ionekane wazi */
+      .cat-panel-close-bottom {
+        margin-top: 4px;
+        border-top: 1px solid rgba(255,255,255,0.07);
+        padding-top: 14px;
+        justify-content: center;
+      }
 
       /* ============================================================ LAYOUT */
       #main-content {
@@ -1099,43 +1110,10 @@
 
 
       .hero-dots {
-        position: absolute;
-        bottom: 22px;
-        right: 36px;
-        display: flex;
-        gap: 6px;
-      }
-      .hero-dot {
-        width: 6px;
-        height: 6px;
-        background: rgba(255, 255, 255, 0.3);
-        transition:
-          background 0.3s,
-          width 0.3s;
-        cursor: pointer;
-      }
-      .hero-dot.active {
-        background: var(--yellow);
-        width: 18px;
+        display: none !important;
       }
       .hero-timer {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        height: 2px;
-        background: var(--yellow);
-        width: 0%;
-      }
-      .hero-timer.running {
-        animation: heroTimer 180s linear forwards;
-      }
-      @keyframes heroTimer {
-        from {
-          width: 0%;
-        }
-        to {
-          width: 100%;
-        }
+        display: none !important;
       }
 
       /* ============================================================ NEWS CARD */
@@ -1193,7 +1171,7 @@
       .top-news-grid {
         display: grid;
         grid-template-columns: 1fr 1fr;
-        gap: 2px;
+        gap: 12px;
       }
       .top-news-grid .news-card:first-child {
         grid-column: 1/-1;
@@ -1215,7 +1193,7 @@
       .main-news-grid {
         display: grid;
         grid-template-columns: 1fr 1fr;
-        gap: 2px;
+        gap: 12px;
       }
       .main-news-grid .news-card .card-img-wrap {
         height: 200px;
@@ -1285,7 +1263,7 @@
       .old-news-grid {
         display: none;
         grid-template-columns: 1fr 1fr;
-        gap: 2px;
+        gap: 12px;
         margin-top: 16px;
       }
       .old-news-grid.visible {
@@ -1715,6 +1693,10 @@
   color: #ccd9e8;
   padding: 0 28px;
   position: relative;
+  transition: color 0.2s ease;
+}
+.live-ticker-inner span:hover {
+  color: var(--yellow);
 }
 .live-ticker-inner span::after {
   content: '◆';
@@ -1925,11 +1907,15 @@
         <div id="cat-panel-posts"></div>
         <div class="cat-panel-footer" id="cat-panel-footer" onclick="toggleCatExpanded()">
           <span class="cat-panel-footer-text" id="cat-panel-footer-text">See more posts based in, <strong id="cat-panel-name"></strong></span>
-          <span class="cat-panel-chevron" id="cat-panel-chevron">&#8964;</span>
+          <span class="cat-panel-chevron" id="cat-panel-chevron">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </span>
         </div>
         <div class="cat-panel-expanded" id="cat-panel-expanded">
-          <div class="cat-panel-close" onclick="toggleCatExpanded()">
-            <i class="fa fa-chevron-up" style="font-size:0.6rem;"></i> Funga
+          <!-- Kitufe cha kufunga expanded list — kinaonekana wakati list imefunguliwa -->
+          <div class="cat-panel-close" onclick="toggleCatExpanded()" id="cat-panel-close-btn">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
+            Close categories section
           </div>
           <div id="cat-panel-all-posts"></div>
         </div>
@@ -2470,19 +2456,32 @@
       let heroInterval = null;
 
       /* ============================================================ UTILITIES */
+      /* ============================================================
+         timeAgo — Kiingereza, professional
+         Chini ya saa 24: "X hours ago" / "X minutes ago"
+         Saa 24 na zaidi: tarehe kamili "26 Jul 2026"
+         ============================================================ */
       function timeAgo(d) {
-        const now = new Date(),
-          date = new Date(d);
+        const now  = new Date();
+        const date = new Date(d);
         if (isNaN(date)) return d || "";
         const s = Math.floor((now - date) / 1000);
-        if (s < 60) return "Sasa hivi";
-        if (s < 3600) return `Dakika ${Math.floor(s / 60)} zilizopita`;
-        if (s < 86400) return `Masaa ${Math.floor(s / 3600)} yaliyopita`;
-        if (s < 2592000) return `Siku ${Math.floor(s / 86400)} zilizopita`;
-        const m = Math.floor(s / 2592000);
-        return m < 12
-          ? `Miezi ${m} iliyopita`
-          : `Miaka ${Math.floor(m / 12)} iliyopita`;
+        /* Sekunde chache — just now */
+        if (s < 60) return "Just now";
+        /* Dakika — chini ya saa 1 */
+        if (s < 3600) {
+          const m = Math.floor(s / 60);
+          return m === 1 ? "1 minute ago" : `${m} minutes ago`;
+        }
+        /* Masaa — chini ya saa 24 */
+        if (s < 86400) {
+          const h = Math.floor(s / 3600);
+          return h === 1 ? "1 hour ago" : `${h} hours ago`;
+        }
+        /* Saa 24+ — onyesha tarehe kamili */
+        const months = ["Jan","Feb","Mar","Apr","May","Jun",
+                        "Jul","Aug","Sep","Oct","Nov","Dec"];
+        return `${date.getDate()} ${months[date.getMonth()]} ${date.getFullYear()}`;
       }
       function isOld(d) {
         const date = new Date(d);
@@ -2675,12 +2674,8 @@
       let catPanelExpandedOpen = false;
       let currentCatPanelKey = '';
 
-      function formatDate(d) {
-        const date = new Date(d);
-        if (isNaN(date)) return '';
-        const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-        return `${date.getDate()}, ${months[date.getMonth()]} ${date.getFullYear()}`;
-      }
+      /* formatDate imeunganishwa na timeAgo — inatumia timeAgo moja kwa moja */
+      function formatDate(d) { return timeAgo(d); }
 
       function catPostRowHTML(post, idx, context) {
         const img = post.picha_url || placeholder();
@@ -2734,9 +2729,15 @@
 
         /* All posts kwa expanded */
         if (allPostsEl) {
-          allPostsEl.innerHTML = filtered.slice(3).map(p =>
+          const rest = filtered.slice(3);
+          /* Close button mwisho kabisa — baada ya post ya mwisho */
+          const closeBtnBottom = `<div class="cat-panel-close cat-panel-close-bottom" onclick="toggleCatExpanded()">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
+            Close categories section
+          </div>`;
+          allPostsEl.innerHTML = rest.map(p =>
             catPostRowHTML(p, allPosts.indexOf(p), 'index')
-          ).join('');
+          ).join('') + closeBtnBottom;
         }
 
         /* Onyesha panel */
@@ -2748,25 +2749,50 @@
         setTimeout(() => panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 50);
       }
 
+      /* closeCatPanel — inafunga panel na kurudisha hali ya kawaida
+         Inafuta class 'visible', inafuta expanded, na inarudisha footer text */
       function closeCatPanel() {
-        const panel = document.getElementById('cat-panel');
-        if (panel) panel.classList.remove('visible');
-        catPanelOpen = false;
-        catPanelExpandedOpen = false;
-        currentCatPanelKey = '';
-        const expanded = document.getElementById('cat-panel-expanded');
-        const chevron = document.getElementById('cat-panel-chevron');
+        const panel     = document.getElementById('cat-panel');
+        const expanded  = document.getElementById('cat-panel-expanded');
+        const chevron   = document.getElementById('cat-panel-chevron');
+        const footerTxt = document.getElementById('cat-panel-footer-text');
+        const catName   = document.getElementById('cat-panel-name');
+
+        if (panel)    panel.classList.remove('visible');
         if (expanded) expanded.classList.remove('visible');
-        if (chevron) chevron.classList.remove('open');
+        if (chevron)  chevron.classList.remove('open');
+        /* Rudisha footer text ya kawaida */
+        if (footerTxt && catName) {
+          footerTxt.innerHTML = `See more posts based in, <strong id="cat-panel-name">${catName.textContent}</strong>`;
+        }
+        catPanelOpen         = false;
+        catPanelExpandedOpen = false;
+        currentCatPanelKey   = '';
       }
 
+      /* toggleCatExpanded — inafungua/kufunga list nzima ya posts za category
+         Inabadilisha pia maandishi ya footer kuonyesha hali ya sasa */
       function toggleCatExpanded() {
         catPanelExpandedOpen = !catPanelExpandedOpen;
-        const expanded = document.getElementById('cat-panel-expanded');
-        const chevron = document.getElementById('cat-panel-chevron');
+        const expanded  = document.getElementById('cat-panel-expanded');
+        const chevron   = document.getElementById('cat-panel-chevron');
+        const footerTxt = document.getElementById('cat-panel-footer-text');
+        const catName   = document.getElementById('cat-panel-name');
+        const label     = catName ? catName.textContent : '';
+
         if (expanded) expanded.classList.toggle('visible', catPanelExpandedOpen);
-        if (chevron) chevron.classList.toggle('open', catPanelExpandedOpen);
-        if (catPanelExpandedOpen) {
+        if (chevron)  chevron.classList.toggle('open', catPanelExpandedOpen);
+
+        /* Badilisha maandishi ya footer kulingana na hali */
+        if (footerTxt) {
+          if (catPanelExpandedOpen) {
+            footerTxt.innerHTML = 'Close categories section';
+          } else {
+            footerTxt.innerHTML = `See more posts based in, <strong id="cat-panel-name">${label}</strong>`;
+          }
+        }
+
+        if (catPanelExpandedOpen && expanded) {
           setTimeout(() => expanded.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 50);
         }
       }
@@ -2911,8 +2937,17 @@
       function buildTicker() {
         const el = document.getElementById("ticker-content");
         if (!el || !allPosts.length) return;
-        const h = allPosts.slice(0, 12).map((p) => esc(p.headline));
-        el.innerHTML = [...h, ...h].map((x) => `<span>${x}</span>`).join("");
+        const posts12 = allPosts.slice(0, 12);
+        /* Rudia mara mbili ili animation ionekane bila mapumziko */
+        const doubled = [...posts12, ...posts12];
+        el.innerHTML = doubled.map((p, i) => {
+          const idx = allPosts.indexOf(p);
+          return `<span
+            onclick="navigateTo('${postUrl(idx)}')"
+            style="cursor:pointer;"
+            title="${esc(p.headline)}"
+          >${esc(p.headline)}</span>`;
+        }).join("");
       }
 
       /* ============================================================ FETCH */
