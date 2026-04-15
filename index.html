@@ -2,15 +2,15 @@
 <html lang="sw">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>Mnyilinga News</title>
 
 
 
 <!-- Favicon: SVG (primary) + ICO (fallback kwa vivinjari vya zamani) -->
-<link rel="icon" type="image/svg+xml" href="https://news.mnyilinga.co.tz/premium-icon-01.svg">
-<link rel="alternate icon" type="image/x-icon" href="https://news.mnyilinga.co.tz/backup-favicon-01.ico">
-<link rel="shortcut icon" href="https://news.mnyilinga.co.tz/backup-favicon-01.ico">
+<link rel="icon" type="image/svg+xml" href="https://mnyilinga.co.tz/premium-icon-01.svg">
+<link rel="alternate icon" type="image/x-icon" href="https://mnyilinga.co.tz/backup-favicon-01.ico">
+<link rel="shortcut icon" href="https://mnyilinga.co.tz/backup-favicon-01.ico">
 
     
 
@@ -21,16 +21,51 @@
     />
     <meta property="og:title" content="Mnyilinga News" />
     <meta property="og:description" content="Mnyilinga News — Habari za haraka, za kweli, na za kina." />
-    <meta property="og:image" content="https://news.mnyilinga.co.tz/new-fav-01.svg" />
-    <meta property="og:url" content="https://news.mnyilinga.co.tz" />
+    <meta property="og:image" content="https://mnyilinga.co.tz/images/mnyilinga-logo-01.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:url" content="https://mnyilinga.co.tz/" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Mnyilinga News" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Mnyilinga News" />
     <meta name="twitter:description" content="Mnyilinga News — Habari za haraka, za kweli, na za kina." />
-    <meta name="twitter:image" content="https://news.mnyilinga.co.tz/new-fav-01.svg" />
-    <meta name="theme-color" content="#000000" />
+    <meta name="twitter:image" content="https://mnyilinga.co.tz/images/mnyilinga-logo-01.png" />
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+    <meta name="theme-color" content="#102039" />
+    <link rel="canonical" href="https://mnyilinga.co.tz/" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
+
+    <!-- JSON-LD: Organization Structured Data kwa Google -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "NewsMediaOrganization",
+      "name": "Mnyilinga News",
+      "alternateName": "Mnyilinga Digital",
+      "url": "https://mnyilinga.co.tz/",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://mnyilinga.co.tz/images/mnyilinga-logo-01.png",
+        "width": 1200,
+        "height": 630
+      },
+      "description": "Mnyilinga News — Habari za haraka, za kweli, na za kina.",
+      "foundingDate": "2022",
+      "foundingLocation": {
+        "@type": "Place",
+        "addressCountry": "TZ",
+        "addressLocality": "Dar es Salaam"
+      },
+      "sameAs": [
+        "https://www.facebook.com/mnyilinga_media",
+        "https://x.com/mnyilinga_media",
+        "https://www.instagram.com/mnyilinga_media",
+        "https://www.youtube.com/@mnyilinga_media"
+      ],
+      "inLanguage": "sw"
+    }
+    </script>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
     <!-- Badilisha fonts hapa ukitaka nyingine — nenda fonts.google.com -->
@@ -98,6 +133,9 @@
         box-sizing: border-box;
         margin: 0;
         padding: 0;
+      }
+      /* Zuia selection popote kwenye index */
+      * {
         user-select: none;
         -webkit-user-select: none;
       }
@@ -121,6 +159,17 @@
         text-decoration: none;
         color: inherit;
       }
+      /* Google SEO fix: cards ni <a> tags sasa - ondoa underline */
+      a.news-card, a.sniper-block, a.cat-post-row, a.cg-article {
+        text-decoration: none;
+        color: inherit;
+        display: block;
+      }
+      a.news-card:visited, a.sniper-block:visited,
+      a.cat-post-row:visited, a.cg-article:visited {
+        color: inherit;
+      }
+
       button {
         cursor: pointer;
         border: none;
@@ -405,6 +454,19 @@
 
 
 
+
+      /* ============================================================ HEADER MISC */
+      .logo-img {
+        height: 30px;
+        width: auto;
+      }
+      .drawer-logo-img {
+        height: 24px;
+        width: auto;
+      }
+      .header-spacer {
+        flex: 1;
+      }
 
       /* ============================================================ HAMBURGER BUTTON */
       .hamburger-btn {
@@ -749,7 +811,7 @@
       .img-box {
         position: relative;
         width: 100%;
-        aspect-ratio: 4 / 3;
+        aspect-ratio: 3 / 2;
         background-color: #e8e8e8;
         overflow: hidden;
         border-radius: 6px;
@@ -785,6 +847,11 @@
         color: #444;
       }
       .category-nav {
+        position: fixed;
+        top: var(--header-h);
+        left: 0;
+        right: 0;
+        z-index: 899;
         background: #0a1628;
         border-bottom: 1px solid #1e3a5f;
         overflow-x: auto;
@@ -829,10 +896,11 @@
 
       /* ============================================================ CATEGORY PANEL — feature mpya */
       #cat-panel {
+        position: relative;
         display: none;
         background: #0a1628;
         border-bottom: 2px solid #1e3a5f;
-        overflow: hidden;
+        overflow: visible;
       }
       #cat-panel.visible {
         display: block;
@@ -857,6 +925,7 @@
         cursor: pointer;
         border-bottom: 1px solid rgba(255,255,255,0.07);
         transition: background 0.15s ease;
+        -webkit-tap-highlight-color: transparent;
       }
       .cat-post-row:last-of-type {
         border-bottom: none;
@@ -1224,12 +1293,15 @@
       .card-img-wrap {
         overflow: hidden;
         position: relative;
+        aspect-ratio: 3 / 2;
+        height: auto;
       }
       .card-img {
         width: 100%;
         height: 100%;
         object-fit: cover;
         transition: transform 0.4s ease;
+        display: block;
       }
       .card-body {
         padding: 14px 16px 16px;
@@ -1268,10 +1340,12 @@
         grid-column: 1/-1;
       }
       .top-news-grid .news-card:first-child .card-img-wrap {
-        height: 380px;
+        aspect-ratio: 3 / 2;
+        height: auto;
       }
       .top-news-grid .news-card:not(:first-child) .card-img-wrap {
-        height: 220px;
+        aspect-ratio: 3 / 2;
+        height: auto;
       }
       .top-news-grid .news-card:first-child .card-headline {
         font-size: 1.45rem;
@@ -1287,7 +1361,8 @@
         gap: 12px;
       }
       .main-news-grid .news-card .card-img-wrap {
-        height: 200px;
+        aspect-ratio: 3 / 2;
+        height: auto;
       }
       .main-news-grid .news-card .card-headline {
         font-size: 1rem;
@@ -1361,7 +1436,8 @@
         display: grid;
       }
       .old-news-grid .news-card .card-img-wrap {
-        height: 160px;
+        aspect-ratio: 3 / 2;
+        height: auto;
       }
       .old-news-grid .news-card .card-headline {
         font-size: 0.9rem;
@@ -1510,10 +1586,12 @@
           grid-column: 1;
         }
         .top-news-grid .news-card:first-child .card-img-wrap {
-          height: 220px;
+          aspect-ratio: 3 / 2;
+          height: auto;
         }
         .top-news-grid .news-card:not(:first-child) .card-img-wrap {
-          height: 180px;
+          aspect-ratio: 3 / 2;
+          height: auto;
         }
         .top-news-grid .news-card:first-child .card-headline {
           font-size: 1.2rem;
@@ -1707,17 +1785,175 @@
 
 
 
-/* CSS za content-grid zinapatikana juu */
+
+
+/* ============================================================ MNYILINGA ARTICLES WIDGET */
+.mn-articles-widget {
+  background: #f7f8fa;
+  border-top: 1px solid #e4e6ea;
+  border-bottom: 1px solid #e4e6ea;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+  margin: 0;
+  padding: 20px 0 22px;
+  font-family: var(--font-inter);
+}
+.mn-articles-widget-inner {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0;
+}
+.mn-articles-widget-title {
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--black);
+  margin-bottom: 16px;
+  letter-spacing: -0.3px;
+  border-left: 6px solid var(--red-new);
+  padding-left: 12px;
+}
+.mn-articles-list {
+  display: flex;
+  flex-direction: column;
+}
+.mn-article-item {
+  display: flex;
+  gap: 14px;
+  padding: 14px 0;
+  border-bottom: 1px solid #e4e6ea;
+  text-decoration: none;
+  color: inherit;
+  transition: background 0.15s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+.mn-article-item:last-child {
+  border-bottom: none;
+}
+.mn-article-item:hover {
+  background: rgba(0,0,0,0.02);
+}
+/* Hidden articles — toggled by "See More Articles" */
+.mn-article-item.mn-hidden {
+  display: none;
+}
+.mn-article-img-wrap {
+  flex-shrink: 0;
+}
+.mn-article-img {
+  width: 120px;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+  border-radius: 3px;
+  background-color: #e4e6ea;
+  display: block;
+}
+.mn-article-content {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  min-width: 0;
+}
+.mn-article-meta-top {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 5px;
+}
+.mn-cat-tag {
+  display: inline-block;
+  background: transparent;
+  color: var(--red-new);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0;
+  border-radius: 0;
+  line-height: 1.6;
+}
+.mn-article-date {
+  color: #888;
+  font-size: 11px;
+  font-weight: 400;
+}
+.mn-article-title {
+  color: #111;
+  font-size: 14.5px;
+  font-weight: 700;
+  line-height: 1.38;
+  margin-bottom: auto;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.mn-article-meta-bottom {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 8px;
+}
+.mn-soma-label {
+  color: #999;
+  font-size: 10.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.mn-ext-icon {
+  width: 11px;
+  height: 11px;
+  color: #999;
+  flex-shrink: 0;
+}
+/* See More / See Less button */
+.mn-btn-see-more {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  background: var(--black);
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  padding: 13px 20px;
+  font-family: var(--font-inter);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  margin-top: 14px;
+  cursor: pointer;
+  transition: opacity 0.18s ease, background 0.18s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+.mn-btn-see-more:hover { opacity: 0.85; }
+.mn-btn-chevron {
+  width: 16px;
+  height: 16px;
+  stroke: #fff;
+  fill: none;
+  flex-shrink: 0;
+  transition: transform 0.28s cubic-bezier(0.4,0,0.2,1);
+}
+.mn-btn-chevron.open { transform: rotate(180deg); }
+@media (max-width: 480px) {
+  .mn-article-img { width: 95px; }
+  .mn-article-title { font-size: 13px; }
+}
+
+      
 
 /* ============================================================ LIVE UPDATES TICKER */
 .live-ticker {
   background: #0a1628;
-  border-bottom: 2px solid #1e3a5f;
+  border-bottom: 2px solid #ffffff;
   overflow: hidden;
   display: flex;
   align-items: center;
   height: 38px;
   position: relative;
+  gap: 2px;
+  
 }
 .live-ticker-badge {
   display: flex;
@@ -1758,13 +1994,18 @@
   bottom: 0;
   width: 10px;
   background: var(--red-new, #cb1111);
-  clip-path: polygon(0 0, 0 100%, 100% 100%);
+
+
+  
+
+
+  
 }
 .live-ticker-track {
   flex: 1;
   overflow: hidden;
   position: relative;
-  mask-image: linear-gradient(to right, transparent 0%, #000 60px, #000 calc(100% - 40px), transparent 100%);
+  color: #00e0ff;
   -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 60px, #000 calc(100% - 40px), transparent 100%);
 }
 .live-ticker-inner {
@@ -1784,26 +2025,53 @@
   color: #ccd9e8;
   padding: 0 28px;
   position: relative;
-  transition: color 0.2s ease;
 }
-.live-ticker-inner span:hover {
-  color: var(--yellow);
-}
-.live-ticker-inner span::after {
-  content: '◆';
+.live-ticker-inner span::after,
+.live-ticker-inner a::after {
+  content: '•';
   position: absolute;
-  right: -4px;
+  right: -6px;
   top: 50%;
   transform: translateY(-50%);
-  font-size: 0.4rem;
+  font-size: 0.75rem;
   color: var(--yellow);
-  opacity: 0.6;
+  opacity: 0.7;
 }
-.live-ticker-inner span:last-child::after { display: none; }
+.live-ticker-inner span:last-child::after,
+.live-ticker-inner a:last-child::after { display: none; }
 @keyframes tickerScroll {
   from { transform: translateX(0); }
   to { transform: translateX(-50%); }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /* ============================================================ DRAWER SEARCH SECTION */
 .nav-drawer-search-wrap {
@@ -1963,19 +2231,23 @@
       </div>
     </div>
 
-    <!-- HEADER -->
-    <header id="site-header">
 
+
+
+
+    
+    <!-- HEADER — inafanana kabisa na post.html -->
+    <header id="site-header">
       <div class="header-top">
         <a href="index.html" class="site-logo" aria-label="Mnyilinga News">
           <img
-            src="https://news.mnyilinga.co.tz/assets/logo-2026-01.svg"
+            src="https://mnyilinga.co.tz/images/logo-2026-02.svg"
             alt="Mnyilinga News"
-            style="height: 30px; width: auto"
+            class="logo-img"
           />
         </a>
         <!-- Spacer ili logo ibaki kushoto, hamburger iende kulia -->
-        <div style="flex:1;"></div>
+        <div class="header-spacer"></div>
         <!-- Hamburger Menu Button — kulia -->
         <button class="hamburger-btn" id="hamburger-btn" aria-label="Fungua menyu" onclick="toggleDrawer()">
           <span></span>
@@ -1983,14 +2255,16 @@
           <span></span>
         </button>
       </div>
-      <nav class="category-nav" aria-label="Aina za habari">
-        <div class="category-nav-inner" id="category-nav">
-          <button class="cat-btn active" onclick="filterCategory('all')">
-            Zote
-          </button>
-        </div>
-      </nav>
     </header>
+
+    <!-- CATEGORY NAV — sasa iko nje ya header, inafanana na post.html -->
+    <nav class="category-nav" aria-label="Aina za habari">
+      <div class="category-nav-inner" id="category-nav">
+        <button class="cat-btn active" onclick="filterCategory('all')">
+          Zote
+        </button>
+      </div>
+    </nav>
 
     <!-- ============================================================ CATEGORY PANEL — inafunguka chini ya categories -->
     <div id="cat-panel" role="region" aria-label="Makala za category">
@@ -2018,27 +2292,6 @@
 
     <!-- ============================================================ PAGE: HOME -->
     <div id="page-home" class="bn-page">
-
-    <!-- LIVE UPDATES TICKER -->
-    <div class="live-ticker" onclick="showHomePage()">
-      <div class="live-ticker-badge">NEW</div>
-      <div class="live-ticker-track">
-        <div class="live-ticker-inner" id="ticker-content">
-          <span>Mapenzi ya kweli huchomeka kama moto wa mkaa — polepole, lakini yanawasha moto wa milele</span>
-          <span>Usiku wa manane, moyo hupiga kwa mtu mmoja tu — yule unaempenda bila kujua sababu</span>
-          <span>Siri za chumbani: Mke mzuri hujua jinsi ya kumfanya mumewe ahisi yeye ni ulimwengu wote</span>
-          <span>Upendo wa kweli si maneno mazuri bali vitendo vidogo vya kila siku vinavyoumba furaha</span>
-          <span>Chumba cha ndoa ni mahali patakatifu — heshima, starehe na upendo vinajenga familia imara</span>
-          <span>Mpenzi wako anapaswa kuwa rafiki yako wa kwanza — kisha ndipo anakuwa mke au mume wako</span>
-          <span>Usiku mrefu hupita haraka mikononi mwa mtu unayempenda — asubuhi inakuja na furaha zaidi</span>
-          <span>Maneno matatu tu — "Nakupenda wewe" — yanaweza kubadilisha giza kuwa mwanga</span>
-          <span>Mapenzi ya kweli huchomeka kama moto wa mkaa — polepole, lakini yanawasha moto wa milele</span>
-          <span>Usiku wa manane, moyo hupiga kwa mtu mmoja tu — yule unaempenda bila kujua sababu</span>
-          <span>Siri za chumbani: Mke mzuri hujua jinsi ya kumfanya mumewe ahisi yeye ni ulimwengu wote</span>
-          <span>Upendo wa kweli si maneno mazuri bali vitendo vidogo vya kila siku vinavyoumba furaha</span>
-        </div>
-      </div>
-    </div>
 
     <main id="main-content">
       <!-- HERO -->
@@ -2152,6 +2405,22 @@
         <div class="top-news-grid" id="top-news-grid"></div>
       </section>
 
+      <!-- MNYILINGA ARTICLES WIDGET — inajazwa na JS -->
+      <div class="mn-articles-widget" id="mn-articles-widget" style="display:none;">
+        <div class="mn-articles-widget-inner">
+          <div class="mn-articles-widget-title">Mnyilinga Media Articles</div>
+          <div class="mn-articles-list" id="mn-articles-list">
+            <!-- JS inajaza hapa -->
+          </div>
+          <button class="mn-btn-see-more" id="mn-btn-see-more" onclick="toggleMnArticles()">
+            <span id="mn-btn-label">See More Articles</span>
+            <svg class="mn-btn-chevron" id="mn-btn-chevron" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="6 9 12 15 18 9"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+
       <!-- LATEST NEWS -->
       <section class="section-wrap">
         <div class="section-label">Habari Za Hivi Karibuni</div>
@@ -2182,16 +2451,16 @@
     <!-- ============================================================ NAV DRAWER OVERLAY -->
     <div class="nav-drawer-overlay" id="nav-drawer-overlay" onclick="closeDrawer()"></div>
 
-    <!-- ============================================================ NAV DRAWER -->
+    <!-- ============================================================ NAV DRAWER — inafanana kabisa na post.html -->
     <nav class="nav-drawer" id="nav-drawer" aria-label="Menyu Kuu">
       <div class="nav-drawer-head">
         <img
-          src="https://news.mnyilinga.co.tz/assets/logo-2026-01.svg"
+          src="https://mnyilinga.co.tz/images/logo-2026-02.svg"
           alt="Mnyilinga News"
-          style="height: 24px; width: auto;"
+          class="drawer-logo-img"
         />
         <button class="nav-drawer-close" onclick="closeDrawer()" aria-label="Funga menyu">
-          <i class="fa fa-times"></i>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
         </button>
       </div>
 
@@ -2218,32 +2487,73 @@
 
       <div class="nav-drawer-body">
         <div class="nav-drawer-section-label">Kurasa Kuu</div>
-        <a href="#" class="nav-drawer-item"><i class="fa fa-house"></i> Nyumbani</a>
-        <a href="#" class="nav-drawer-item"><i class="fa fa-newspaper"></i> Habari Zote</a>
-        <a href="#" class="nav-drawer-item"><i class="fa fa-fire"></i> Zinazosumbua</a>
-        <a href="#" class="nav-drawer-item"><i class="fa fa-video"></i> Video</a>
+        <a href="index.html" class="nav-drawer-item"
+          ><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5L12 3l9 7.5"/><path d="M5 8.5V20a1 1 0 0 0 1 1h4v-5h4v5h4a1 1 0 0 0 1-1V8.5"/></svg> Nyumbani</a
+        >
+        <a href="#" class="nav-drawer-item"
+          ><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/><path d="M18 14h-8"/><path d="M15 18h-5"/><path d="M10 6h8v4h-8V6z"/></svg> Habari Zote</a
+        >
+        <a href="#" class="nav-drawer-item"
+          ><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg> Zinazosumbua</a
+        >
+        <a href="#" class="nav-drawer-item"
+          ><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg> Video</a
+        >
         <div class="nav-drawer-divider"></div>
         <div class="nav-drawer-section-label">Aina za Habari</div>
-        <a href="#" class="nav-drawer-item"><i class="fa fa-globe"></i> Siasa</a>
-        <a href="#" class="nav-drawer-item"><i class="fa fa-chart-line"></i> Uchumi</a>
-        <a href="#" class="nav-drawer-item"><i class="fa fa-futbol"></i> Michezo</a>
-        <a href="#" class="nav-drawer-item"><i class="fa fa-microchip"></i> Teknolojia</a>
-        <a href="#" class="nav-drawer-item"><i class="fa fa-heart-pulse"></i> Afya</a>
-        <a href="#" class="nav-drawer-item"><i class="fa fa-masks-theater"></i> Burudani</a>
+        <a href="#" class="nav-drawer-item"
+          ><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg> Siasa</a
+        >
+        <a href="#" class="nav-drawer-item"
+          ><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg> Uchumi</a
+        >
+        <a href="#" class="nav-drawer-item"
+          ><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 7l2.5 4h-5z"/><path d="M7.5 16.5l4.5-5.5 4.5 5.5"/></svg> Michezo</a
+        >
+        <a href="#" class="nav-drawer-item"
+          ><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="6" height="6" rx="1"/><path d="M9 1v2M15 1v2M9 21v2M15 21v2M1 9h2M1 15h2M21 9h2M21 15h2"/><rect x="3" y="3" width="18" height="18" rx="2"/></svg> Teknolojia</a
+        >
+        <a href="#" class="nav-drawer-item"
+          ><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7z"/><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg> Afya</a
+        >
+        <a href="#" class="nav-drawer-item"
+          ><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 10s3-3 3-8h14c0 5 3 8 3 8"/><path d="M2 10c0 5 4 8 8 8s8-3 8-8"/><path d="M9 14s0 2 3 2 3-2 3-2"/><line x1="9" y1="11" x2="9.01" y2="11"/><line x1="15" y1="11" x2="15.01" y2="11"/></svg> Burudani</a
+        >
         <div class="nav-drawer-divider"></div>
         <div class="nav-drawer-section-label">Zaidi</div>
-        <a href="#" class="nav-drawer-item"><i class="fa fa-circle-info"></i> Kuhusu Sisi</a>
-        <a href="#" class="nav-drawer-item"><i class="fa fa-envelope"></i> Wasiliana Nasi</a>
-        <a href="#" class="nav-drawer-item"><i class="fa fa-mobile-screen"></i> Pakua App</a>
+        <a href="#" class="nav-drawer-item"
+          ><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg> Kuhusu Sisi</a
+        >
+        <a href="#" class="nav-drawer-item"
+          ><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg> Wasiliana Nasi</a
+        >
+        <a href="#" class="nav-drawer-item"
+          ><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg> Pakua App</a
+        >
       </div>
       <div class="nav-drawer-footer">
-        <a href="#" class="nav-drawer-social"><i class="fab fa-facebook-f"></i></a>
-        <a href="#" class="nav-drawer-social"><i class="fab fa-x-twitter"></i></a>
-        <a href="#" class="nav-drawer-social"><i class="fab fa-instagram"></i></a>
-        <a href="#" class="nav-drawer-social"><i class="fab fa-tiktok"></i></a>
-        <a href="#" class="nav-drawer-social"><i class="fab fa-threads"></i></a>
+        <a href="#" class="nav-drawer-social" aria-label="YouTube"
+          ><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg
+        ></a>
+        <a href="#" class="nav-drawer-social" aria-label="Facebook"
+          ><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg
+        ></a>
+        <a href="#" class="nav-drawer-social" aria-label="TikTok"
+          ><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.2 8.2 0 0 0 4.79 1.52V6.76a4.85 4.85 0 0 1-1.02-.07z"/></svg
+        ></a>
+        <a href="#" class="nav-drawer-social" aria-label="WhatsApp"
+          ><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg
+        ></a>
+        <a href="#" class="nav-drawer-social" aria-label="Instagram"
+          ><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg
+        ></a>
       </div>
     </nav>
+
+    <!-- Search suggestions na hint (hidden — zinatumiwa na showSuggestions JS function) -->
+    <div id="search-suggestions" style="display:none;" aria-hidden="true"></div>
+    <span id="search-hint" style="display:none;" aria-hidden="true"></span>
+    <div id="search-overlay" style="display:none;" aria-hidden="true"></div>
 
     <!-- Search overlay imehamishiwa ndani ya Hamburger drawer -->
 
@@ -2262,55 +2572,63 @@
 
 
 
- <!-- HAPA NDIPO INAKAA FOOTER YOTE YA MNYILINGA NEWS -->
+<!-- HAPA NDIPO INAKAA FOOTER YOTE YA MNYILINGA NEWS -->
 
     <footer class="footer">
       <div class="footer-container">
+        <!-- Logo nyeupe ya Mnyilinga -->
+        <div style="display:flex;justify-content:center;margin-bottom:28px;">
+          <svg width="64" height="64" viewBox="0 0 1080 1080" xmlns="http://www.w3.org/2000/svg" aria-label="Mnyilinga News">
+            <polygon points="518.61 108.53 364.75 216.75 364.75 224.82 364.75 347.85 364.75 349.21 364.75 472.24 364.75 480.31 518.61 588.53 518.61 108.53" fill="#fff"/>
+            <polygon points="560.17 588.53 714.03 480.31 714.03 349.21 714.03 347.85 714.03 216.75 560.17 108.53 560.17 588.53" fill="#fff"/>
+            <polygon points="495.78 619.87 326.38 538.09 319.34 542.01 211.84 601.86 210.66 602.52 103.16 662.38 96.11 666.3 76.41 853.37 495.78 619.87" fill="#fff"/>
+            <polygon points="96.63 889.69 266.03 971.47 380.57 907.69 381.75 907.04 496.3 843.26 516 656.19 96.63 889.69" fill="#fff"/>
+            <polygon points="1003.59 844.26 979.99 657.64 972.87 653.86 864.15 596.26 862.95 595.63 754.23 538.03 747.1 534.25 579.44 619.54 1003.59 844.26" fill="#fff"/>
+            <polygon points="559.98 656.28 583.58 842.9 699.43 904.27 700.63 904.91 816.47 966.28 984.13 880.99 559.98 656.28" fill="#fff"/>
+          </svg>
+        </div>
+
         <hr />
-
-       
-
-
-
-
 
         <h3 class="follow-title">FOLLOW MNYILINGA</h3>
 
         <div class="social-icons">
-          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <!-- YouTube -->
+          <a href="#" aria-label="YouTube"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a>
 
-          <a href="#"><i class="fab fa-x-twitter"></i></a>
+          <!-- Facebook -->
+          <a href="#" aria-label="Facebook"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
 
-          <a href="#"><i class="fab fa-instagram"></i></a>
+          <!-- TikTok -->
+          <a href="#" aria-label="TikTok"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.2 8.2 0 0 0 4.79 1.52V6.76a4.85 4.85 0 0 1-1.02-.07z"/></svg></a>
 
-          <a href="#"><i class="fab fa-tiktok"></i></a>
+          <!-- WhatsApp -->
+          <a href="#" aria-label="WhatsApp"><svg width="21" height="21" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg></a>
 
-          <a href="#"><i class="fab fa-linkedin-in"></i></a>
-
-          <a href="#"><i class="fab fa-threads"></i></a>
+          <!-- Instagram -->
+          <a href="#" aria-label="Instagram"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
         </div>
 
         <h3 class="download-title">DOWNLOAD MNYILINGA APP</h3>
 
         <div class="app-buttons">
           <a href="#" class="app-btn">
-            <i class="fab fa-apple"></i> App Store
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg> App Store
           </a>
 
           <a href="#" class="app-btn">
-            <i class="fab fa-google-play"></i> Google Play
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M3.18 23.76c.37.21.8.22 1.2.04l12.76-7.17-2.82-2.82zM1.5 2.28A1.5 1.5 0 0 0 1 3.5v17a1.5 1.5 0 0 0 .5 1.22l.08.06 9.52-9.52v-.22L1.58 2.22zm19.1 7.93-2.56-1.44-3.19 3.19 3.19 3.19 2.57-1.44a1.73 1.73 0 0 0 0-3.5zM4.38.26 17.14 7.43l-2.82 2.82z"/></svg> Google Play
           </a>
         </div>
 
         <hr />
-
         <div class="footer-links">
           <a href="#">Terms of Use</a>
           <a href="#">Privacy Policy</a>
           <a href="#">Manage Cookies</a>
           <a href="#">Ad Choices</a>
           <a href="#">Accessibility</a>
-          <a href="#">About</a>
+          <a href="/about">About</a>
           <a href="#">Newsletters</a>
           <a href="#">Transcripts</a>
         </div>
@@ -2318,7 +2636,7 @@
         <div class="copyright">
           <p>© 2026 Mnyilinga Digital. All Rights Reserved.</p>
 
-          <p>Mnyilinga™ Technology & Digital Platforms</p>
+          <p>Mnyilinga™ Technology &amp; Digital Platforms</p>
         </div>
       </div>
     </footer>
@@ -2676,21 +2994,21 @@
         const lazy = post.picha_url
           ? `<img class="card-img lazy" data-src="${esc(img)}" src="${placeholder()}" alt="${esc(post.headline)}">`
           : `<img class="card-img" src="${placeholder()}" alt="${esc(post.headline)}">`;
-        return `<div class="news-card" onclick="navigateTo('${postUrl(idx)}')" tabindex="0" role="article" onkeydown="if(event.key==='Enter')navigateTo('${postUrl(idx)}')">
+        return `<a class="news-card" href="${postUrl(idx)}" tabindex="0" role="article">
     <div class="card-img-wrap">${lazy}</div>
     <div class="card-body">
       <div class="card-headline">${esc(post.headline)}</div>
       <div class="card-snippet">${esc(snippet(post.article))}</div>
     </div>
-  </div>`;
+  </a>`;
       }
 
       /* ============================================================ SNIPER HTML */
       function sniperHTML(post, idx) {
-        return `<div class="sniper-block" onclick="navigateTo('${postUrl(idx)}')" tabindex="0" role="article" onkeydown="if(event.key==='Enter')navigateTo('${postUrl(idx)}')">
+        return `<a class="sniper-block" href="${postUrl(idx)}" tabindex="0" role="article">
     <div class="sniper-headline">${esc(post.headline)}</div>
     <div class="sniper-snippet">${esc(snippet(post.article, 30))}</div>
-  </div>`;
+  </a>`;
       }
 
       /* ============================================================ HERO */
@@ -2815,13 +3133,14 @@
         const action = context === 'post'
           ? `loadPost(${idx})`
           : `navigateTo('${postUrl(idx)}')`;
-        return `<div class="cat-post-row" onclick="${action}">
+        const href = context === 'post' ? '#' : postUrl(idx);
+        return `<a class="cat-post-row" href="${href}">
           <img class="cat-post-thumb" src="${esc(img)}" alt="${esc(post.headline)}" onerror="this.src='${placeholder()}'" loading="lazy">
           <div class="cat-post-content">
             <div class="cat-post-title">${esc(post.headline)}</div>
             <div class="cat-post-time">${formatDate(post.timestamp)}</div>
           </div>
-        </div>`;
+        </a>`;
       }
 
       function showCatPanel(cat, catLabel) {
@@ -2894,9 +3213,11 @@
         if (panel)    panel.classList.remove('visible');
         if (expanded) expanded.classList.remove('visible');
         if (chevron)  chevron.classList.remove('open');
-        /* Rudisha footer text ya kawaida */
-        if (footerTxt && catName) {
-          footerTxt.innerHTML = `See more posts based in, <strong id="cat-panel-name">${catName.textContent}</strong>`;
+        /* Rudisha footer text ya kawaida — sasisha text tu, bila kuunda ID mpya */
+        if (footerTxt) {
+          const nameEl2 = document.getElementById('cat-panel-name');
+          if (nameEl2) nameEl2.textContent = catName ? catName.textContent : '';
+          footerTxt.querySelector('strong') && (footerTxt.querySelector('strong').textContent = catName ? catName.textContent : '');
         }
         catPanelOpen         = false;
         catPanelExpandedOpen = false;
@@ -2921,7 +3242,12 @@
           if (catPanelExpandedOpen) {
             footerTxt.innerHTML = 'Close categories section';
           } else {
-            footerTxt.innerHTML = `See more posts based in, <strong id="cat-panel-name">${label}</strong>`;
+            const strongEl = footerTxt.querySelector('strong');
+            if (strongEl) {
+              strongEl.textContent = label;
+            } else {
+              footerTxt.innerHTML = `See more posts based in, <strong id="cat-panel-name">${label}</strong>`;
+            }
           }
         }
 
@@ -3023,10 +3349,10 @@
         const recent = filtered.filter((p) => !isOld(p.timestamp));
         const old = filtered.filter((p) => isOld(p.timestamp));
 
-        /* Top 4 */
+        /* Top 2 (widget comes after these) */
         const topEl = document.getElementById("top-news-grid");
         if (topEl) {
-          const top = recent.slice(0, 4);
+          const top = recent.slice(0, 2);
           topEl.innerHTML = top.length
             ? top.map((p) => cardHTML(p, allPosts.indexOf(p))).join("")
             : `<div class="empty-state"><strong>Hakuna habari</strong>Jaribu tafuta kwa neno tofauti.</div>`;
@@ -3035,7 +3361,7 @@
         /* Main grid + sniper kila 5 */
         const mainEl = document.getElementById("main-news-grid");
         if (mainEl) {
-          const rest = recent.slice(4);
+          const rest = recent.slice(2);
           mainEl.innerHTML = rest.length
             ? rest
                 .map((p, i) => {
@@ -3075,12 +3401,93 @@
         const doubled = [...posts12, ...posts12];
         el.innerHTML = doubled.map((p, i) => {
           const idx = allPosts.indexOf(p);
-          return `<span
-            onclick="navigateTo('${postUrl(idx)}')"
-            style="cursor:pointer;"
+          return `<a
+            href="${postUrl(idx)}"
+            style="cursor:pointer;padding:0 32px;position:relative;font-family:var(--font-body);font-size:0.76rem;font-weight:500;color:#ccd9e8;white-space:nowrap;text-decoration:none;"
             title="${esc(p.headline)}"
-          >${esc(p.headline)}</span>`;
+          >${esc(p.headline)}</a>`;
         }).join("");
+      }
+
+      /* ============================================================ ARTICLES WIDGET */
+      let mnArticlesExpanded = false;
+      const MN_VISIBLE_COUNT = 5; /* Articles zinaonekana mwanzo */
+
+      function buildArticlesWidget(posts) {
+        const widget = document.getElementById("mn-articles-widget");
+        const list   = document.getElementById("mn-articles-list");
+        const btn    = document.getElementById("mn-btn-see-more");
+        if (!widget || !list) return;
+
+        /* Pool: posts 2..11 (posts 0-1 ziko kwenye Habari Kuu) */
+        const pool = posts.slice(2, 12);
+        if (!pool.length) { widget.style.display = "none"; return; }
+
+        /* SVG ya external link icon */
+        const extIcon = `<svg class="mn-ext-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>`;
+
+        list.innerHTML = pool.map((p, i) => {
+          const idx      = posts.indexOf(p);
+          const img      = p.picha_url || placeholder();
+          const cat      = p.category ? esc(p.category.toUpperCase()) : "HABARI";
+          const ts       = timeAgo(p.timestamp);
+          const isHidden  = i >= MN_VISIBLE_COUNT;
+          const hiddenCls = isHidden ? " mn-hidden" : "";
+          const hiddenSty = isHidden ? ' style="display:none;"' : '';
+          return `<a class="mn-article-item${hiddenCls}"${hiddenSty} href="${postUrl(idx)}" tabindex="0" role="article">
+            <div class="mn-article-img-wrap">
+              <img class="mn-article-img" src="${esc(img)}" alt="${esc(p.headline)}" onerror="this.src='${placeholder()}'" loading="lazy">
+            </div>
+            <div class="mn-article-content">
+              <div class="mn-article-meta-top">
+                <span class="mn-cat-tag">${cat}</span>
+                <span class="mn-article-date">${ts}</span>
+              </div>
+              <h3 class="mn-article-title">${esc(p.headline)}</h3>
+              <div class="mn-article-meta-bottom">
+                <span class="mn-soma-label">SOMA</span>
+                ${extIcon}
+              </div>
+            </div>
+          </a>`;
+        }).join("");
+
+        /* Onyesha / ficha button kulingana na idadi ya articles */
+        if (pool.length <= MN_VISIBLE_COUNT && btn) btn.style.display = "none";
+        widget.style.display = "";
+      }
+
+      function toggleMnArticles() {
+        mnArticlesExpanded = !mnArticlesExpanded;
+        const list    = document.getElementById("mn-articles-list");
+        const label   = document.getElementById("mn-btn-label");
+        const chevron = document.getElementById("mn-btn-chevron");
+        if (!list) return;
+
+        const items = list.querySelectorAll(".mn-article-item");
+
+        if (mnArticlesExpanded) {
+          /* Onyesha zote — lazima itumie "flex" kwa sababu CSS class .mn-hidden ina display:none */
+          items.forEach(el => {
+            el.style.display = "flex";
+            el.classList.remove("mn-hidden");
+          });
+          if (label)   label.textContent = "See Less Articles";
+          if (chevron) chevron.classList.add("open");
+        } else {
+          /* Ficha kuanzia MN_VISIBLE_COUNT na kurudisha class */
+          items.forEach((el, i) => {
+            if (i >= MN_VISIBLE_COUNT) {
+              el.style.display = "none";
+              el.classList.add("mn-hidden");
+            } else {
+              el.style.display = "flex";
+              el.classList.remove("mn-hidden");
+            }
+          });
+          if (label)   label.textContent = "See More Articles";
+          if (chevron) chevron.classList.remove("open");
+        }
       }
 
       /* ============================================================ FETCH */
@@ -3097,6 +3504,7 @@
           renderContent(allPosts, "all", "");
           buildTicker();
           buildContentGrid(allPosts);
+          buildArticlesWidget(allPosts);
           const ls = document.getElementById("loading-screen");
           if (ls) ls.classList.add("hidden");
           /* Refresh data nyuma bila kuonyesha skeleton */
@@ -3130,6 +3538,7 @@
           renderContent(allPosts, "all", "");
           buildTicker();
           buildContentGrid(allPosts);
+          buildArticlesWidget(allPosts);
         } catch (err) {
           console.error("Fetch error:", err);
           const topEl = document.getElementById("top-news-grid");
@@ -3184,12 +3593,12 @@
         inner.innerHTML = four.map(p => {
           const idx = posts.indexOf(p);
           const img = p.picha_url || placeholder();
-          return `<div
+          return `<a
               class="cg-article"
-              onclick="navigateTo('${postUrl(idx)}')"
+              href="${postUrl(idx)}"
               tabindex="0"
               role="article"
-              onkeydown="if(event.key==='Enter')navigateTo('${postUrl(idx)}')"
+              
             >
               <div class="img-box">
                 <img
@@ -3200,10 +3609,20 @@
                 >
               </div>
               <div class="cg-title">${esc(p.headline)}</div>
-            </div>`;
+            </a>`;
         }).join("");
 
         card.style.display = "";
+      }
+
+      /* closeSearch — search overlay iliondolewa kwenye UI,
+         stub hii inazuia ReferenceError kama ikaitwa popote */
+      function closeSearch() {
+        const overlay = document.getElementById("search-overlay");
+        if (overlay) {
+          overlay.classList.remove("visible");
+          document.body.style.overflow = "";
+        }
       }
 
       /* ============================================================ HAMBURGER / DRAWER */
