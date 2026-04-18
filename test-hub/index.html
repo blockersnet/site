@@ -62,6 +62,8 @@
       --art-read-col:     #999999;
       --sniper-bg:        var(--dark-bg);
       --sniper-hover:     var(--dark-light);
+      --catbar-bg:        #000b26;
+      --hero-grad-rgb:    0,7,35;
     }
 
     /* ============================================================
@@ -94,6 +96,8 @@
       --art-read-col:    #64748b;
       --sniper-bg:       #0d0d0d;
       --sniper-hover:    #1a1a1a;
+      --catbar-bg:       #090909;
+      --hero-grad-rgb:   0,0,0;
     }
 
     /* ── THEME 3: CRIMSON NOIR ─ blood red on deep black ── */
@@ -122,6 +126,8 @@
       --art-read-col:    #884455;
       --sniper-bg:       #120006;
       --sniper-hover:    #22000b;
+      --catbar-bg:       #120006;
+      --hero-grad-rgb:   8,0,3;
     }
 
     /* ── THEME 4: MATRIX EMERALD ─ terminal green on pure black ── */
@@ -150,6 +156,8 @@
       --art-read-col:    #2a7a4a;
       --sniper-bg:       #001208;
       --sniper-hover:    #002010;
+      --catbar-bg:       #001208;
+      --hero-grad-rgb:   0,6,2;
     }
 
     /* ── THEME 5: SOLAR GOLD ─ molten gold on deep espresso ── */
@@ -178,6 +186,8 @@
       --art-read-col:    #7a5c18;
       --sniper-bg:       #120e00;
       --sniper-hover:    #221900;
+      --catbar-bg:       #100d00;
+      --hero-grad-rgb:   8,6,0;
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -248,7 +258,7 @@
       width: 100%;
       max-width: 480px;
       z-index: 899;
-      background: #000b26;
+      background: var(--catbar-bg);
       border-bottom: 1px solid rgba(0,153,214,0.18);
       transition: background 0.4s ease, border-color 0.4s ease;
     }
@@ -259,9 +269,10 @@
       top: 0;
       bottom: 0;
       width: 36px;
-      background: linear-gradient(to right, transparent, #000b26);
+      background: linear-gradient(to right, transparent, var(--catbar-bg));
       pointer-events: none;
       z-index: 2;
+      transition: background 0.4s ease;
     }
     .category-nav-bar {
       display: flex;
@@ -286,12 +297,12 @@
       color: rgba(160, 190, 220, 0.75);
       padding: 6px 12px;
       white-space: nowrap;
-      border: 1px solid rgba(0,150,210,0.2);
+      border: 1px solid rgba(255,255,255,0.12);
       border-radius: 5px;
-      background: rgba(0,20,55,0.6);
+      background: rgba(255,255,255,0.04);
       flex-shrink: 0;
       cursor: pointer;
-      transition: color 0.2s, background 0.2s, border-color 0.2s, box-shadow 0.2s, transform 0.15s;
+      transition: color 0.25s, background 0.25s, border-color 0.25s, box-shadow 0.25s, transform 0.15s;
       -webkit-tap-highlight-color: transparent;
     }
     .hub-cat-btn i {
@@ -300,16 +311,17 @@
     }
     .hub-cat-btn:hover {
       color: #fff;
-      border-color: rgba(0,170,223,0.5);
-      background: rgba(0,50,90,0.65);
+      border-color: var(--blue-primary);
+      background: rgba(255,255,255,0.09);
       transform: translateY(-1px);
     }
     .hub-cat-btn.active {
-      color: #fff;
-      background: linear-gradient(135deg, #0084c2 0%, #00aadf 100%);
-      border-color: #00aadf;
+      color: var(--dark-bg);
+      background: var(--blue-primary);
+      border-color: var(--blue-primary);
       font-weight: 800;
       transform: none;
+      box-shadow: 0 0 12px rgba(var(--blue-primary), 0.3);
     }
     .hub-cat-btn.active i { opacity: 1; }
 
@@ -382,6 +394,16 @@
       stroke-linejoin: round;
       flex-shrink: 0;
       transition: stroke 0.4s ease;
+      transform-origin: center;
+    }
+    .theme-btn svg.spinning {
+      animation: icon-spin 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    @keyframes icon-spin {
+      0%   { transform: rotate(0deg) scale(1); }
+      40%  { transform: rotate(200deg) scale(1.25); }
+      70%  { transform: rotate(340deg) scale(0.95); }
+      100% { transform: rotate(360deg) scale(1); }
     }
 
     /* ── THEME TOAST NOTIFICATION ── */
@@ -437,12 +459,13 @@
       background: linear-gradient(
         to bottom,
         transparent 0%,
-        rgba(0,7,35,0.45) 30%,
-        rgba(0,7,35,0.82) 65%,
-        rgba(0,7,35,0.97) 85%,
-        #000723 100%
+        rgba(var(--hero-grad-rgb),0.45) 30%,
+        rgba(var(--hero-grad-rgb),0.82) 65%,
+        rgba(var(--hero-grad-rgb),0.97) 85%,
+        var(--dark-bg) 100%
       );
       pointer-events: none;
+      transition: background 0.4s ease;
     }
     .hero-content {
       position: absolute;
@@ -1404,10 +1427,10 @@
   <div class="theme-banner" id="theme-banner">
     <div class="theme-banner-label">
       <span class="theme-dot"></span>
-      We have chosen <strong id="theme-name-label">HUB Classic</strong> for you.
+      We have chosen this theme for you.
     </div>
     <button class="theme-btn" onclick="cycleTheme()" aria-label="Change theme">
-      <svg viewBox="0 0 24 24">
+      <svg id="theme-icon" viewBox="0 0 24 24">
         <circle cx="12" cy="12" r="4"/>
         <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
       </svg>
@@ -2088,36 +2111,16 @@
 
     /* ── THEME SWITCHER ── */
     const THEMES = [
-      {
-        key:   null,
-        name:  'HUB Classic',
-        emoji: '🔵'
-      },
-      {
-        key:   'void',
-        name:  'Void Black',
-        emoji: '⬛'
-      },
-      {
-        key:   'crimson',
-        name:  'Crimson Noir',
-        emoji: '🔴'
-      },
-      {
-        key:   'emerald',
-        name:  'Matrix Emerald',
-        emoji: '🟢'
-      },
-      {
-        key:   'gold',
-        name:  'Solar Gold',
-        emoji: '🟡'
-      }
+      { key: null,      name: 'HUB Classic',     emoji: '🔵' },
+      { key: 'void',    name: 'Void Black',       emoji: '⬛' },
+      { key: 'crimson', name: 'Crimson Noir',     emoji: '🔴' },
+      { key: 'emerald', name: 'Matrix Emerald',   emoji: '🟢' },
+      { key: 'gold',    name: 'Solar Gold',       emoji: '🟡' }
     ];
 
     let currentThemeIdx = 0;
 
-    function applyTheme(idx) {
+    function applyTheme(idx, animate) {
       const theme = THEMES[idx];
       const html  = document.documentElement;
 
@@ -2128,31 +2131,14 @@
         html.removeAttribute('data-theme');
       }
 
-      /* update catbar gradient to match new bg */
-      const catWrap = document.querySelector('.category-nav-bar-wrap');
-      if (catWrap) {
-        const bgMap = {
-          null:    '#000b26',
-          void:    '#090909',
-          crimson: '#120006',
-          emerald: '#001208',
-          gold:    '#0e0b00'
-        };
-        const bg = bgMap[theme.key] || bgMap[null];
-        catWrap.style.background = bg;
-        /* update ::after fade gradient too — inject inline style */
-        const styleId = 'catbar-after-style';
-        let styleEl = document.getElementById(styleId);
-        if (!styleEl) {
-          styleEl = document.createElement('style');
-          styleEl.id = styleId;
-          document.head.appendChild(styleEl);
-        }
-        styleEl.textContent = `.category-nav-bar-wrap::after { background: linear-gradient(to right, transparent, ${bg}); }`;
+      /* spin the icon if triggered by user click */
+      if (animate) {
+        const icon = document.getElementById('theme-icon');
+        icon.classList.remove('spinning');
+        void icon.offsetWidth; /* reflow to restart animation */
+        icon.classList.add('spinning');
+        icon.addEventListener('animationend', () => icon.classList.remove('spinning'), { once: true });
       }
-
-      /* update label */
-      document.getElementById('theme-name-label').textContent = theme.name;
 
       /* save preference */
       try { localStorage.setItem('mnyilinga-theme', idx); } catch(e) {}
@@ -2163,7 +2149,7 @@
 
     function cycleTheme() {
       currentThemeIdx = (currentThemeIdx + 1) % THEMES.length;
-      applyTheme(currentThemeIdx);
+      applyTheme(currentThemeIdx, true);
     }
 
     /* toast helper */
@@ -2182,7 +2168,7 @@
         const saved = parseInt(localStorage.getItem('mnyilinga-theme'));
         if (!isNaN(saved) && saved >= 0 && saved < THEMES.length) {
           currentThemeIdx = saved;
-          applyTheme(saved);
+          applyTheme(saved, false);
         }
       } catch(e) {}
     })();
