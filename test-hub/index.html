@@ -1,466 +1,460 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mnyilinga Hub</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        :root {
-            --primary-blue: #00b4f0;
-            --dark-blue: #003366;
-            --dark-bg: #0f121a;
-            --bottom-bg: #000723;
-            --red-badge: #d32029;
-            --text-grey: #8a93a6;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mnyilinga HUB</title>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700;800&family=Barlow+Condensed:wght@600;700;800&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Inter', sans-serif;
-            -webkit-tap-highlight-color: transparent;
-        }
+    :root {
+      --blue-primary: #0099d6;
+      --blue-nav: #00aadf;
+      --blue-light: #33c0f0;
+      --dark-bg: #000723;
+      --red-badge: #e8002a;
+      --white: #ffffff;
+      --text-muted: #a0b4c8;
+    }
 
-        body {
-            background-color: var(--bottom-bg);
-            color: #ffffff;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
+    body {
+      font-family: 'Barlow', sans-serif;
+      background: var(--dark-bg);
+      color: var(--white);
+      max-width: 480px;
+      margin: 0 auto;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
 
-        /* Top Navigation */
-        .top-nav {
-            background-color: var(--primary-blue);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 20px;
-        }
+    /* ── NAVBAR ── */
+    .navbar {
+      background: var(--blue-nav);
+      padding: 14px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .navbar-logo {
+      display: flex;
+      align-items: center;
+      gap: 0;
+    }
+    .navbar-logo img {
+      height: 38px;
+      width: auto;
+    }
+    .navbar-actions {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+    .navbar-actions button {
+      background: none;
+      border: none;
+      color: var(--white);
+      font-size: 20px;
+      cursor: pointer;
+      padding: 4px;
+      transition: opacity 0.2s;
+    }
+    .navbar-actions button:hover { opacity: 0.75; }
 
-        .logo-container img {
-            height: 28px;
-            display: block;
-        }
+    /* ── IN FOCUS BAR ── */
+    .infocus-bar {
+      background: #008bbf;
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .infocus-bar::-webkit-scrollbar { display: none; }
+    .infocus-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      color: rgba(255,255,255,0.7);
+      white-space: nowrap;
+      text-transform: uppercase;
+    }
+    .infocus-link {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--white);
+      text-decoration: none;
+      white-space: nowrap;
+      transition: color 0.2s;
+    }
+    .infocus-link:hover { color: #cceeff; }
 
-        .nav-actions {
-            display: flex;
-            gap: 20px;
-            color: var(--dark-blue);
-            font-size: 22px;
-        }
+    /* ── LANGUAGE BANNER ── */
+    .lang-banner {
+      background: #0d1a2e;
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+    .lang-banner span {
+      font-size: 13px;
+      color: rgba(255,255,255,0.85);
+      font-weight: 400;
+    }
+    .lang-btn {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      background: transparent;
+      border: 2px solid rgba(255,255,255,0.5);
+      border-radius: 5px;
+      color: var(--white);
+      font-size: 13px;
+      font-weight: 600;
+      padding: 7px 14px;
+      cursor: pointer;
+      white-space: nowrap;
+      font-family: 'Barlow', sans-serif;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .lang-btn:hover { border-color: var(--white); background: rgba(255,255,255,0.08); }
+    .lang-btn i { font-size: 15px; }
 
-        .nav-actions i {
-            cursor: pointer;
-            transition: opacity 0.2s;
-        }
+    /* ── HERO SECTION ── */
+    .hero {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 4/3;
+      overflow: hidden;
+      display: block;
+    }
+    .hero-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+    }
+    /* Gradient overlay bottom of hero */
+    .hero-gradient {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 70%;
+      background: linear-gradient(
+        to bottom,
+        transparent 0%,
+        rgba(0, 7, 35, 0.45) 30%,
+        rgba(0, 7, 35, 0.82) 65%,
+        rgba(0, 7, 35, 0.97) 85%,
+        #000723 100%
+      );
+      pointer-events: none;
+    }
+    .hero-content {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 0 16px 20px;
+    }
+    .hero-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 28px;
+      font-weight: 700;
+      line-height: 1.18;
+      color: var(--white);
+      margin-bottom: 10px;
+      letter-spacing: 0.1px;
+    }
+    .hero-meta {
+      font-size: 11.5px;
+      font-weight: 600;
+      letter-spacing: 1.2px;
+      color: rgba(255,255,255,0.72);
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .hero-meta span.sep { opacity: 0.5; }
 
-        .nav-actions i:hover {
-            opacity: 0.7;
-        }
+    /* ── CAROUSEL SECTION ── */
+    .carousel-section {
+      background: var(--dark-bg);
+      padding: 14px 0 0;
+      position: relative;
+    }
 
-        /* Sub Navigation */
-        .sub-nav {
-            background-color: var(--primary-blue);
-            padding: 0 20px 15px 20px;
-            display: flex;
-            gap: 15px;
-            align-items: center;
-            overflow-x: auto;
-            white-space: nowrap;
-        }
+    .carousel-track-wrapper {
+      overflow: hidden;
+      position: relative;
+    }
+    .carousel-track {
+      display: flex;
+      transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+      will-change: transform;
+    }
+    .carousel-slide {
+      min-width: 100%;
+      display: flex;
+      align-items: center;
+      padding: 0 16px;
+      gap: 14px;
+      cursor: pointer;
+    }
 
-        .sub-nav::-webkit-scrollbar {
-            display: none;
-        }
+    /* Thumbnail */
+    .slide-thumb {
+      width: 88px;
+      height: 66px;
+      border-radius: 5px;
+      object-fit: cover;
+      flex-shrink: 0;
+      display: block;
+    }
+    .slide-body {
+      flex: 1;
+      min-width: 0;
+    }
+    .badge-new {
+      display: inline-block;
+      background: var(--red-badge);
+      color: var(--white);
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      padding: 2px 8px;
+      border-radius: 2px;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+    }
+    .slide-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 18px;
+      font-weight: 700;
+      line-height: 1.22;
+      color: var(--white);
+      margin-bottom: 7px;
+      letter-spacing: 0.1px;
+    }
+    .slide-meta {
+      font-size: 10.5px;
+      font-weight: 600;
+      letter-spacing: 1.2px;
+      color: rgba(255,255,255,0.55);
+      text-transform: uppercase;
+    }
+    .slide-arrow {
+      color: rgba(255,255,255,0.45);
+      font-size: 18px;
+      flex-shrink: 0;
+      margin-left: 4px;
+    }
 
-        .sub-nav .label {
-            color: rgba(0, 51, 102, 0.7);
-            font-size: 13px;
-            font-weight: 500;
-            letter-spacing: 0.5px;
-            text-transform: uppercase;
-        }
+    /* Carousel Dots */
+    .carousel-dots {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 7px;
+      padding: 18px 0 20px;
+    }
+    .dot {
+      width: 28px;
+      height: 3px;
+      border-radius: 2px;
+      background: rgba(255,255,255,0.2);
+      cursor: pointer;
+      transition: background 0.3s, width 0.3s;
+    }
+    .dot.active {
+      background: var(--white);
+      width: 36px;
+    }
 
-        .sub-nav a {
-            text-decoration: none;
-            color: var(--dark-blue);
-            font-weight: 700;
-            font-size: 15px;
-            transition: color 0.2s;
-        }
+    /* Touch swipe support handled via JS */
 
-        .sub-nav a:hover {
-            color: #000;
-        }
-
-        /* Language Bar */
-        .lang-bar {
-            background-color: var(--dark-bg);
-            padding: 12px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 13px;
-        }
-
-        .lang-bar .lang-text {
-            color: #e0e0e0;
-        }
-
-        .lang-btn {
-            background: transparent;
-            border: 1px solid #ffffff;
-            color: #ffffff;
-            padding: 6px 12px;
-            border-radius: 4px;
-            font-size: 13px;
-            font-weight: 500;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            transition: background 0.3s, color 0.3s;
-        }
-
-        .lang-btn:hover {
-            background: #ffffff;
-            color: var(--dark-bg);
-        }
-
-        /* Hero Section */
-        .hero {
-            position: relative;
-            height: 55vh;
-            min-height: 400px;
-            background: url('https://images.unsplash.com/photo-1542385151-efd9000785a0?q=80&w=1000&auto=format&fit=crop') center/cover no-repeat;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-        }
-
-        .hero-overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 60%;
-            background: linear-gradient(to top, var(--bottom-bg) 0%, rgba(0,7,35,0.8) 40%, transparent 100%);
-            z-index: 1;
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 2;
-            padding: 20px;
-        }
-
-        .hero-title {
-            font-size: 28px;
-            font-weight: 700;
-            line-height: 1.2;
-            margin-bottom: 10px;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
-        }
-
-        .hero-meta {
-            font-size: 13px;
-            color: var(--text-grey);
-            font-weight: 500;
-            letter-spacing: 0.5px;
-            text-transform: uppercase;
-        }
-
-        /* Carousel Section */
-        .news-carousel {
-            background-color: var(--bottom-bg);
-            position: relative;
-            flex: 1;
-            overflow: hidden;
-            padding-bottom: 30px;
-        }
-
-        .carousel-track {
-            display: flex;
-            width: 300%; /* 3 slides */
-            transition: transform 0.4s ease-in-out;
-        }
-
-        .slide {
-            width: 33.333%;
-            display: flex;
-            align-items: center;
-            padding: 20px;
-            box-sizing: border-box;
-            cursor: pointer;
-        }
-
-        .slide-thumb {
-            width: 70px;
-            height: 70px;
-            object-fit: cover;
-            margin-right: 15px;
-            flex-shrink: 0;
-        }
-
-        .slide-info {
-            flex: 1;
-        }
-
-        .badge {
-            background-color: var(--red-badge);
-            color: white;
-            font-size: 11px;
-            font-weight: 600;
-            padding: 3px 6px;
-            display: inline-block;
-            margin-bottom: 8px;
-        }
-
-        .slide-title {
-            font-size: 18px;
-            font-weight: 600;
-            line-height: 1.3;
-            margin-bottom: 6px;
-        }
-
-        .slide-meta {
-            font-size: 12px;
-            color: var(--text-grey);
-            font-weight: 500;
-        }
-
-        .slide-arrow {
-            font-size: 20px;
-            color: #ffffff;
-            margin-left: 15px;
-            opacity: 0.8;
-            transition: transform 0.3s;
-        }
-
-        .slide:hover .slide-arrow {
-            transform: translateX(5px);
-        }
-
-        /* Indicators */
-        .carousel-indicators {
-            position: absolute;
-            bottom: 10px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            gap: 5px;
-        }
-
-        .indicator {
-            width: 35px;
-            height: 3px;
-            background-color: rgba(255, 255, 255, 0.2);
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        .indicator.active {
-            background-color: #ffffff;
-        }
-
-        /* Responsive */
-        @media (min-width: 768px) {
-            .hero-title {
-                font-size: 36px;
-                max-width: 800px;
-            }
-            .slide-title {
-                font-size: 20px;
-            }
-            .sub-nav {
-                padding: 0 40px 15px 40px;
-            }
-            .top-nav {
-                padding: 20px 40px;
-            }
-            .hero-content, .lang-bar {
-                padding: 20px 40px;
-            }
-            .slide {
-                padding: 30px 40px;
-            }
-        }
-    </style>
+    /* ── RESPONSIVE ── */
+    @media (min-width: 481px) {
+      body { max-width: 480px; }
+    }
+    @media (max-width: 360px) {
+      .hero-title { font-size: 24px; }
+      .slide-title { font-size: 16px; }
+      .slide-thumb { width: 74px; height: 55px; }
+    }
+  </style>
 </head>
 <body>
 
-    <header class="top-nav">
-        <div class="logo-container">
-            <img src="https://cdn.mnyilinga.co.tz/HUB-WHITE-01.svg" alt="Mnyilinga Hub Logo">
-        </div>
-        <div class="nav-actions">
-            <i class="fa-solid fa-magnifying-glass"></i>
-            <i class="fa-solid fa-bars"></i>
-        </div>
-    </header>
-
-    <nav class="sub-nav">
-        <span class="label">IN FOCUS</span>
-        <a href="#">Iran</a>
-        <a href="#">Ukraine</a>
-        <a href="#">Hungary</a>
-    </nav>
-
-    <div class="lang-bar">
-        <span class="lang-text">We have chosen English for you.</span>
-        <button class="lang-btn">
-            <i class="fa-solid fa-globe"></i> Change language
-        </button>
+  <!-- ── NAVBAR ── -->
+  <nav class="navbar">
+    <div class="navbar-logo">
+      <img src="https://cdn.mnyilinga.co.tz/HUB-WHITE-01.svg" alt="Mnyilinga HUB Logo"
+           onerror="this.onerror=null;this.src='';this.parentElement.innerHTML='<span style=\'font-size:20px;font-weight:800;letter-spacing:1px;color:#fff\'>✦ MNYILINGA <span style=\'font-weight:400\'>HUB</span></span>'"/>
     </div>
+    <div class="navbar-actions">
+      <button aria-label="Search"><i class="fa-solid fa-magnifying-glass"></i></button>
+      <button aria-label="Menu"><i class="fa-solid fa-bars"></i></button>
+    </div>
+  </nav>
 
-    <main class="hero">
-        <div class="hero-overlay"></div>
-        <div class="hero-content">
-            <h1 class="hero-title">Europe looks to secure shipping in Strait of Hormuz</h1>
-            <p class="hero-meta">POLITICS | 14 hours ago</p>
+  <!-- ── IN FOCUS BAR ── -->
+  <div class="infocus-bar">
+    <span class="infocus-label">In Focus</span>
+    <a href="#" class="infocus-link">Iran</a>
+    <a href="#" class="infocus-link">Ukraine</a>
+    <a href="#" class="infocus-link">Hungary</a>
+  </div>
+
+  <!-- ── LANGUAGE BANNER ── -->
+  <div class="lang-banner">
+    <span>We have chosen English for you.</span>
+    <button class="lang-btn">
+      <i class="fa-solid fa-globe"></i>
+      Change language
+    </button>
+  </div>
+
+  <!-- ── HERO SECTION ── -->
+  <section class="hero">
+    <img
+      class="hero-img"
+      src="https://images.unsplash.com/photo-1578575437130-527eed3abbec?w=900&q=80&fit=crop"
+      alt="Shipping in Strait of Hormuz"
+    />
+    <div class="hero-gradient"></div>
+    <div class="hero-content">
+      <h1 class="hero-title">Europe looks to secure shipping in Strait of Hormuz</h1>
+      <div class="hero-meta">
+        <span>Politics</span>
+        <span class="sep">|</span>
+        <span>14 hours ago</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CAROUSEL SECTION ── -->
+  <div class="carousel-section">
+    <div class="carousel-track-wrapper" id="carouselWrapper">
+      <div class="carousel-track" id="carouselTrack">
+
+        <!-- Slide 1 -->
+        <div class="carousel-slide">
+          <img
+            class="slide-thumb"
+            src="https://images.unsplash.com/photo-1589793907316-f94025b46850?w=200&q=75&fit=crop"
+            alt="Strait of Hormuz"
+          />
+          <div class="slide-body">
+            <span class="badge-new">New</span>
+            <div class="slide-title">Iran closes Strait of Hormuz again over US blockade</div>
+            <div class="slide-meta">Conflicts &nbsp;|&nbsp; 46 minutes ago</div>
+          </div>
+          <i class="fa-solid fa-chevron-right slide-arrow"></i>
         </div>
-    </main>
 
-    <section class="news-carousel" id="carousel">
-        <div class="carousel-track" id="track">
-            
-            <article class="slide">
-                <img src="https://images.unsplash.com/photo-1584483758376-79db04b9015c?auto=format&fit=crop&w=150&q=80" alt="Thumbnail" class="slide-thumb">
-                <div class="slide-info">
-                    <span class="badge">NEW</span>
-                    <h2 class="slide-title">Iran closes Strait of Hormuz again over US blockade</h2>
-                    <p class="slide-meta">CONFLICTS | 46 minutes ago</p>
-                </div>
-                <i class="fa-solid fa-chevron-right slide-arrow"></i>
-            </article>
-
-            <article class="slide">
-                <img src="https://images.unsplash.com/photo-1524661135-423995f22d0b?auto=format&fit=crop&w=150&q=80" alt="Thumbnail" class="slide-thumb">
-                <div class="slide-info">
-                    <span class="badge">NEW</span>
-                    <h2 class="slide-title">Global markets react sharply to shifting ocean trade routes</h2>
-                    <p class="slide-meta">ECONOMY | 1 hour ago</p>
-                </div>
-                <i class="fa-solid fa-chevron-right slide-arrow"></i>
-            </article>
-
-            <article class="slide">
-                <img src="https://images.unsplash.com/photo-1504279577054-acfece074eef?auto=format&fit=crop&w=150&q=80" alt="Thumbnail" class="slide-thumb">
-                <div class="slide-info">
-                    <span class="badge">UPDATE</span>
-                    <h2 class="slide-title">Joint naval exercises commence in the Mediterranean Sea</h2>
-                    <p class="slide-meta">MILITARY | 3 hours ago</p>
-                </div>
-                <i class="fa-solid fa-chevron-right slide-arrow"></i>
-            </article>
-
+        <!-- Slide 2 -->
+        <div class="carousel-slide">
+          <img
+            class="slide-thumb"
+            src="https://images.unsplash.com/photo-1527192491265-7e15c55b1ed2?w=200&q=75&fit=crop"
+            alt="Ukraine conflict"
+          />
+          <div class="slide-body">
+            <span class="badge-new">New</span>
+            <div class="slide-title">Ukraine ceasefire talks stall as frontlines shift east</div>
+            <div class="slide-meta">World &nbsp;|&nbsp; 1 hour ago</div>
+          </div>
+          <i class="fa-solid fa-chevron-right slide-arrow"></i>
         </div>
 
-        <div class="carousel-indicators">
-            <div class="indicator active" onclick="goToSlide(0)"></div>
-            <div class="indicator" onclick="goToSlide(1)"></div>
-            <div class="indicator" onclick="goToSlide(2)"></div>
+        <!-- Slide 3 -->
+        <div class="carousel-slide">
+          <img
+            class="slide-thumb"
+            src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=200&q=75&fit=crop"
+            alt="Hungary politics"
+          />
+          <div class="slide-body">
+            <span class="badge-new">New</span>
+            <div class="slide-title">Hungary vetoes EU military aid package for third time</div>
+            <div class="slide-meta">Politics &nbsp;|&nbsp; 2 hours ago</div>
+          </div>
+          <i class="fa-solid fa-chevron-right slide-arrow"></i>
         </div>
-    </section>
 
-    <script>
-        const track = document.getElementById('track');
-        const indicators = document.querySelectorAll('.indicator');
-        const slides = document.querySelectorAll('.slide');
-        
-        let currentIndex = 0;
-        const totalSlides = slides.length;
-        let slideInterval;
+      </div><!-- /carousel-track -->
+    </div><!-- /carousel-track-wrapper -->
 
-        // Function to update visual state of the carousel
-        function updateCarousel(index) {
-            track.style.transform = `translateX(-${index * 33.333}%)`;
-            
-            // Update indicators
-            indicators.forEach((ind, i) => {
-                if(i === index) {
-                    ind.classList.add('active');
-                } else {
-                    ind.classList.remove('active');
-                }
-            });
-            
-            currentIndex = index;
-        }
+    <!-- Dots -->
+    <div class="carousel-dots" id="carouselDots">
+      <div class="dot active" data-index="0"></div>
+      <div class="dot"        data-index="1"></div>
+      <div class="dot"        data-index="2"></div>
+    </div>
+  </div>
 
-        // Move to the next slide
-        function nextSlide() {
-            let nextIndex = (currentIndex + 1) % totalSlides;
-            updateCarousel(nextIndex);
-        }
+  <script>
+    (function () {
+      const track  = document.getElementById('carouselTrack');
+      const dots   = document.querySelectorAll('.dot');
+      const total  = 3;
+      let current  = 0;
+      let autoTimer;
 
-        // Move to the previous slide
-        function prevSlide() {
-            let prevIndex = (currentIndex - 1 + totalSlides) % totalSlides;
-            updateCarousel(prevIndex);
-        }
+      function goTo(index) {
+        current = (index + total) % total;
+        track.style.transform = `translateX(-${current * 100}%)`;
+        dots.forEach((d, i) => d.classList.toggle('active', i === current));
+      }
 
-        // Direct navigation via indicators
-        function goToSlide(index) {
-            updateCarousel(index);
-            resetInterval();
-        }
+      function startAuto() {
+        autoTimer = setInterval(() => goTo(current + 1), 4000);
+      }
+      function resetAuto() {
+        clearInterval(autoTimer);
+        startAuto();
+      }
 
-        // Auto slide every 1 minute (60,000 milliseconds)
-        function startInterval() {
-            slideInterval = setInterval(nextSlide, 60000); 
-        }
+      /* Dot click */
+      dots.forEach(d => {
+        d.addEventListener('click', () => { goTo(+d.dataset.index); resetAuto(); });
+      });
 
-        function resetInterval() {
-            clearInterval(slideInterval);
-            startInterval();
-        }
+      /* Touch / swipe */
+      let touchX = null;
+      const wrapper = document.getElementById('carouselWrapper');
 
-        // Start auto-play on load
-        startInterval();
+      wrapper.addEventListener('touchstart', e => {
+        touchX = e.touches[0].clientX;
+      }, { passive: true });
 
-        // Touch swipe functionality for manual sliding
-        let startX = 0;
-        let isDragging = false;
+      wrapper.addEventListener('touchend', e => {
+        if (touchX === null) return;
+        const dx = e.changedTouches[0].clientX - touchX;
+        touchX = null;
+        if (Math.abs(dx) < 40) return;
+        goTo(dx < 0 ? current + 1 : current - 1);
+        resetAuto();
+      }, { passive: true });
 
-        track.addEventListener('touchstart', (e) => {
-            startX = e.touches[0].clientX;
-            isDragging = true;
-            clearInterval(slideInterval); // Pause on touch
-        }, { passive: true });
+      /* Mouse drag fallback for desktop */
+      let mouseX = null;
+      wrapper.addEventListener('mousedown', e => { mouseX = e.clientX; });
+      wrapper.addEventListener('mouseup', e => {
+        if (mouseX === null) return;
+        const dx = e.clientX - mouseX;
+        mouseX = null;
+        if (Math.abs(dx) < 40) return;
+        goTo(dx < 0 ? current + 1 : current - 1);
+        resetAuto();
+      });
 
-        track.addEventListener('touchmove', (e) => {
-            if (!isDragging) return;
-        }, { passive: true });
-
-        track.addEventListener('touchend', (e) => {
-            if (!isDragging) return;
-            let endX = e.changedTouches[0].clientX;
-            let diffX = startX - endX;
-
-            // Threshold for swipe
-            if (diffX > 50) {
-                nextSlide();
-            } else if (diffX < -50) {
-                prevSlide();
-            }
-            
-            isDragging = false;
-            startInterval(); // Resume auto-play
-        }, { passive: true });
-
-        // Optional: click on slide arrow advances slide manually
-        slides.forEach(slide => {
-            slide.addEventListener('click', () => {
-                nextSlide();
-                resetInterval();
-            });
-        });
-
-    </script>
+      startAuto();
+    })();
+  </script>
 </body>
 </html>
