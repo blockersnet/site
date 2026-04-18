@@ -65,6 +65,7 @@
       --catbar-bg:        #000b26;
       --hero-grad-rgb:    0,7,35;
       --btn-active-text:  #ffffff;
+      --footer-end:       #000510;
     }
 
     /* ============================================================
@@ -100,6 +101,7 @@
       --catbar-bg:       #090909;
       --hero-grad-rgb:   0,0,0;
       --btn-active-text: #0d0d0d;
+      --footer-end:      #000000;
     }
 
     /* ── THEME 3: CRIMSON NOIR ─ blood red on deep black ── */
@@ -130,6 +132,7 @@
       --sniper-hover:    #22000b;
       --catbar-bg:       #120006;
       --hero-grad-rgb:   8,0,3;
+      --footer-end:      #040001;
     }
 
     /* ── THEME 4: MATRIX EMERALD ─ terminal green on pure black ── */
@@ -161,6 +164,7 @@
       --catbar-bg:       #001208;
       --hero-grad-rgb:   0,6,2;
       --btn-active-text: #001a08;
+      --footer-end:      #000401;
     }
 
     /* ── THEME 5: SOLAR GOLD ─ molten gold on deep espresso ── */
@@ -192,6 +196,106 @@
       --catbar-bg:       #100d00;
       --hero-grad-rgb:   8,6,0;
       --btn-active-text: #1a1000;
+      --footer-end:      #050400;
+    }
+
+    /* ── THEME 6: NEBULA ─ deep space violet, cosmic & electric ── */
+    [data-theme="nebula"] {
+      --dark-bg:         #07000f;
+      --dark-mid:        #0f0022;
+      --dark-light:      #1d0042;
+      --dark-border:     #420090;
+      --blue-primary:    #bf00ff;
+      --blue-nav:        #0d001e;
+      --blue-light:      #e066ff;
+      --red-badge:       #ff00bb;
+      --white:           #ffffff;
+      --text-muted:      #a060cc;
+      --body-bg:         #090010;
+      --card-bg:         #110020;
+      --card-bg-alt:     #0c0018;
+      --body-text:       #f0d0ff;
+      --card-text:       #f0d0ff;
+      --card-snippet:    #9955bb;
+      --card-time-col:   #6633aa;
+      --art-date-col:    #6633aa;
+      --border-light:    #2d0060;
+      --section-lbl-txt: #cc55ff;
+      --cg-title-col:    #f0d0ff;
+      --art-title-col:   #f0d0ff;
+      --art-read-col:    #6633aa;
+      --sniper-bg:       #0f0022;
+      --sniper-hover:    #1d0042;
+      --catbar-bg:       #0a0018;
+      --hero-grad-rgb:   7,0,15;
+      --btn-active-text: #07000f;
+      --footer-end:      #030007;
+    }
+
+    /* ── THEME 7: INFERNO ─ molten lava, volcanic heat ── */
+    [data-theme="inferno"] {
+      --dark-bg:         #0f0200;
+      --dark-mid:        #1e0600;
+      --dark-light:      #360b00;
+      --dark-border:     #6e1500;
+      --blue-primary:    #ff4500;
+      --blue-nav:        #160300;
+      --blue-light:      #ff8800;
+      --red-badge:       #ff1100;
+      --white:           #ffffff;
+      --text-muted:      #cc5522;
+      --body-bg:         #0f0200;
+      --card-bg:         #1c0500;
+      --card-bg-alt:     #160400;
+      --body-text:       #ffe0c8;
+      --card-text:       #ffe0c8;
+      --card-snippet:    #bb6633;
+      --card-time-col:   #884422;
+      --art-date-col:    #884422;
+      --border-light:    #3d0900;
+      --section-lbl-txt: #ff6622;
+      --cg-title-col:    #ffe0c8;
+      --art-title-col:   #ffe0c8;
+      --art-read-col:    #884422;
+      --sniper-bg:       #1e0600;
+      --sniper-hover:    #360b00;
+      --catbar-bg:       #180400;
+      --hero-grad-rgb:   15,2,0;
+      --btn-active-text: #0f0200;
+      --footer-end:      #060100;
+    }
+
+    /* ── THEME 8: SAKURA NOIR ─ neon pink on pure black, Tokyo nights ── */
+    [data-theme="sakura"] {
+      --dark-bg:         #060009;
+      --dark-mid:        #0e0014;
+      --dark-light:      #1e0028;
+      --dark-border:     #4a0060;
+      --blue-primary:    #ff2d78;
+      --blue-nav:        #0c000f;
+      --blue-light:      #ff80b3;
+      --red-badge:       #ff0055;
+      --white:           #ffffff;
+      --text-muted:      #cc3388;
+      --body-bg:         #08000b;
+      --card-bg:         #110016;
+      --card-bg-alt:     #0d0012;
+      --body-text:       #ffd0e8;
+      --card-text:       #ffd0e8;
+      --card-snippet:    #bb4477;
+      --card-time-col:   #883355;
+      --art-date-col:    #883355;
+      --border-light:    #330044;
+      --section-lbl-txt: #ff4d88;
+      --cg-title-col:    #ffd0e8;
+      --art-title-col:   #ffd0e8;
+      --art-read-col:    #883355;
+      --sniper-bg:       #0e0014;
+      --sniper-hover:    #1e0028;
+      --catbar-bg:       #0c0012;
+      --hero-grad-rgb:   6,0,9;
+      --btn-active-text: #ffffff;
+      --footer-end:      #030005;
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -997,7 +1101,7 @@
        FOOTER — dark, hub colors
     ============================================================ */
     .footer {
-      background: linear-gradient(180deg, var(--dark-mid) 0%, #000510 100%);
+      background: linear-gradient(180deg, var(--dark-mid) 0%, var(--footer-end) 100%);
       color: #fff;
       padding: 50px 16px 32px;
       text-align: center;
@@ -2126,7 +2230,10 @@
       { key: 'void',    name: 'Void Black',       emoji: '⬛' },
       { key: 'crimson', name: 'Crimson Noir',     emoji: '🔴' },
       { key: 'emerald', name: 'Matrix Emerald',   emoji: '🟢' },
-      { key: 'gold',    name: 'Solar Gold',       emoji: '🟡' }
+      { key: 'gold',    name: 'Solar Gold',       emoji: '🟡' },
+      { key: 'nebula',  name: 'Nebula',           emoji: '🟣' },
+      { key: 'inferno', name: 'Inferno',          emoji: '🟠' },
+      { key: 'sakura',  name: 'Sakura Noir',      emoji: '🩷' }
     ];
 
     let currentThemeIdx = 0;
