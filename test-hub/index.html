@@ -2,55 +2,90 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
   <title>Mnyilinga HUB</title>
-  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700;800&family=Barlow+Condensed:wght@600;700;800&display=swap" rel="stylesheet"/>
+
+  <!-- Fonts: Barlow + Barlow Condensed — professional like DW / BBC -->
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=Barlow+Condensed:wght@500;600;700;800&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    /* ============================================================
+       MNYILINGA HUB — FULL PAGE
+       Color palette (Hub brand):
+         --dark-bg:      #000723  (primary dark)
+         --dark-mid:     #000d2e
+         --dark-light:   #001a4d
+         --dark-border:  #002060
+         --blue-primary: #0099d6
+         --blue-nav:     #00aadf
+         --blue-light:   #33c0f0
+         --red-badge:    #e8002a
+         --white:        #ffffff
+         --text-muted:   #a0b4c8
+       Fonts: Barlow (body) + Barlow Condensed (headlines/display)
+    ============================================================ */
 
     :root {
+      --dark-bg:      #000723;
+      --dark-mid:     #000d2e;
+      --dark-light:   #001a4d;
+      --dark-border:  #002060;
       --blue-primary: #0099d6;
-      --blue-nav: #00aadf;
-      --blue-light: #33c0f0;
-      --dark-bg: #000723;
-      --red-badge: #e8002a;
-      --white: #ffffff;
-      --text-muted: #a0b4c8;
+      --blue-nav:     #00aadf;
+      --blue-light:   #33c0f0;
+      --red-badge:    #e8002a;
+      --white:        #ffffff;
+      --text-muted:   #a0b4c8;
+      --gray-100:     #f5f5f5;
+      --gray-200:     #e8e8e8;
+      --gray-400:     #999999;
+      --gray-600:     #555555;
+
+      --font-display:   'Barlow Condensed', sans-serif;
+      --font-body:      'Barlow', sans-serif;
+      --tr: 0.18s ease;
     }
 
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    * { user-select: none; -webkit-user-select: none; }
+
+    html { scroll-behavior: smooth; font-size: 15px; }
+
     body {
-      font-family: 'Barlow', sans-serif;
-      background: var(--dark-bg);
-      color: var(--white);
+      font-family: var(--font-body);
+      background: var(--white);
+      color: #111;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
       max-width: 480px;
       margin: 0 auto;
       min-height: 100vh;
-      overflow-x: hidden;
+      padding-bottom: 64px;
     }
 
-    /* ── NAVBAR ── */
+    img { display: block; max-width: 100%; object-fit: cover; }
+    a { text-decoration: none; color: inherit; }
+    button { cursor: pointer; border: none; background: none; font-family: var(--font-body); }
+    ul { list-style: none; }
+
+
+    /* ============================================================
+       NAVBAR (exact from hub — haibadiliki)
+    ============================================================ */
     .navbar {
       background: var(--blue-nav);
       padding: 14px 16px;
       display: flex;
       align-items: center;
       justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 900;
     }
-    .navbar-logo {
-      display: flex;
-      align-items: center;
-      gap: 0;
-    }
-    .navbar-logo img {
-      height: 38px;
-      width: auto;
-    }
-    .navbar-actions {
-      display: flex;
-      align-items: center;
-      gap: 18px;
-    }
+    .navbar-logo { display: flex; align-items: center; gap: 0; }
+    .navbar-logo img { height: 38px; width: auto; }
+    .navbar-actions { display: flex; align-items: center; gap: 18px; }
     .navbar-actions button {
       background: none;
       border: none;
@@ -62,7 +97,9 @@
     }
     .navbar-actions button:hover { opacity: 0.75; }
 
-    /* ── IN FOCUS BAR ── */
+    /* ============================================================
+       IN FOCUS BAR (exact from hub)
+    ============================================================ */
     .infocus-bar {
       background: #008bbf;
       padding: 10px 16px;
@@ -91,7 +128,9 @@
     }
     .infocus-link:hover { color: #cceeff; }
 
-    /* ── LANGUAGE BANNER ── */
+    /* ============================================================
+       LANGUAGE BANNER (exact from hub)
+    ============================================================ */
     .lang-banner {
       background: #0d1a2e;
       padding: 10px 16px;
@@ -118,19 +157,22 @@
       padding: 7px 14px;
       cursor: pointer;
       white-space: nowrap;
-      font-family: 'Barlow', sans-serif;
+      font-family: var(--font-body);
       transition: border-color 0.2s, background 0.2s;
     }
     .lang-btn:hover { border-color: var(--white); background: rgba(255,255,255,0.08); }
     .lang-btn i { font-size: 15px; }
 
-    /* ── HERO SECTION ── */
+    /* ============================================================
+       HERO (exact from hub — static image)
+    ============================================================ */
     .hero {
       position: relative;
       width: 100%;
       aspect-ratio: 4/3;
       overflow: hidden;
       display: block;
+      cursor: pointer;
     }
     .hero-img {
       width: 100%;
@@ -139,7 +181,6 @@
       object-position: center top;
       display: block;
     }
-    /* Gradient overlay bottom of hero */
     .hero-gradient {
       position: absolute;
       bottom: 0; left: 0; right: 0;
@@ -147,9 +188,9 @@
       background: linear-gradient(
         to bottom,
         transparent 0%,
-        rgba(0, 7, 35, 0.45) 30%,
-        rgba(0, 7, 35, 0.82) 65%,
-        rgba(0, 7, 35, 0.97) 85%,
+        rgba(0,7,35,0.45) 30%,
+        rgba(0,7,35,0.82) 65%,
+        rgba(0,7,35,0.97) 85%,
         #000723 100%
       );
       pointer-events: none;
@@ -160,7 +201,7 @@
       padding: 0 16px 20px;
     }
     .hero-title {
-      font-family: 'Barlow Condensed', sans-serif;
+      font-family: var(--font-display);
       font-size: 28px;
       font-weight: 700;
       line-height: 1.18;
@@ -180,20 +221,17 @@
     }
     .hero-meta span.sep { opacity: 0.5; }
 
-    /* ── CAROUSEL SECTION ── */
+    /* ============================================================
+       CAROUSEL (exact from hub — static slides)
+    ============================================================ */
     .carousel-section {
       background: var(--dark-bg);
       padding: 14px 0 0;
-      position: relative;
     }
-
-    .carousel-track-wrapper {
-      overflow: hidden;
-      position: relative;
-    }
+    .carousel-track-wrapper { overflow: hidden; position: relative; }
     .carousel-track {
       display: flex;
-      transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: transform 0.45s cubic-bezier(0.4,0,0.2,1);
       will-change: transform;
     }
     .carousel-slide {
@@ -204,8 +242,6 @@
       gap: 14px;
       cursor: pointer;
     }
-
-    /* Thumbnail */
     .slide-thumb {
       width: 88px;
       height: 66px;
@@ -214,10 +250,7 @@
       flex-shrink: 0;
       display: block;
     }
-    .slide-body {
-      flex: 1;
-      min-width: 0;
-    }
+    .slide-body { flex: 1; min-width: 0; }
     .badge-new {
       display: inline-block;
       background: var(--red-badge);
@@ -231,13 +264,12 @@
       text-transform: uppercase;
     }
     .slide-title {
-      font-family: 'Barlow Condensed', sans-serif;
+      font-family: var(--font-display);
       font-size: 18px;
       font-weight: 700;
       line-height: 1.22;
       color: var(--white);
       margin-bottom: 7px;
-      letter-spacing: 0.1px;
     }
     .slide-meta {
       font-size: 10.5px;
@@ -246,14 +278,8 @@
       color: rgba(255,255,255,0.55);
       text-transform: uppercase;
     }
-    .slide-arrow {
-      color: rgba(255,255,255,0.45);
-      font-size: 18px;
-      flex-shrink: 0;
-      margin-left: 4px;
-    }
+    .slide-arrow { color: rgba(255,255,255,0.45); font-size: 18px; flex-shrink: 0; margin-left: 4px; }
 
-    /* Carousel Dots */
     .carousel-dots {
       display: flex;
       justify-content: center;
@@ -269,47 +295,721 @@
       cursor: pointer;
       transition: background 0.3s, width 0.3s;
     }
-    .dot.active {
+    .dot.active { background: var(--white); width: 36px; }
+
+    /* ============================================================
+       SECTION DIVIDER STRIP
+    ============================================================ */
+    .section-strip {
+      background: var(--dark-bg);
+      height: 8px;
+      width: 100%;
+    }
+
+    /* ============================================================
+       SECTION LABEL — kama proindex ila blue badala ya yellow
+    ============================================================ */
+    .section-label {
+      font-family: var(--font-display);
+      font-size: 20px;
+      font-weight: 800;
+      text-transform: uppercase;
+      color: var(--dark-bg);
+      border-left: 8px solid var(--blue-primary);
+      padding-left: 14px;
+      letter-spacing: 0.5px;
+      margin-bottom: 20px;
+    }
+    .section-wrap { margin-top: 36px; padding: 0 14px; }
+
+    /* ============================================================
+       CONTENT GRID — 2×2, tiles za articles
+    ============================================================ */
+    .content-grid-wrap {
       background: var(--white);
-      width: 36px;
+      padding: 22px 14px 28px;
+      border-top: 3px solid var(--blue-primary);
+    }
+    .content-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0,1fr));
+      gap: 14px;
+    }
+    .cg-article {
+      display: flex;
+      flex-direction: column;
+      cursor: pointer;
+      text-decoration: none;
+      color: inherit;
+      overflow: hidden;
+    }
+    .img-box {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 3/2;
+      background: var(--gray-200);
+      overflow: hidden;
+      border-radius: 4px;
+    }
+    .img-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+    .cg-article:hover .img-box img { transform: scale(1.04); }
+    .cg-title {
+      font-family: var(--font-body);
+      font-size: 0.82rem;
+      font-weight: 700;
+      line-height: 1.35;
+      margin-top: 8px;
+      color: #111;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
     }
 
-    /* Touch swipe support handled via JS */
-
-    /* ── RESPONSIVE ── */
-    @media (min-width: 481px) {
-      body { max-width: 480px; }
+    /* ============================================================
+       NEWS CARD (top stories / latest news)
+    ============================================================ */
+    .news-card {
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      background: var(--gray-100);
+      transition: box-shadow var(--tr);
+      text-decoration: none;
+      color: inherit;
+      display: block;
     }
+    .news-card:hover { box-shadow: 0 4px 18px rgba(0,0,0,0.12); }
+    .card-img-wrap {
+      aspect-ratio: 3/2;
+      overflow: hidden;
+      background: var(--gray-200);
+    }
+    .card-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+    .news-card:hover .card-img-wrap img { transform: scale(1.03); }
+    .card-body {
+      padding: 12px 14px 14px;
+      background: var(--white);
+    }
+    .card-cat-tag {
+      display: inline-block;
+      background: transparent;
+      color: var(--blue-primary);
+      font-family: var(--font-body);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    .card-headline {
+      font-family: var(--font-display);
+      font-weight: 700;
+      line-height: 1.22;
+      color: var(--dark-bg);
+    }
+    .card-snippet {
+      font-family: var(--font-body);
+      font-size: 0.78rem;
+      color: var(--gray-600);
+      line-height: 1.5;
+      margin-top: 6px;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .card-time {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--gray-400);
+      margin-top: 8px;
+      letter-spacing: 0.03em;
+    }
+
+    /* TOP NEWS GRID */
+    .top-news-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    .top-news-grid .news-card:first-child { grid-column: 1/-1; }
+    .top-news-grid .news-card:first-child .card-headline { font-size: 1.35rem; }
+    .top-news-grid .news-card:not(:first-child) .card-headline { font-size: 1rem; }
+
+    /* MAIN NEWS GRID */
+    .main-news-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    .main-news-grid .news-card .card-headline { font-size: 0.98rem; }
+
+    /* OLD NEWS GRID */
+    .old-news-grid {
+      display: none;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 14px;
+    }
+    .old-news-grid.visible { display: grid; }
+    .old-news-grid .news-card .card-headline { font-size: 0.9rem; }
+
+    /* ============================================================
+       SNIPER BLOCK — full-width dark text tile
+    ============================================================ */
+    .sniper-block {
+      background: var(--dark-bg);
+      color: var(--white);
+      padding: 20px 16px;
+      cursor: pointer;
+      border-left: 4px solid var(--blue-primary);
+      transition: background var(--tr);
+      grid-column: 1/-1;
+      text-decoration: none;
+      display: block;
+    }
+    .sniper-block:hover { background: var(--dark-light); }
+    .sniper-headline {
+      font-family: var(--font-display);
+      font-size: 1.12rem;
+      font-weight: 700;
+      line-height: 1.28;
+      color: var(--white);
+      margin-bottom: 8px;
+    }
+    .sniper-snippet {
+      font-family: var(--font-body);
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      line-height: 1.55;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .sniper-tag {
+      display: inline-block;
+      background: var(--blue-primary);
+      color: #fff;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 2px 7px;
+      border-radius: 2px;
+      margin-bottom: 9px;
+    }
+
+    /* ============================================================
+       ARTICLES WIDGET — list format (kama mn-articles)
+    ============================================================ */
+    .articles-widget {
+      background: #f7f8fa;
+      border-top: 1px solid var(--gray-200);
+      border-bottom: 1px solid var(--gray-200);
+      padding: 18px 0 20px;
+      margin-top: 36px;
+    }
+    .articles-widget-inner { padding: 0 14px; }
+    .articles-widget-title {
+      font-family: var(--font-display);
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--dark-bg);
+      margin-bottom: 14px;
+      letter-spacing: 0.2px;
+      border-left: 6px solid var(--red-badge);
+      padding-left: 12px;
+    }
+    .articles-list { display: flex; flex-direction: column; }
+    .article-item {
+      display: flex;
+      gap: 12px;
+      padding: 13px 0;
+      border-bottom: 1px solid var(--gray-200);
+      text-decoration: none;
+      color: inherit;
+      transition: background 0.15s;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .article-item:last-child { border-bottom: none; }
+    .article-item:hover { background: rgba(0,0,0,0.02); }
+    .article-item.hidden { display: none; }
+    .article-img {
+      width: 110px;
+      aspect-ratio: 3/2;
+      object-fit: cover;
+      border-radius: 3px;
+      flex-shrink: 0;
+      display: block;
+      background: var(--gray-200);
+    }
+    .article-content {
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+      min-width: 0;
+    }
+    .article-meta-top {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 4px;
+    }
+    .art-cat {
+      color: var(--red-badge);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    .art-date { color: #888; font-size: 11px; }
+    .article-title {
+      font-family: var(--font-body);
+      color: #111;
+      font-size: 14px;
+      font-weight: 700;
+      line-height: 1.38;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .article-read {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      margin-top: 7px;
+      color: #999;
+      font-size: 10.5px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .btn-see-more {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      background: var(--dark-bg);
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      padding: 13px 20px;
+      font-family: var(--font-body);
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      margin-top: 14px;
+      cursor: pointer;
+      transition: opacity 0.18s, background 0.18s;
+    }
+    .btn-see-more:hover { background: var(--dark-light); }
+    .btn-see-more i { transition: transform 0.28s; }
+    .btn-see-more.open i { transform: rotate(180deg); }
+
+    /* ============================================================
+       OLD NEWS TOGGLE
+    ============================================================ */
+    #old-news-section {
+      margin-top: 50px;
+      padding: 20px 14px 0;
+      border-top: 1px solid var(--gray-200);
+    }
+    .old-news-toggle {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      padding: 10px 0;
+    }
+    .old-news-toggle .section-label { margin-bottom: 0; }
+    .old-news-chevron {
+      font-size: 0.85rem;
+      color: var(--gray-400);
+      transition: transform var(--tr);
+    }
+    .old-news-chevron.open { transform: rotate(180deg); }
+
+    /* ============================================================
+       BOTTOM NAV — hub color
+    ============================================================ */
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      max-width: 480px;
+      z-index: 950;
+      background: var(--dark-bg);
+      display: flex;
+      align-items: stretch;
+      height: 64px;
+    }
+    .bottom-nav-item {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      color: rgba(255,255,255,0.55);
+      font-family: var(--font-body);
+      font-size: 0.48rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      transition: color 0.2s, background 0.2s;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .bottom-nav-item svg {
+      width: 20px;
+      height: 20px;
+      stroke: rgba(255,255,255,0.55);
+      fill: none;
+      transition: stroke 0.2s;
+    }
+    .bottom-nav-item:hover,
+    .bottom-nav-item.active {
+      color: var(--blue-primary);
+    }
+    .bottom-nav-item:hover svg,
+    .bottom-nav-item.active svg {
+      stroke: var(--blue-primary);
+    }
+    .bottom-nav-divider {
+      width: 1px;
+      background: var(--dark-border);
+      align-self: stretch;
+      flex-shrink: 0;
+    }
+
+    /* ============================================================
+       FOOTER — dark, hub colors
+    ============================================================ */
+    .footer {
+      background: linear-gradient(180deg, var(--dark-mid) 0%, #000510 100%);
+      color: #fff;
+      padding: 50px 16px 32px;
+      text-align: center;
+      margin-top: 50px;
+    }
+    .footer-logo-wrap {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 24px;
+    }
+    .footer-logo-wrap img { height: 36px; width: auto; opacity: 0.9; }
+    .footer hr {
+      border: 0;
+      border-top: 1px solid var(--dark-border);
+      margin: 24px auto;
+      max-width: 400px;
+    }
+    .follow-title {
+      font-family: var(--font-display);
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 18px;
+    }
+    .social-icons {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      font-size: 20px;
+      margin-bottom: 36px;
+    }
+    .social-icons a { color: var(--text-muted); transition: 0.25s; }
+    .social-icons a:hover { color: var(--blue-primary); }
+    .download-title {
+      font-family: var(--font-display);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 22px;
+    }
+    .app-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-bottom: 36px;
+    }
+    .app-btn {
+      background: var(--dark-light);
+      border: 1px solid var(--dark-border);
+      color: #fff;
+      padding: 11px 16px;
+      border-radius: 6px;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      font-family: var(--font-body);
+      font-size: 13px;
+      font-weight: 600;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .app-btn:hover { background: var(--dark-border); border-color: var(--blue-primary); }
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+    .footer-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--blue-light); }
+    .copyright {
+      color: rgba(160,180,200,0.5);
+      font-size: 11.5px;
+      line-height: 1.7;
+    }
+
+    /* ============================================================
+       LOADING SCREEN — hub dark color
+    ============================================================ */
+    #loading-screen {
+      position: fixed;
+      inset: 0;
+      background: var(--dark-bg);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      transition: opacity 0.5s ease, visibility 0.5s ease;
+    }
+    #loading-screen.hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+    .loading-spinner {
+      width: 44px;
+      height: 44px;
+      border: 3px solid rgba(0,153,214,0.25);
+      border-top-color: var(--blue-primary);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .loading-wordmark {
+      margin-top: 22px;
+      font-family: var(--font-display);
+      font-size: 18px;
+      font-weight: 800;
+      letter-spacing: 3px;
+      color: var(--white);
+      text-transform: uppercase;
+    }
+    .loading-wordmark span { color: var(--blue-primary); }
+
+    /* ============================================================
+       NAV DRAWER — hub dark colors
+    ============================================================ */
+    .nav-drawer-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.75);
+      backdrop-filter: blur(2px);
+      z-index: 998;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s, visibility 0.3s;
+    }
+    .nav-drawer-overlay.visible { opacity: 1; visibility: visible; }
+
+    .nav-drawer {
+      position: fixed;
+      top: 0;
+      left: -100vw;
+      width: 100vw;
+      max-width: 480px;
+      height: 100vh;
+      background: var(--dark-mid);
+      z-index: 999;
+      transition: left 0.38s cubic-bezier(0.77,0,0.175,1);
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      scrollbar-width: none;
+    }
+    .nav-drawer::-webkit-scrollbar { display: none; }
+    .nav-drawer.open { left: 0; }
+
+    .nav-drawer-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 18px;
+      height: 58px;
+      border-bottom: 1px solid var(--dark-border);
+      background: var(--dark-bg);
+      flex-shrink: 0;
+    }
+    .nav-drawer-head img { height: 26px; width: auto; }
+    .nav-drawer-close {
+      color: var(--text-muted);
+      font-size: 1.15rem;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 6px;
+      transition: color var(--tr);
+    }
+    .nav-drawer-close:hover { color: var(--white); }
+
+    .nav-drawer-search-wrap {
+      padding: 14px 16px 10px;
+      border-bottom: 1px solid var(--dark-border);
+      flex-shrink: 0;
+    }
+    .nav-drawer-search-box {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--dark-light);
+      border: 1px solid var(--dark-border);
+      border-radius: 8px;
+      padding: 9px 14px;
+    }
+    .nav-drawer-search-box svg {
+      width: 15px; height: 15px;
+      stroke: var(--text-muted);
+      fill: none;
+    }
+    .nav-drawer-search-input {
+      background: none;
+      border: none;
+      outline: none;
+      color: var(--white);
+      font-family: var(--font-body);
+      font-size: 0.82rem;
+      width: 100%;
+    }
+    .nav-drawer-search-input::placeholder { color: rgba(160,180,200,0.5); }
+
+    .nav-drawer-body { padding: 10px 0 24px; flex: 1; }
+
+    .nav-drawer-section-label {
+      font-family: var(--font-body);
+      font-size: 0.56rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--blue-primary);
+      padding: 18px 20px 6px;
+    }
+    .nav-drawer-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 11px 20px;
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--text-muted);
+      border-left: 3px solid transparent;
+      transition: color var(--tr), border-color var(--tr), background var(--tr);
+      text-decoration: none;
+    }
+    .nav-drawer-item:hover {
+      color: var(--blue-light);
+      border-left-color: var(--blue-primary);
+      background: rgba(0,153,214,0.06);
+    }
+    .nav-drawer-item i { width: 18px; text-align: center; flex-shrink: 0; }
+    .nav-drawer-divider { height: 1px; background: var(--dark-border); margin: 10px 0; }
+    .nav-drawer-footer {
+      padding: 16px 20px;
+      border-top: 1px solid var(--dark-border);
+      display: flex;
+      gap: 20px;
+    }
+    .nav-drawer-social {
+      color: var(--text-muted);
+      font-size: 1rem;
+      transition: color var(--tr);
+    }
+    .nav-drawer-social:hover { color: var(--blue-primary); }
+
+    /* ============================================================
+       RESPONSIVE
+    ============================================================ */
     @media (max-width: 360px) {
       .hero-title { font-size: 24px; }
       .slide-title { font-size: 16px; }
       .slide-thumb { width: 74px; height: 55px; }
+      .article-img { width: 88px; }
+      .article-title { font-size: 13px; }
     }
   </style>
 </head>
 <body>
 
-  <!-- ── NAVBAR ── -->
+  <!-- LOADING SCREEN -->
+  <div id="loading-screen">
+    <div class="loading-spinner"></div>
+    <div class="loading-wordmark">MNYILINGA <span>HUB</span></div>
+  </div>
+
+  <!-- ── NAVBAR (exact from hub) ── -->
   <nav class="navbar">
     <div class="navbar-logo">
-      <img src="https://cdn.mnyilinga.co.tz/HUB-WHITE-01.svg" alt="Mnyilinga HUB Logo"
-           onerror="this.onerror=null;this.src='';this.parentElement.innerHTML='<span style=\'font-size:20px;font-weight:800;letter-spacing:1px;color:#fff\'>✦ MNYILINGA <span style=\'font-weight:400\'>HUB</span></span>'"/>
+      <img
+        src="https://cdn.mnyilinga.co.tz/HUB-WHITE-01.svg"
+        alt="Mnyilinga HUB"
+        onerror="this.onerror=null;this.src='';this.parentElement.innerHTML='<span style=\'font-family:var(--font-display);font-size:20px;font-weight:800;letter-spacing:1px;color:#fff\'>✦ MNYILINGA <span style=\'font-weight:400\'>HUB</span></span>'"
+      />
     </div>
     <div class="navbar-actions">
-      <button aria-label="Search"><i class="fa-solid fa-magnifying-glass"></i></button>
-      <button aria-label="Menu"><i class="fa-solid fa-bars"></i></button>
+      <button aria-label="Search" onclick="alert('Search')"><i class="fa-solid fa-magnifying-glass"></i></button>
+      <button aria-label="Menu" onclick="toggleDrawer()"><i class="fa-solid fa-bars"></i></button>
     </div>
   </nav>
 
-  <!-- ── IN FOCUS BAR ── -->
+  <!-- ── IN FOCUS BAR (exact from hub) ── -->
   <div class="infocus-bar">
     <span class="infocus-label">In Focus</span>
     <a href="#" class="infocus-link">Iran</a>
     <a href="#" class="infocus-link">Ukraine</a>
     <a href="#" class="infocus-link">Hungary</a>
+    <a href="#" class="infocus-link">Gaza</a>
+    <a href="#" class="infocus-link">Sudan</a>
   </div>
 
-  <!-- ── LANGUAGE BANNER ── -->
+  <!-- ── LANGUAGE BANNER (exact from hub) ── -->
   <div class="lang-banner">
     <span>We have chosen English for you.</span>
     <button class="lang-btn">
@@ -318,12 +1018,12 @@
     </button>
   </div>
 
-  <!-- ── HERO SECTION ── -->
+  <!-- ── HERO (exact from hub, hardcoded image) ── -->
   <section class="hero">
     <img
       class="hero-img"
       src="https://images.unsplash.com/photo-1578575437130-527eed3abbec?w=900&q=80&fit=crop"
-      alt="Shipping in Strait of Hormuz"
+      alt="Europe secures shipping lanes"
     />
     <div class="hero-gradient"></div>
     <div class="hero-content">
@@ -336,7 +1036,7 @@
     </div>
   </section>
 
-  <!-- ── CAROUSEL SECTION ── -->
+  <!-- ── CAROUSEL (exact from hub, hardcoded) ── -->
   <div class="carousel-section">
     <div class="carousel-track-wrapper" id="carouselWrapper">
       <div class="carousel-track" id="carouselTrack">
@@ -346,7 +1046,7 @@
           <img
             class="slide-thumb"
             src="https://images.unsplash.com/photo-1589793907316-f94025b46850?w=200&q=75&fit=crop"
-            alt="Strait of Hormuz"
+            alt="Iran closes strait"
           />
           <div class="slide-body">
             <span class="badge-new">New</span>
@@ -361,7 +1061,7 @@
           <img
             class="slide-thumb"
             src="https://images.unsplash.com/photo-1527192491265-7e15c55b1ed2?w=200&q=75&fit=crop"
-            alt="Ukraine conflict"
+            alt="Ukraine ceasefire"
           />
           <div class="slide-body">
             <span class="badge-new">New</span>
@@ -376,7 +1076,7 @@
           <img
             class="slide-thumb"
             src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=200&q=75&fit=crop"
-            alt="Hungary politics"
+            alt="Hungary EU veto"
           />
           <div class="slide-body">
             <span class="badge-new">New</span>
@@ -387,7 +1087,7 @@
         </div>
 
       </div><!-- /carousel-track -->
-    </div><!-- /carousel-track-wrapper -->
+    </div>
 
     <!-- Dots -->
     <div class="carousel-dots" id="carouselDots">
@@ -397,12 +1097,509 @@
     </div>
   </div>
 
+  <!-- ── DARK STRIP DIVIDER ── -->
+  <div class="section-strip"></div>
+
+
+  <!-- ============================================================
+       CONTENT GRID — 2×2 tiles (hardcoded)
+  ============================================================ -->
+  <div class="content-grid-wrap">
+    <div class="section-label">Editor's Pick</div>
+    <div class="content-grid">
+
+      <a class="cg-article" href="#">
+        <div class="img-box">
+          <img src="https://images.unsplash.com/photo-1559526324-4b87b5e36e44?w=600&h=400&q=80&fit=crop" alt="Economy">
+        </div>
+        <div class="cg-title">Global markets react as central banks signal rate pause through 2026</div>
+      </a>
+
+      <a class="cg-article" href="#">
+        <div class="img-box">
+          <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=600&h=400&q=80&fit=crop" alt="Health">
+        </div>
+        <div class="cg-title">WHO approves new malaria vaccine for sub-Saharan distribution</div>
+      </a>
+
+      <a class="cg-article" href="#">
+        <div class="img-box">
+          <img src="https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=600&h=400&q=80&fit=crop" alt="Tech">
+        </div>
+        <div class="cg-title">Africa's AI adoption doubles as continent leaps over legacy infrastructure</div>
+      </a>
+
+      <a class="cg-article" href="#">
+        <div class="img-box">
+          <img src="https://images.unsplash.com/photo-1461354464878-ad92f492a5a0?w=600&h=400&q=80&fit=crop" alt="Protest">
+        </div>
+        <div class="cg-title">Mass protests in West Africa demand accountability on climate reparations</div>
+      </a>
+
+    </div>
+  </div>
+
+
+  <!-- ============================================================
+       TOP STORIES — Habari Kuu
+  ============================================================ -->
+  <div class="section-wrap">
+    <div class="section-label">Top Stories</div>
+    <div class="top-news-grid">
+
+      <!-- Featured card — full width -->
+      <a class="news-card" href="#">
+        <div class="card-img-wrap">
+          <img src="https://images.unsplash.com/photo-1580060839134-75a5edca2e99?w=1200&h=800&q=80&fit=crop" alt="Military">
+        </div>
+        <div class="card-body">
+          <div class="card-cat-tag">World</div>
+          <div class="card-headline">NATO allies commit record defence spending after summit in Brussels</div>
+          <div class="card-snippet">The alliance agreed on a new baseline of 3% of GDP for defence budgets, up from 2%, amid growing pressure from Washington.</div>
+          <div class="card-time">3 hours ago</div>
+        </div>
+      </a>
+
+      <!-- Card 2 -->
+      <a class="news-card" href="#">
+        <div class="card-img-wrap">
+          <img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=600&h=400&q=80&fit=crop" alt="Politics">
+        </div>
+        <div class="card-body">
+          <div class="card-cat-tag">Politics</div>
+          <div class="card-headline">Elections in four African nations set for the same weekend in November</div>
+          <div class="card-time">5 hours ago</div>
+        </div>
+      </a>
+
+      <!-- Card 3 -->
+      <a class="news-card" href="#">
+        <div class="card-img-wrap">
+          <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=600&h=400&q=80&fit=crop" alt="Economy">
+        </div>
+        <div class="card-body">
+          <div class="card-cat-tag">Economy</div>
+          <div class="card-headline">IMF upgrades East Africa growth forecast on infrastructure boom</div>
+          <div class="card-time">6 hours ago</div>
+        </div>
+      </a>
+
+      <!-- Sniper block — full width dark tile -->
+      <a class="sniper-block" href="#">
+        <span class="sniper-tag">Breaking</span>
+        <div class="sniper-headline">G7 leaders agree on new framework for AI governance and digital trade rules</div>
+        <div class="sniper-snippet">In a joint statement released after two days of closed-door sessions, the group outlined binding commitments on cross-border data flows, algorithmic transparency, and liability for AI-generated content.</div>
+      </a>
+
+    </div>
+  </div>
+
+
+  <!-- ============================================================
+       ARTICLES WIDGET — list style
+  ============================================================ -->
+  <div class="articles-widget">
+    <div class="articles-widget-inner">
+      <div class="articles-widget-title">More From Mnyilinga</div>
+      <div class="articles-list">
+
+        <a class="article-item" href="#">
+          <img class="article-img" src="https://images.unsplash.com/photo-1595435934249-5df7ed86e1c0?w=330&h=220&q=80&fit=crop" alt="">
+          <div class="article-content">
+            <div class="article-meta-top">
+              <span class="art-cat">Environment</span>
+              <span class="art-date">Apr 16</span>
+            </div>
+            <div class="article-title">Dar es Salaam port expansion threatens mangrove ecosystem, scientists warn</div>
+            <div class="article-read">Read more <i class="fa-solid fa-arrow-right fa-xs"></i></div>
+          </div>
+        </a>
+
+        <a class="article-item" href="#">
+          <img class="article-img" src="https://images.unsplash.com/photo-1468339882297-c555af3e3f7e?w=330&h=220&q=80&fit=crop" alt="">
+          <div class="article-content">
+            <div class="article-meta-top">
+              <span class="art-cat">Culture</span>
+              <span class="art-date">Apr 15</span>
+            </div>
+            <div class="article-title">Tanzania's bongo flava goes global as streaming numbers hit 500 million plays</div>
+            <div class="article-read">Read more <i class="fa-solid fa-arrow-right fa-xs"></i></div>
+          </div>
+        </a>
+
+        <a class="article-item" href="#">
+          <img class="article-img" src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=330&h=220&q=80&fit=crop" alt="">
+          <div class="article-content">
+            <div class="article-meta-top">
+              <span class="art-cat">Education</span>
+              <span class="art-date">Apr 14</span>
+            </div>
+            <div class="article-title">East African universities launch joint STEM programme to tackle youth unemployment</div>
+            <div class="article-read">Read more <i class="fa-solid fa-arrow-right fa-xs"></i></div>
+          </div>
+        </a>
+
+        <!-- Hidden items — toggled by button -->
+        <a class="article-item hidden" href="#">
+          <img class="article-img" src="https://images.unsplash.com/photo-1613042631858-ceaebcdf1a94?w=330&h=220&q=80&fit=crop" alt="">
+          <div class="article-content">
+            <div class="article-meta-top">
+              <span class="art-cat">Economy</span>
+              <span class="art-date">Apr 13</span>
+            </div>
+            <div class="article-title">Shilling strengthens against dollar following central bank intervention</div>
+            <div class="article-read">Read more <i class="fa-solid fa-arrow-right fa-xs"></i></div>
+          </div>
+        </a>
+
+        <a class="article-item hidden" href="#">
+          <img class="article-img" src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=330&h=220&q=80&fit=crop" alt="">
+          <div class="article-content">
+            <div class="article-meta-top">
+              <span class="art-cat">Health</span>
+              <span class="art-date">Apr 12</span>
+            </div>
+            <div class="article-title">New maternal health clinics to be built across rural Tanzania by 2027</div>
+            <div class="article-read">Read more <i class="fa-solid fa-arrow-right fa-xs"></i></div>
+          </div>
+        </a>
+
+        <a class="article-item hidden" href="#">
+          <img class="article-img" src="https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=330&h=220&q=80&fit=crop" alt="">
+          <div class="article-content">
+            <div class="article-meta-top">
+              <span class="art-cat">Tech</span>
+              <span class="art-date">Apr 11</span>
+            </div>
+            <div class="article-title">Zanzibar launches digital ID pilot covering 200,000 residents on the islands</div>
+            <div class="article-read">Read more <i class="fa-solid fa-arrow-right fa-xs"></i></div>
+          </div>
+        </a>
+
+      </div><!-- /articles-list -->
+
+      <button class="btn-see-more" id="btnSeeMore" onclick="toggleArticles()">
+        <span id="btnSeeMoreLabel">See More Articles</span>
+        <i class="fa-solid fa-chevron-down"></i>
+      </button>
+    </div>
+  </div>
+
+
+  <!-- ============================================================
+       LATEST NEWS — Habari Za Hivi Karibuni
+  ============================================================ -->
+  <div class="section-wrap" style="padding-bottom: 20px;">
+    <div class="section-label">Latest News</div>
+    <div class="main-news-grid">
+
+      <a class="news-card" href="#">
+        <div class="card-img-wrap">
+          <img src="https://images.unsplash.com/photo-1527192491265-7e15c55b1ed2?w=600&h=400&q=80&fit=crop" alt="Conflict">
+        </div>
+        <div class="card-body">
+          <div class="card-cat-tag">World</div>
+          <div class="card-headline">Sudan aid corridors reopened after six-week blockade by RSF</div>
+          <div class="card-time">1 hour ago</div>
+        </div>
+      </a>
+
+      <a class="news-card" href="#">
+        <div class="card-img-wrap">
+          <img src="https://images.unsplash.com/photo-1559526324-4b87b5e36e44?w=600&h=400&q=80&fit=crop" alt="Finance">
+        </div>
+        <div class="card-body">
+          <div class="card-cat-tag">Finance</div>
+          <div class="card-headline">Kenya raises bond to finance ambitious railway corridor project</div>
+          <div class="card-time">2 hours ago</div>
+        </div>
+      </a>
+
+      <!-- Sniper block -->
+      <a class="sniper-block" href="#">
+        <span class="sniper-tag">Analysis</span>
+        <div class="sniper-headline">Why the EAC's push for a common currency keeps stalling — and what it would take to succeed</div>
+        <div class="sniper-snippet">Despite decades of negotiations, the East African Community's monetary union remains a distant goal. Economists and policymakers break down the political and structural obstacles that continue to block progress.</div>
+      </a>
+
+      <a class="news-card" href="#">
+        <div class="card-img-wrap">
+          <img src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=600&h=400&q=80&fit=crop" alt="Diplomacy">
+        </div>
+        <div class="card-body">
+          <div class="card-cat-tag">Diplomacy</div>
+          <div class="card-headline">Tanzania and China sign agreement on deep-sea research partnership</div>
+          <div class="card-time">3 hours ago</div>
+        </div>
+      </a>
+
+      <a class="news-card" href="#">
+        <div class="card-img-wrap">
+          <img src="https://images.unsplash.com/photo-1461354464878-ad92f492a5a0?w=600&h=400&q=80&fit=crop" alt="Society">
+        </div>
+        <div class="card-body">
+          <div class="card-cat-tag">Society</div>
+          <div class="card-headline">Youth-led climate march draws 40,000 in Nairobi calling for faster action</div>
+          <div class="card-time">4 hours ago</div>
+        </div>
+      </a>
+
+      <a class="news-card" href="#">
+        <div class="card-img-wrap">
+          <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=600&h=400&q=80&fit=crop" alt="Health">
+        </div>
+        <div class="card-body">
+          <div class="card-cat-tag">Health</div>
+          <div class="card-headline">Mpox outbreak contained in DRC border regions after rapid WHO response</div>
+          <div class="card-time">5 hours ago</div>
+        </div>
+      </a>
+
+    </div>
+  </div>
+
+
+  <!-- ============================================================
+       OLD NEWS — Habari za Zamani (collapsed by default)
+  ============================================================ -->
+  <div id="old-news-section">
+    <div class="old-news-toggle" onclick="toggleOldNews()">
+      <div class="section-label" style="margin-bottom:0">Older Stories</div>
+      <span class="old-news-chevron" id="old-news-chevron">&#x25BC;</span>
+    </div>
+    <div class="old-news-grid" id="old-news-grid">
+
+      <a class="news-card" href="#">
+        <div class="card-img-wrap">
+          <img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=600&h=400&q=80&fit=crop" alt="Politics">
+        </div>
+        <div class="card-body">
+          <div class="card-cat-tag">Politics</div>
+          <div class="card-headline">African Union proposes joint border force for the Sahel region</div>
+          <div class="card-time">2 days ago</div>
+        </div>
+      </a>
+
+      <a class="news-card" href="#">
+        <div class="card-img-wrap">
+          <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=600&h=400&q=80&fit=crop" alt="Business">
+        </div>
+        <div class="card-body">
+          <div class="card-cat-tag">Business</div>
+          <div class="card-headline">Rwandan fintech unicorn expands into six new markets across Africa</div>
+          <div class="card-time">3 days ago</div>
+        </div>
+      </a>
+
+      <a class="news-card" href="#">
+        <div class="card-img-wrap">
+          <img src="https://images.unsplash.com/photo-1595435934249-5df7ed86e1c0?w=600&h=400&q=80&fit=crop" alt="Ocean">
+        </div>
+        <div class="card-body">
+          <div class="card-cat-tag">Environment</div>
+          <div class="card-headline">Indian Ocean warming accelerates as scientists record hottest sea surface temps</div>
+          <div class="card-time">4 days ago</div>
+        </div>
+      </a>
+
+      <a class="news-card" href="#">
+        <div class="card-img-wrap">
+          <img src="https://images.unsplash.com/photo-1468339882297-c555af3e3f7e?w=600&h=400&q=80&fit=crop" alt="Africa">
+        </div>
+        <div class="card-body">
+          <div class="card-cat-tag">Culture</div>
+          <div class="card-headline">Swahili declared official language of instruction in Tanzania's secondary schools</div>
+          <div class="card-time">5 days ago</div>
+        </div>
+      </a>
+
+    </div>
+  </div><!-- /#old-news-section -->
+
+
+  <!-- ============================================================
+       FOOTER
+  ============================================================ -->
+  <footer class="footer">
+    <div class="footer-logo-wrap">
+      <img
+        src="https://cdn.mnyilinga.co.tz/HUB-WHITE-01.svg"
+        alt="Mnyilinga HUB"
+        onerror="this.onerror=null;this.src='';this.parentElement.innerHTML='<span style=\'font-family:var(--font-display);font-size:22px;font-weight:800;letter-spacing:2px;color:#fff\'>MNYILINGA HUB</span>'"
+      />
+    </div>
+
+    <hr />
+
+    <div class="follow-title">Follow Mnyilinga</div>
+    <div class="social-icons">
+      <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+      <a href="#" aria-label="X"><i class="fab fa-x-twitter"></i></a>
+      <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+      <a href="#" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+      <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+      <a href="#" aria-label="Threads"><i class="fab fa-threads"></i></a>
+    </div>
+
+    <div class="download-title">Download the App</div>
+    <div class="app-buttons">
+      <a href="#" class="app-btn"><i class="fab fa-apple"></i> App Store</a>
+      <a href="#" class="app-btn"><i class="fab fa-google-play"></i> Google Play</a>
+    </div>
+
+    <hr />
+
+    <div class="footer-links">
+      <a href="#">Terms of Use</a>
+      <a href="#">Privacy Policy</a>
+      <a href="#">Manage Cookies</a>
+      <a href="#">Ad Choices</a>
+      <a href="#">Accessibility</a>
+      <a href="#">About</a>
+      <a href="#">Newsletters</a>
+      <a href="#">Transcripts</a>
+    </div>
+
+    <div class="copyright">
+      <p>&copy; 2026 Mnyilinga Digital. All Rights Reserved.</p>
+      <p>Mnyilinga&trade; Technology &amp; Digital Platforms</p>
+    </div>
+  </footer>
+
+
+  <!-- ============================================================
+       BOTTOM NAV
+  ============================================================ -->
+  <nav class="bottom-nav">
+    <button class="bottom-nav-item active" id="bn-home">
+      <svg viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M3 10.5L12 3l9 7.5"/>
+        <path d="M5 8.5V20a1 1 0 0 0 1 1h4v-5h4v5h4a1 1 0 0 0 1-1V8.5"/>
+      </svg>
+      Home
+    </button>
+
+    <div class="bottom-nav-divider"></div>
+
+    <button class="bottom-nav-item" id="bn-hot">
+      <svg viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.07-2.14-.22-4.05 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.15.43-2.29 1-3a2.5 2.5 0 0 0 2.5 2.5z"/>
+      </svg>
+      Hot
+    </button>
+
+    <div class="bottom-nav-divider"></div>
+
+    <button class="bottom-nav-item" id="bn-books">
+      <svg viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+        <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+        <line x1="8.5" y1="7" x2="15.5" y2="7"/>
+        <line x1="8.5" y1="11" x2="15.5" y2="11"/>
+        <line x1="8.5" y1="15" x2="12.5" y2="15"/>
+      </svg>
+      Books
+    </button>
+
+    <div class="bottom-nav-divider"></div>
+
+    <button class="bottom-nav-item" id="bn-saved">
+      <svg viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M17 3H7a2 2 0 0 0-2 2v16l7-3 7 3V5a2 2 0 0 0-2-2z"/>
+        <polyline points="9,11 11,13 15,9"/>
+      </svg>
+      Saved
+    </button>
+  </nav>
+
+
+  <!-- ============================================================
+       NAV DRAWER OVERLAY
+  ============================================================ -->
+  <div class="nav-drawer-overlay" id="nav-drawer-overlay" onclick="closeDrawer()"></div>
+
+  <!-- ============================================================
+       NAV DRAWER
+  ============================================================ -->
+  <nav class="nav-drawer" id="nav-drawer" aria-label="Main Menu">
+    <div class="nav-drawer-head">
+      <img
+        src="https://cdn.mnyilinga.co.tz/HUB-WHITE-01.svg"
+        alt="Mnyilinga HUB"
+        onerror="this.onerror=null;this.src='';this.parentElement.innerHTML='<span style=\'font-family:var(--font-display);font-size:16px;font-weight:800;color:#fff\'>MNYILINGA HUB</span>'"
+      />
+      <button class="nav-drawer-close" onclick="closeDrawer()" aria-label="Close menu">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+
+    <!-- Search inside drawer -->
+    <div class="nav-drawer-search-wrap">
+      <div class="nav-drawer-search-box">
+        <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"/>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+        </svg>
+        <input
+          type="text"
+          class="nav-drawer-search-input"
+          placeholder="Search stories..."
+          autocomplete="off"
+        />
+      </div>
+    </div>
+
+    <div class="nav-drawer-body">
+      <div class="nav-drawer-section-label">Main Pages</div>
+      <a href="#" class="nav-drawer-item"><i class="fa fa-house"></i> Home</a>
+      <a href="#" class="nav-drawer-item"><i class="fa fa-newspaper"></i> All Stories</a>
+      <a href="#" class="nav-drawer-item"><i class="fa fa-fire"></i> Trending</a>
+      <a href="#" class="nav-drawer-item"><i class="fa fa-video"></i> Video</a>
+
+      <div class="nav-drawer-divider"></div>
+      <div class="nav-drawer-section-label">Categories</div>
+      <a href="#" class="nav-drawer-item"><i class="fa fa-globe"></i> World</a>
+      <a href="#" class="nav-drawer-item"><i class="fa fa-landmark"></i> Politics</a>
+      <a href="#" class="nav-drawer-item"><i class="fa fa-chart-line"></i> Economy</a>
+      <a href="#" class="nav-drawer-item"><i class="fa fa-futbol"></i> Sports</a>
+      <a href="#" class="nav-drawer-item"><i class="fa fa-microchip"></i> Technology</a>
+      <a href="#" class="nav-drawer-item"><i class="fa fa-heart-pulse"></i> Health</a>
+      <a href="#" class="nav-drawer-item"><i class="fa fa-masks-theater"></i> Culture</a>
+
+      <div class="nav-drawer-divider"></div>
+      <div class="nav-drawer-section-label">More</div>
+      <a href="#" class="nav-drawer-item"><i class="fa fa-circle-info"></i> About Us</a>
+      <a href="#" class="nav-drawer-item"><i class="fa fa-envelope"></i> Contact</a>
+      <a href="#" class="nav-drawer-item"><i class="fa fa-mobile-screen"></i> Download App</a>
+    </div>
+
+    <div class="nav-drawer-footer">
+      <a href="#" class="nav-drawer-social"><i class="fab fa-facebook-f"></i></a>
+      <a href="#" class="nav-drawer-social"><i class="fab fa-x-twitter"></i></a>
+      <a href="#" class="nav-drawer-social"><i class="fab fa-instagram"></i></a>
+      <a href="#" class="nav-drawer-social"><i class="fab fa-tiktok"></i></a>
+      <a href="#" class="nav-drawer-social"><i class="fab fa-youtube"></i></a>
+    </div>
+  </nav>
+
+
+  <!-- ============================================================
+       SCRIPTS
+  ============================================================ -->
   <script>
+    /* ── LOADING SCREEN ── */
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        document.getElementById('loading-screen').classList.add('hidden');
+      }, 600);
+    });
+
+    /* ── CAROUSEL ── */
     (function () {
-      const track  = document.getElementById('carouselTrack');
-      const dots   = document.querySelectorAll('.dot');
-      const total  = 3;
-      let current  = 0;
+      const track = document.getElementById('carouselTrack');
+      const dots  = document.querySelectorAll('.dot');
+      const total = 3;
+      let current = 0;
       let autoTimer;
 
       function goTo(index) {
@@ -410,28 +1607,16 @@
         track.style.transform = `translateX(-${current * 100}%)`;
         dots.forEach((d, i) => d.classList.toggle('active', i === current));
       }
+      function startAuto() { autoTimer = setInterval(() => goTo(current + 1), 4000); }
+      function resetAuto() { clearInterval(autoTimer); startAuto(); }
 
-      function startAuto() {
-        autoTimer = setInterval(() => goTo(current + 1), 4000);
-      }
-      function resetAuto() {
-        clearInterval(autoTimer);
-        startAuto();
-      }
-
-      /* Dot click */
       dots.forEach(d => {
         d.addEventListener('click', () => { goTo(+d.dataset.index); resetAuto(); });
       });
 
-      /* Touch / swipe */
       let touchX = null;
       const wrapper = document.getElementById('carouselWrapper');
-
-      wrapper.addEventListener('touchstart', e => {
-        touchX = e.touches[0].clientX;
-      }, { passive: true });
-
+      wrapper.addEventListener('touchstart', e => { touchX = e.touches[0].clientX; }, { passive: true });
       wrapper.addEventListener('touchend', e => {
         if (touchX === null) return;
         const dx = e.changedTouches[0].clientX - touchX;
@@ -441,20 +1626,62 @@
         resetAuto();
       }, { passive: true });
 
-      /* Mouse drag fallback for desktop */
-      let mouseX = null;
-      wrapper.addEventListener('mousedown', e => { mouseX = e.clientX; });
-      wrapper.addEventListener('mouseup', e => {
-        if (mouseX === null) return;
-        const dx = e.clientX - mouseX;
-        mouseX = null;
-        if (Math.abs(dx) < 40) return;
-        goTo(dx < 0 ? current + 1 : current - 1);
-        resetAuto();
-      });
-
       startAuto();
     })();
+
+    /* ── DRAWER ── */
+    function toggleDrawer() {
+      const drawer  = document.getElementById('nav-drawer');
+      const overlay = document.getElementById('nav-drawer-overlay');
+      const isOpen  = drawer.classList.contains('open');
+      if (isOpen) { closeDrawer(); }
+      else {
+        drawer.classList.add('open');
+        overlay.classList.add('visible');
+        document.body.style.overflow = 'hidden';
+      }
+    }
+    function closeDrawer() {
+      document.getElementById('nav-drawer').classList.remove('open');
+      document.getElementById('nav-drawer-overlay').classList.remove('visible');
+      document.body.style.overflow = '';
+    }
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDrawer(); });
+
+    /* ── ARTICLES TOGGLE ── */
+    function toggleArticles() {
+      const btn     = document.getElementById('btnSeeMore');
+      const label   = document.getElementById('btnSeeMoreLabel');
+      const hidden  = document.querySelectorAll('.article-item.hidden');
+      const isOpen  = btn.classList.contains('open');
+
+      if (!isOpen) {
+        hidden.forEach(el => el.style.display = 'flex');
+        btn.classList.add('open');
+        label.textContent = 'See Less';
+      } else {
+        hidden.forEach(el => el.style.display = '');
+        btn.classList.remove('open');
+        label.textContent = 'See More Articles';
+      }
+    }
+
+    /* ── OLD NEWS TOGGLE ── */
+    function toggleOldNews() {
+      const grid    = document.getElementById('old-news-grid');
+      const chevron = document.getElementById('old-news-chevron');
+      const open    = grid.classList.toggle('visible');
+      chevron.classList.toggle('open', open);
+    }
+
+    /* ── BOTTOM NAV ── */
+    document.querySelectorAll('.bottom-nav-item').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.bottom-nav-item').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+      });
+    });
   </script>
+
 </body>
 </html>
