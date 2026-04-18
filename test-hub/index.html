@@ -901,20 +901,21 @@
     .nav-drawer {
       position: fixed;
       top: 0;
-      left: -100vw;
+      right: 0;
       width: 100vw;
       max-width: 480px;
       height: 100vh;
       background: var(--dark-mid);
       z-index: 999;
-      transition: left 0.38s cubic-bezier(0.77,0,0.175,1);
+      transform: translateX(100%);
+      transition: transform 0.38s cubic-bezier(0.77,0,0.175,1);
       overflow-y: auto;
       display: flex;
       flex-direction: column;
       scrollbar-width: none;
     }
     .nav-drawer::-webkit-scrollbar { display: none; }
-    .nav-drawer.open { left: 0; }
+    .nav-drawer.open { transform: translateX(0); }
 
     .nav-drawer-head {
       display: flex;
@@ -1051,15 +1052,134 @@
 
   <!-- ── CATEGORY NAV BAR (FIXED) ── -->
   <div class="category-nav-bar-wrap">
-    <nav class="category-nav-bar" aria-label="News categories">
-      <button class="hub-cat-btn active" data-cat="all"><i class="fa-solid fa-grip"></i> All</button>
-      <button class="hub-cat-btn" data-cat="world"><i class="fa-solid fa-globe"></i> World</button>
-      <button class="hub-cat-btn" data-cat="politics"><i class="fa-solid fa-landmark"></i> Politics</button>
-      <button class="hub-cat-btn" data-cat="economy"><i class="fa-solid fa-chart-line"></i> Economy</button>
-      <button class="hub-cat-btn" data-cat="sports"><i class="fa-solid fa-futbol"></i> Sports</button>
-      <button class="hub-cat-btn" data-cat="technology"><i class="fa-solid fa-microchip"></i> Technology</button>
-      <button class="hub-cat-btn" data-cat="health"><i class="fa-solid fa-heart-pulse"></i> Health</button>
-      <button class="hub-cat-btn" data-cat="culture"><i class="fa-solid fa-masks-theater"></i> Culture</button>
+    <nav class="category-nav-bar" aria-label="Aina za habari">
+
+      <!-- ZOTE -->
+      <button class="hub-cat-btn active" data-cat="all">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/>
+          <rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/>
+        </svg>
+        Zote
+      </button>
+
+      <!-- TECHNOLOGY -->
+      <button class="hub-cat-btn" data-cat="technology">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="7" y="7" width="10" height="10" rx="1"/>
+          <path d="M7 9H5M7 12H5M7 15H5M17 9h2M17 12h2M17 15h2M9 7V5M12 7V5M15 7V5M9 17v2M12 17v2M15 17v2"/>
+        </svg>
+        Technology
+      </button>
+
+      <!-- MAPENZI -->
+      <button class="hub-cat-btn" data-cat="mapenzi">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+        </svg>
+        Mapenzi
+      </button>
+
+      <!-- AFYA -->
+      <button class="hub-cat-btn" data-cat="afya">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+        </svg>
+        Afya
+      </button>
+
+      <!-- UCHUMI -->
+      <button class="hub-cat-btn" data-cat="uchumi">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/>
+          <line x1="6" y1="20" x2="6" y2="14"/><line x1="2" y1="20" x2="22" y2="20"/>
+        </svg>
+        Uchumi
+      </button>
+
+      <!-- BURUDANI -->
+      <button class="hub-cat-btn" data-cat="burudani">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"/>
+          <polygon points="10 8 16 12 10 16 10 8"/>
+        </svg>
+        Burudani
+      </button>
+
+      <!-- MICHEZO -->
+      <button class="hub-cat-btn" data-cat="michezo">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/>
+          <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/>
+          <path d="M4 22h16"/>
+          <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/>
+          <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/>
+          <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/>
+        </svg>
+        Michezo
+      </button>
+
+      <!-- SIASA -->
+      <button class="hub-cat-btn" data-cat="siasa">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="3" y1="22" x2="21" y2="22"/>
+          <line x1="6" y1="18" x2="6" y2="11"/><line x1="10" y1="18" x2="10" y2="11"/>
+          <line x1="14" y1="18" x2="14" y2="11"/><line x1="18" y1="18" x2="18" y2="11"/>
+          <polygon points="12 2 20 7 4 7"/>
+        </svg>
+        Siasa
+      </button>
+
+      <!-- ELIMU -->
+      <button class="hub-cat-btn" data-cat="elimu">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+          <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+          <line x1="9" y1="7" x2="15" y2="7"/><line x1="9" y1="11" x2="13" y2="11"/>
+        </svg>
+        Elimu
+      </button>
+
+      <!-- MATUKIO -->
+      <button class="hub-cat-btn" data-cat="matukio">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+          <line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/>
+          <line x1="3" y1="10" x2="21" y2="10"/>
+          <line x1="8" y1="15" x2="10" y2="15"/><line x1="14" y1="15" x2="16" y2="15"/>
+        </svg>
+        Matukio
+      </button>
+
+      <!-- LIFESTYLE -->
+      <button class="hub-cat-btn" data-cat="lifestyle">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="4"/>
+          <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+        </svg>
+        Lifestyle
+      </button>
+
+      <!-- SAYANSI -->
+      <button class="hub-cat-btn" data-cat="sayansi">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="1"/>
+          <path d="M20.2 20.2c2.04-2.03.02-7.36-4.5-11.9-4.54-4.52-9.87-6.54-11.9-4.5-2.04 2.03-.02 7.36 4.5 11.9 4.54 4.52 9.87 6.54 11.9 4.5z"/>
+          <path d="M15.7 15.7c4.52-4.54 6.54-9.87 4.5-11.9-2.03-2.04-7.36-.02-11.9 4.5-4.52 4.54-6.54 9.87-4.5 11.9 2.03 2.04 7.36.02 11.9-4.5z"/>
+        </svg>
+        Sayansi
+      </button>
+
+      <!-- BIASHARA -->
+      <button class="hub-cat-btn" data-cat="biashara">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="7" width="20" height="14" rx="2"/>
+          <path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/>
+          <line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/>
+        </svg>
+        Biashara
+      </button>
+
     </nav>
   </div>
 
