@@ -64,6 +64,7 @@
       --sniper-hover:     var(--dark-light);
       --catbar-bg:        #000b26;
       --hero-grad-rgb:    0,7,35;
+      --btn-active-text:  #ffffff;
     }
 
     /* ============================================================
@@ -98,6 +99,7 @@
       --sniper-hover:    #1a1a1a;
       --catbar-bg:       #090909;
       --hero-grad-rgb:   0,0,0;
+      --btn-active-text: #0d0d0d;
     }
 
     /* ── THEME 3: CRIMSON NOIR ─ blood red on deep black ── */
@@ -158,6 +160,7 @@
       --sniper-hover:    #002010;
       --catbar-bg:       #001208;
       --hero-grad-rgb:   0,6,2;
+      --btn-active-text: #001a08;
     }
 
     /* ── THEME 5: SOLAR GOLD ─ molten gold on deep espresso ── */
@@ -188,6 +191,7 @@
       --sniper-hover:    #221900;
       --catbar-bg:       #100d00;
       --hero-grad-rgb:   8,6,0;
+      --btn-active-text: #1a1000;
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -316,12 +320,11 @@
       transform: translateY(-1px);
     }
     .hub-cat-btn.active {
-      color: var(--dark-bg);
+      color: var(--btn-active-text);
       background: var(--blue-primary);
       border-color: var(--blue-primary);
       font-weight: 800;
       transform: none;
-      box-shadow: 0 0 12px rgba(var(--blue-primary), 0.3);
     }
     .hub-cat-btn.active i { opacity: 1; }
 
@@ -2105,6 +2108,14 @@
     document.querySelectorAll('.bottom-nav-item').forEach(btn => {
       btn.addEventListener('click', () => {
         document.querySelectorAll('.bottom-nav-item').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+      });
+    });
+
+    /* ── CATEGORY NAV BAR ── */
+    document.querySelectorAll('.hub-cat-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.hub-cat-btn').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
       });
     });
