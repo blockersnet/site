@@ -98,35 +98,84 @@
     .navbar-actions button:hover { opacity: 0.75; }
 
     /* ============================================================
-       IN FOCUS BAR (exact from hub)
+       CATEGORY NAV BAR — FIXED PREMIUM PILL STYLE
     ============================================================ */
-    .infocus-bar {
-      background: #008bbf;
-      padding: 10px 16px;
+    :root {
+      --navbar-h: 66px;
+      --catbar-h: 52px;
+    }
+
+    .category-nav-bar-wrap {
+      position: fixed;
+      top: var(--navbar-h);
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      max-width: 480px;
+      z-index: 899;
+      background: #000b26;
+      border-bottom: 1px solid rgba(0,153,214,0.18);
+    }
+    .category-nav-bar-wrap::after {
+      content: '';
+      position: absolute;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      width: 36px;
+      background: linear-gradient(to right, transparent, #000b26);
+      pointer-events: none;
+      z-index: 2;
+    }
+    .category-nav-bar {
       display: flex;
       align-items: center;
-      gap: 20px;
+      gap: 7px;
+      padding: 9px 14px;
       overflow-x: auto;
       scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
     }
-    .infocus-bar::-webkit-scrollbar { display: none; }
-    .infocus-label {
-      font-size: 11px;
+    .category-nav-bar::-webkit-scrollbar { display: none; }
+
+    .hub-cat-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-display);
+      font-size: 0.67rem;
       font-weight: 700;
-      letter-spacing: 1.5px;
-      color: rgba(255,255,255,0.7);
-      white-space: nowrap;
+      letter-spacing: 0.09em;
       text-transform: uppercase;
-    }
-    .infocus-link {
-      font-size: 14px;
-      font-weight: 600;
-      color: var(--white);
-      text-decoration: none;
+      color: rgba(160, 190, 220, 0.75);
+      padding: 6px 12px;
       white-space: nowrap;
-      transition: color 0.2s;
+      border: 1px solid rgba(0,150,210,0.2);
+      border-radius: 5px;
+      background: rgba(0,20,55,0.6);
+      flex-shrink: 0;
+      cursor: pointer;
+      transition: color 0.2s, background 0.2s, border-color 0.2s, box-shadow 0.2s, transform 0.15s;
+      -webkit-tap-highlight-color: transparent;
     }
-    .infocus-link:hover { color: #cceeff; }
+    .hub-cat-btn i {
+      font-size: 0.65rem;
+      opacity: 0.85;
+    }
+    .hub-cat-btn:hover {
+      color: #fff;
+      border-color: rgba(0,170,223,0.5);
+      background: rgba(0,50,90,0.65);
+      transform: translateY(-1px);
+    }
+    .hub-cat-btn.active {
+      color: #fff;
+      background: linear-gradient(135deg, #0084c2 0%, #00aadf 100%);
+      border-color: #00aadf;
+      font-weight: 800;
+      transform: none;
+    }
+    .hub-cat-btn.active i { opacity: 1; }
 
     /* ============================================================
        LANGUAGE BANNER (exact from hub)
@@ -138,6 +187,7 @@
       align-items: center;
       justify-content: space-between;
       gap: 10px;
+      margin-top: 52px; /* height of fixed category bar */
     }
     .lang-banner span {
       font-size: 13px;
@@ -999,14 +1049,18 @@
     </div>
   </nav>
 
-  <!-- ── IN FOCUS BAR (exact from hub) ── -->
-  <div class="infocus-bar">
-    <span class="infocus-label">In Focus</span>
-    <a href="#" class="infocus-link">Iran</a>
-    <a href="#" class="infocus-link">Ukraine</a>
-    <a href="#" class="infocus-link">Hungary</a>
-    <a href="#" class="infocus-link">Gaza</a>
-    <a href="#" class="infocus-link">Sudan</a>
+  <!-- ── CATEGORY NAV BAR (FIXED) ── -->
+  <div class="category-nav-bar-wrap">
+    <nav class="category-nav-bar" aria-label="News categories">
+      <button class="hub-cat-btn active" data-cat="all"><i class="fa-solid fa-grip"></i> All</button>
+      <button class="hub-cat-btn" data-cat="world"><i class="fa-solid fa-globe"></i> World</button>
+      <button class="hub-cat-btn" data-cat="politics"><i class="fa-solid fa-landmark"></i> Politics</button>
+      <button class="hub-cat-btn" data-cat="economy"><i class="fa-solid fa-chart-line"></i> Economy</button>
+      <button class="hub-cat-btn" data-cat="sports"><i class="fa-solid fa-futbol"></i> Sports</button>
+      <button class="hub-cat-btn" data-cat="technology"><i class="fa-solid fa-microchip"></i> Technology</button>
+      <button class="hub-cat-btn" data-cat="health"><i class="fa-solid fa-heart-pulse"></i> Health</button>
+      <button class="hub-cat-btn" data-cat="culture"><i class="fa-solid fa-masks-theater"></i> Culture</button>
+    </nav>
   </div>
 
   <!-- ── LANGUAGE BANNER (exact from hub) ── -->
@@ -1682,6 +1736,14 @@
     document.querySelectorAll('.bottom-nav-item').forEach(btn => {
       btn.addEventListener('click', () => {
         document.querySelectorAll('.bottom-nav-item').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+      });
+    });
+
+    /* ── CATEGORY NAV BAR ── */
+    document.querySelectorAll('.hub-cat-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.hub-cat-btn').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
       });
     });
