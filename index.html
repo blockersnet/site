@@ -7,7 +7,7 @@
   <meta name="description" content="Kijiji cha Mahaba — Pata SMS nzuri za mapenzi, hadithi za kusisimua, na maneno ya moyo. Sehemu ya mnyilinga.co.tz/mahaba-space" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,700&family=Inter:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600;1,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     /* =============================================
        CSS VARIABLES & RESET
@@ -52,7 +52,7 @@
       --border-rose:   rgba(199,35,64,0.40);
 
       /* — Typography — */
-      --font-display:  'Cormorant Garamond', Georgia, serif;
+      --font-display:  'Fira Sans', sans-serif;
       --font-ui:       'Fira Sans', sans-serif;
       --font-body:     'Inter', sans-serif;
 
@@ -1675,12 +1675,18 @@
     }
 
     /* z-stacking */
-    .fixed-nav-wrapper, .hero, .notif-bar, .main-wrapper,
+    .hero, .notif-bar, .main-wrapper,
     .trending-section, .more-sms-section, .footer {
       position: relative;
       z-index: 1;
     }
-    .fixed-nav-wrapper { z-index: 1000; }
+    .fixed-nav-wrapper {
+      position: fixed !important;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+    }
 
     /* Spinner */
     .spinner {
