@@ -15,18 +15,18 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      /* — Crimson Palette (deeper, richer) — */
-      --crimson:       #9B0D24;
-      --crimson-deep:  #780B1C;
-      --crimson-dark:  #4A0710;
-      --crimson-rich:  #B21030;
-      --crimson-mid:   #8A0E22;
-      --rose:          #C72340;
-      --rose-light:    #E03459;
-      --rose-vivid:    #F03D65;
-      --gold:          #E8B44A;
-      --gold-light:    #F5D080;
-      --gold-dim:      #C09030;
+      /* — Deep Burgundy/Maroon Palette — */
+      --crimson:       #8B0000;
+      --crimson-deep:  #5C0010;
+      --crimson-dark:  #1A0008;
+      --crimson-rich:  #A50020;
+      --crimson-mid:   #6E000F;
+      --rose:          #C0002A;
+      --rose-light:    #D4184A;
+      --rose-vivid:    #E8245A;
+      --gold:          #D4A017;
+      --gold-light:    #F0C040;
+      --gold-dim:      #A87810;
 
       /* — Whites & Transparencies — */
       --white:         #FFFFFF;
@@ -46,10 +46,10 @@
       --black-20:      rgba(0,0,0,0.20);
 
       /* — Cards — */
-      --card-bg:       rgba(100,10,25,0.88);
-      --card-hover:    rgba(120,14,32,0.96);
-      --border:        rgba(255,255,255,0.10);
-      --border-rose:   rgba(199,35,64,0.40);
+      --card-bg:       #200008;
+      --card-hover:    #2E000E;
+      --border:        rgba(255,255,255,0.08);
+      --border-rose:   rgba(192,0,42,0.50);
 
       /* — Typography — */
       --font-display:  'Fira Sans', sans-serif;
@@ -72,7 +72,7 @@
 
     body {
       font-family: var(--font-body);
-      background: var(--crimson-dark);
+      background: #120006;
       color: var(--white);
       min-height: 100vh;
       overflow-x: hidden;
@@ -86,7 +86,7 @@
 
     /* Scrollbar */
     ::-webkit-scrollbar { width: 5px; }
-    ::-webkit-scrollbar-track { background: var(--crimson-dark); }
+    ::-webkit-scrollbar-track { background: #120006; }
     ::-webkit-scrollbar-thumb { background: var(--rose); border-radius: 3px; }
 
     /* SVG icon utility */
@@ -108,11 +108,11 @@
        TOP BAR — GLASS MORPHISM
     ============================================= */
     .topbar {
-      background: rgba(74, 7, 16, 0.72);
-      backdrop-filter: blur(28px) saturate(180%);
-      -webkit-backdrop-filter: blur(28px) saturate(180%);
-      border-bottom: 1px solid rgba(255,255,255,0.09);
-      box-shadow: 0 2px 32px rgba(0,0,0,0.35);
+      background: rgba(22, 0, 8, 0.85);
+      backdrop-filter: blur(28px) saturate(200%);
+      -webkit-backdrop-filter: blur(28px) saturate(200%);
+      border-bottom: 1px solid rgba(192,0,42,0.20);
+      box-shadow: 0 2px 40px rgba(0,0,0,0.6);
       height: var(--topbar-h);
       padding: 0 24px;
     }
@@ -273,7 +273,7 @@
 
     .nav-cta-btn {
       background: var(--gold);
-      color: var(--crimson-dark);
+      color: #120006;
       font-family: var(--font-ui);
       font-size: 12px;
       font-weight: 800;
@@ -307,10 +307,10 @@
        SECONDARY NAV (FILTER BAR)
     ============================================= */
     .secondary-nav {
-      background: rgba(90, 8, 20, 0.80);
-      backdrop-filter: blur(20px) saturate(160%);
-      -webkit-backdrop-filter: blur(20px) saturate(160%);
-      border-bottom: 1px solid rgba(255,255,255,0.07);
+      background: rgba(30, 0, 10, 0.90);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      border-bottom: 1px solid rgba(192,0,42,0.15);
       height: var(--secnav-h);
       padding: 0 24px;
     }
@@ -483,17 +483,17 @@
     .hero-img {
       position: absolute;
       inset: 0;
-      background: url('https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=1600&q=85') center/cover no-repeat;
+      background: url('https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=1200&h=800&fit=crop&q=85') center/cover no-repeat;
     }
     .hero-overlay {
       position: absolute;
       inset: 0;
       background: linear-gradient(
         105deg,
-        rgba(74,7,16,0.97) 0%,
-        rgba(74,7,16,0.82) 40%,
-        rgba(74,7,16,0.30) 75%,
-        rgba(74,7,16,0.08) 100%
+        rgba(18,0,6,0.97) 0%,
+        rgba(18,0,6,0.85) 40%,
+        rgba(18,0,6,0.35) 75%,
+        rgba(18,0,6,0.10) 100%
       );
     }
     /* Subtle texture overlay */
@@ -721,7 +721,7 @@
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(0deg, rgba(74,7,16,0.6) 0%, transparent 60%);
+      background: linear-gradient(0deg, rgba(18,0,6,0.82) 0%, rgba(80,0,18,0.18) 55%, transparent 100%);
     }
 
     .card-label {
@@ -813,7 +813,7 @@
     .story-highlight-overlay {
       position: absolute;
       inset: 0;
-      background: linear-gradient(0deg, rgba(74,7,16,0.98) 0%, rgba(74,7,16,0.5) 50%, transparent 100%);
+      background: linear-gradient(0deg, rgba(18,0,6,0.99) 0%, rgba(18,0,6,0.55) 50%, transparent 100%);
     }
 
     .story-highlight-body {
@@ -978,7 +978,7 @@
 
     /* Quick Send Widget */
     .quick-send-widget {
-      background: linear-gradient(135deg, rgba(138,14,34,0.9), rgba(120,11,28,0.9));
+      background: linear-gradient(135deg, rgba(100,0,20,0.95), rgba(50,0,10,0.98));
       border: 1px solid var(--border);
       border-radius: var(--radius-lg);
       padding: 20px;
@@ -1038,7 +1038,7 @@
 
     /* Video / Tips Widget */
     .tips-widget {
-      background: linear-gradient(160deg, rgba(155,13,36,0.5), rgba(74,7,16,0.9));
+      background: linear-gradient(160deg, rgba(155,13,36,0.5), rgba(18,0,6,0.9));
       border: 1px solid var(--border);
       border-radius: var(--radius-lg);
       padding: 18px;
@@ -1130,7 +1130,7 @@
 
     /* Code aesthetic widget */
     .code-widget {
-      background: #180508;
+      background: #0D0003;
       border: 1px solid rgba(199,35,64,0.2);
       border-radius: var(--radius);
       padding: 14px 16px;
@@ -1153,7 +1153,7 @@
     }
 
     .trending-strip {
-      background: linear-gradient(90deg, var(--crimson-deep), var(--crimson-mid), var(--crimson-deep));
+      background: linear-gradient(90deg, #200008, #3D000F, #200008);
       border: 1px solid var(--border);
       border-radius: var(--radius-lg);
       padding: 18px 24px;
@@ -1170,7 +1170,7 @@
       align-items: center;
       gap: 6px;
       background: var(--gold);
-      color: var(--crimson-dark);
+      color: #120006;
       font-family: var(--font-ui);
       font-size: 10px;
       font-weight: 900;
@@ -1181,7 +1181,7 @@
       white-space: nowrap;
       flex-shrink: 0;
     }
-    .trending-label svg { color: var(--crimson-dark); }
+    .trending-label svg { color: #120006; }
 
     .trending-items { display: flex; gap: 14px; overflow-x: auto; flex: 1; }
     .trending-items::-webkit-scrollbar { display: none; }
@@ -1265,7 +1265,7 @@
        FOOTER
     ============================================= */
     .footer {
-      background: var(--crimson-dark);
+      background: #120006;
       border-top: 1px solid var(--border);
       padding: 48px 24px 28px;
     }
@@ -1396,7 +1396,7 @@
     .modal-overlay.open { opacity: 1; pointer-events: all; }
 
     .modal-box {
-      background: linear-gradient(160deg, var(--crimson-mid), var(--crimson-deep));
+      background: linear-gradient(160deg, #3D000F, #200008);
       border: 1px solid rgba(199,35,64,0.25);
       border-radius: var(--radius-xl);
       max-width: 500px;
@@ -1463,7 +1463,7 @@
     .modal-form select:focus { border-color: var(--rose); }
     .modal-form input::placeholder,
     .modal-form textarea::placeholder { color: var(--white-35); }
-    .modal-form select option { background: var(--crimson-dark); }
+    .modal-form select option { background: #120006; }
     .modal-form textarea { height: 100px; }
 
     .modal-submit {
@@ -1526,7 +1526,7 @@
       bottom: 28px;
       left: 50%;
       transform: translateX(-50%) translateY(80px);
-      background: rgba(74,7,16,0.95);
+      background: rgba(18,0,6,0.95);
       backdrop-filter: blur(16px);
       border: 1px solid rgba(199,35,64,0.35);
       color: var(--white);
@@ -1554,7 +1554,7 @@
       position: fixed;
       top: 0; bottom: 0; left: 0;
       width: 280px;
-      background: linear-gradient(160deg, var(--crimson-mid), var(--crimson-dark));
+      background: linear-gradient(160deg, var(--crimson-mid), #120006);
       border-right: 1px solid var(--border);
       z-index: 8000;
       padding: 28px 20px;
@@ -1962,7 +1962,7 @@
       <div class="sms-card" onclick="copyAndToast(this)">
         <div class="sms-card-img">
           <div class="card-label">Popular</div>
-          <img src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=500&q=85" loading="lazy" alt="">
+          <img src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=1200&h=800&fit=crop&q=85" loading="lazy" alt="">
         </div>
         <div class="sms-card-body">
           <p>Nakupenda si kwa sababu ya urembo wako tu, bali kwa roho yako nzuri ambayo inaning'inia na kunivutia kila siku.</p>
@@ -1982,7 +1982,7 @@
       <div class="sms-card" onclick="copyAndToast(this)">
         <div class="sms-card-img">
           <div class="card-label">Hot</div>
-          <img src="https://images.unsplash.com/photo-1529927120092-0b082f3d73b1?w=500&q=85" loading="lazy" alt="">
+          <img src="https://images.unsplash.com/photo-1529927120092-0b082f3d73b1?w=1200&h=800&fit=crop&q=85" loading="lazy" alt="">
         </div>
         <div class="sms-card-body">
           <p>Wewe ni wimbo unaoendelea kuimba moyoni mwangu bila kukoma. Kila pumzi ninayopumua inanukia upendo wako.</p>
@@ -2001,7 +2001,7 @@
 
       <div class="sms-card" onclick="copyAndToast(this)">
         <div class="sms-card-img">
-          <img src="https://images.unsplash.com/photo-1474552226712-ac0f0961a954?w=500&q=85" loading="lazy" alt="">
+          <img src="https://images.unsplash.com/photo-1474552226712-ac0f0961a954?w=1200&h=800&fit=crop&q=85" loading="lazy" alt="">
         </div>
         <div class="sms-card-body">
           <p>Umbali kati yetu hauzuii moyo wangu kukufikia. Ninakupenda kwa nguvu zote za maisha yangu, bila kikomo.</p>
@@ -2020,7 +2020,7 @@
 
       <div class="sms-card" onclick="copyAndToast(this)">
         <div class="sms-card-img">
-          <img src="https://images.unsplash.com/photo-1542596594-649edbc13630?w=500&q=85" loading="lazy" alt="">
+          <img src="https://images.unsplash.com/photo-1542596594-649edbc13630?w=1200&h=800&fit=crop&q=85" loading="lazy" alt="">
         </div>
         <div class="sms-card-body">
           <p>Kila asubuhi ninapoamka, fikira yangu ya kwanza ni wewe. Nakushukuru kwa uwepo wako maishani mwangu.</p>
@@ -2040,7 +2040,7 @@
       <div class="sms-card" onclick="copyAndToast(this)">
         <div class="sms-card-img">
           <div class="card-label">New</div>
-          <img src="https://images.unsplash.com/photo-1515037893149-de7f840978e2?w=500&q=85" loading="lazy" alt="">
+          <img src="https://images.unsplash.com/photo-1515037893149-de7f840978e2?w=1200&h=800&fit=crop&q=85" loading="lazy" alt="">
         </div>
         <div class="sms-card-body">
           <p>Usiku huu, nyota zinakukumbuka kwa upole. Mimi pia ninakukumbuka — kila sekunde, kila pumzi ya usiku.</p>
@@ -2059,7 +2059,7 @@
 
       <div class="sms-card" onclick="copyAndToast(this)">
         <div class="sms-card-img">
-          <img src="https://images.unsplash.com/photo-1532634993-15f421e42ec0?w=500&q=85" loading="lazy" alt="">
+          <img src="https://images.unsplash.com/photo-1532634993-15f421e42ec0?w=1200&h=800&fit=crop&q=85" loading="lazy" alt="">
         </div>
         <div class="sms-card-body">
           <p>Upendo wangu kwako ni kama bahari kubwa — huna mwisho, huna ukingo, na hauzuiiki na nguvu yoyote ulimwenguni.</p>
@@ -2096,7 +2096,7 @@
     <!-- Featured story highlight -->
     <div class="story-highlight" onclick="openStoryModal(1)">
       <div class="story-highlight-img">
-        <img src="https://images.unsplash.com/photo-1521566652839-697aa473761a?w=600&q=85" loading="lazy" alt="">
+        <img src="https://images.unsplash.com/photo-1521566652839-697aa473761a?w=1200&h=800&fit=crop&q=85" loading="lazy" alt="">
       </div>
       <div class="story-highlight-overlay"></div>
       <div class="story-highlight-body">
@@ -2116,7 +2116,7 @@
     <!-- Story small cards -->
     <div class="story-small" onclick="openStoryModal(2)">
       <div class="story-small-img">
-        <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=300&q=85" loading="lazy" alt="">
+        <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=1200&h=800&fit=crop&q=85" loading="lazy" alt="">
       </div>
       <div class="story-small-body">
         <div>
@@ -2136,7 +2136,7 @@
 
     <div class="story-small" onclick="openStoryModal(3)">
       <div class="story-small-img">
-        <img src="https://images.unsplash.com/photo-1501901609772-df0848060b33?w=300&q=85" loading="lazy" alt="">
+        <img src="https://images.unsplash.com/photo-1501901609772-df0848060b33?w=1200&h=800&fit=crop&q=85" loading="lazy" alt="">
       </div>
       <div class="story-small-body">
         <div>
@@ -2156,7 +2156,7 @@
 
     <div class="story-small" onclick="openStoryModal(4)">
       <div class="story-small-img">
-        <img src="https://images.unsplash.com/photo-1504274066651-8d31a536b11a?w=300&q=85" loading="lazy" alt="">
+        <img src="https://images.unsplash.com/photo-1504274066651-8d31a536b11a?w=1200&h=800&fit=crop&q=85" loading="lazy" alt="">
       </div>
       <div class="story-small-body">
         <div>
@@ -2189,7 +2189,7 @@
 
     <div class="right-sms-grid">
       <div class="right-sms-card" onclick="copyAndToast(this)">
-        <div class="right-sms-card-img"><img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=300&q=80" loading="lazy" alt=""></div>
+        <div class="right-sms-card-img"><img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=1200&h=800&fit=crop&q=85" loading="lazy" alt=""></div>
         <div class="right-sms-card-body">
           <p>Upendo wangu ni dhahabu ambayo haichakai wala kubadilika na wakati.</p>
           <div class="right-sms-footer">
@@ -2199,7 +2199,7 @@
         </div>
       </div>
       <div class="right-sms-card" onclick="copyAndToast(this)">
-        <div class="right-sms-card-img"><img src="https://images.unsplash.com/photo-1535530992830-e25d07cfa780?w=300&q=80" loading="lazy" alt=""></div>
+        <div class="right-sms-card-img"><img src="https://images.unsplash.com/photo-1535530992830-e25d07cfa780?w=1200&h=800&fit=crop&q=85" loading="lazy" alt=""></div>
         <div class="right-sms-card-body">
           <p>Wewe peke yako ndiye sababu ya furaha yote ninayoipata maishani.</p>
           <div class="right-sms-footer">
@@ -2209,7 +2209,7 @@
         </div>
       </div>
       <div class="right-sms-card" onclick="copyAndToast(this)">
-        <div class="right-sms-card-img"><img src="https://images.unsplash.com/photo-1502139214982-d0ad755818d8?w=300&q=80" loading="lazy" alt=""></div>
+        <div class="right-sms-card-img"><img src="https://images.unsplash.com/photo-1502139214982-d0ad755818d8?w=1200&h=800&fit=crop&q=85" loading="lazy" alt=""></div>
         <div class="right-sms-card-body">
           <p>Mwanga wa asubuhi hauniamshi kama jinsi tabasamu lako linavyonifanya niamke na furaha.</p>
           <div class="right-sms-footer">
@@ -2219,7 +2219,7 @@
         </div>
       </div>
       <div class="right-sms-card" onclick="copyAndToast(this)">
-        <div class="right-sms-card-img"><img src="https://images.unsplash.com/photo-1525193612562-0ec53b0e5d7c?w=300&q=80" loading="lazy" alt=""></div>
+        <div class="right-sms-card-img"><img src="https://images.unsplash.com/photo-1525193612562-0ec53b0e5d7c?w=1200&h=800&fit=crop&q=85" loading="lazy" alt=""></div>
         <div class="right-sms-card-body">
           <p>Nakukumbuka kila usiku nikiangalia nyota — kila nyota inanikumbusha macho yako yanayong'aa.</p>
           <div class="right-sms-footer">
@@ -2229,7 +2229,7 @@
         </div>
       </div>
       <div class="right-sms-card" onclick="copyAndToast(this)">
-        <div class="right-sms-card-img"><img src="https://images.unsplash.com/photo-1545233038-4d5b75b5f55e?w=300&q=80" loading="lazy" alt=""></div>
+        <div class="right-sms-card-img"><img src="https://images.unsplash.com/photo-1545233038-4d5b75b5f55e?w=1200&h=800&fit=crop&q=85" loading="lazy" alt=""></div>
         <div class="right-sms-card-body">
           <p>Upendo si tu hisia — ni chaguo. Na kila siku ninachagua kukupenda wewe, mpenzi wangu.</p>
           <div class="right-sms-footer">
@@ -2239,7 +2239,7 @@
         </div>
       </div>
       <div class="right-sms-card" onclick="copyAndToast(this)">
-        <div class="right-sms-card-img"><img src="https://images.unsplash.com/photo-1537633552985-df8429e8048b?w=300&q=80" loading="lazy" alt=""></div>
+        <div class="right-sms-card-img"><img src="https://images.unsplash.com/photo-1537633552985-df8429e8048b?w=1200&h=800&fit=crop&q=85" loading="lazy" alt=""></div>
         <div class="right-sms-card-body">
           <p>Upendo wa kweli hauna mwisho. Na upendo wangu kwako utaendelea hadi milele na milele.</p>
           <div class="right-sms-footer">
@@ -2249,7 +2249,7 @@
         </div>
       </div>
       <div class="right-sms-card" onclick="copyAndToast(this)">
-        <div class="right-sms-card-img"><img src="https://images.unsplash.com/photo-1558349699-1451e36cbac2?w=300&q=80" loading="lazy" alt=""></div>
+        <div class="right-sms-card-img"><img src="https://images.unsplash.com/photo-1558349699-1451e36cbac2?w=1200&h=800&fit=crop&q=85" loading="lazy" alt=""></div>
         <div class="right-sms-card-body">
           <p>Upendo wetu ni kama mto — daima ukitiririka, daima ukiendelea, kamwe hauzuiiki na vizuizi.</p>
           <div class="right-sms-footer">
@@ -2259,7 +2259,7 @@
         </div>
       </div>
       <div class="right-sms-card" onclick="copyAndToast(this)">
-        <div class="right-sms-card-img"><img src="https://images.unsplash.com/photo-1611421711676-19a84e9bf0d2?w=300&q=80" loading="lazy" alt=""></div>
+        <div class="right-sms-card-img"><img src="https://images.unsplash.com/photo-1611421711676-19a84e9bf0d2?w=1200&h=800&fit=crop&q=85" loading="lazy" alt=""></div>
         <div class="right-sms-card-body">
           <p>Roho yangu imejaa upendo wako. Hata umbali hauwezi kuzuia moyo wangu kukufikia.</p>
           <div class="right-sms-footer">
@@ -2367,7 +2367,7 @@
     <div class="sms-card" onclick="copyAndToast(this)">
       <div class="sms-card-img">
         <div class="card-label">Most Loved</div>
-        <img src="https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?w=400&q=80" loading="lazy" alt="">
+        <img src="https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?w=1200&h=800&fit=crop&q=85" loading="lazy" alt="">
       </div>
       <div class="sms-card-body">
         <p>Wewe ni ndoto yangu ya kweli iliyokuwa hai. Kila wakati ninaokufikiri, moyo wangu unafurahi bila kikomo.</p>
@@ -2380,7 +2380,7 @@
 
     <div class="sms-card" onclick="copyAndToast(this)">
       <div class="sms-card-img">
-        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&q=80" loading="lazy" alt="">
+        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1200&h=800&fit=crop&q=85" loading="lazy" alt="">
       </div>
       <div class="sms-card-body">
         <p>Nakupenda kwa kila atomi ya mwili wangu. Upendo wangu kwako ni mzizi ambao hauwezi kung'olewa na nguvu yoyote duniani.</p>
@@ -2394,7 +2394,7 @@
     <div class="sms-card" onclick="copyAndToast(this)">
       <div class="sms-card-img">
         <div class="card-label">New</div>
-        <img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=400&q=80" loading="lazy" alt="">
+        <img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=1200&h=800&fit=crop&q=85" loading="lazy" alt="">
       </div>
       <div class="sms-card-body">
         <p>Kipepeo anakupenda ua kwa sababu anajua kuwepo kwake kunalifanya ua kuwa zuri zaidi. Mimi nakupenda vivyo hivyo.</p>
@@ -2407,7 +2407,7 @@
 
     <div class="sms-card" onclick="copyAndToast(this)">
       <div class="sms-card-img">
-        <img src="https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?w=400&q=80" loading="lazy" alt="">
+        <img src="https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?w=1200&h=800&fit=crop&q=85" loading="lazy" alt="">
       </div>
       <div class="sms-card-body">
         <p>Sitakuacha hata siku moja bila kukujulisha jinsi ninavyokupenda. Wewe ni kila kitu kwangu.</p>
@@ -2420,7 +2420,7 @@
 
     <div class="sms-card" onclick="copyAndToast(this)">
       <div class="sms-card-img">
-        <img src="https://images.unsplash.com/photo-1534759926651-39b6af900a8e?w=400&q=80" loading="lazy" alt="">
+        <img src="https://images.unsplash.com/photo-1534759926651-39b6af900a8e?w=1200&h=800&fit=crop&q=85" loading="lazy" alt="">
       </div>
       <div class="sms-card-body">
         <p>Usiku huu naomba nyota zikulinde. Naomba upepo ukuletee salamu zangu za upendo na busu la usiku.</p>
@@ -2433,7 +2433,7 @@
 
     <div class="sms-card" onclick="copyAndToast(this)">
       <div class="sms-card-img">
-        <img src="https://images.unsplash.com/photo-1474552226712-ac0f0961a954?w=400&q=80" loading="lazy" alt="">
+        <img src="https://images.unsplash.com/photo-1474552226712-ac0f0961a954?w=1200&h=800&fit=crop&q=85" loading="lazy" alt="">
       </div>
       <div class="sms-card-body">
         <p>Hata kama dunia nzima ingenikatalia, mimi bado ningekupenda wewe. Upendo wangu una nguvu ya kushinda yote.</p>
@@ -2446,7 +2446,7 @@
 
     <div class="sms-card" onclick="copyAndToast(this)">
       <div class="sms-card-img">
-        <img src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=400&q=80" loading="lazy" alt="">
+        <img src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=1200&h=800&fit=crop&q=85" loading="lazy" alt="">
       </div>
       <div class="sms-card-body">
         <p>Tabasamu lako linalosha giza lolote moyoni mwangu. Nakukumbusha kila sekunde jinsi unavyonifanya niwe mzuri.</p>
@@ -2459,7 +2459,7 @@
 
     <div class="sms-card" onclick="copyAndToast(this)">
       <div class="sms-card-img">
-        <img src="https://images.unsplash.com/photo-1601931935821-5fbe71157695?w=400&q=80" loading="lazy" alt="">
+        <img src="https://images.unsplash.com/photo-1601931935821-5fbe71157695?w=1200&h=800&fit=crop&q=85" loading="lazy" alt="">
       </div>
       <div class="sms-card-body">
         <p>Upendo wangu kwako ni wa kweli kama dhahabu ya safi. Hauzuiiki na umbali wala wakati, ni wa milele.</p>
@@ -2604,7 +2604,7 @@
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
     </button>
     <div class="story-modal-img">
-      <img src="https://images.unsplash.com/photo-1521566652839-697aa473761a?w=640&q=85" alt="">
+      <img src="https://images.unsplash.com/photo-1521566652839-697aa473761a?w=1200&h=800&fit=crop&q=85" alt="">
     </div>
     <div class="story-modal-body">
       <div class="story-tag" style="margin-bottom:12px">
@@ -2843,12 +2843,12 @@
   /* ---- Load More ---- */
   let moreCount = 0;
   const extraSMS = [
-    { img: 'https://images.unsplash.com/photo-1601931935821-5fbe71157695?w=400&q=80', txt: 'Upendo wangu kwako ni wa kweli kama dhahabu ya safi. Hauzuiiki na umbali wala wakati.' },
-    { img: 'https://images.unsplash.com/photo-1542596594-649edbc13630?w=400&q=80', txt: 'Kila asubuhi ninakushukuru kwa uwepo wako. Wewe ni zawadi kubwa ya maisha yangu.' },
-    { img: 'https://images.unsplash.com/photo-1535530992830-e25d07cfa780?w=400&q=80', txt: 'Nakupenda si kwa siku moja, bali kwa siku zote za maisha yangu. Daima na milele.' },
-    { img: 'https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=400&q=80', txt: 'Mwanga wa maisha yangu ni wewe. Bila wewe, dunia yangu ingekuwa giza totoro.' },
-    { img: 'https://images.unsplash.com/photo-1474552226712-ac0f0961a954?w=400&q=80', txt: 'Ukweli wa hali ya mapenzi yetu ni huu: hata vikwazo vikubwa zaidi haviwezi kuzuia mioyo miwili inayopendana.' },
-    { img: 'https://images.unsplash.com/photo-1515037893149-de7f840978e2?w=400&q=80', txt: 'Usiku huu, nakuomba unisamehe kama niliwahi kukuumiza. Nakupenda zaidi ya maneno yanaweza kueleza.' },
+    { img: 'https://images.unsplash.com/photo-1601931935821-5fbe71157695?w=1200&h=800&fit=crop&q=85', txt: 'Upendo wangu kwako ni wa kweli kama dhahabu ya safi. Hauzuiiki na umbali wala wakati.' },
+    { img: 'https://images.unsplash.com/photo-1542596594-649edbc13630?w=1200&h=800&fit=crop&q=85', txt: 'Kila asubuhi ninakushukuru kwa uwepo wako. Wewe ni zawadi kubwa ya maisha yangu.' },
+    { img: 'https://images.unsplash.com/photo-1535530992830-e25d07cfa780?w=1200&h=800&fit=crop&q=85', txt: 'Nakupenda si kwa siku moja, bali kwa siku zote za maisha yangu. Daima na milele.' },
+    { img: 'https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=1200&h=800&fit=crop&q=85', txt: 'Mwanga wa maisha yangu ni wewe. Bila wewe, dunia yangu ingekuwa giza totoro.' },
+    { img: 'https://images.unsplash.com/photo-1474552226712-ac0f0961a954?w=1200&h=800&fit=crop&q=85', txt: 'Ukweli wa hali ya mapenzi yetu ni huu: hata vikwazo vikubwa zaidi haviwezi kuzuia mioyo miwili inayopendana.' },
+    { img: 'https://images.unsplash.com/photo-1515037893149-de7f840978e2?w=1200&h=800&fit=crop&q=85', txt: 'Usiku huu, nakuomba unisamehe kama niliwahi kukuumiza. Nakupenda zaidi ya maneno yanaweza kueleza.' },
   ];
 
   function loadMore() {
