@@ -258,6 +258,10 @@
 
     /* Hamburger */
     .hamburger {
+      position: absolute;
+      right: 24px;
+      top: 50%;
+      transform: translateY(-50%);
       display: none;
       flex-direction: column;
       gap: 5px;
@@ -594,6 +598,53 @@
       color: var(--white-50);
       display: block;
       margin-top: 4px;
+    }
+
+    .book-grid-section {
+      padding: 28px 24px 70px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .book-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+    }
+    .book-item {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .book-img {
+      width: 100%;
+      aspect-ratio: 2 / 3;
+      object-fit: cover;
+      border-radius: 0;
+      box-shadow: 0 24px 60px rgba(0,0,0,0.28);
+    }
+    .book-copy {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .book-copy h4 {
+      margin: 0;
+      font-family: var(--font-display);
+      font-size: 16px;
+      color: var(--white);
+      line-height: 1.25;
+    }
+    .book-copy p {
+      margin: 0;
+      color: var(--white-60);
+      font-size: 13px;
+      line-height: 1.75;
+    }
+    .book-grid-section .section-head {
+      margin-bottom: 22px;
+    }
+    .book-grid-section .see-all svg {
+      margin-left: 6px;
     }
 
     @keyframes fadeUp {
@@ -1098,20 +1149,7 @@
     .tags-cloud { display: flex; flex-wrap: wrap; gap: 6px; }
     .tags-cloud .tag-pill { font-size: 10px; }
 
-    /* Code aesthetic widget */
-    .code-widget {
-      background: #0D0003;
-      border: 1px solid rgba(199,35,64,0.2);
-      border-radius: var(--radius);
-      padding: 14px 16px;
-      font-family: 'Courier New', monospace;
-      font-size: 10px;
-      color: #e0919e;
-      line-height: 1.9;
-    }
-    .code-widget .ct { color: #f4a261; }
-    .code-widget .ca { color: #a8d0e8; }
-    .code-widget .cv { color: #90c882; }
+
 
     /* =============================================
        TRENDING STRIP
@@ -1523,7 +1561,7 @@
     .mobile-nav {
       position: fixed;
       top: 0; bottom: 0; left: 0;
-      width: 280px;
+      width: 100vw;
       background: linear-gradient(160deg, var(--crimson-mid), #120006);
       border-right: 1px solid var(--border);
       z-index: 8000;
@@ -1699,9 +1737,9 @@
       .topbar-search { display: none; }
       .nav-cta-btn { display: none; }
       .breadcrumb { display: none; }
+      .book-grid-section { padding: 20px 18px 70px; }
     }
     @media (max-width: 520px) {
-      .sms-grid { grid-template-columns: 1fr; }
       .sms-grid-4 { grid-template-columns: 1fr; }
       .hero { height: 280px; }
       .hero-sub { display: none; }
@@ -1713,6 +1751,8 @@
       .footer-bottom { flex-direction: column; text-align: center; }
       .trending-section, .more-sms-section { padding: 0 14px 28px; }
       .main-wrapper { padding: 16px 14px; }
+      .book-grid-section .section-head { gap: 12px; }
+      .book-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     }
   </style>
 </head>
@@ -1777,10 +1817,6 @@
   <!-- TOP BAR -->
   <header class="topbar">
     <div class="topbar-inner">
-      <button class="hamburger" onclick="openMobileNav()" aria-label="Open menu">
-        <span></span><span></span><span></span>
-      </button>
-
       <a href="#" class="logo">
         <img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjwhLS0gR2VuZXJhdG9yOiBBZG9iZSBJbGx1c3RyYXRvciAyOC40LjEsIFNWRyBFeHBvcnQgUGx1Zy1JbiAuIFNWRyBWZXJzaW9uOiA2LjAwIEJ1aWxkIDApICAtLT4NCjxzdmcgdmVyc2lvbj0iMS4xIiBpZD0idXVpZC0xZWI4YTE0Ny01ZmRmLTQ5MzEtYWI5YS05Y2I3OGY3MGVlY2IiDQoJIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IiB2aWV3Qm94PSIwIDAgMTAwMCAxNTAiDQoJIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDEwMDAgMTUwOyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+DQo8c3R5bGUgdHlwZT0idGV4dC9jc3MiPg0KCS5zdDB7ZmlsbC1ydWxlOmV2ZW5vZGQ7Y2xpcC1ydWxlOmV2ZW5vZGQ7ZmlsbDojRDAwMDBCO30NCgkuc3Qxe2ZpbHRlcjp1cmwoI0Fkb2JlX09wYWNpdHlNYXNrRmlsdGVyKTt9DQoJLnN0MnttYXNrOnVybCgjdXVpZC1kZGE1OTdlYy0wOTk0LTQ0MjAtYWQyOS04ZDFkZGY5NmU2ZTJfMDAwMDAxMDY4MzIzMjY2OTYwMTUyOTcwMjAwMDAwMDM4OTU1NTE4NjM5MzQ4NDk0NjVfKTt9DQoJLnN0M3tmaWxsLXJ1bGU6ZXZlbm9kZDtjbGlwLXJ1bGU6ZXZlbm9kZDtmaWxsOnVybCgjU1ZHSURfMV8pO2VuYWJsZS1iYWNrZ3JvdW5kOm5ldyAgICA7fQ0KCS5zdDR7ZmlsbC1ydWxlOmV2ZW5vZGQ7Y2xpcC1ydWxlOmV2ZW5vZGQ7ZmlsbDp1cmwoI1NWR0lEXzAwMDAwMTgwMzI0NDExNjgzNDczMjIyMjMwMDAwMDAxNTAzMTEyMjMzNjU2OTQxNDY5Xyk7fQ0KCS5zdDV7ZmlsbC1ydWxlOmV2ZW5vZGQ7Y2xpcC1ydWxlOmV2ZW5vZGQ7ZmlsbDojRjIyMjIyO30NCgkuc3Q2e2ZpbGw6I0ZGRkZGRjt9DQo8L3N0eWxlPg0KPGc+DQoJPHBhdGggY2xhc3M9InN0MCIgZD0iTTEwMy4zLDEyMy4zQzY5LjUsMTA3LjUsNDcsNzkuOCw0Nyw1NS41YzAtMzQuMSw0MS0zNy44LDU2LjMtMTEuNGMxNS4zLTI2LjUsNTYuMy0yMi44LDU2LjMsMTEuNA0KCQlDMTU5LjUsNzkuOCwxMzcsMTA3LjUsMTAzLjMsMTIzLjNDMTAzLjMsMTIzLjMsMTAzLjMsMTIzLjMsMTAzLjMsMTIzLjN6Ii8+DQoJPGRlZnM+DQoJCTxmaWx0ZXIgaWQ9IkFkb2JlX09wYWNpdHlNYXNrRmlsdGVyIiBmaWx0ZXJVbml0cz0idXNlclNwYWNlT25Vc2UiIHg9IjQ3IiB5PSIyNi43IiB3aWR0aD0iODkuOSIgaGVpZ2h0PSI3Mi41Ij4NCgkJCTxmZUNvbG9yTWF0cml4ICB0eXBlPSJtYXRyaXgiIHZhbHVlcz0iMSAwIDAgMCAwICAwIDEgMCAwIDAgIDAgMCAxIDAgMCAgMCAwIDAgMSAwIi8+DQoJCTwvZmlsdGVyPg0KCTwvZGVmcz4NCgkNCgkJPG1hc2sgbWFza1VuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeD0iNDciIHk9IjI2LjciIHdpZHRoPSI4OS45IiBoZWlnaHQ9IjcyLjUiIGlkPSJ1dWlkLThkOGU0ODI3LTM1ZTItNDE0OC1hOTA4LTgyNzIyNjY5MDI3OF8wMDAwMDE1NTgzODU1MTUyMzAyODg4ODQxMDAwMDAwOTYzNjMzNDQ1MzE2MjA5NDI3MV8iPg0KCQk8ZyBjbGFzcz0ic3QxIj4NCgkJCTxkZWZzPg0KCQkJCQ0KCQkJCQk8ZmlsdGVyIGlkPSJBZG9iZV9PcGFjaXR5TWFza0ZpbHRlcl8wMDAwMDEyNzA0MTk4MDQ3NTYyMDEzNTQ1MDAwMDAwMTg4OTEyNTI2OTcyOTM3NDYxMl8iIGZpbHRlclVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeD0iNDciIHk9IjI2LjciIHdpZHRoPSI4OS45IiBoZWlnaHQ9IjcyLjUiPg0KCQkJCQk8ZmVDb2xvck1hdHJpeCAgdHlwZT0ibWF0cml4IiB2YWx1ZXM9IjEgMCAwIDAgMCAgMCAxIDAgMCAwICAwIDAgMSAwIDAgIDAgMCAwIDEgMCIvPg0KCQkJCTwvZmlsdGVyPg0KCQkJPC9kZWZzPg0KCQkJDQoJCQkJPG1hc2sgbWFza1VuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeD0iNDciIHk9IjI2LjciIHdpZHRoPSI4OS45IiBoZWlnaHQ9IjcyLjUiIGlkPSJ1dWlkLWRkYTU5N2VjLTA5OTQtNDQyMC1hZDI5LThkMWRkZjk2ZTZlMl8wMDAwMDEwNjgzMjMyNjY5NjAxNTI5NzAyMDAwMDAwMzg5NTU1MTg2MzkzNDg0OTQ2NV8iPg0KCQkJPC9tYXNrPg0KCQkJPGcgY2xhc3M9InN0MiI+DQoJCQkJDQoJCQkJCTxsaW5lYXJHcmFkaWVudCBpZD0iU1ZHSURfMV8iIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIiB4MT0iNjQuMzE3NiIgeTE9IjEyNS4yMTc0IiB4Mj0iMTE2LjMxNzUiIHkyPSI3My4yMTc1IiBncmFkaWVudFRyYW5zZm9ybT0ibWF0cml4KDEgMCAwIC0xIDAgMTUwKSI+DQoJCQkJCTxzdG9wICBvZmZzZXQ9IjAiIHN0eWxlPSJzdG9wLWNvbG9yOiMwMDAwMDAiLz4NCgkJCQkJPHN0b3AgIG9mZnNldD0iMC4yMyIgc3R5bGU9InN0b3AtY29sb3I6IzAyMDIwMiIvPg0KCQkJCQk8c3RvcCAgb2Zmc2V0PSIwLjM2IiBzdHlsZT0ic3RvcC1jb2xvcjojMEEwQTBBIi8+DQoJCQkJCTxzdG9wICBvZmZzZXQ9IjAuNDciIHN0eWxlPSJzdG9wLWNvbG9yOiMxOTE5MTkiLz4NCgkJCQkJPHN0b3AgIG9mZnNldD0iMC41NyIgc3R5bGU9InN0b3AtY29sb3I6IzJEMkQyRCIvPg0KCQkJCQk8c3RvcCAgb2Zmc2V0PSIwLjY3IiBzdHlsZT0ic3RvcC1jb2xvcjojNDc0NzQ3Ii8+DQoJCQkJCTxzdG9wICBvZmZzZXQ9IjAuNzUiIHN0eWxlPSJzdG9wLWNvbG9yOiM2ODY4NjgiLz4NCgkJCQkJPHN0b3AgIG9mZnNldD0iMC44MyIgc3R5bGU9InN0b3AtY29sb3I6IzhFOEU4RSIvPg0KCQkJCQk8c3RvcCAgb2Zmc2V0PSIwLjkxIiBzdHlsZT0ic3RvcC1jb2xvcjojQkJCQkJCIi8+DQoJCQkJCTxzdG9wICBvZmZzZXQ9IjAuOTgiIHN0eWxlPSJzdG9wLWNvbG9yOiNFQ0VDRUMiLz4NCgkJCQkJPHN0b3AgIG9mZnNldD0iMSIgc3R5bGU9InN0b3AtY29sb3I6I0ZGRkZGRiIvPg0KCQkJCTwvbGluZWFyR3JhZGllbnQ+DQoJCQkJPHBhdGggY2xhc3M9InN0MyIgZD0iTTEzNi44LDI3YzEuMSwxNi42LTYuMywzNS43LTIxLjQsNTAuN2MtMTMuOSwxMy45LTMxLjMsMjEuMy00Ni45LDIxLjVDNTUsODUuNiw0Nyw2OS45LDQ3LDU1LjUNCgkJCQkJYzAtMzQuMSw0MS0zNy44LDU2LjMtMTEuNEMxMTAuOCwzMSwxMjQuNywyNS4zLDEzNi44LDI3TDEzNi44LDI3TDEzNi44LDI3eiIvPg0KCQkJPC9nPg0KCQk8L2c+DQoJPC9tYXNrPg0KCTxnPg0KCQkNCgkJCTxsaW5lYXJHcmFkaWVudCBpZD0iU1ZHSURfMDAwMDAwMjE4MTAwMzY2NDI1NzI5MjAyMTAwMDAwMDM5MTE2Njc4NDU4MDg2ODE2MzNfIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjY0LjMxNzYiIHkxPSIxMjUuMjE3NCIgeDI9IjExNi4zMTc1IiB5Mj0iNzMuMjE3NSIgZ3JhZGllbnRUcmFuc2Zvcm09Im1hdHJpeCgxIDAgMCAtMSAwIDE1MCkiPg0KCQkJPHN0b3AgIG9mZnNldD0iMCIgc3R5bGU9InN0b3AtY29sb3I6I0QwMDAwQiIvPg0KCQkJPHN0b3AgIG9mZnNldD0iMC4zOSIgc3R5bGU9InN0b3AtY29sb3I6I0QyMDEwQyIvPg0KCQkJPHN0b3AgIG9mZnNldD0iMC42MiIgc3R5bGU9InN0b3AtY29sb3I6I0RBMDYwRiIvPg0KCQkJPHN0b3AgIG9mZnNldD0iMC44MiIgc3R5bGU9InN0b3AtY29sb3I6I0U5MTAxNSIvPg0KCQkJPHN0b3AgIG9mZnNldD0iMC45OSIgc3R5bGU9InN0b3AtY29sb3I6I0ZEMUMxRCIvPg0KCQkJPHN0b3AgIG9mZnNldD0iMSIgc3R5bGU9InN0b3AtY29sb3I6I0ZGMUUxRSIvPg0KCQk8L2xpbmVhckdyYWRpZW50Pg0KCQk8cGF0aCBzdHlsZT0iZmlsbC1ydWxlOmV2ZW5vZGQ7Y2xpcC1ydWxlOmV2ZW5vZGQ7ZmlsbDp1cmwoI1NWR0lEXzAwMDAwMDIxODEwMDM2NjQyNTcyOTIwMjEwMDAwMDAzOTExNjY3ODQ1ODA4NjgxNjMzXyk7IiBkPSINCgkJCU0xMzYuOCwyN2MxLjEsMTYuNi02LjMsMzUuNy0yMS40LDUwLjdjLTEzLjksMTMuOS0zMS4zLDIxLjMtNDYuOSwyMS41QzU1LDg1LjYsNDcsNjkuOSw0Nyw1NS41YzAtMzQuMSw0MS0zNy44LDU2LjMtMTEuNA0KCQkJQzExMC44LDMxLDEyNC43LDI1LjMsMTM2LjgsMjdMMTM2LjgsMjdMMTM2LjgsMjd6Ii8+DQoJPC9nPg0KPC9nPg0KPHBhdGggY2xhc3M9InN0NSIgZD0iTTE0OS4zLDU1LjRjLTIuMy0xNS44LDIuMi0zMC40LDExLTM2LjJjMTIuMi04LjEsMjMuMiw1LjcsMTcuNCwxNy41YzEzLjEtMC44LDIxLjUsMTQuOCw5LjIsMjIuOA0KCUMxNzguMiw2NS4zLDE2Myw2My44LDE0OS4zLDU1LjRMMTQ5LjMsNTUuNEwxNDkuMyw1NS40eiIvPg0KPHBhdGggY2xhc3M9InN0NSIgZD0iTTg2LjYsOTYuNmMxLjMsMTUuOS00LjMsMzAuMi0xMy40LDM1LjRjLTEyLjcsNy4yLTIyLjgtNy4zLTE2LjItMTguNmMtMTMuMS0wLjEtMjAuNC0xNi4yLTcuNy0yMy40DQoJQzU4LjQsODQuOSw3My41LDg3LjQsODYuNiw5Ni42TDg2LjYsOTYuNkw4Ni42LDk2LjZ6Ii8+DQo8Zz4NCgk8cGF0aCBjbGFzcz0ic3Q2IiBkPSJNMjMzLjksNDcuOHY2OS44aC0xMy4zVjQ3LjhIMjMzLjl6IE0yNzMuMSw0Ny44bC0yNC4xLDMxLjZsMjYuMSwzOC4yaC0xNS45bC0yNC42LTM3LjNsMjQuMS0zMi41SDI3My4xDQoJCUwyNzMuMSw0Ny44eiIvPg0KCTxwYXRoIGNsYXNzPSJzdDYiIGQ9Ik0yOTQuMywzOS40YzEuNSwxLjUsMi4zLDMuNCwyLjMsNS42cy0wLjgsNC4xLTIuMyw1LjZjLTEuNSwxLjUtMy41LDIuMi01LjksMi4ycy00LjMtMC43LTUuOC0yLjINCgkJcy0yLjMtMy4zLTIuMy01LjZzMC44LTQuMSwyLjMtNS42YzEuNS0xLjUsMy41LTIuMyw1LjgtMi4zUzI5Mi44LDM3LjksMjk0LjMsMzkuNHogTTI5NSw2NC4ydjUzLjRIMjgyVjY0LjJIMjk1eiIvPg0KCTxwYXRoIGNsYXNzPSJzdDYiIGQ9Ik0zMjMuNCwxMTIuOWMwLDUuMi0wLjgsOS41LTIuMywxMi45cy0zLjYsNi02LjQsOHMtNi40LDMuOS0xMC44LDUuOGwtNC4xLTkuNGMyLjYtMS4yLDQuNy0yLjQsNi4yLTMuNg0KCQljMS41LTEuMiwyLjYtMi44LDMuNC00LjhjMC44LTIsMS4yLTQuNywxLjItOC4xVjY0LjJoMTIuOVYxMTIuOUwzMjMuNCwxMTIuOXogTTMyMi43LDM5LjRjMS41LDEuNSwyLjMsMy40LDIuMyw1LjYNCgkJcy0wLjgsNC4xLTIuMyw1LjZjLTEuNSwxLjUtMy41LDIuMi01LjksMi4ycy00LjMtMC43LTUuOC0yLjJzLTIuMy0zLjMtMi4zLTUuNnMwLjgtNC4xLDIuMy01LjZjMS41LTEuNSwzLjUtMi4zLDUuOC0yLjMNCgkJUzMyMS4yLDM3LjksMzIyLjcsMzkuNHoiLz4NCgk8cGF0aCBjbGFzcz0ic3Q2IiBkPSJNMzUxLjIsMzkuNGMxLjUsMS41LDIuMywzLjQsMi4zLDUuNnMtMC44LDQuMS0yLjMsNS42Yy0xLjUsMS41LTMuNSwyLjItNS45LDIuMnMtNC4zLTAuNy01LjgtMi4yDQoJCXMtMi4zLTMuMy0yLjMtNS42czAuOC00LjEsMi4zLTUuNmMxLjUtMS41LDMuNS0yLjMsNS44LTIuM1MzNDkuNywzNy45LDM1MS4yLDM5LjR6IE0zNTEuOCw2NC4ydjUzLjRoLTEyLjlWNjQuMkgzNTEuOHoiLz4NCgk8cGF0aCBjbGFzcz0ic3Q2IiBkPSJNMzgwLjIsMTEyLjljMCw1LjItMC44LDkuNS0yLjMsMTIuOXMtMy42LDYtNi40LDhzLTYuNCwzLjktMTAuOCw1LjhsLTQuMS05LjRjMi42LTEuMiw0LjctMi40LDYuMi0zLjYNCgkJYzEuNS0xLjIsMi42LTIuOCwzLjQtNC44YzAuOC0yLDEuMi00LjcsMS4yLTguMVY2NC4yaDEyLjlWMTEyLjlMMzgwLjIsMTEyLjl6IE0zNzkuNiwzOS40YzEuNSwxLjUsMi4zLDMuNCwyLjMsNS42DQoJCXMtMC44LDQuMS0yLjMsNS42Yy0xLjUsMS41LTMuNSwyLjItNS45LDIuMnMtNC4zLTAuNy01LjgtMi4ycy0yLjMtMy4zLTIuMy01LjZzMC44LTQuMSwyLjMtNS42YzEuNS0xLjUsMy41LTIuMyw1LjgtMi4zDQoJCVMzNzgsMzcuOSwzNzkuNiwzOS40eiIvPg0KCTxwYXRoIGNsYXNzPSJzdDYiIGQ9Ik00MDgsMzkuNGMxLjUsMS41LDIuMywzLjQsMi4zLDUuNnMtMC44LDQuMS0yLjMsNS42Yy0xLjUsMS41LTMuNSwyLjItNS45LDIuMnMtNC4zLTAuNy01LjgtMi4yDQoJCXMtMi4zLTMuMy0yLjMtNS42czAuOC00LjEsMi4zLTUuNmMxLjUtMS41LDMuNS0yLjMsNS44LTIuM1M0MDYuNSwzNy45LDQwOCwzOS40eiBNNDA4LjcsNjQuMnY1My40aC0xMi45VjY0LjJINDA4Ljd6Ii8+DQoJPHBhdGggY2xhc3M9InN0NiIgZD0iTTQ4MC41LDY0LjJjMi44LDEsNS40LDIuNiw3LjksNC44bC01LjgsNy44Yy0xLjgtMS4zLTMuNi0yLjMtNS4yLTIuOXMtMy41LTAuOS01LjUtMC45Yy04LDAtMTIsNi4xLTEyLDE4LjMNCgkJYzAsNi4yLDEsMTAuNywzLjEsMTMuNGMyLjEsMi43LDUsNC4xLDguOSw0LjFjMS45LDAsMy42LTAuMyw1LjItMC45YzEuNi0wLjYsMy41LTEuNiw1LjYtMi45bDUuOCw4LjJjLTUsNC4xLTEwLjgsNi4yLTE3LjMsNi4yDQoJCWMtNS4xLDAtOS42LTEuMS0xMy4zLTMuNGMtMy44LTIuMy02LjctNS41LTguNy05LjdjLTItNC4yLTMtOS4xLTMtMTQuOHMxLTEwLjcsMy0xNXM0LjktNy43LDguNy0xMC4xYzMuOC0yLjQsOC4yLTMuNiwxMy4yLTMuNg0KCQlDNDc0LjUsNjIuNyw0NzcuNyw2My4yLDQ4MC41LDY0LjJMNDgwLjUsNjQuMnoiLz4NCgk8cGF0aCBjbGFzcz0ic3Q2IiBkPSJNNTM3LjQsNjdjMi43LDIuOSw0LDYuOSw0LDExLjl2MzguN2gtMTIuOVY4MWMwLTMuMi0wLjYtNS40LTEuNy02LjdzLTIuNy0xLjktNC45LTEuOXMtNC4xLDAuNy02LDIuMQ0KCQlzLTMuNiwzLjMtNS4yLDUuOXYzNy4zaC0xMi45VjQyLjlsMTIuOS0xLjN2MjljNC4zLTUuMiw5LjUtNy45LDE1LjUtNy45QzUzMSw2Mi43LDUzNC43LDY0LjEsNTM3LjQsNjdMNTM3LjQsNjd6Ii8+DQoJPHBhdGggY2xhc3M9InN0NiIgZD0iTTU5Ni45LDEwOC4xYzAuNiwxLDEuNywxLjcsMy4xLDIuM2wtMi43LDguNmMtMy0wLjMtNS41LTEtNy40LTIuMnMtMy40LTMuMS00LjQtNS42Yy0xLjgsMi43LTQuMSw0LjctNi44LDYNCgkJYy0yLjcsMS4zLTUuOCwyLTkuMSwyYy01LjMsMC05LjUtMS41LTEyLjYtNC41Yy0zLjEtMy00LjctNy00LjctMTEuOWMwLTUuOCwyLjEtMTAuMiw2LjMtMTMuM3MxMC4yLTQuNiwxOC00LjZoNi43di0zDQoJCWMwLTMuNC0wLjgtNS44LTIuNC03LjJzLTQuMS0yLjEtNy42LTIuMWMtMy45LDAtOC42LDAuOS0xNC4xLDIuOGwtMy04LjhjNi43LTIuNiwxMy4xLTMuOCwxOS40LTMuOGMxMy43LDAsMjAuNSw2LjEsMjAuNSwxOC40DQoJCXYyMi40QzU5NS45LDEwNS42LDU5Ni4zLDEwNy4xLDU5Ni45LDEwOC4xTDU5Ni45LDEwOC4xeiBNNTgzLjIsMTAzLjJWOTIuNGgtNS4zYy04LjMsMC0xMi41LDMuMS0xMi41LDkuM2MwLDIuNiwwLjYsNC41LDEuOSw2DQoJCWMxLjMsMS40LDMuMiwyLjEsNS43LDIuMUM1NzcuMywxMDkuOCw1ODAuNywxMDcuNiw1ODMuMiwxMDMuMkw1ODMuMiwxMDMuMnoiLz4NCgk8cGF0aCBjbGFzcz0ic3Q2IiBkPSJNNzAzLjQsMTE3LjZoLTEzbC0xLjgtMjkuMmMtMC42LTEwLjQtMC45LTE4LjctMC45LTI0Ljh2LTMuNkw2NzQuOSwxMTBoLTEyLjZsLTEzLjUtNTAuMg0KCQljMC4xLDQuNCwwLjIsNy44LDAuMiwxMC4xYzAsNi4xLTAuMiwxMi40LTAuNiwxOC45bC0xLjcsMjguOGgtMTIuOWw1LjUtNjkuOGgxNy4ybDEyLjQsNDguOWwxMS43LTQ4LjloMTcuNEw3MDMuNCwxMTcuNg0KCQlMNzAzLjQsMTE3LjZ6Ii8+DQoJPHBhdGggY2xhc3M9InN0NiIgZD0iTTc1Ni4zLDEwOC4xYzAuNiwxLDEuNywxLjcsMy4xLDIuM2wtMi43LDguNmMtMy0wLjMtNS41LTEtNy40LTIuMnMtMy40LTMuMS00LjQtNS42Yy0xLjgsMi43LTQuMSw0LjctNi44LDYNCgkJYy0yLjcsMS4zLTUuOCwyLTkuMSwyYy01LjMsMC05LjUtMS41LTEyLjYtNC41Yy0zLjEtMy00LjctNy00LjctMTEuOWMwLTUuOCwyLjEtMTAuMiw2LjMtMTMuM3MxMC4yLTQuNiwxOC00LjZoNi43di0zDQoJCWMwLTMuNC0wLjgtNS44LTIuNC03LjJzLTQuMS0yLjEtNy42LTIuMWMtMy45LDAtOC42LDAuOS0xNC4xLDIuOGwtMy04LjhjNi43LTIuNiwxMy4xLTMuOCwxOS40LTMuOGMxMy43LDAsMjAuNSw2LjEsMjAuNSwxOC40DQoJCXYyMi40Qzc1NS4zLDEwNS42LDc1NS42LDEwNy4xLDc1Ni4zLDEwOC4xTDc1Ni4zLDEwOC4xeiBNNzQyLjYsMTAzLjJWOTIuNGgtNS4zYy04LjMsMC0xMi41LDMuMS0xMi41LDkuM2MwLDIuNiwwLjYsNC41LDEuOSw2DQoJCWMxLjMsMS40LDMuMiwyLjEsNS43LDIuMUM3MzYuNywxMDkuOCw3NDAuMSwxMDcuNiw3NDIuNiwxMDMuMkw3NDIuNiwxMDMuMnoiLz4NCgk8cGF0aCBjbGFzcz0ic3Q2IiBkPSJNODEwLjYsNjdjMi43LDIuOSw0LDYuOSw0LDExLjl2MzguN2gtMTIuOVY4MWMwLTMuMi0wLjYtNS40LTEuNy02LjdzLTIuNy0xLjktNC45LTEuOXMtNC4xLDAuNy02LDIuMQ0KCQlzLTMuNiwzLjMtNS4yLDUuOXYzNy4zSDc3MVY0Mi45bDEyLjktMS4zdjI5YzQuMy01LjIsOS41LTcuOSwxNS41LTcuOUM4MDQuMiw2Mi43LDgwNy45LDY0LjEsODEwLjYsNjdMODEwLjYsNjd6Ii8+DQoJPHBhdGggY2xhc3M9InN0NiIgZD0iTTg3MC4xLDEwOC4xYzAuNiwxLDEuNywxLjcsMy4xLDIuM2wtMi43LDguNmMtMy0wLjMtNS41LTEtNy40LTIuMnMtMy40LTMuMS00LjQtNS42Yy0xLjgsMi43LTQuMSw0LjctNi44LDYNCgkJYy0yLjcsMS4zLTUuOCwyLTkuMSwyYy01LjMsMC05LjUtMS41LTEyLjYtNC41Yy0zLjEtMy00LjctNy00LjctMTEuOWMwLTUuOCwyLjEtMTAuMiw2LjMtMTMuM3MxMC4yLTQuNiwxOC00LjZoNi43di0zDQoJCWMwLTMuNC0wLjgtNS44LTIuNC03LjJzLTQuMS0yLjEtNy42LTIuMWMtMy45LDAtOC42LDAuOS0xNC4xLDIuOGwtMy04LjhjNi43LTIuNiwxMy4xLTMuOCwxOS40LTMuOGMxMy43LDAsMjAuNSw2LjEsMjAuNSwxOC40DQoJCXYyMi40Qzg2OS4yLDEwNS42LDg2OS41LDEwNy4xLDg3MC4xLDEwOC4xTDg3MC4xLDEwOC4xeiBNODU2LjQsMTAzLjJWOTIuNGgtNS4zYy04LjMsMC0xMi41LDMuMS0xMi41LDkuM2MwLDIuNiwwLjYsNC41LDEuOSw2DQoJCWMxLjMsMS40LDMuMiwyLjEsNS43LDIuMUM4NTAuNSwxMDkuOCw4NTMuOSwxMDcuNiw4NTYuNCwxMDMuMkw4NTYuNCwxMDMuMnoiLz4NCgk8cGF0aCBjbGFzcz0ic3Q2IiBkPSJNOTI3LDcwLjFjMy41LDQuOSw1LjIsMTEuOSw1LjIsMjAuOGMwLDUuNS0wLjksMTAuNC0yLjYsMTQuN2MtMS43LDQuMy00LjIsNy42LTcuMywxMA0KCQljLTMuMiwyLjQtNi45LDMuNi0xMS4yLDMuNmMtMi45LDAtNS41LTAuNi03LjktMS44cy00LjUtMi45LTYuMi01LjJsLTAuOCw1LjRoLTExLjRWNDIuOGwxMi45LTEuNHYyOC45YzEuOC0yLjQsMy45LTQuMyw2LjQtNS42DQoJCWMyLjUtMS4zLDUuMy0yLDguMy0yQzkxOC43LDYyLjcsOTIzLjUsNjUuMiw5MjcsNzAuMUw5MjcsNzAuMXogTTkxNS44LDEwNWMyLTMsMi45LTcuNywyLjktMTQuMWMwLTYuNy0wLjktMTEuNS0yLjctMTQuMw0KCQlzLTQuNC00LjItNy43LTQuMmMtNC4xLDAtNy42LDIuNC0xMC42LDcuM3YyMy42YzEuMSwxLjksMi42LDMuNSw0LjMsNC41YzEuNywxLjEsMy42LDEuNiw1LjYsMS42DQoJCUM5MTEuMSwxMDkuNCw5MTMuOSwxMDcuOSw5MTUuOCwxMDV6Ii8+DQoJPHBhdGggY2xhc3M9InN0NiIgZD0iTTk4NC41LDEwOC4xYzAuNiwxLDEuNywxLjcsMy4xLDIuM2wtMi43LDguNmMtMy0wLjMtNS41LTEtNy40LTIuMnMtMy40LTMuMS00LjQtNS42Yy0xLjgsMi43LTQuMSw0LjctNi44LDYNCgkJYy0yLjcsMS4zLTUuOCwyLTkuMSwyYy01LjMsMC05LjUtMS41LTEyLjYtNC41Yy0zLjEtMy00LjctNy00LjctMTEuOWMwLTUuOCwyLjEtMTAuMiw2LjMtMTMuM3MxMC4yLTQuNiwxOC00LjZoNi43di0zDQoJCWMwLTMuNC0wLjgtNS44LTIuNC03LjJzLTQuMS0yLjEtNy42LTIuMWMtMy45LDAtOC42LDAuOS0xNC4xLDIuOGwtMy04LjhjNi43LTIuNiwxMy4xLTMuOCwxOS40LTMuOGMxMy43LDAsMjAuNSw2LjEsMjAuNSwxOC40DQoJCXYyMi40Qzk4My41LDEwNS42LDk4My44LDEwNy4xLDk4NC41LDEwOC4xTDk4NC41LDEwOC4xeiBNOTcwLjgsMTAzLjJWOTIuNGgtNS4zYy04LjMsMC0xMi41LDMuMS0xMi41LDkuM2MwLDIuNiwwLjYsNC41LDEuOSw2DQoJCWMxLjMsMS40LDMuMiwyLjEsNS43LDIuMUM5NjQuOCwxMDkuOCw5NjguMywxMDcuNiw5NzAuOCwxMDMuMkw5NzAuOCwxMDMuMnoiLz4NCjwvZz4NCjwvc3ZnPg0K" alt="Kijiji cha Mahaba" class="logo-img-svg" style="height:36px;width:auto;display:block;">
       </a>
@@ -1819,8 +1855,11 @@
         <div class="search-results" id="topResults"></div>
       </div>
 
-      <button class="nav-cta-btn" onclick="openModal()">Share Love</button>
+      <button class="nav-cta-btn" onclick="openModal()">Soma Love</button>
     </div>
+    <button class="hamburger" onclick="openMobileNav()" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
   </header>
 
   <!-- SECONDARY NAV / FILTER BAR -->
@@ -1860,10 +1899,6 @@
   <div class="hero-img"></div>
   <div class="hero-overlay"></div>
   <div class="hero-content">
-    <div class="hero-badge">
-      <div class="live-dot"></div>
-      Mahali pa Upendo wa Kweli
-    </div>
     <h1 class="hero-title">
       Kijiji cha Mahaba<br>
       <em>Kila Siku ni Valentine's Day</em>
@@ -1931,6 +1966,26 @@
 
       <div class="sms-card" onclick="copyAndToast(this)">
         <div class="sms-card-img">
+          <div class="card-label">Hot</div>
+          <img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=1200&h=800&fit=crop&q=85" loading="lazy" alt="">
+        </div>
+        <div class="sms-card-body">
+          <p>Wewe ni wimbo unaoendelea kuimba moyoni mwangu bila kukoma. Kila pumzi ninayopumua inanukia upendo wako.</p>
+          <div class="sms-card-footer">
+            <button class="like-btn" onclick="likePost(event, this)">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+              <span class="count">6.1K</span>
+            </button>
+            <button class="send-btn" onclick="sharePost(event, this)">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+              Soma
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="sms-card" onclick="copyAndToast(this)">
+        <div class="sms-card-img">
           <div class="card-label">Popular</div>
           <img src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=1200&h=800&fit=crop&q=85" loading="lazy" alt="">
         </div>
@@ -1943,27 +1998,7 @@
             </button>
             <button class="send-btn" onclick="sharePost(event, this)">
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-              Share
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <div class="sms-card" onclick="copyAndToast(this)">
-        <div class="sms-card-img">
-          <div class="card-label">Hot</div>
-          <img src="https://images.unsplash.com/photo-1529927120092-0b082f3d73b1?w=1200&h=800&fit=crop&q=85" loading="lazy" alt="">
-        </div>
-        <div class="sms-card-body">
-          <p>Wewe ni wimbo unaoendelea kuimba moyoni mwangu bila kukoma. Kila pumzi ninayopumua inanukia upendo wako.</p>
-          <div class="sms-card-footer">
-            <button class="like-btn" onclick="likePost(event, this)">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-              <span class="count">6.1K</span>
-            </button>
-            <button class="send-btn" onclick="sharePost(event, this)">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-              Share
+              Soma
             </button>
           </div>
         </div>
@@ -1982,7 +2017,7 @@
             </button>
             <button class="send-btn" onclick="sharePost(event, this)">
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-              Share
+              Soma
             </button>
           </div>
         </div>
@@ -2001,7 +2036,7 @@
             </button>
             <button class="send-btn" onclick="sharePost(event, this)">
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-              Share
+              Soma
             </button>
           </div>
         </div>
@@ -2302,13 +2337,7 @@
       </div>
     </div>
 
-    <!-- Code aesthetic -->
-    <div class="code-widget">
-      <span class="ct">&lt;heart</span> <span class="ca">for=</span><span class="cv">"you"</span><br>
-      &nbsp;&nbsp;<span class="ca">size=</span><span class="cv">"infinity"</span><br>
-      &nbsp;&nbsp;<span class="ca">expires=</span><span class="cv">"never"</span><br>
-      &nbsp;&nbsp;<span class="ca">author=</span><span class="cv">"your_heart"</span> <span class="ct">/&gt;</span>
-    </div>
+
 
   </div><!-- end right col -->
 
@@ -2390,13 +2419,13 @@
 
     <div class="sms-card" onclick="copyAndToast(this)">
       <div class="sms-card-img">
-        <img src="https://images.unsplash.com/photo-1534759926651-39b6af900a8e?w=1200&h=800&fit=crop&q=85" loading="lazy" alt="">
+        <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200&h=800&fit=crop&q=85" loading="lazy" alt="">
       </div>
       <div class="sms-card-body">
         <p>Usiku huu naomba nyota zikulinde. Naomba upepo ukuletee salamu zangu za upendo na busu la usiku.</p>
         <div class="sms-card-footer">
           <button class="like-btn liked" onclick="likePost(event, this)"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg><span class="count">3.6K</span></button>
-          <button class="send-btn" onclick="sharePost(event, this)"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg> Share</button>
+          <button class="send-btn" onclick="sharePost(event, this)"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg> Soma</button>
         </div>
       </div>
     </div>
@@ -2450,6 +2479,49 @@
   </div>
 </div><!-- end more-sms-section -->
 
+<section class="book-grid-section">
+  <div class="section-head">
+    <h2>
+      <span class="ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M19 2H8a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h11V2zm1 0v20h1a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1h-1z"/></svg></span>
+      Vitabu vya Mahaba <small>• Book Covers</small>
+    </h2>
+    <span class="see-all" onclick="showToast('Viewing more love books')">
+      Angalia Zaidi
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+    </span>
+  </div>
+  <div class="book-grid">
+    <article class="book-item">
+      <img class="book-img" src="https://images.unsplash.com/photo-1512820790803-83ca734da794?w=320&h=480&fit=crop&q=80" loading="lazy" alt="Mapenzi ya Milele cover">
+      <div class="book-copy">
+        <h4>Mapenzi ya Milele</h4>
+        <p>Hadithi ya mapenzi ya kusisimua kwa wale wanaopenda hisia kali na uhalisia wa moyo.</p>
+      </div>
+    </article>
+    <article class="book-item">
+      <img class="book-img" src="https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?w=320&h=480&fit=crop&q=80" loading="lazy" alt="Mbali na Wewe cover">
+      <div class="book-copy">
+        <h4>Mbali na Wewe</h4>
+        <p>Kitabu kinacholenga mapenzi ya mbali, mavutano ya moyo, na zawadi za maneno ya mpenzi.</p>
+      </div>
+    </article>
+    <article class="book-item">
+      <img class="book-img" src="https://images.unsplash.com/photo-1507842217343-583bb7270b66?w=320&h=480&fit=crop&q=80" loading="lazy" alt="Hisia za Usiku cover">
+      <div class="book-copy">
+        <h4>Hisia za Usiku</h4>
+        <p>Ukusanyaji wa taratibu za upendo, barua za mpenzi, na wasifu wa mapenzi ya usiku.</p>
+      </div>
+    </article>
+    <article class="book-item">
+      <img class="book-img" src="https://images.unsplash.com/photo-1495446815901-a7297e633e8d?w=320&h=480&fit=crop&q=80" loading="lazy" alt="Hisia za Moyo cover">
+      <div class="book-copy">
+        <h4>Hisia za Moyo</h4>
+        <p>Kitabu cha mapenzi cha maneno ya moyo, wazo, na barua za hisia za kweli.</p>
+      </div>
+    </article>
+  </div>
+</section>
+
 <!-- =============================================
      FOOTER
 ============================================= -->
@@ -2469,9 +2541,6 @@
           <div class="social-icon" onclick="showToast('Instagram page opening...')">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/></svg>
           </div>
-          <div class="social-icon" onclick="showToast('Twitter / X page opening...')">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-          </div>
           <div class="social-icon" onclick="showToast('WhatsApp Channel opening...')">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0 0 20.464 3.488"/></svg>
           </div>
@@ -2489,40 +2558,12 @@
         </ul>
       </div>
 
-      <div class="footer-col">
-        <h4>Categories</h4>
-        <ul>
-          <li><a href="#">Romantic</a></li>
-          <li><a href="#">Good Morning</a></li>
-          <li><a href="#">Good Night</a></li>
-          <li><a href="#">Missing You</a></li>
-          <li><a href="#">Wedding</a></li>
-        </ul>
-      </div>
-
-      <div class="footer-col">
-        <h4>mnyilinga.co.tz</h4>
-        <ul>
-          <li><a href="https://mnyilinga.co.tz">Home</a></li>
-          <li><a href="https://mnyilinga.co.tz/habari">Habari</a></li>
-          <li><a href="https://mnyilinga.co.tz/burudani">Burudani</a></li>
-          <li><a href="https://mnyilinga.co.tz/mahaba-space" style="color:var(--gold)">Mahaba Space</a></li>
-        </ul>
-      </div>
-
-      <div class="footer-col footer-contact">
-        <h4>Contact</h4>
-        <p><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg> mahaba@mnyilinga.co.tz</p>
-        <p><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9a16 16 0 0 0 6.29 6.29l.61-.61a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg> +255 712 345 678</p>
-        <p><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg> mnyilinga.co.tz</p>
-      </div>
-
     </div>
 
     <hr class="footer-divider">
 
     <div class="footer-bottom">
-      <p>&copy; 2024 <a href="https://mnyilinga.co.tz">mnyilinga.co.tz</a> — Kijiji cha Mahaba. All rights reserved.</p>
+      <p>&copy; 2024 Kijiji cha Mahaba. All rights reserved.</p>
       <div class="footer-bottom-links">
         <a href="#">Privacy Policy</a>
         <a href="#">Terms of Use</a>
