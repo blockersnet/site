@@ -477,7 +477,7 @@
     ============================================= */
     .hero {
       position: relative;
-      height: 420px;
+      height: 500px;
       overflow: hidden;
     }
     .hero-img {
@@ -512,7 +512,7 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
-      max-width: 620px;
+      max-width: 580px;
     }
 
     .hero-badge {
@@ -530,18 +530,18 @@
       text-transform: uppercase;
       letter-spacing: 1.5px;
       color: var(--gold);
-      margin-bottom: 20px;
+      margin-bottom: 16px;
       width: fit-content;
       animation: fadeUp 0.8s ease both;
     }
 
     .hero-title {
       font-family: var(--font-display);
-      font-size: clamp(32px, 4.5vw, 58px);
-      font-weight: 700;
+      font-size: clamp(26px, 4vw, 52px);
+      font-weight: 800;
       line-height: 1.1;
       color: var(--white);
-      margin-bottom: 18px;
+      margin-bottom: 14px;
       animation: fadeUp 0.9s 0.1s ease both;
     }
     .hero-title em {
@@ -551,17 +551,17 @@
 
     .hero-sub {
       font-family: var(--font-body);
-      font-size: 14px;
-      line-height: 1.75;
+      font-size: 13px;
+      line-height: 1.7;
       color: var(--white-70);
-      max-width: 440px;
-      margin-bottom: 30px;
+      max-width: 400px;
+      margin-bottom: 26px;
       animation: fadeUp 1s 0.2s ease both;
     }
 
     .hero-btns {
       display: flex;
-      gap: 12px;
+      gap: 10px;
       flex-wrap: wrap;
       animation: fadeUp 1s 0.3s ease both;
     }
@@ -1717,7 +1717,12 @@
       .featured-col { display: none; }
       .sms-grid-4 { grid-template-columns: repeat(2, 1fr); }
       .footer-top { grid-template-columns: 1fr 1fr; }
-      .hero { height: 340px; }
+      .hero { height: 320px; }
+      .hero-sub { display: none; }
+      .hero-badge { margin-bottom: 10px; }
+      .hero-title { font-size: clamp(22px, 6vw, 36px); margin-bottom: 16px; }
+      .hero-stats { bottom: 16px; right: 16px; gap: 16px; }
+      .hero-stat strong { font-size: 20px; }
       .secondary-tags { display: none; }
       .hamburger { display: flex; }
       .main-nav { display: none; }
@@ -1728,7 +1733,11 @@
     @media (max-width: 520px) {
       .sms-grid { grid-template-columns: 1fr; }
       .sms-grid-4 { grid-template-columns: 1fr; }
-      .hero { height: 300px; }
+      .hero { height: 280px; }
+      .hero-sub { display: none; }
+      .hero-title { font-size: clamp(20px, 7vw, 30px); }
+      .hero-badge { font-size: 9px; padding: 4px 12px; }
+      .hero-btns .btn-outline { display: none; }
       .hero-stats { display: none; }
       .footer-top { grid-template-columns: 1fr; }
       .footer-bottom { flex-direction: column; text-align: center; }
