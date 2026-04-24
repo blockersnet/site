@@ -7,7 +7,7 @@
   <meta name="description" content="Kijiji cha Mahaba — Pata SMS nzuri za mapenzi, hadithi za kusisimua, na maneno ya moyo. Sehemu ya mnyilinga.co.tz/mahaba-space" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,700&family=Inter:wght@400;500;600;700;800&family=Great+Vibes&display=swap" rel="stylesheet">
   <style>
     /* =============================================
        CSS VARIABLES & RESET
@@ -519,8 +519,13 @@
       animation: fadeUp 0.9s 0.1s ease both;
     }
     .hero-title em {
-      font-style: italic;
+      font-style: normal;
+      font-family: 'Great Vibes', cursive;
       color: var(--gold);
+      font-size: 1.25em;
+      display: block;
+      line-height: 1.2;
+      text-shadow: 0 2px 18px rgba(212,160,23,0.35);
     }
 
     .hero-sub {
@@ -1716,6 +1721,46 @@
     /* Horizontal divider */
     .hdivider { border: none; border-top: 1px solid var(--border); margin: 18px 0; }
 
+    /* Mnyilinga Hub footer brand band */
+    .footer-parent-brand {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      padding: 22px 0 20px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      margin-top: 0;
+    }
+    .footer-parent-brand-label {
+      font-family: var(--font-ui);
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1.8px;
+      color: var(--white-40);
+      white-space: nowrap;
+    }
+    .footer-parent-brand-logo {
+      height: 32px;
+      width: auto;
+      opacity: 0.80;
+      transition: opacity 0.25s, transform 0.25s;
+      filter: drop-shadow(0 0 6px rgba(255,255,255,0.12));
+      flex-shrink: 0;
+    }
+    .footer-parent-brand:hover .footer-parent-brand-logo {
+      opacity: 1;
+      transform: scale(1.04);
+      filter: drop-shadow(0 0 12px rgba(212,160,23,0.3));
+    }
+    .footer-parent-brand-dot {
+      width: 3px;
+      height: 3px;
+      border-radius: 50%;
+      background: var(--white-30);
+      flex-shrink: 0;
+    }
+
     /* =============================================
        RESPONSIVE
     ============================================= */
@@ -1904,7 +1949,6 @@
   <div class="hero-overlay"></div>
   <div class="hero-content">
     <h1 class="hero-title">
-      Kijiji cha Mahaba<br>
       <em>Kila Siku ni Valentine's Day</em>
     </h1>
     <p class="hero-sub">
@@ -2565,6 +2609,14 @@
     </div>
 
     <hr class="footer-divider">
+
+    <a href="https://mnyilinga.co.tz" class="footer-parent-brand" target="_blank" rel="noopener" style="text-decoration:none">
+      <span class="footer-parent-brand-label">A product of</span>
+      <span class="footer-parent-brand-dot"></span>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" class="footer-parent-brand-logo" aria-label="Mnyilinga Hub"><rect x="99.92" y="99.92" width="800.16" height="800.16" rx="101.24" ry="101.24" fill="none" stroke="#fff" stroke-miterlimit="10" stroke-width="9"/><polygon points="490.26 245.69 420.29 294.96 420.29 298.6 420.29 354.61 420.29 355.2 420.29 411.16 420.29 414.84 490.26 464.06 490.26 245.69" fill="#fff"/><polygon points="509.19 464.06 579.16 414.84 579.16 355.2 579.16 354.61 579.16 294.96 509.19 245.69 509.19 464.06" fill="#fff"/><polygon points="479.89 478.35 402.82 441.14 399.59 442.91 350.69 470.16 350.19 470.43 301.28 497.68 298.05 499.46 289.09 584.58 479.89 478.35" fill="#fff"/><polygon points="298.28 601.09 375.35 638.31 427.48 609.28 428.03 608.96 480.12 579.98 489.08 494.86 298.28 601.09" fill="#fff"/><polygon points="710.91 580.44 700.17 495.5 696.94 493.82 647.49 467.61 646.95 467.29 597.45 441.09 594.22 439.36 517.92 478.17 710.91 580.44" fill="#fff"/><polygon points="509.1 494.91 519.84 579.8 572.52 607.73 573.06 608.01 625.79 635.94 702.04 597.13 509.1 494.91" fill="#fff"/><path d="M280.47,746.2c-.46-8.55-1-18.84-.91-26.48h-.27c-2.09,7.19-4.64,14.83-7.74,23.3l-10.83,29.76h-6.01l-9.92-29.21c-2.91-8.65-5.37-16.56-7.1-23.84h-.18c-.18,7.64-.64,17.93-1.18,27.12l-1.64,26.3h-7.55l4.28-61.34h10.1l10.47,29.67c2.55,7.55,4.64,14.29,6.19,20.66h.27c1.55-6.19,3.73-12.92,6.46-20.66l10.92-29.67h10.1l3.82,61.34h-7.74l-1.55-26.94Z" fill="#fff"/><path d="M302.76,741.01c0-4.55-.09-8.28-.36-11.92h7.1l.46,7.28h.18c2.18-4.19,7.28-8.28,14.56-8.28,6.1,0,15.56,3.64,15.56,18.75v26.3h-8.01v-25.39c0-7.1-2.64-13.01-10.19-13.01-5.28,0-9.37,3.73-10.74,8.19-.36,1-.55,2.37-.55,3.73v26.48h-8.01v-32.12Z" fill="#fff"/><path d="M355,729.09l9.65,26.03c1,2.91,2.09,6.37,2.82,9.01h.18c.82-2.64,1.73-6.01,2.82-9.19l8.74-25.84h8.46l-12.01,31.4c-5.73,15.11-9.65,22.84-15.11,27.57-3.91,3.46-7.83,4.82-9.83,5.19l-2-6.73c2-.64,4.64-1.91,7.01-3.91,2.18-1.73,4.91-4.82,6.73-8.92.36-.82.64-1.46.64-1.91s-.18-1.09-.55-2.09l-16.29-40.59h8.74Z" fill="#fff"/><path d="M403.86,716.71c.09,2.73-1.91,4.91-5.1,4.91-2.82,0-4.82-2.18-4.82-4.91s2.09-5.01,5.01-5.01,4.91,2.18,4.91,5.01ZM394.94,773.14v-44.05h8.01v44.05h-8.01Z" fill="#fff"/><path d="M416.24,708.52h8.01v64.61h-8.01v-64.61Z" fill="#fff"/><path d="M446.63,716.71c.09,2.73-1.91,4.91-5.1,4.91-2.82,0-4.82-2.18-4.82-4.91s2.09-5.01,5.01-5.01,4.91,2.18,4.91,5.01ZM437.71,773.14v-44.05h8.01v44.05h-8.01Z" fill="#fff"/><path d="M459.01,741.01c0-4.55-.09-8.28-.36-11.92h7.1l.46,7.28h.18c2.18-4.19,7.28-8.28,14.56-8.28,6.1,0,15.56,3.64,15.56,18.75v26.3h-8.01v-25.39c0-7.1-2.64-13.01-10.19-13.01-5.28,0-9.37,3.73-10.74,8.19-.36,1-.55,2.37-.55,3.73v26.48h-8.01v-32.12Z" fill="#fff"/><path d="M547.46,729.09c-.18,3.19-.36,6.73-.36,12.1v25.57c0,10.1-2,16.29-6.28,20.11-4.28,4-10.46,5.28-16.02,5.28s-11.1-1.27-14.65-3.64l2-6.1c2.91,1.82,7.46,3.46,12.92,3.46,8.19,0,14.2-4.28,14.2-15.38v-4.92h-.18c-2.46,4.1-7.19,7.37-14.01,7.37-10.92,0-18.75-9.28-18.75-21.48,0-14.92,9.74-23.39,19.84-23.39,7.64,0,11.83,4,13.74,7.64h.18l.36-6.64h7.01ZM539.18,746.47c0-1.37-.09-2.55-.46-3.64-1.46-4.64-5.37-8.46-11.19-8.46-7.64,0-13.1,6.46-13.1,16.65,0,8.65,4.37,15.83,13.01,15.83,4.91,0,9.37-3.09,11.1-8.19.46-1.37.64-2.91.64-4.28v-7.92Z" fill="#fff"/><path d="M584.77,773.14l-.64-5.55h-.27c-2.46,3.46-7.19,6.55-13.47,6.55-8.92,0-13.47-6.28-13.47-12.65,0-10.65,9.46-16.47,26.48-16.38v-.91c0-3.64-1-10.19-10.01-10.19-4.09,0-8.37,1.27-11.47,3.28l-1.82-5.28c3.64-2.37,8.92-3.91,14.47-3.91,13.47,0,16.74,9.19,16.74,18.02v16.47c0,3.82.18,7.55.73,10.56h-7.28ZM583.58,750.66c-8.74-.18-18.66,1.36-18.66,9.92,0,5.19,3.46,7.64,7.55,7.64,5.73,0,9.37-3.64,10.65-7.37.27-.82.46-1.73.46-2.55v-7.64Z" fill="#fff"/><path d="M631.72,711.8v25.66h29.67v-25.66h8.01v61.34h-8.01v-28.76h-29.67v28.76h-7.92v-61.34h7.92Z" fill="#fff"/><path d="M719.72,761.12c0,4.55.09,8.55.36,12.01h-7.1l-.46-7.19h-.18c-2.09,3.55-6.73,8.19-14.56,8.19-6.92,0-15.2-3.82-15.2-19.29v-25.75h8.01v24.39c0,8.37,2.55,14.01,9.83,14.01,5.37,0,9.1-3.73,10.56-7.28.46-1.18.73-2.64.73-4.09v-27.03h8.01v32.03Z" fill="#fff"/><path d="M732.64,773.14c.18-3,.36-7.46.36-11.38v-53.24h7.92v27.67h.18c2.82-4.91,7.92-8.1,15.02-8.1,10.92,0,18.66,9.1,18.57,22.48,0,15.74-9.92,23.57-19.75,23.57-6.37,0-11.47-2.46-14.74-8.28h-.27l-.36,7.28h-6.92ZM740.92,755.48c0,1,.18,2,.36,2.91,1.55,5.55,6.19,9.37,12.01,9.37,8.37,0,13.38-6.83,13.38-16.93,0-8.83-4.55-16.38-13.1-16.38-5.46,0-10.56,3.73-12.19,9.83-.18.91-.46,2-.46,3.28v7.92Z" fill="#fff"/></svg>
+      <span class="footer-parent-brand-dot"></span>
+      <span class="footer-parent-brand-label">Mnyilinga Hub</span>
+    </a>
 
     <div class="footer-bottom">
       <p>&copy; 2024 Kijiji cha Mahaba. All rights reserved.</p>
