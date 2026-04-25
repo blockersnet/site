@@ -266,16 +266,12 @@
       flex-direction: column;
       gap: 5px;
       background: none;
-      padding: 6px;
+      padding: 8px;
+      border-radius: 8px;
+      transition: background 0.2s;
+      z-index: 9000;
     }
-    .hamburger span {
-      width: 22px;
-      height: 2px;
-      background: var(--white);
-      border-radius: 2px;
-      display: block;
-      transition: all 0.3s;
-    }
+    .hamburger:hover { background: rgba(255,255,255,0.07); }
 
     /* =============================================
        SECONDARY NAV (FILTER BAR)
@@ -1587,32 +1583,121 @@
     .toast svg { color: var(--rose-light); flex-shrink: 0; }
 
     /* =============================================
-       MOBILE NAV
+       MOBILE NAV — MAGICAL CIRCULAR REVEAL
     ============================================= */
     .mobile-nav {
       position: fixed;
       top: 0; bottom: 0; left: 0;
       width: 100vw;
-      background: linear-gradient(160deg, var(--crimson-mid), #120006);
-      border-right: 1px solid var(--border);
+      background: radial-gradient(ellipse at top right, #4a0018 0%, #2a000d 35%, #120006 70%, #0d0004 100%);
       z-index: 8000;
       padding: 28px 20px;
-      transform: translateX(-100%);
-      transition: transform 0.3s ease;
       overflow-y: auto;
+      /* Start as a tiny circle at the hamburger icon position (top-right) */
+      clip-path: circle(0% at calc(100% - 37px) 32px);
+      transition: clip-path 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+      /* Subtle rose shimmer overlay */
+      box-shadow: inset 0 0 120px rgba(192,0,42,0.12);
     }
-    .mobile-nav.open { transform: translateX(0); }
+    .mobile-nav::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 80% 10%, rgba(192,0,42,0.18) 0%, transparent 50%),
+        radial-gradient(circle at 20% 90%, rgba(212,160,23,0.08) 0%, transparent 40%);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .mobile-nav > * { position: relative; z-index: 1; }
+    .mobile-nav.open {
+      clip-path: circle(200% at calc(100% - 37px) 32px);
+    }
 
+    /* Overlay fades in normally */
     .mobile-nav-overlay {
       position: fixed;
       inset: 0;
-      background: rgba(0,0,0,0.65);
+      background: rgba(0,0,0,0.50);
       z-index: 7999;
       opacity: 0;
       pointer-events: none;
-      transition: opacity 0.3s;
+      transition: opacity 0.4s ease;
+      backdrop-filter: blur(3px);
+      -webkit-backdrop-filter: blur(3px);
     }
     .mobile-nav-overlay.open { opacity: 1; pointer-events: all; }
+
+    /* Nav items staggered entrance */
+    .mobile-nav .mobile-nav-header,
+    .mobile-nav a {
+      opacity: 0;
+      transform: translateX(28px);
+      transition: opacity 0.38s ease, transform 0.38s ease;
+    }
+    .mobile-nav.open .mobile-nav-header   { opacity:1; transform:none; transition-delay: 0.20s; }
+    .mobile-nav.open a:nth-of-type(1)     { opacity:1; transform:none; transition-delay: 0.28s; }
+    .mobile-nav.open a:nth-of-type(2)     { opacity:1; transform:none; transition-delay: 0.34s; }
+    .mobile-nav.open a:nth-of-type(3)     { opacity:1; transform:none; transition-delay: 0.40s; }
+    .mobile-nav.open a:nth-of-type(4)     { opacity:1; transform:none; transition-delay: 0.46s; }
+    .mobile-nav.open a:nth-of-type(5)     { opacity:1; transform:none; transition-delay: 0.52s; }
+    .mobile-nav.open a:nth-of-type(6)     { opacity:1; transform:none; transition-delay: 0.58s; }
+    .mobile-nav.open a:nth-of-type(7)     { opacity:1; transform:none; transition-delay: 0.64s; }
+    .mobile-nav.open a:nth-of-type(8)     { opacity:1; transform:none; transition-delay: 0.70s; }
+
+    /* Hamburger → X morphing magic */
+    .hamburger span {
+      width: 22px;
+      height: 2px;
+      background: var(--white);
+      border-radius: 2px;
+      display: block;
+      transition: all 0.38s cubic-bezier(0.23, 1, 0.32, 1);
+      transform-origin: center;
+    }
+    /* Active: morph into X + glow rose */
+    .hamburger.active span { background: var(--rose-vivid); }
+    .hamburger.active span:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+      box-shadow: 0 0 10px rgba(232, 36, 90, 0.8);
+    }
+    .hamburger.active span:nth-child(2) {
+      opacity: 0;
+      transform: scaleX(0);
+    }
+    .hamburger.active span:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+      box-shadow: 0 0 10px rgba(232, 36, 90, 0.8);
+    }
+
+    /* Heart burst particles */
+    .heart-burst {
+      position: fixed;
+      pointer-events: none;
+      z-index: 9999;
+      font-size: 16px;
+      animation: heartBurstAnim 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+      will-change: transform, opacity;
+    }
+    @keyframes heartBurstAnim {
+      0%   { transform: translate(0,0) scale(0); opacity: 1; }
+      50%  { opacity: 1; }
+      100% { transform: translate(var(--dx), var(--dy)) scale(1.2); opacity: 0; }
+    }
+
+    /* Ripple ring on hamburger click */
+    .hamburger-ripple {
+      position: fixed;
+      border-radius: 50%;
+      background: rgba(192,0,42,0.35);
+      pointer-events: none;
+      z-index: 8999;
+      animation: hamburgerRipple 0.6s ease-out forwards;
+    }
+    @keyframes hamburgerRipple {
+      0%   { transform: scale(0); opacity: 1; }
+      100% { transform: scale(4); opacity: 0; }
+    }
 
     .mobile-nav-header {
       display: flex;
@@ -1620,37 +1705,44 @@
       justify-content: space-between;
       margin-bottom: 28px;
       padding-bottom: 18px;
-      border-bottom: 1px solid var(--border);
+      border-bottom: 1px solid rgba(192,0,42,0.25);
     }
     .mobile-nav-close {
-      background: var(--white-10);
-      border: none;
+      background: rgba(192,0,42,0.15);
+      border: 1px solid rgba(192,0,42,0.3);
       color: var(--white);
-      width: 34px;
-      height: 34px;
+      width: 36px;
+      height: 36px;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
+      transition: all 0.25s;
     }
+    .mobile-nav-close:hover { background: rgba(192,0,42,0.35); transform: rotate(90deg); }
     .mobile-nav a {
       display: flex;
       align-items: center;
-      gap: 12px;
-      padding: 13px 12px;
-      border-radius: var(--radius);
+      gap: 14px;
+      padding: 14px 14px;
+      border-radius: 12px;
       font-family: var(--font-ui);
-      font-size: 14px;
-      font-weight: 500;
+      font-size: 15px;
+      font-weight: 600;
       color: var(--white-70);
-      transition: all 0.2s;
-      border-bottom: 1px solid var(--white-06);
+      transition: all 0.22s;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      letter-spacing: 0.2px;
     }
-    .mobile-nav a svg { color: var(--white-50); }
-    .mobile-nav a:last-child { border: none; }
-    .mobile-nav a:hover { background: var(--white-06); color: var(--white); }
-    .mobile-nav a:hover svg { color: var(--rose-light); }
+    .mobile-nav a svg { color: var(--white-40); transition: color 0.2s, transform 0.25s; }
+    .mobile-nav a:last-of-type { border: none; }
+    .mobile-nav a:hover {
+      background: rgba(192,0,42,0.12);
+      color: var(--white);
+      padding-left: 20px;
+    }
+    .mobile-nav a:hover svg { color: var(--rose-light); transform: scale(1.2); }
     .mob-cta {
       background: linear-gradient(135deg, var(--rose-vivid), var(--rose)) !important;
       color: var(--white) !important;
@@ -1658,8 +1750,10 @@
       margin-top: 14px !important;
       border: none !important;
       justify-content: center;
-      box-shadow: 0 6px 18px rgba(199,35,64,0.35);
+      box-shadow: 0 6px 24px rgba(199,35,64,0.45);
+      border-radius: var(--radius-pill) !important;
     }
+    .mob-cta:hover { filter: brightness(1.12) !important; padding-left: 14px !important; }
 
     /* =============================================
        LIVE BADGE & PULSE
@@ -1930,7 +2024,7 @@
 
       <button class="nav-cta-btn" onclick="openModal()">Soma Love</button>
     </div>
-    <button class="hamburger" onclick="openMobileNav()" aria-label="Open menu">
+    <button class="hamburger" onclick="openMobileNav(event)" aria-label="Open menu">
       <span></span><span></span><span></span>
     </button>
   </header>
@@ -2908,15 +3002,70 @@
     showToast('Searching: "' + val + '"');
   }
 
-  /* ---- Mobile nav ---- */
-  function openMobileNav() {
+  /* ---- Mobile nav — MAGICAL CIRCULAR REVEAL ---- */
+  function burstHearts(x, y) {
+    const hearts = ['❤️','💖','💗','💓','💝','🌹','💕'];
+    const count = 12;
+    for (let i = 0; i < count; i++) {
+      const el = document.createElement('div');
+      el.className = 'heart-burst';
+      const angle = (360 / count) * i + (Math.random() * 30 - 15);
+      const dist = 60 + Math.random() * 80;
+      const rad = (angle * Math.PI) / 180;
+      const dx = Math.cos(rad) * dist;
+      const dy = Math.sin(rad) * dist;
+      const size = 14 + Math.random() * 14;
+      el.style.cssText = `
+        left: ${x - size/2}px;
+        top: ${y - size/2}px;
+        font-size: ${size}px;
+        --dx: ${dx}px;
+        --dy: ${dy}px;
+        animation-delay: ${Math.random() * 0.15}s;
+        animation-duration: ${0.75 + Math.random() * 0.4}s;
+      `;
+      el.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+      document.body.appendChild(el);
+      setTimeout(() => el.remove(), 1400);
+    }
+  }
+
+  function createRipple(x, y) {
+    const el = document.createElement('div');
+    el.className = 'hamburger-ripple';
+    const size = 60;
+    el.style.cssText = `
+      width: ${size}px;
+      height: ${size}px;
+      left: ${x - size/2}px;
+      top: ${y - size/2}px;
+    `;
+    document.body.appendChild(el);
+    setTimeout(() => el.remove(), 700);
+  }
+
+  function openMobileNav(e) {
+    const btn = document.querySelector('.hamburger');
+    const rect = btn.getBoundingClientRect();
+    const cx = rect.left + rect.width / 2;
+    const cy = rect.top + rect.height / 2;
+
+    // Ripple ring effect
+    createRipple(cx, cy);
+    // Hearts burst
+    burstHearts(cx, cy);
+    // Activate hamburger → X
+    btn.classList.add('active');
+
     document.getElementById('mobileNav').classList.add('open');
     document.getElementById('mobileOverlay').classList.add('open');
     document.body.style.overflow = 'hidden';
   }
+
   function closeMobileNav() {
     document.getElementById('mobileNav').classList.remove('open');
     document.getElementById('mobileOverlay').classList.remove('open');
+    document.querySelector('.hamburger').classList.remove('active');
     document.body.style.overflow = '';
   }
 
