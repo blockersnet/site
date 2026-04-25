@@ -457,7 +457,7 @@
     .hero-img {
       position: absolute;
       inset: 0;
-      background: url('https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=1200&h=800&fit=crop&q=85') center/cover no-repeat;
+      background: url('https://images.mnyilinga.co.tz/KSyvX.jpg') center/cover no-repeat;
     }
     .hero-overlay {
       position: absolute;
@@ -481,11 +481,11 @@
     .hero-content {
       position: relative;
       z-index: 2;
-      padding: 0 24px;
+      padding: 170px 24px 0;
       height: 100%;
       display: flex;
       flex-direction: column;
-      justify-content: center;
+      justify-content: flex-start;
       max-width: 580px;
       text-align: center;
     }
@@ -516,7 +516,7 @@
       font-weight: 800;
       line-height: 1.1;
       color: var(--white);
-      margin-bottom: 14px;
+      margin: 20px 0 0;
       animation: fadeUp 0.9s 0.1s ease both;
       text-align: center;
     }
@@ -545,6 +545,26 @@
       gap: 10px;
       flex-wrap: wrap;
       animation: fadeUp 1s 0.3s ease both;
+      justify-content: center;
+      align-items: flex-start;
+    }
+
+    .hero-primary-group {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .hero-caption {
+      font-family: var(--font-body);
+      font-size: 13px;
+      color: var(--white-70);
+      margin: 10px 0 0;
+      text-align: center;
+      max-width: 220px;
+      line-height: 1.4;
+      animation: fadeUp 1s 0.35s ease both;
     }
 
     .btn-primary {
@@ -1794,9 +1814,11 @@
       .sms-grid-4 { grid-template-columns: 1fr; }
       .hero { height: 280px; }
       .hero-sub { display: none; }
-      .hero-title { font-size: clamp(16px, 5vw, 20px); }
+      .hero-title { font-size: clamp(16px, 5vw, 20px); margin: 24px 0 0; }
       .hero-badge { font-size: 9px; padding: 4px 12px; }
       .hero-btns .btn-outline { display: none; }
+      .hero-primary-group { gap: 20px; }
+      .hero-caption { margin-top: 18px; }
       .hero-stats { display: none; }
       .footer-top { grid-template-columns: 1fr; }
       .footer-bottom { flex-direction: column; text-align: center; }
@@ -1950,9 +1972,6 @@
   <div class="hero-img"></div>
   <div class="hero-overlay"></div>
   <div class="hero-content">
-    <h1 class="hero-title">
-      <em>Kila Siku ni Valentine's Day</em>
-    </h1>
     <p class="hero-sub">
       Karibu kwenye bustani ya maneno ya upendo. Pata SMS nzuri za mapenzi, hadithi za kusisimua, na usemi wa moyo ambao utamfikia mpenzi wako bila mashaka.
     </p>
@@ -1966,6 +1985,9 @@
         Submit Yours
       </button>
     </div>
+    <h1 class="hero-title">
+      <em>Kila Siku ni Valentine's Day</em>
+    </h1>
   </div>
   <div class="hero-stats">
     <div class="hero-stat"><strong>12K+</strong><span>Love SMS</span></div>
